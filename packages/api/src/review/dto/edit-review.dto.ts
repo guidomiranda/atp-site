@@ -1,27 +1,27 @@
 import {
   IsArray,
   IsBoolean,
-  IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
-export class CreateReviewDTO {
+export class EditReviewDTO {
   @IsArray()
-  @IsNotEmpty()
-  body: Description[];
+  @IsOptional()
+  body?: Description[];
 
   @IsString()
-  @IsNotEmpty()
-  author: string;
+  @IsOptional()
+  author?: string;
 
   @IsBoolean()
-  @IsNotEmpty()
-  status: boolean;
+  @IsOptional()
+  status?: boolean;
 
   @IsNumber()
-  @IsNotEmpty()
-  order: number;
+  @IsOptional()
+  order?: number;
 }
 
 type Description = {

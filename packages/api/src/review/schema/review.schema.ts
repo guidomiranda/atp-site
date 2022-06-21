@@ -2,7 +2,7 @@ import { Schema } from 'mongoose';
 
 export const ReviewSchema = new Schema({
   body: {
-    type: String,
+    type: Array,
     required: true,
   },
   author: {

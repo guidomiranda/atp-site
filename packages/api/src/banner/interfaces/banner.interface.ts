@@ -1,13 +1,18 @@
 export interface BannerInterface {
   _id?: string;
   title?: string;
-  description?: string;
+  description?: Description[];
   image: string;
   bg: string;
   order: number;
   status: boolean;
   createdAt: Date;
 }
+
+type Description = {
+  id: string;
+  text: string;
+};
 
 export interface BannerResponse {
   message: string;
