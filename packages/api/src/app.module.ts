@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { BannerModule } from './banner/banner.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { BannerModule } from './banner/banner.module';
       useNewUrlParser: true,
     }),
     BannerModule,
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,7 +2,7 @@ import { Model } from 'mongoose';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { BannerInterface } from './interfaces/banner.interface';
+import { BannerInterface } from './interfaces';
 import { CreateBannerDTO, EditBannerDTO } from './dto';
 
 @Injectable()

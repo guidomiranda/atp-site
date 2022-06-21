@@ -4,9 +4,9 @@ export interface BannerInterface {
   description?: string;
   image: string;
   bg: string;
-  createdAt: string;
   order: number;
   status: boolean;
+  createdAt: Date;
 }
 
 export interface BannerResponse {
