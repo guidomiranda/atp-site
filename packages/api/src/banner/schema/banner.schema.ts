@@ -12,7 +12,7 @@ export const BannerSchema = new Schema({
   },
   bg: {
     type: String,
-    required: true,
+    require: true,
   },
   status: {
     type: Boolean,

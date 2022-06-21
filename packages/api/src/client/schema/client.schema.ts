@@ -1,12 +1,12 @@
 import { Schema } from 'mongoose';
 
-export const ReviewSchema = new Schema({
-  body: {
-    type: Array,
+export const ClientSchema = new Schema({
+  title: {
+    type: String,
     require: true,
   },
-  author: {
-    type: String,
+  description: {
+    type: Array,
     require: true,
   },
   status: {

@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 import { BannerModule } from './banner/banner.module';
 import { ReviewModule } from './review/review.module';
+import { ClientsModule } from './client/client.module';
 
 @Module({
   imports: [
@@ -14,6 +16,7 @@ import { ReviewModule } from './review/review.module';
     }),
     BannerModule,
     ReviewModule,
+    ClientsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
