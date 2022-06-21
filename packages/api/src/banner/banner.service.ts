@@ -37,4 +37,10 @@ export class BannerService {
     if (!banners) throw new NotFoundException('Banners no encontrado');
     return banners;
   }
+
+  async getBanner(id: string) {
+    const banner = await this.serviceBanner.findById(id);
+    if (!banner) throw new NotFoundException('Banners no encontrado');
+    return banner;
+  }
 }

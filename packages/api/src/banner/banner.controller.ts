@@ -59,4 +59,14 @@ export class BannerController {
       banners,
     });
   }
+
+  @Get('/:id')
+  async getBanner(@Res() res: Response, @Param('id') id: string) {
+    const banner = await this.bannerService.getBanner(id);
+    return res.status(HttpStatus.OK).json({
+      message: 'Banner',
+      success: true,
+      banner,
+    });
+  }
 }
