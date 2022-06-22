@@ -9,17 +9,17 @@ import { CreateBannerDTO, EditBannerDTO } from './dto';
 export class BannerService {
   constructor(
     @InjectModel('Banner')
-    private readonly serviceBanner: Model<BannerInterface>,
+    private readonly serviceModel: Model<BannerInterface>,
   ) {}
 
   async createBanner(dto: CreateBannerDTO) {
-    const banner = new this.serviceBanner(dto);
+    const banner = new this.serviceModel(dto);
     if (!banner) throw new NotFoundException('Banner no encontrado');
     return await banner.save();
   }
 
   async updateBanner(id: string, dto: EditBannerDTO) {
-    const banner = await this.serviceBanner.findByIdAndUpdate(id, dto, {
+    const banner = await this.serviceModel.findByIdAndUpdate(id, dto, {
       new: true,
     });
     if (!banner) throw new NotFoundException('Banner no encontrado');
@@ -27,19 +27,19 @@ export class BannerService {
   }
 
   async deleteBanner(id: string) {
-    const banner = await this.serviceBanner.findByIdAndDelete(id);
+    const banner = await this.serviceModel.findByIdAndDelete(id);
     if (!banner) throw new NotFoundException('Banner no encontrado');
     return banner;
   }
 
   async getBanners() {
-    const banners = await this.serviceBanner.find({});
+    const banners = await this.serviceModel.find({});
     if (!banners) throw new NotFoundException('Banners no encontrado');
     return banners;
   }
 
   async getBanner(id: string) {
-    const banner = await this.serviceBanner.findById(id);
+    const banner = await this.serviceModel.findById(id);
     if (!banner) throw new NotFoundException('Banners no encontrado');
     return banner;
   }
