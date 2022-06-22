@@ -1,10 +1,14 @@
 import * as argon from 'argon2';
 import { Model } from 'mongoose';
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
 
-import { CreateUserDTO } from './dto';
+import { CreateUserDTO, EditUserDTO } from './dto';
 import { UserInterface } from './interfaces';
 import { CreateUserLoginDTO } from './dto/login-user.dto';
 
@@ -54,5 +58,39 @@ export class UserService {
       secret,
     });
     return token;
+  }
+
+  async updateUser(id: string, dto: EditUserDTO) {
+    const currentUser = dto;
+
+    const user = await this.userModel.findById(id);
+    if (!user) throw new NotFoundException('Usuario no encontrado');
+
+    currentUser.password = await argon.hash(currentUser.password);
+
+    const userUpdated = await this.userModel.findByIdAndUpdate(
+      id,
+      currentUser,
+      { new: true },
+    );
+    return userUpdated;
+  }
+
+  async deleteUser(id: string) {
+    const user = await this.userModel.findByIdAndDelete(id);
+    if (!user) throw new NotFoundException('Usuario no encontrado');
+    return user;
+  }
+
+  async getUsers() {
+    const users = await this.userModel.find({});
+    if (!users) throw new NotFoundException('Usuario no encontrado');
+    return users;
+  }
+
+  async getUser(id: string) {
+    const user = await this.userModel.findById(id);
+    if (!user) throw new NotFoundException('Usuario no encontrado');
+    return user;
   }
 }
