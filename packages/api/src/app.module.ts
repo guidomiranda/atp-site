@@ -7,6 +7,7 @@ import { AppService } from './app.service';
 import { BannerModule } from './banner/banner.module';
 import { ReviewModule } from './review/review.module';
 import { ClientsModule } from './client/client.module';
+import { SuccessModule } from './success/success.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ClientsModule } from './client/client.module';
     BannerModule,
     ReviewModule,
     ClientsModule,
+    SuccessModule,
   ],
   controllers: [AppController],
   providers: [AppService],
