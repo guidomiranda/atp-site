@@ -9,6 +9,10 @@ export const ProductSchema = new Schema({
     type: String,
     require: true,
   },
+  category: {
+    type: String,
+    require: true,
+  },
   capacity: {
     type: String,
     require: true,
@@ -35,11 +39,11 @@ export const ProductSchema = new Schema({
   },
   status: {
     type: Boolean,
-    require: true,
+    default: true,
   },
   order: {
     type: Number,
-    require: true,
+    default: 1,
   },
   createdAt: {
     type: Date,

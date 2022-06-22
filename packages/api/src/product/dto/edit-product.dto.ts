@@ -11,6 +11,10 @@ export class EditProductDTO {
 
   @IsString()
   @IsOptional()
+  category?: string;
+
+  @IsString()
+  @IsOptional()
   capacity?: string;
 
   @IsString()
