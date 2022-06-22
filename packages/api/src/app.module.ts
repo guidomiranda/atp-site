@@ -8,6 +8,7 @@ import { BannerModule } from './banner/banner.module';
 import { ReviewModule } from './review/review.module';
 import { ClientsModule } from './client/client.module';
 import { SuccessModule } from './success/success.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { SuccessModule } from './success/success.module';
     ReviewModule,
     ClientsModule,
     SuccessModule,
+    ProductModule,
   ],
   controllers: [AppController],
   providers: [AppService],
