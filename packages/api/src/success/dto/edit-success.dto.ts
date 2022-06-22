@@ -1,27 +1,27 @@
 import {
   IsArray,
   IsBoolean,
-  IsNotEmpty,
+  IsOptional,
   IsNumber,
   IsString,
 } from 'class-validator';
 
-export class CreateSuccessDTO {
+export class EditSuccessDTO {
   @IsString()
-  @IsNotEmpty()
-  title: string;
+  @IsOptional()
+  title?: string;
 
   @IsArray()
-  @IsNotEmpty()
-  description: Description[];
+  @IsOptional()
+  description?: Description[];
 
   @IsBoolean()
-  @IsNotEmpty()
-  status: boolean;
+  @IsOptional()
+  status?: boolean;
 
   @IsNumber()
-  @IsNotEmpty()
-  order: number;
+  @IsOptional()
+  order?: number;
 }
 
 type Description = {
