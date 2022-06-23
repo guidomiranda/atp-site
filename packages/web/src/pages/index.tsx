@@ -1,12 +1,14 @@
-import React from 'react'
-import { Flex, Heading } from '@chakra-ui/react'
+import React from 'react';
+import { Text } from '@chakra-ui/react';
+
+import { Layout } from '../layout';
 
 const Home: React.FC = () => {
-  return (
-    <Flex height="100vh" alignItems="center" justifyContent="center">
-      <Heading backgroundColor="secondary">Hello</Heading>
-    </Flex>
-  )
-}
+	return (
+		<Layout>
+			<Text>Hello</Text>
+		</Layout>
+	);
+};
 
-export default Home
+export default Home;
