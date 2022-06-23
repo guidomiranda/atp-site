@@ -1,6 +1,7 @@
 import React from 'react';
 import NextLink from 'next/link';
-import { Box, Flex, Image, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Link } from '@chakra-ui/react';
+import { FaTimes, FaBars } from 'react-icons/fa';
 
 interface NavLinkProps {
 	text: string;
@@ -25,9 +26,9 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link }) => {
 	);
 };
 
-export const Navbar = () => {
+const Navbar = () => {
 	return (
-		<Box height='100px' bgColor='blue.500'>
+		<Box height='100px' position='relative' zIndex='20'>
 			<Flex
 				height='100%'
 				alignItems='center'
@@ -40,7 +41,11 @@ export const Navbar = () => {
 					<Box>
 						<NextLink href='/' passHref>
 							<Link _focus={{ outline: 0 }}>
-								<Image src='/logo.png' height='90px' objectFit='contain' />
+								<Image
+									src='/logo.png'
+									height={{ base: '70px', lg: '80px' }}
+									objectFit='contain'
+								/>
 							</Link>
 						</NextLink>
 					</Box>
@@ -48,7 +53,8 @@ export const Navbar = () => {
 						<Image src='/logo-brands.png' height='60px' objectFit='contain' />
 					</Box>
 				</Flex>
-				<Flex>
+
+				<Flex display={{ base: 'none', lg: 'flex' }}>
 					<NavLink text='Inicio' link='/' />
 					<NavLink text='Nosotros' link='/' />
 					<Box>
@@ -57,7 +63,13 @@ export const Navbar = () => {
 					<NavLink text='Servicios' link='/' />
 					<NavLink text='Contacto' link='/' />
 				</Flex>
+
+				<Button display={{ base: 'block', lg: 'none' }}>
+					<FaBars />
+				</Button>
 			</Flex>
 		</Box>
 	);
 };
+
+export default Navbar;
