@@ -27,3 +27,11 @@
 	padding: 30px !important;
 	color: #fff !important;
 }
+
+.mySwiper-slide .swiper-button-next {
+	color: #b41f1b !important;
+}
+
+.mySwiper-slide .swiper-button-prev {
+	color: #b41f1b !important;
+}
