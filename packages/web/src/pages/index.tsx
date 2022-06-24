@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 
 import Layout from '../layout';
 import Banner from '../components/Banner';
@@ -49,6 +49,65 @@ const Home: React.FC = () => {
 
 			{/* Slides */}
 			<Slides />
+
+			{/* Brands */}
+			<Box py='64px'>
+				<Heading
+					fontWeight='black'
+					fontSize='48px'
+					textAlign='center'
+					color='#015796'
+				>
+					Trabajan con nosotros
+				</Heading>
+				<Text
+					color='#9ca3af'
+					mt='8px'
+					textAlign='center'
+					fontSize='22px'
+					fontWeight='medium'
+				>
+					Las marcas que están dia a día con ATP
+				</Text>
+
+				<Grid
+					maxW='1220px'
+					m='0 auto'
+					w='90%'
+					gridTemplateColumns={{
+						base: '1fr',
+						sm: 'repeat(2, 1fr)',
+						md: 'repeat(3, 1fr)',
+						lg: 'repeat(4, 1fr)',
+					}}
+					gap='20px'
+				>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+					<Grid placeItems='center'>
+						<Image src='/logo-volskwagen.png' alt='' />
+					</Grid>
+				</Grid>
+			</Box>
 		</Layout>
 	);
 };
