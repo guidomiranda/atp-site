@@ -56,7 +56,7 @@ const Navbar = () => {
 
 				<Flex display={{ base: 'none', lg: 'flex' }}>
 					<NavLink text='Inicio' link='/' />
-					<NavLink text='Nosotros' link='/' />
+					<NavLink text='Nosotros' link='/about' />
 					<Box>
 						<NavLink text='Productos' link='/' />
 					</Box>
