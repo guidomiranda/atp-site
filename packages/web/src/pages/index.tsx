@@ -5,6 +5,7 @@ import Layout from '../layout';
 import Banner from '../components/Banner';
 import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
+import Footer from '../components/Footer';
 
 const Home: React.FC = () => {
 	return (
@@ -108,6 +109,9 @@ const Home: React.FC = () => {
 					</Grid>
 				</Grid>
 			</Box>
+
+			{/* Footer */}
+			<Footer />
 		</Layout>
 	);
 };
