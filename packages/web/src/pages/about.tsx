@@ -8,7 +8,9 @@ const About = () => {
 	return (
 		<Layout>
 			<Header />
-			<Box>About</Box>
+			<Box maxW='1220px' m='0 auto' w='90%' py='128px'>
+				<Box>hllo</Box>
+			</Box>
 		</Layout>
 	);
 };
