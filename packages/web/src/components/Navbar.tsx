@@ -58,10 +58,10 @@ const Navbar = () => {
 					<NavLink text='Inicio' link='/' />
 					<NavLink text='Nosotros' link='/about' />
 					<Box>
-						<NavLink text='Productos' link='/' />
+						<NavLink text='Productos' link='/product/aire' />
 					</Box>
 					<NavLink text='Servicios' link='/services' />
-					<NavLink text='Contacto' link='/' />
+					<NavLink text='Contacto' link='' />
 				</Flex>
 
 				<Button display={{ base: 'block', lg: 'none' }}>
