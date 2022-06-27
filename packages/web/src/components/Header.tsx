@@ -50,7 +50,7 @@ const Header: React.FC = () => {
 					<Text
 						textAlign='center'
 						w={{ base: '100%', md: '70%' }}
-						fontSize='20px'
+						fontSize={['16px', '20px']}
 						color='white'
 						fontWeight='medium'
 					>
