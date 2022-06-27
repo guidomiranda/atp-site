@@ -60,7 +60,7 @@ const Navbar = () => {
 					<Box>
 						<NavLink text='Productos' link='/' />
 					</Box>
-					<NavLink text='Servicios' link='/' />
+					<NavLink text='Servicios' link='/services' />
 					<NavLink text='Contacto' link='/' />
 				</Flex>
 

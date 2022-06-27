@@ -33,7 +33,11 @@ const ValuesQuote: React.FC<ValuesQuoteProps> = ({ title, description }) => {
 const About = () => {
 	return (
 		<Layout>
-			<Header />
+			<Header
+				bg='banner-atp-nosotros.jpg'
+				title='Quienes somos'
+				description='ATP es una empresa con más de 40 años en el mercado que se encarga de distribuir productos y servicios de alta calidad.'
+			/>
 			<Box maxW='1220px' m='0 auto' w='90%' py='128px'>
 				<Box as='article' mb='96px'>
 					<Grid

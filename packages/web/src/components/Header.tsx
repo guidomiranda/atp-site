@@ -1,12 +1,19 @@
 import React from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+	title: string;
+	bg: string;
+	description: string;
+	page?: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ bg, title, description, page }) => {
 	return (
 		<Box h='100vh' mt='-100px'>
 			<Box
 				height='calc(100vh - 180px)'
-				bgImage="url('/banner-atp-nosotros.jpg')"
+				bgImage={`url('/${bg}')`}
 				bgSize='cover'
 				bgPos='center'
 			>
@@ -24,7 +31,7 @@ const Header: React.FC = () => {
 							fontSize={{ base: '40px', lg: '48px' }}
 							fontWeight='black'
 						>
-							Quienes somos
+							{title}
 						</Heading>
 
 						<Box
@@ -38,7 +45,7 @@ const Header: React.FC = () => {
 					</Flex>
 				</Flex>
 			</Box>
-			<Box h='180px' bgColor='#015796'>
+			<Box h='180px' bgColor={page === 'services' ? '#0c1427' : '#015796'}>
 				<Flex
 					alignItems='center'
 					justifyContent='center'
@@ -49,14 +56,16 @@ const Header: React.FC = () => {
 				>
 					<Text
 						textAlign='center'
-						w={{ base: '100%', md: '70%' }}
-						fontSize={['16px', '20px']}
+						w={
+							page === 'services'
+								? { base: '100%', md: '90%' }
+								: { base: '100%', md: '70%' }
+						}
+						fontSize={page === 'services' ? ['14px', '20px'] : ['16px', '20px']}
 						color='white'
 						fontWeight='medium'
 					>
-						ATP es una empresa con más de 40 años en el mercado que
-						<br /> se encarga de distribuir productos y servicios de alta
-						calidad.
+						{description}
 					</Text>
 				</Flex>
 			</Box>
