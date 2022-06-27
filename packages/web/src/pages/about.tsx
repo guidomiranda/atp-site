@@ -174,6 +174,98 @@ const About = () => {
 					</Grid>
 				</Box>
 			</Box>
+
+			<Box
+				bgImage='linear-gradient(rgb(13, 20, 38), rgb(87, 86, 84))'
+				py='72px'
+			>
+				<Grid placeItems='center' maxW='1000px' w='90%' m='0 auto'>
+					<Box textAlign='center' mb='56px'>
+						<Flex display='inline-flex' position='relative'>
+							<Heading
+								fontWeight='black'
+								color='#fff'
+								fontSize={{ base: '32px', md: '42px' }}
+							>
+								Vídeo Institucional
+							</Heading>
+							<Box
+								width='60px'
+								height='14px'
+								bgColor='#b41f1b'
+								position='absolute'
+								right='0'
+								bottom='-15px'
+							/>
+						</Flex>
+					</Box>
+
+					<iframe
+						width='100%'
+						height='500px'
+						src='https://www.youtube.com/embed/lV9zZ3CuT4I'
+						title='YouTube video player'
+						frameBorder='0'
+						allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+						// allowFullscreen
+					></iframe>
+				</Grid>
+			</Box>
+
+			<Box py='72px' maxW='1220px' m='0 auto' w='90%'>
+				<Box textAlign='center' mb='56px'>
+					<Flex display='inline-flex' position='relative'>
+						<Heading
+							fontWeight='black'
+							color='#015796'
+							fontSize={{ base: '32px', md: '42px' }}
+						>
+							Representantes exclusivos
+						</Heading>
+						<Box
+							width='60px'
+							height='14px'
+							bgColor='#b41f1b'
+							position='absolute'
+							right='0'
+							bottom='-15px'
+						/>
+					</Flex>
+				</Box>
+
+				<Grid
+					gridTemplateColumns={['1fr', 'repeat(2,1fr)', 'repeat(3,1fr)']}
+					gap={['32px 0', '32px 0']}
+				>
+					<Grid placeItems='center'>
+						<Image
+							src='/logo-mobil-atp.jpg'
+							alt=''
+							width='100%'
+							objectFit='cover'
+							verticalAlign='top'
+						/>
+					</Grid>
+					<Grid placeItems='center'>
+						<Image
+							src='/logo-route-atp.jpg'
+							alt=''
+							width='100%'
+							objectFit='cover'
+							verticalAlign='top'
+						/>
+					</Grid>
+					<Grid placeItems='center'>
+						<Image
+							src='/logo-vox-atp.jpg'
+							alt=''
+							width='100%'
+							objectFit='cover'
+							verticalAlign='top'
+						/>
+					</Grid>
+				</Grid>
+			</Box>
 		</Layout>
 	);
 };
