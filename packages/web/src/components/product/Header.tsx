@@ -6,9 +6,16 @@ interface HeaderProps {
 	bg: string;
 	logo: string;
 	product: string;
+	query: any;
 }
 
-const Header: React.FC<HeaderProps> = ({ bg, logo, product, children }) => {
+const Header: React.FC<HeaderProps> = ({
+	bg,
+	logo,
+	product,
+	children,
+	query,
+}) => {
 	return (
 		<Box h='100vh' mt='-100px'>
 			<Box
@@ -33,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ bg, logo, product, children }) => {
 								<Image
 									src={logo}
 									alt=''
-									w={['200px', '300px']}
+									w={['170px', '300px']}
 									objectFit='cover'
 								/>
 							</Grid>
@@ -44,8 +51,8 @@ const Header: React.FC<HeaderProps> = ({ bg, logo, product, children }) => {
 									right='0'
 									src={product}
 									alt=''
-									height={['200px', '500px']}
-									objectFit='cover'
+									height={['170px', '500px']}
+									objectFit={query.category ? 'cover' : 'contain'}
 									verticalAlign='top'
 								/>
 							</Grid>
@@ -74,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ bg, logo, product, children }) => {
 					</Box>
 				</Flex>
 			</Box>
-			<Box h='180px' bgColor='#3d3425'>
+			<Box h='180px' bgColor={query.category ? '#3d3425' : '#fe5101'}>
 				{children}
 			</Box>
 		</Box>

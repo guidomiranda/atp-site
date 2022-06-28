@@ -2,8 +2,9 @@ import React from 'react';
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-import Layout from '../../layout';
-import Header from '../../components/product/Header';
+import Layout from '../../../layout';
+import Header from '../../../components/product/Header';
+import FilterHeader from '../../../components/product/FilterHeader';
 
 const HeaderProductFooter = () => {
 	return (
@@ -23,15 +24,15 @@ const HeaderProductFooter = () => {
 					fontSize={['24px', '32px', '48px']}
 					color='#fff'
 				>
-					Baterías 12 V
+					Filtros
 				</Heading>
 				<Text color='#fff' mt='5px' textAlign={['center', 'left']}>
-					VRLA / Sellada
+					Aceite | Combustible | Aire
 				</Text>
 			</Box>
 			<Box>
 				<Image
-					src='/banner_productos_route_logo.png'
+					src='/bannervox_logo.png'
 					alt=''
 					width={['130px', '180px']}
 					objectFit='cover'
@@ -42,21 +43,24 @@ const HeaderProductFooter = () => {
 	);
 };
 
-const Products = () => {
-	const { query } = useRouter();
+const TypeFilter: React.FC = () => {
+	const { query, push } = useRouter();
 
 	return (
 		<Layout>
 			<Header
-				bg='banner_productos_route_fondo.jpg'
-				logo='/banner_productos_route_logo.png'
-				product='/banner_productos_route_img.png'
+				bg='bannervox_fondo.jpg'
+				logo='/bannervox_logo.png'
+				product='/header-product-image.png'
 				children={<HeaderProductFooter />}
 				query={query}
 			/>
-			<Box>Products</Box>
+
+			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>
+				<FilterHeader query={query} push={push} />
+			</Box>
 		</Layout>
 	);
 };
 
-export default Products;
+export default TypeFilter;
