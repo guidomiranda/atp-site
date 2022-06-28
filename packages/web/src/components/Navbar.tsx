@@ -43,7 +43,7 @@ const Navbar = () => {
 							<Link _focus={{ outline: 0 }}>
 								<Image
 									src='/logo.png'
-									height={{ base: '70px', lg: '80px' }}
+									height={{ base: '60px', lg: '70px' }}
 									objectFit='contain'
 								/>
 							</Link>

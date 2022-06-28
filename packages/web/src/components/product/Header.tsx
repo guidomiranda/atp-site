@@ -2,12 +2,13 @@ import React from 'react';
 import { Box, Text, Heading, Flex, Grid, Image } from '@chakra-ui/react';
 
 interface HeaderProps {
+	children?: React.ReactNode;
 	bg: string;
 	logo: string;
 	product: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ bg, logo, product }) => {
+const Header: React.FC<HeaderProps> = ({ bg, logo, product, children }) => {
 	return (
 		<Box h='100vh' mt='-100px'>
 			<Box
@@ -40,10 +41,10 @@ const Header: React.FC<HeaderProps> = ({ bg, logo, product }) => {
 								<Image
 									position={['initial', 'absolute']}
 									bottom='-32px'
+									right='0'
 									src={product}
 									alt=''
-									// width={['300px', '200px']}
-									height={['200px', '420px']}
+									height={['200px', '500px']}
 									objectFit='cover'
 									verticalAlign='top'
 								/>
@@ -74,24 +75,7 @@ const Header: React.FC<HeaderProps> = ({ bg, logo, product }) => {
 				</Flex>
 			</Box>
 			<Box h='180px' bgColor='#3d3425'>
-				<Flex
-					alignItems='center'
-					justifyContent='center'
-					h='full'
-					maxW='1220px'
-					m='0 auto'
-					w='90%'
-				>
-					<Text
-						textAlign='center'
-						w={{ base: '100%', md: '90%' }}
-						fontSize={['14px', '20px']}
-						color='white'
-						fontWeight='medium'
-					>
-						description
-					</Text>
-				</Flex>
+				{children}
 			</Box>
 		</Box>
 	);
