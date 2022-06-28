@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 import Layout from '../../layout';
@@ -54,7 +54,18 @@ const Products = () => {
 				children={<HeaderProductFooter />}
 				query={query}
 			/>
-			<Box>Products</Box>
+
+			<Box bgImage="url('/route_bg_iso.jpg')">
+				<Grid placeItems='center' maxW='1220px' w='90%' m='0 auto' py='72px'>
+					<Image
+						src='/route_img_iso.png'
+						alt=''
+						w={['100%', '600px']}
+						objectFit='cover'
+						verticalAlign='top'
+					/>
+				</Grid>
+			</Box>
 		</Layout>
 	);
 };
