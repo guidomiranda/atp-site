@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 
 import Layout from '../../layout';
 import Header from '../../components/product/Header';
+import Product from '../../components/product/battery/Product';
 
 const HeaderProductFooter = () => {
 	return (
@@ -64,6 +65,23 @@ const Products = () => {
 						objectFit='cover'
 						verticalAlign='top'
 					/>
+				</Grid>
+			</Box>
+
+			<Box maxW='1220px' m='0 auto' w='90%' py='72px'>
+				<Grid
+					gridTemplateColumns={[
+						'1fr',
+						'repeat(2,1fr)',
+						'repeat(3,1fr)',
+						'repeat(4,1fr)',
+					]}
+					gap='32px 56px'
+				>
+					<Product />
+					<Product />
+					<Product />
+					<Product />
 				</Grid>
 			</Box>
 		</Layout>
