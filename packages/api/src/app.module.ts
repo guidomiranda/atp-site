@@ -11,6 +11,7 @@ import { SuccessModule } from './success/success.module';
 import { ProductModule } from './product/product.module';
 import { UserModule } from './user/user.module';
 import { CategoryModule } from './category/category.module';
+import { FilterModule } from './filter/filter.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { CategoryModule } from './category/category.module';
     ProductModule,
     UserModule,
     CategoryModule,
+    FilterModule,
   ],
   controllers: [AppController],
   providers: [AppService],
