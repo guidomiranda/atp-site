@@ -1,9 +1,10 @@
 import React from 'react';
-import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 
 import Layout from '../../../layout';
 import Header from '../../../components/product/Header';
+import Product from '../../../components/product/Product';
 import FilterHeader from '../../../components/product/FilterHeader';
 
 const HeaderProductFooter = () => {
@@ -58,6 +59,10 @@ const TypeFilter: React.FC = () => {
 
 			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>
 				<FilterHeader query={query} push={push} />
+
+				<Box pt='56px' maxW={['100%', '60%']} m='0 auto'>
+					<Product />
+				</Box>
 			</Box>
 		</Layout>
 	);
