@@ -1,26 +1,7 @@
 import React from 'react';
 import { Box, Grid, Image, Text } from '@chakra-ui/react';
 
-interface DetailItemProps {
-	title: string;
-	content: string;
-}
-
-const DetailItem: React.FC<DetailItemProps> = ({ title, content }) => {
-	return (
-		<Grid
-			gridTemplateColumns='repeat(2, 1fr)'
-			borderBottom='1px solid hsl(0, 0%, 80%)'
-			pb='5px'
-			mb='8px'
-		>
-			<Text fontSize='14px' fontWeight='bold' color='#333'>
-				{title}
-			</Text>
-			<Text fontSize='14px'>{content}</Text>
-		</Grid>
-	);
-};
+import DetailItem from './DetailItem';
 
 const Product: React.FC = () => {
 	return (
