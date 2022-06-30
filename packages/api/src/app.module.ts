@@ -16,12 +16,9 @@ import { FilterModule } from './filter/filter.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:2245!20*@atpweb.yvwa6.mongodb.net/atpdatabase',
-      {
-        useNewUrlParser: true,
-      },
-    ),
+    MongooseModule.forRoot(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+    }),
     BannerModule,
     ReviewModule,
     ClientsModule,
