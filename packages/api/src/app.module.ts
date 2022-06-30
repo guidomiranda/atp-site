@@ -15,7 +15,7 @@ import { FilterModule } from './filter/filter.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     MongooseModule.forRoot(process.env.MONGO_URI, {
       useNewUrlParser: true,
     }),
