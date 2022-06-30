@@ -15,12 +15,10 @@ import { FilterModule } from './filter/filter.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '.env',
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(process.env.MONGO_URI, {
+      useNewUrlParser: true,
     }),
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:SKw1uBmjMKhUJYnd@atpweb.yvwa6.mongodb.net/atpdatabase?directConnection=true',
-    ),
     BannerModule,
     ReviewModule,
     ClientsModule,
