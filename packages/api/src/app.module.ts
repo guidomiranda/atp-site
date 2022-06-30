@@ -18,6 +18,7 @@ import { FilterModule } from './filter/filter.module';
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGO_URI, {
       useNewUrlParser: true,
+      envFilePath: '.env',
     }),
     BannerModule,
     ReviewModule,
