@@ -20,9 +20,6 @@ import { FilterModule } from './filter/filter.module';
     }),
     MongooseModule.forRoot(
       'mongodb+srv://admin:SKw1uBmjMKhUJYnd@atpweb.yvwa6.mongodb.net/atpdatabase?retryWrites=true&w=majority',
-      {
-        useNewUrlParser: true,
-      },
     ),
     BannerModule,
     ReviewModule,
