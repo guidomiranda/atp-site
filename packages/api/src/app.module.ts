@@ -18,9 +18,12 @@ import { FilterModule } from './filter/filter.module';
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    MongooseModule.forRoot(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-    }),
+    MongooseModule.forRoot(
+      'mongodb+srv://admin:SKw1uBmjMKhUJYnd@atpweb.yvwa6.mongodb.net/atpdatabase?retryWrites=true&w=majority',
+      {
+        useNewUrlParser: true,
+      },
+    ),
     BannerModule,
     ReviewModule,
     ClientsModule,
