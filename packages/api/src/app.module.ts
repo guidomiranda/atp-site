@@ -15,10 +15,11 @@ import { FilterModule } from './filter/filter.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
     MongooseModule.forRoot(process.env.MONGO_URI, {
       useNewUrlParser: true,
-      envFilePath: '.env',
     }),
     BannerModule,
     ReviewModule,
