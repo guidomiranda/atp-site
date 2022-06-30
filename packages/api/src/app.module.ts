@@ -19,7 +19,7 @@ import { FilterModule } from './filter/filter.module';
       envFilePath: '.env',
     }),
     MongooseModule.forRoot(
-      'mongodb+srv://admin:SKw1uBmjMKhUJYnd@atpweb.yvwa6.mongodb.net/atpdatabase?retryWrites=true&w=majority',
+      'mongodb+srv://admin:SKw1uBmjMKhUJYnd@atpweb.yvwa6.mongodb.net/atpdatabase?directConnection=true',
     ),
     BannerModule,
     ReviewModule,
