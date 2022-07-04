@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Banner {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String[]
+  image       String
+  bg          String
+  status      Boolean
+  order       Int
+  created_at  String
+}
+
+model Client {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String[]
+  status      Boolean
+  order       Int
+  created_at  String
+}
+
+model Filter {
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  image        String
+  line         String
+  type         String
+  dia_ext      String
+  height       String
+  dia_int      String
+  thread       String
+  val_anti_ret String
+  val_ali      String
+  model        String
+  status       Boolean
+  order        Int
+  created_at   String
+  updated_at   String
+}
+
+model Product {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  image      String
+  category   String
+  capacity   String
+  cca10      String
+  polarity   String
+  large      String
+  width      String
+  height     String
+  status     Boolean
+  order      Int
+  created_at String
+  updated_at String
+}
+
+model Review {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  body       String[]
+  author     String
+  status     Boolean
+  order      Int
+  created_at String
+}
+
+model Success {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String[]
+  status      Boolean
+  order       Int
+  created_at  String
+}
+
+model User {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  email      String
+  password   String
+  role       String
+  created_at String
+}

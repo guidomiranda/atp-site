@@ -29,10 +29,9 @@ export class EditBannerDTO {
 
   @IsArray()
   @IsOptional()
-  description?: Description[];
-}
+  description?: string[];
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsBoolean()
+  @IsOptional()
+  created_at: string;
+}

@@ -16,11 +16,13 @@ import { CreateBannerDTO, EditBannerDTO } from './dto';
 
 @Controller('banner')
 export class BannerController {
-  constructor(private bannerService: BannerService) {}
+  constructor(private readonly bannerService: BannerService) {}
 
   @Post('/create')
   async createBanner(@Res() res: Response, @Body() dto: CreateBannerDTO) {
     const banner = await this.bannerService.createBanner(dto);
+    console.log(dto);
+
     return res
       .status(HttpStatus.OK)
       .json({ message: 'Banner creado', success: true, banner });

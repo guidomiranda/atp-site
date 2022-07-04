@@ -27,10 +27,9 @@ export class CreateBannerDTO {
   status: boolean;
 
   @IsArray()
-  description: Description[];
-}
+  description: string[];
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsBoolean()
+  @IsNotEmpty()
+  created_at: string;
+}

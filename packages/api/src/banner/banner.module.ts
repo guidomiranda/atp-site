@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 
 import { BannerService } from './banner.service';
 import { BannerController } from './banner.controller';
-import { BannerSchema } from './schema';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Banner', schema: BannerSchema }]),
-  ],
+  imports: [PrismaService],
   providers: [BannerService],
   controllers: [BannerController],
 })

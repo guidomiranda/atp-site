@@ -1,46 +1,39 @@
-import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 
-import { BannerInterface } from './interfaces';
 import { CreateBannerDTO, EditBannerDTO } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class BannerService {
-  constructor(
-    @InjectModel('Banner')
-    private readonly serviceModel: Model<BannerInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async createBanner(dto: CreateBannerDTO) {
-    const banner = new this.serviceModel(dto);
-    if (!banner) throw new NotFoundException('Banner no encontrado');
-    return await banner.save();
+    return this.prisma.banner.create({
+      data: {
+        ...dto,
+        status: true,
+        order: 1,
+        created_at: new Date().toISOString(),
+      },
+    });
   }
 
   async updateBanner(id: string, dto: EditBannerDTO) {
-    const banner = await this.serviceModel.findByIdAndUpdate(id, dto, {
-      new: true,
+    return this.prisma.banner.update({
+      where: { id },
+      data: { ...dto },
     });
-    if (!banner) throw new NotFoundException('Banner no encontrado');
-    return banner;
   }
 
   async deleteBanner(id: string) {
-    const banner = await this.serviceModel.findByIdAndDelete(id);
-    if (!banner) throw new NotFoundException('Banner no encontrado');
-    return banner;
+    return this.prisma.banner.delete({ where: { id } });
   }
 
   async getBanners() {
-    const banners = await this.serviceModel.find({});
-    if (!banners) throw new NotFoundException('Banners no encontrado');
-    return banners;
+    return this.prisma.banner.findMany();
   }
 
   async getBanner(id: string) {
-    const banner = await this.serviceModel.findById(id);
-    if (!banner) throw new NotFoundException('Banners no encontrado');
-    return banner;
+    return this.prisma.banner.findFirst({ where: { id } });
   }
 }
