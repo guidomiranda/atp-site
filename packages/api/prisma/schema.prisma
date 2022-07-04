@@ -31,15 +31,15 @@ model Filter {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   image        String
-  line         String
-  type         String
-  dia_ext      String
-  height       String
-  dia_int      String
-  thread       String
-  val_anti_ret String
-  val_ali      String
-  model        String
+  line         String?
+  type         String?
+  dia_ext      String?
+  height       String?
+  dia_int      String?
+  thread       String?
+  val_anti_ret String?
+  val_ali      String?
+  model        String?
   status       Boolean
   order        Int
   created_at   String

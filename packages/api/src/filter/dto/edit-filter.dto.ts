@@ -59,4 +59,12 @@ export class EditFiltertDTO {
   @IsNumber()
   @IsOptional()
   order?: number;
+
+  @IsString()
+  @IsOptional()
+  created_at: string;
+
+  @IsString()
+  @IsOptional()
+  updated_at: string;
 }

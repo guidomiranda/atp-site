@@ -1,59 +1,45 @@
-import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 
-import { FilterInterface } from './interfaces';
 import { CreateFiltertDTO, EditFiltertDTO } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class FilterService {
-  constructor(
-    @InjectModel('Filter') private readonly filterModel: Model<FilterInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
-  async createFilter(createFilterDTO: CreateFiltertDTO) {
-    const filter = new this.filterModel(createFilterDTO);
-    if (!filter) throw new NotFoundException('Filtro no encontrado');
-    return await filter.save();
+  async createFilter(dto: CreateFiltertDTO) {
+    return this.prisma.filter.create({
+      data: {
+        ...dto,
+        status: true,
+        order: 1,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      },
+    });
   }
 
-  async updateFilter(id: string, updateFilterDTO: EditFiltertDTO) {
-    const filter = await this.filterModel.findByIdAndUpdate(
-      id,
-      updateFilterDTO,
-      { new: true },
-    );
-    if (!filter) throw new NotFoundException('Filtro no encontrado');
-    return filter;
+  async updateFilter(id: string, dto: EditFiltertDTO) {
+    return this.prisma.filter.update({ where: { id }, data: { ...dto } });
   }
 
   async deleteFilter(id: string) {
-    const filter = await this.filterModel.findByIdAndDelete(id);
-    if (!filter) throw new NotFoundException('Filtro no encontrado');
-    return filter;
+    return this.prisma.filter.delete({ where: { id } });
   }
 
   async getFilters() {
-    const filters = await this.filterModel.find({});
-    if (!filters) throw new NotFoundException('Filtro no encontrado');
-    return filters;
+    return this.prisma.filter.findMany();
   }
 
   async getFilterByLine(line: string) {
-    const filters = await this.filterModel.find({ line });
-    if (!filters) throw new NotFoundException('Filtro no encontrado');
-    return filters;
+    return this.prisma.filter.findMany({ where: { line } });
   }
 
   async getFiltersByType(type: string) {
-    const filters = await this.filterModel.find({ type });
-    if (!filters) throw new NotFoundException('Filtro no encontrado');
-    return filters;
+    return this.prisma.filter.findMany({ where: { type } });
   }
 
   async getFilter(id: string) {
-    const filter = await this.filterModel.findById(id);
-    if (!filter) throw new NotFoundException('Filtro no encontrado');
-    return filter;
+    return this.prisma.filter.findFirst({ where: { id } });
   }
 }

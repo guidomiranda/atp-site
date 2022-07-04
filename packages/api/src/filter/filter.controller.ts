@@ -88,7 +88,6 @@ export class FilterController {
   @Get('/line/:line')
   async getFiltersByLine(@Res() res: Response, @Param('line') line: string) {
     const filters = await this.filterService.getFilterByLine(line);
-    console.log(line);
 
     return res.status(HttpStatus.OK).json({
       message: 'Filtros por línea',

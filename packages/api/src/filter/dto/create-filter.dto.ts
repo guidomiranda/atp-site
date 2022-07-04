@@ -65,4 +65,12 @@ export class CreateFiltertDTO {
   @IsNumber()
   @IsNotEmpty()
   order: number;
+
+  @IsString()
+  @IsNotEmpty()
+  created_at: string;
+
+  @IsString()
+  @IsNotEmpty()
+  updated_at: string;
 }

@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
+
 import { FilterService } from './filter.service';
 import { FilterController } from './filter.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { FilterSchema } from './schema/filter.schema';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Filter', schema: FilterSchema }]),
-  ],
+  imports: [PrismaService],
   providers: [FilterService],
   controllers: [FilterController],
 })
