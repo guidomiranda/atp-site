@@ -13,7 +13,7 @@ export class EditClientDTO {
 
   @IsArray()
   @IsOptional()
-  description?: Description[];
+  description?: string[];
 
   @IsBoolean()
   @IsOptional()
@@ -22,9 +22,8 @@ export class EditClientDTO {
   @IsNumber()
   @IsOptional()
   order?: number;
-}
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsString()
+  @IsOptional()
+  created_at?: string;
+}

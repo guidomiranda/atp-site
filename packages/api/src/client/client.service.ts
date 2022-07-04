@@ -1,46 +1,39 @@
-import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 
-import { CreateClientDTO } from './dto';
-import { ClientInterface } from './interfaces';
-import { EditClientDTO } from './dto/edit-client.dto';
+import { CreateClientDTO, EditClientDTO } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class ClientsService {
-  constructor(
-    @InjectModel('Client') private readonly clientModel: Model<ClientInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async createClient(dto: CreateClientDTO) {
-    const client = new this.clientModel(dto);
-    if (!client) throw new NotFoundException('Cliente no encontrado');
-    return await client.save();
+    return this.prisma.client.create({
+      data: {
+        ...dto,
+        status: true,
+        order: 1,
+        created_at: new Date().toISOString(),
+      },
+    });
   }
 
   async updateClient(id: string, dto: EditClientDTO) {
-    const client = await this.clientModel.findByIdAndUpdate(id, dto, {
-      new: true,
+    return this.prisma.client.update({
+      where: { id },
+      data: { ...dto },
     });
-    if (!client) throw new NotFoundException('Cliente no encontrado');
-    return client;
   }
 
   async deleteClient(id: string) {
-    const client = await this.clientModel.findByIdAndDelete(id);
-    if (!client) throw new NotFoundException('Cliente no encontrado');
-    return client;
+    return this.prisma.client.delete({ where: { id } });
   }
 
   async getClients() {
-    const clients = await this.clientModel.find({});
-    if (!clients) throw new NotFoundException('Cliente no encontrado');
-    return clients;
+    return this.prisma.client.findMany();
   }
 
   async getClient(id: string) {
-    const client = await this.clientModel.findById(id);
-    if (!client) throw new NotFoundException('Cliente no encontrado');
-    return client;
+    return this.prisma.client.findFirst({ where: { id } });
   }
 }

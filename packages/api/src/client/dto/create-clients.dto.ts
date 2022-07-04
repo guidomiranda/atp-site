@@ -13,7 +13,7 @@ export class CreateClientDTO {
 
   @IsArray()
   @IsNotEmpty()
-  description: Description[];
+  description: string[];
 
   @IsBoolean()
   @IsNotEmpty()
@@ -22,9 +22,8 @@ export class CreateClientDTO {
   @IsNumber()
   @IsNotEmpty()
   order: number;
-}
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsNumber()
+  @IsNotEmpty()
+  created_at: string;
+}
