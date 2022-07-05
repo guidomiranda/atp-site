@@ -9,7 +9,7 @@ import {
 export class CreateReviewDTO {
   @IsArray()
   @IsNotEmpty()
-  body: Description[];
+  body: string[];
 
   @IsString()
   @IsNotEmpty()
@@ -22,9 +22,8 @@ export class CreateReviewDTO {
   @IsNumber()
   @IsNotEmpty()
   order: number;
-}
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsString()
+  @IsNotEmpty()
+  created_at: string;
+}

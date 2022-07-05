@@ -1,45 +1,36 @@
-import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 
-import { ReviewInterface } from './interfaces';
 import { CreateReviewDTO, EditReviewDTO } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class ReviewService {
-  constructor(
-    @InjectModel('Review') private readonly reviewModel: Model<ReviewInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async createReview(dto: CreateReviewDTO) {
-    const review = new this.reviewModel(dto);
-    if (!review) throw new NotFoundException('Testimonio no encontrado');
-    return await review.save();
+    return this.prisma.review.create({
+      data: {
+        ...dto,
+        status: true,
+        order: 1,
+        created_at: new Date().toISOString(),
+      },
+    });
   }
 
   async editReview(id: string, dto: EditReviewDTO) {
-    const review = await this.reviewModel.findByIdAndUpdate(id, dto, {
-      new: true,
-    });
-    if (!review) throw new NotFoundException('Testimonio no encontrado');
-    return review;
+    return this.prisma.review.update({ where: { id }, data: { ...dto } });
   }
 
   async deleteReview(id: string) {
-    const review = await this.reviewModel.findByIdAndDelete(id);
-    if (!review) throw new NotFoundException('Testimonio no encontrado');
-    return review;
+    return this.prisma.review.delete({ where: { id } });
   }
 
   async getReviews() {
-    const reviews = await this.reviewModel.find({});
-    if (!reviews) throw new NotFoundException('Testimonios no encontrado');
-    return reviews;
+    return this.prisma.review.findMany();
   }
 
   async getReview(id: string) {
-    const review = await this.reviewModel.findById(id);
-    if (!review) throw new NotFoundException('Testimonios no encontrado');
-    return review;
+    return this.prisma.review.findFirst({ where: { id } });
   }
 }

@@ -9,7 +9,7 @@ import {
 export class EditReviewDTO {
   @IsArray()
   @IsOptional()
-  body?: Description[];
+  body?: string[];
 
   @IsString()
   @IsOptional()
@@ -22,9 +22,8 @@ export class EditReviewDTO {
   @IsNumber()
   @IsOptional()
   order?: number;
-}
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsString()
+  @IsOptional()
+  created_at?: string;
+}

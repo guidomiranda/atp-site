@@ -13,6 +13,8 @@ import { ProductService } from './product/product.service';
 import { ProductController } from './product/product.controller';
 import { CategoryController } from './category/category.controller';
 import { CategoryService } from './category/category.service';
+import { ReviewController } from './review/review.controller';
+import { ReviewService } from './review/review.service';
 
 @Module({
   imports: [],
@@ -22,6 +24,7 @@ import { CategoryService } from './category/category.service';
     ClientsController,
     FilterController,
     ProductController,
+    ReviewController,
     CategoryController,
   ],
   providers: [
@@ -31,6 +34,7 @@ import { CategoryService } from './category/category.service';
     FilterService,
     ProductService,
     CategoryService,
+    ReviewService,
     PrismaService,
   ],
 })
