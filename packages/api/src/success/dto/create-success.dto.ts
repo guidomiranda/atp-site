@@ -13,7 +13,7 @@ export class CreateSuccessDTO {
 
   @IsArray()
   @IsNotEmpty()
-  description: Description[];
+  description: string[];
 
   @IsBoolean()
   @IsNotEmpty()
@@ -22,9 +22,8 @@ export class CreateSuccessDTO {
   @IsNumber()
   @IsNotEmpty()
   order: number;
-}
 
-type Description = {
-  id: string;
-  text: string;
-};
+  @IsString()
+  @IsNotEmpty()
+  created_at: string;
+}

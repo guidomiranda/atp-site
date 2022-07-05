@@ -1,14 +1,11 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 
 import { SuccessService } from './success.service';
 import { SuccessController } from './success.controller';
-import { SuccessSchema } from './schema';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'Success', schema: SuccessSchema }]),
-  ],
+  imports: [PrismaService],
   providers: [SuccessService],
   controllers: [SuccessController],
 })

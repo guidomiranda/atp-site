@@ -1,46 +1,36 @@
-import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 
 import { CreateSuccessDTO, EditSuccessDTO } from './dto';
-import { SuccessInterface } from './interfaces';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class SuccessService {
-  constructor(
-    @InjectModel('Success')
-    private readonly successModel: Model<SuccessInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async createSuccess(dto: CreateSuccessDTO) {
-    const info = new this.successModel(dto);
-    if (!info) throw new NotFoundException('Post no encontrado');
-    return await info.save();
+    return this.prisma.success.create({
+      data: {
+        ...dto,
+        status: true,
+        order: 1,
+        created_at: new Date().toISOString(),
+      },
+    });
   }
 
   async editSuccess(id: string, dto: EditSuccessDTO) {
-    const info = await this.successModel.findByIdAndUpdate(id, dto, {
-      new: true,
-    });
-    if (!info) throw new NotFoundException('Post no encontrado');
-    return info;
+    return this.prisma.success.update({ where: { id }, data: { ...dto } });
   }
 
   async deleteSuccess(id: string) {
-    const info = await this.successModel.findByIdAndDelete(id);
-    if (!info) throw new NotFoundException('Post no encontrado');
-    return info;
+    return this.prisma.success.delete({ where: { id } });
   }
 
   async getSuccesses() {
-    const infos = await this.successModel.find({});
-    if (!infos) throw new NotFoundException('Post no encontrado');
-    return infos;
+    return this.prisma.success.findMany();
   }
 
   async getSuccess(id: string) {
-    const info = await this.successModel.findById(id);
-    if (!info) throw new NotFoundException('Post no encontrado');
-    return info;
+    return this.prisma.success.findFirst({ where: { id } });
   }
 }

@@ -15,6 +15,8 @@ import { CategoryController } from './category/category.controller';
 import { CategoryService } from './category/category.service';
 import { ReviewController } from './review/review.controller';
 import { ReviewService } from './review/review.service';
+import { SuccessController } from './success/success.controller';
+import { SuccessService } from './success/success.service';
 
 @Module({
   imports: [],
@@ -26,6 +28,7 @@ import { ReviewService } from './review/review.service';
     ProductController,
     ReviewController,
     CategoryController,
+    SuccessController,
   ],
   providers: [
     AppService,
@@ -35,6 +38,7 @@ import { ReviewService } from './review/review.service';
     ProductService,
     CategoryService,
     ReviewService,
+    SuccessService,
     PrismaService,
   ],
 })
