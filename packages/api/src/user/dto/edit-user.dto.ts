@@ -16,4 +16,8 @@ export class EditUserDTO {
   @IsString()
   @IsOptional()
   role?: string;
+
+  @IsString()
+  @IsOptional()
+  created_at?: string;
 }

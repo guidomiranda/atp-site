@@ -17,6 +17,9 @@ import { ReviewController } from './review/review.controller';
 import { ReviewService } from './review/review.service';
 import { SuccessController } from './success/success.controller';
 import { SuccessService } from './success/success.service';
+import { UserController } from './user/user.controller';
+import { UserService } from './user/user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [],
@@ -29,6 +32,7 @@ import { SuccessService } from './success/success.service';
     ReviewController,
     CategoryController,
     SuccessController,
+    UserController,
   ],
   providers: [
     AppService,
@@ -39,6 +43,8 @@ import { SuccessService } from './success/success.service';
     CategoryService,
     ReviewService,
     SuccessService,
+    UserService,
+    JwtService,
     PrismaService,
   ],
 })

@@ -16,4 +16,8 @@ export class CreateUserDTO {
   @IsString()
   @IsNotEmpty()
   role: string;
+
+  @IsString()
+  @IsNotEmpty()
+  created_at: string;
 }

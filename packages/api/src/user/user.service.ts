@@ -1,48 +1,49 @@
 import * as argon from 'argon2';
-import { Model } from 'mongoose';
 import {
   ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
 import { JwtService } from '@nestjs/jwt';
 
-import { CreateUserDTO, EditUserDTO } from './dto';
-import { UserInterface } from './interfaces';
-import { CreateUserLoginDTO } from './dto/login-user.dto';
+import { CreateUserDTO, EditUserDTO, CreateUserLoginDTO } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectModel('User') private readonly userModel: Model<UserInterface>,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async createUser(dto: CreateUserDTO) {
     const hash = await argon.hash(dto.password);
 
-    const foundUser = await this.userModel.findOne({ email: dto.email });
+    const foundUser = await this.prisma.user.findFirst({
+      where: { email: dto.email },
+    });
     if (foundUser) throw new ForbiddenException('El email ya existe');
 
-    const user = new this.userModel({
-      email: dto.email,
-      name: dto.name,
-      password: hash,
+    const user = await this.prisma.user.create({
+      data: {
+        name: dto.name,
+        email: dto.email,
+        role: 'ADMIN',
+        password: hash,
+        created_at: new Date().toISOString(),
+      },
     });
 
-    await user.save();
-    return await this.signInToken(user._id, user.email, user.name);
+    return await this.signInToken(user.id, user.email, user.name);
   }
 
   async loginUser(dto: CreateUserLoginDTO) {
-    const user = await this.userModel.findOne({ email: dto.email });
+    const user = await this.prisma.user.findFirst({
+      where: { email: dto.email },
+    });
     if (!user) throw new ForbiddenException('Credenciales incorrectos');
 
     const pwMatches = await argon.verify(user.password, dto.password);
     if (!pwMatches) throw new ForbiddenException('Credenciales incorrectos');
 
-    return this.signInToken(user._id, user.email, user.name);
+    return this.signInToken(user.id, user.email, user.name);
   }
 
   async signInToken(userId: string, email: string, name: string) {
@@ -52,7 +53,7 @@ export class UserService {
       name,
     };
 
-    const secret = process.env.JWT_SECRET;
+    const secret = 'aGFyZCF0by1ndWVzc19zZWNyZXQ';
     const token = await this.jwtService.signAsync(payload, {
       expiresIn: '72h',
       secret,
@@ -63,34 +64,26 @@ export class UserService {
   async updateUser(id: string, dto: EditUserDTO) {
     const currentUser = dto;
 
-    const user = await this.userModel.findById(id);
+    const user = await this.prisma.user.findFirst({ where: { id } });
     if (!user) throw new NotFoundException('Usuario no encontrado');
 
     currentUser.password = await argon.hash(currentUser.password);
 
-    const userUpdated = await this.userModel.findByIdAndUpdate(
-      id,
-      currentUser,
-      { new: true },
-    );
-    return userUpdated;
+    return this.prisma.user.update({
+      where: { id },
+      data: { ...currentUser },
+    });
   }
 
   async deleteUser(id: string) {
-    const user = await this.userModel.findByIdAndDelete(id);
-    if (!user) throw new NotFoundException('Usuario no encontrado');
-    return user;
+    return this.prisma.user.delete({ where: { id } });
   }
 
   async getUsers() {
-    const users = await this.userModel.find({});
-    if (!users) throw new NotFoundException('Usuario no encontrado');
-    return users;
+    return this.prisma.user.findMany({});
   }
 
   async getUser(id: string) {
-    const user = await this.userModel.findById(id);
-    if (!user) throw new NotFoundException('Usuario no encontrado');
-    return user;
+    return this.prisma.user.findFirst({ where: { id } });
   }
 }
