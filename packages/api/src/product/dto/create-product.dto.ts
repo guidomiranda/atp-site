@@ -50,4 +50,12 @@ export class CreateProductDTO {
   @IsNumber()
   @IsNotEmpty()
   order: boolean;
+
+  @IsString()
+  @IsNotEmpty()
+  created_at: string;
+
+  @IsString()
+  @IsNotEmpty()
+  updated_at: string;
 }

@@ -1,18 +1,12 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
-import { ProductInterface } from 'src/product/interfaces';
+import { Injectable } from '@nestjs/common';
+
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class CategoryService {
-  constructor(
-    @InjectModel('Product')
-    private readonly productModel: Model<ProductInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async getProducts(type: string) {
-    const products = await this.productModel.find({}).where({ category: type });
-    if (!products) throw new NotFoundException('Productos no encontrado');
-    return products;
+    return this.prisma.product.findMany({ where: { category: type } });
   }
 }

@@ -50,13 +50,13 @@ model Product {
   id         String  @id @default(auto()) @map("_id") @db.ObjectId
   title      String
   image      String
-  category   String
-  capacity   String
-  cca10      String
-  polarity   String
-  large      String
-  width      String
-  height     String
+  category   String?
+  capacity   String?
+  cca10      String?
+  polarity   String?
+  large      String?
+  width      String?
+  height     String?
   status     Boolean
   order      Int
   created_at String

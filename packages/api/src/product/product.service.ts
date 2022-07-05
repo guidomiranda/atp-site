@@ -1,46 +1,40 @@
-import { Model } from 'mongoose';
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common';
 
-import { ProductInterface } from './interfaces';
 import { CreateProductDTO, EditProductDTO } from './dto';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class ProductService {
-  constructor(
-    @InjectModel('Product')
-    private readonly productModel: Model<ProductInterface>,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async createProduct(dto: CreateProductDTO) {
-    const product = new this.productModel(dto);
-    if (!product) throw new NotFoundException('Producto no encontrado');
-    return await product.save();
+    return this.prisma.product.create({
+      data: {
+        ...dto,
+        status: true,
+        order: 1,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      },
+    });
   }
 
   async updateProduct(id: string, dto: EditProductDTO) {
-    const product = await this.productModel.findByIdAndUpdate(id, dto, {
-      new: true,
+    return this.prisma.product.update({
+      where: { id },
+      data: { ...dto, updated_at: new Date().toISOString() },
     });
-    if (!product) throw new NotFoundException('Producto no encontrado');
-    return product;
   }
 
   async deleteProduct(id: string) {
-    const product = await this.productModel.findByIdAndDelete(id);
-    if (!product) throw new NotFoundException('Producto no encontrado');
-    return product;
+    return this.prisma.product.delete({ where: { id } });
   }
 
   async getProducts() {
-    const products = await this.productModel.find({});
-    if (!products) throw new NotFoundException('Productos no encontrado');
-    return products;
+    return this.prisma.product.findMany();
   }
 
   async getProduct(id: string) {
-    const product = await this.productModel.findById(id);
-    if (!product) throw new NotFoundException('Producto no encontrado');
-    return product;
+    return this.prisma.product.findFirst({ where: { id } });
   }
 }

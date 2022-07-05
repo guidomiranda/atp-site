@@ -43,5 +43,13 @@ export class EditProductDTO {
 
   @IsNumber()
   @IsOptional()
-  order?: boolean;
+  order?: number;
+
+  @IsString()
+  @IsOptional()
+  created_at?: string;
+
+  @IsString()
+  @IsOptional()
+  updated_at?: string;
 }

@@ -20,7 +20,10 @@ export class FilterService {
   }
 
   async updateFilter(id: string, dto: EditFiltertDTO) {
-    return this.prisma.filter.update({ where: { id }, data: { ...dto } });
+    return this.prisma.filter.update({
+      where: { id },
+      data: { ...dto, updated_at: new Date().toISOString() },
+    });
   }
 
   async deleteFilter(id: string) {
