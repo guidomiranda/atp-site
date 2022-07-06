@@ -16,7 +16,6 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link }) => {
 				_hover={{ textDecoration: 'none' }}
 				textTransform='uppercase'
 				color='white'
-				// fontSize='18px'
 				fontWeight='medium'
 				ml='20px'
 			>
@@ -61,7 +60,7 @@ const Navbar = () => {
 						<NavLink text='Productos' link='/product/aire' />
 					</Box>
 					<NavLink text='Servicios' link='/services' />
-					<NavLink text='Contacto' link='' />
+					<NavLink text='Contacto' link='/' />
 				</Flex>
 
 				<Button display={{ base: 'block', lg: 'none' }}>

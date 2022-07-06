@@ -8,6 +8,7 @@ import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
 import { getClients } from '../utils';
 import { slides_data } from '../data';
+import { brands } from '../data/brands';
 
 interface ClientProps {
 	clients: {
@@ -107,30 +108,11 @@ const Home: React.FC<ClientProps> = ({ clients }) => {
 					}}
 					gap='20px'
 				>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
-					<Grid placeItems='center'>
-						<Image src='/logo-volskwagen.png' alt='' />
-					</Grid>
+					{brands.map((brand, i) => (
+						<Grid key={i} placeItems='center'>
+							<Image src={brand.url} alt='' />
+						</Grid>
+					))}
 				</Grid>
 			</Box>
 		</Layout>

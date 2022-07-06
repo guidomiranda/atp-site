@@ -24,8 +24,11 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 				modules={[Navigation]}
 				className='mySwiper mySwiper-slide'
 			>
-				{slides.map(slide => (
-					<SwiperSlide style={{ backgroundImage: `url(${slide.bg})` }}>
+				{slides.map((slide: any) => (
+					<SwiperSlide
+						key={slide.id}
+						style={{ backgroundImage: `url(${slide.bg})` }}
+					>
 						<Flex
 							pt={{ base: '64px', lg: '0' }}
 							maxW='1220px'
@@ -46,8 +49,9 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 								>
 									{slide.title}
 								</Heading>
-								{slide.description.map(text => (
+								{slide.description.map((text: any) => (
 									<Text
+										key={text}
 										fontSize='18px'
 										textAlign='left'
 										color='white'
