@@ -1,12 +1,38 @@
 import React from 'react';
 import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 
 import Layout from '../layout';
 import Banner from '../components/Banner';
 import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
+import { getClients } from '../utils';
+import { slides_data } from '../data';
 
-const Home: React.FC = () => {
+interface ClientProps {
+	clients: {
+		_id?: string;
+		title: string;
+		description: string[];
+		status: boolean;
+		order: number;
+		createdAt: Date;
+	};
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const data = await getClients();
+
+	return {
+		props: {
+			clients: data,
+		},
+	};
+};
+
+const Home: React.FC<ClientProps> = ({ clients }) => {
+	console.log(clients);
+
 	return (
 		<Layout>
 			{/* Banner */}
@@ -16,7 +42,6 @@ const Home: React.FC = () => {
 			<Box
 				py='64px'
 				bgImage='linear-gradient(to right, rgb(13, 21, 37), rgb(2, 2, 4))'
-				// overflow='hidden'
 			>
 				{/* Product Banner */}
 				<Box textAlign='center'>
@@ -48,7 +73,7 @@ const Home: React.FC = () => {
 			</Box>
 
 			{/* Slides */}
-			<Slides />
+			<Slides slides={slides_data} />
 
 			{/* Brands */}
 			<Box py='64px'>

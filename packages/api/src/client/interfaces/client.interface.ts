@@ -1,13 +1,8 @@
 export interface ClientInterface {
   _id?: string;
   title: string;
-  description: Description[];
+  description: string[];
   status: boolean;
   order: number;
-  createdAt: Date;
+  created_at: string;
 }
-
-type Description = {
-  id: string;
-  text: string;
-};
