@@ -8,8 +8,6 @@ interface FilterHeaderProps {
 }
 
 const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
-	console.log(query);
-
 	return (
 		<Box>
 			<Flex alignItems={['flex-start', 'center']} flexDir={['column', 'row']}>
@@ -31,7 +29,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 				alignItems={['flex-start', 'center']}
 				flexDir={['column', 'row']}
 			>
-				<NextLink href='/product/filters/aire#main' passHref>
+				<NextLink href='/product/filters/liviana/aire#main' passHref>
 					<Link
 						color={query.type === 'aire' ? '#fe5101' : '#000'}
 						fontWeight='bold'
@@ -49,7 +47,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 					mx='10px'
 					display={['none', 'block']}
 				/>
-				<NextLink href='/product/filters/aceite#main' passHref>
+				<NextLink href='/product/filters/liviana/aceite#main' passHref>
 					<Link
 						color={query.type === 'aceite' ? '#fe5101' : '#000'}
 						fontWeight='bold'
@@ -67,7 +65,7 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 					mx='10px'
 					display={['none', 'block']}
 				/>
-				<NextLink href='/product/filters/combustible#main' passHref>
+				<NextLink href='/product/filters/liviana/combustible#main' passHref>
 					<Link
 						color={query.type === 'combustible' ? '#fe5101' : '#000'}
 						fontWeight='bold'

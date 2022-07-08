@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 
-import Layout from '../../../layout';
-import Header from '../../../components/product/Header';
-import Product from '../../../components/product/Product';
-import FilterHeader from '../../../components/product/FilterHeader';
+import Layout from '../../../../layout';
+import Header from '../../../../components/product/Header';
+import Product from '../../../../components/product/Product';
+import FilterHeader from '../../../../components/product/FilterHeader';
+import { getProductsByLine } from '../../../../utils';
 
 const HeaderProductFooter = () => {
 	return (
@@ -46,6 +47,23 @@ const HeaderProductFooter = () => {
 
 const TypeFilter: React.FC = () => {
 	const { query, push } = useRouter();
+	const [filters, setFilters] = useState<any>(null);
+
+	const getProductsLine = async () => {
+		const data = await getProductsByLine(query?.line as string);
+		const dataFiltered = data.filters.filter(
+			(item: any) => item.type === query?.type
+		);
+
+		return dataFiltered;
+	};
+
+	useEffect(() => {
+		(async () => {
+			const dataFiltered = await getProductsLine();
+			setFilters(dataFiltered);
+		})();
+	}, [query]);
 
 	return (
 		<Layout>
@@ -61,7 +79,9 @@ const TypeFilter: React.FC = () => {
 				<FilterHeader query={query} push={push} />
 
 				<Box pt='56px' maxW={['100%', '60%']} m='0 auto'>
-					<Product />
+					{filters?.map(item => (
+						<Product key={item.id} filter={item} />
+					))}
 				</Box>
 			</Box>
 		</Layout>

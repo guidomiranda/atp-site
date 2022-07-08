@@ -1,22 +1,25 @@
 import React from 'react';
 import { Box, Grid, Image, Text } from '@chakra-ui/react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import DetailItem from './DetailItem';
 
-const Product: React.FC = () => {
+interface ProductProps {
+	filter: any;
+}
+
+const Product: React.FC<ProductProps> = ({ filter }) => {
 	return (
 		<Grid
-			gridTemplateColumns={['1fr', '1fr 1.2fr']}
+			gridTemplateColumns={['1fr', '1fr 1.3fr']}
 			gap='32px 64px'
 			alignItems='center'
 		>
 			<Box>
-				<Image
-					src='/banner_productos_route_img.png'
-					alt=''
+				<LazyLoadImage
+					src={filter.image} // use normal <img> attributes as props
 					width='100%'
-					objectFit='cover'
-					verticalAlign='top'
+					effect='blur'
 				/>
 			</Box>
 			<Box>
@@ -25,8 +28,27 @@ const Product: React.FC = () => {
 				</Text>
 
 				<Box mt='10px'>
-					<DetailItem title='Modelo Vehículo' content='COROLLA / C90' />
-					<DetailItem title='Modelo Vehículo' content='COROLLA / C90' />
+					{filter.height && (
+						<DetailItem title='Altura' content={filter.height} />
+					)}
+					{filter.dia_ext && (
+						<DetailItem title='Dia.Ext.' content={filter.dia_ext} />
+					)}
+					{filter.thread && (
+						<DetailItem title='Rosca' content={filter.thread} />
+					)}
+					{filter.val_anti_ret && (
+						<DetailItem
+							title='Válvula anti retorno'
+							content={filter.val_anti_ret}
+						/>
+					)}
+					{filter.val_ali && (
+						<DetailItem title='Válvula alívio' content={filter.val_ali} />
+					)}
+					{filter.model && (
+						<DetailItem title='Modelo Vehículo' content={filter.model} />
+					)}
 				</Box>
 			</Box>
 		</Grid>

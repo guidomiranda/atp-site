@@ -13,10 +13,10 @@ const DetailItem: React.FC<DetailItemProps> = ({ title, content }) => {
 			pb='5px'
 			mb='8px'
 		>
-			<Text fontSize='14px' fontWeight='bold' color='#333'>
+			<Text fontSize='12px' fontWeight='bold' color='#333'>
 				{title}
 			</Text>
-			<Text fontSize='14px'>{content}</Text>
+			<Text fontSize='12px'>{content}</Text>
 		</Grid>
 	);
 };
