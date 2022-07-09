@@ -2,12 +2,16 @@ import React from 'react';
 import { Box, Image, Text } from '@chakra-ui/react';
 import DetailItem from '../DetailItem';
 
-const Product: React.FC = () => {
+interface ProductProps {
+	battery: any;
+}
+
+const Product: React.FC<ProductProps> = ({ battery }) => {
 	return (
 		<Box>
 			<Box>
 				<Image
-					src='/banner_productos_route_img.png'
+					src={battery.image}
 					alt=''
 					width='100%'
 					objectFit='cover'
@@ -16,13 +20,28 @@ const Product: React.FC = () => {
 			</Box>
 			<Box>
 				<Text fontWeight='bold' fontSize='28px'>
-					YTX5L-BS
+					{battery.title}
 				</Text>
 
 				<Box mt='10px'>
-					<DetailItem title='Capacidad:' content=' 5 AH ' />
-					<DetailItem title='Capacidad:' content=' 5 AH ' />
-					<DetailItem title='Capacidad:' content=' 5 AH ' />
+					{battery.capacity && (
+						<DetailItem title='Capacidad:' content={battery.capacity} />
+					)}
+					{battery.cca10 && (
+						<DetailItem title='CCA - 10o C:' content={battery.cca10} />
+					)}
+					{battery.polarity && (
+						<DetailItem title='Polaridad:' content={battery.polarity} />
+					)}
+					{battery.large && (
+						<DetailItem title='Largo:' content={battery.large} />
+					)}
+					{battery.width && (
+						<DetailItem title='Ancho:' content={battery.width} />
+					)}
+					{battery.height && (
+						<DetailItem title='Altura:' content={battery.height} />
+					)}
 				</Box>
 			</Box>
 		</Box>

@@ -63,6 +63,15 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 						</Box>
 					</Box>
 
+					{product.more_info && (
+						<Box mt='20px'>
+							<Text fontWeight='bold'>¿Necesitas más información?</Text>
+							<Text>
+								Visita de forma directo el sitio web oficial de la marca.
+							</Text>
+						</Box>
+					)}
+
 					<Box mt='26px'>
 						{product.target === true ? (
 							<Link
@@ -114,7 +123,6 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 						<Image
 							src={product.image}
 							alt=''
-							// width={{ base: '70%', lg: '100%' }}
 							width='100%'
 							objectFit='cover'
 							verticalAlign='top'

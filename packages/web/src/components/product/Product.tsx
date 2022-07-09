@@ -14,6 +14,7 @@ const Product: React.FC<ProductProps> = ({ filter }) => {
 			gridTemplateColumns={['1fr', '1fr 1.3fr']}
 			gap='32px 64px'
 			alignItems='center'
+			mb='32px'
 		>
 			<Box>
 				<LazyLoadImage

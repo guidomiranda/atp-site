@@ -72,7 +72,7 @@ const TypeFilter: React.FC = () => {
 				logo='/bannervox_logo.png'
 				product='/header-product-image.png'
 				children={<HeaderProductFooter />}
-				query={query}
+				// category={category}
 			/>
 
 			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>

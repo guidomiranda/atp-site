@@ -31,8 +31,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Home: React.FC<ClientProps> = ({ clients }) => {
-	console.log(clients);
-
 	return (
 		<Layout>
 			{/* Banner */}

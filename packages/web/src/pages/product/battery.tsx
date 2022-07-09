@@ -1,10 +1,19 @@
 import React from 'react';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 
 import Layout from '../../layout';
 import Header from '../../components/product/Header';
 import Product from '../../components/product/battery/Product';
+import { getBatteries } from '../../utils';
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const batteries = await getBatteries();
+	return {
+		props: { batteries },
+	};
+};
 
 const HeaderProductFooter = () => {
 	return (
@@ -43,7 +52,7 @@ const HeaderProductFooter = () => {
 	);
 };
 
-const Products = () => {
+const Products = ({ batteries }) => {
 	const { pathname } = useRouter();
 	const category = pathname.split('/')[pathname.split('/').length - 1];
 
@@ -79,10 +88,9 @@ const Products = () => {
 					]}
 					gap='32px 56px'
 				>
-					<Product />
-					<Product />
-					<Product />
-					<Product />
+					{batteries.products?.map(battery => (
+						<Product key={battery.id} battery={battery} />
+					))}
 				</Grid>
 			</Box>
 		</Layout>
