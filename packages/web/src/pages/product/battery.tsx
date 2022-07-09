@@ -44,7 +44,8 @@ const HeaderProductFooter = () => {
 };
 
 const Products = () => {
-	const { query } = useRouter();
+	const { pathname } = useRouter();
+	const category = pathname.split('/')[pathname.split('/').length - 1];
 
 	return (
 		<Layout>
@@ -53,7 +54,7 @@ const Products = () => {
 				logo='/banner_productos_route_logo.png'
 				product='/banner_productos_route_img.png'
 				children={<HeaderProductFooter />}
-				query={query}
+				category={category}
 			/>
 
 			<Box bgImage="url('/route_bg_iso.jpg')">

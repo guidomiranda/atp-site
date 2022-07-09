@@ -6,7 +6,7 @@ interface HeaderProps {
 	bg: string;
 	logo: string;
 	product: string;
-	query: any;
+	category?: any;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({
 	logo,
 	product,
 	children,
-	query,
+	category,
 }) => {
 	return (
 		<Box h='100vh' mt='-100px'>
@@ -52,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({
 									src={product}
 									alt=''
 									height={['170px', '500px']}
-									objectFit={query.category ? 'cover' : 'contain'}
+									objectFit={category ? 'cover' : 'contain'}
 									verticalAlign='top'
 								/>
 							</Grid>
@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({
 					</Box>
 				</Flex>
 			</Box>
-			<Box h='180px' bgColor={query.category ? '#3d3425' : '#fe5101'}>
+			<Box h='180px' bgColor={category ? '#3d3425' : '#fe5101'}>
 				{children}
 			</Box>
 		</Box>

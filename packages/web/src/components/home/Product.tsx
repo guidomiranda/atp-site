@@ -5,12 +5,20 @@ import {
 	Grid,
 	Heading,
 	Image,
+	Link,
 	Text,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
-const Product: React.FC = () => {
+interface ProductProps {
+	product: any;
+}
+
+const Product: React.FC<ProductProps> = ({ product }) => {
+	const router = useRouter();
+
 	return (
 		<Box
 			bgImage='url("/bg-products.png")'
@@ -28,7 +36,7 @@ const Product: React.FC = () => {
 					<Box>
 						<Flex mb='24px' display='inline-flex' position='relative'>
 							<Heading color='#fff' fontSize='48px' fontWeight='bold'>
-								Lubricantes
+								{product.title}
 							</Heading>
 							<Box
 								position='absolute'
@@ -39,38 +47,61 @@ const Product: React.FC = () => {
 								right='0'
 							/>
 						</Flex>
-						<Text
-							color='#fff'
-							fontSize='18px'
-							width='100%'
-							textAlign='justify'
-							mb='20px'
-						>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
-							ullam aliquid, fuga quia a quis voluptates quam tempore deserunt
-							nostrum vero sunt neque eius maiores voluptatum sequi consectetur
-							beatae quaerat molestiae at iste. Optio reprehenderit id vitae a
-							animi quis.
-						</Text>
+						<Box>
+							{product.description.map(text => (
+								<Text
+									key={text}
+									color='#fff'
+									// fontSize='18px'
+									width='100%'
+									textAlign='justify'
+									mb='20px'
+								>
+									{text}
+								</Text>
+							))}
+						</Box>
 					</Box>
 
 					<Box mt='26px'>
-						<Button
-							width={{ base: '100%', lg: 'auto' }}
-							display='flex'
-							bgColor='#b41f1b'
-							rounded='full'
-							height='60px'
-							px='42px'
-							alignItems='center'
-							_hover={{ bgColor: '#dd2622' }}
-							_active={{ bgColor: '#841715' }}
-						>
-							<Text>VISITAR SITIO WEB OFICIAL</Text>
-							<Text as='span' color='#fff' ml='10px'>
-								<FaArrowRight />
-							</Text>
-						</Button>
+						{product.target === true ? (
+							<Link
+								href={product.path}
+								// width={{ base: '100%', lg: 'auto' }}
+								display='inline-flex'
+								bgColor='#b41f1b'
+								rounded='full'
+								height='60px'
+								px='42px'
+								alignItems='center'
+								_hover={{ bgColor: '#dd2622' }}
+								_active={{ bgColor: '#841715' }}
+								target='_blank'
+							>
+								<Text>VISITAR SITIO WEB OFICIAL</Text>
+								<Text as='span' color='#fff' ml='10px'>
+									<FaArrowRight />
+								</Text>
+							</Link>
+						) : (
+							<Button
+								width={{ base: '100%', lg: 'auto' }}
+								display='flex'
+								bgColor='#b41f1b'
+								rounded='full'
+								height='60px'
+								px='42px'
+								alignItems='center'
+								_hover={{ bgColor: '#dd2622' }}
+								_active={{ bgColor: '#841715' }}
+								onClick={() => router.push(product.path)}
+							>
+								<Text>VISITAR SITIO WEB OFICIAL</Text>
+								<Text as='span' color='#fff' ml='10px'>
+									<FaArrowRight />
+								</Text>
+							</Button>
+						)}
 					</Box>
 				</Box>
 				<Box
@@ -81,7 +112,7 @@ const Product: React.FC = () => {
 				>
 					<Box>
 						<Image
-							src='/img-lubricantes-mobil.png'
+							src={product.image}
 							alt=''
 							// width={{ base: '70%', lg: '100%' }}
 							width='100%'

@@ -7,8 +7,7 @@ import Banner from '../components/Banner';
 import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
 import { getClients } from '../utils';
-import { slides_data } from '../data';
-import { brands } from '../data/brands';
+import { slides_data, brands, products } from '../data';
 
 interface ClientProps {
 	clients: {
@@ -67,9 +66,9 @@ const Home: React.FC<ClientProps> = ({ clients }) => {
 
 				{/* Product Main */}
 				<Box pt='60px' maxW='1220px' w='90%' m='0 auto' mt='32px'>
-					<Product />
-					<Product />
-					<Product />
+					{products.map(item => (
+						<Product key={item.id} product={item} />
+					))}
 				</Box>
 			</Box>
 
