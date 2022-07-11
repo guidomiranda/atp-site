@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { FaTimes, FaBars } from 'react-icons/fa';
@@ -18,9 +18,11 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 						_focus={{ outline: 0 }}
 						_hover={{ textDecoration: 'none' }}
 						textTransform='uppercase'
-						color='white'
+						color={{ base: 'black', lg: 'white' }}
 						fontWeight='medium'
-						ml='20px'
+						ml={{ base: '0', lg: '20px' }}
+						mb={{ base: '15px', lg: '0' }}
+						fontSize={{ base: '24px', lg: '16px' }}
 					>
 						{text}
 					</Link>
@@ -32,9 +34,11 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 					_focus={{ outline: 0 }}
 					_hover={{ textDecoration: 'none' }}
 					textTransform='uppercase'
-					color='white'
+					color={{ base: 'black', lg: 'white' }}
 					fontWeight='medium'
-					ml='20px'
+					ml={{ base: '0', lg: '20px' }}
+					mb={{ base: '15px', lg: '0' }}
+					fontSize={{ base: '24px', lg: '16px' }}
 				>
 					{text}
 				</Text>
@@ -44,10 +48,16 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 };
 
 const Navbar = () => {
+	const [showMenu, setShowMenu] = useState<boolean>(false);
 	const [showSubmenuProduct, setShowSubmenuProduct] = useState<boolean>(false);
 
 	const handleMouseEnter = () => setShowSubmenuProduct(true);
 	const handleMouseLeave = () => setShowSubmenuProduct(false);
+
+	const handleOpenMenu = () => setShowMenu(true);
+	const handleCloseMenu = () => setShowMenu(false);
+
+	useEffect(() => setShowMenu(false), []);
 
 	return (
 		<Box height='100px' position='relative' zIndex='20'>
@@ -76,14 +86,29 @@ const Navbar = () => {
 					</Box>
 				</Flex>
 
-				<Flex display={{ base: 'none', lg: 'flex' }}>
+				<Flex
+					display={
+						showMenu
+							? { base: 'flex', lg: 'flex' }
+							: { base: 'none', lg: 'flex' }
+					}
+					position={{ base: 'fixed', lg: 'relative' }}
+					bgColor={{ base: 'white', lg: 'transparent' }}
+					left={{ base: '0', lg: 'initial' }}
+					top={{ base: '0', lg: 'initial' }}
+					w={{ base: '100vw', lg: 'initial' }}
+					h={{ base: '100vh', lg: 'initial' }}
+					flexDir={{ base: 'column', lg: 'row' }}
+					alignItems={{ base: 'center', lg: 'initial' }}
+					justifyContent={{ base: 'center', lg: 'initial' }}
+				>
 					<NavLink text='Inicio' link='/' />
 					<NavLink text='Nosotros' link='/about' />
 					<Box
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
 						position='relative'
-						pb='10px'
+						pb={{ base: '0', lg: '10px' }}
 						cursor='pointer'
 					>
 						<NavLink isLink text='Productos' link='/product/aire' />
@@ -94,7 +119,6 @@ const Navbar = () => {
 							position='absolute'
 							top='100%'
 							w='200px'
-							// h='200px'
 							bgColor='white'
 							boxShadow='0px 0px 10px 0px rgba(0,0,0,0.6)'
 							p='10px'
@@ -137,8 +161,17 @@ const Navbar = () => {
 					<NavLink text='Contacto' link='/' />
 				</Flex>
 
-				<Button display={{ base: 'block', lg: 'none' }}>
-					<FaBars />
+				<Button
+					display={{ base: 'block', lg: 'none' }}
+					onClick={() => {
+						if (showMenu) {
+							handleCloseMenu();
+						} else {
+							handleOpenMenu();
+						}
+					}}
+				>
+					{showMenu ? <FaTimes /> : <FaBars />}
 				</Button>
 			</Flex>
 		</Box>
