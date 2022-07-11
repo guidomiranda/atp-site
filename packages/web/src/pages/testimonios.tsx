@@ -1,20 +1,32 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 
 import Header from '../components/client/Header';
 import Layout from '../layout';
+import { getReviews } from '../utils';
 
-const ItemReview: React.FC = () => {
+interface ReviewsProps {
+	reviews: any;
+}
+interface ReviewProps {
+	review: any;
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const reviews = await getReviews();
+	return { props: { reviews } };
+};
+
+const ItemReview: React.FC<ReviewProps> = ({ review }) => {
 	return (
-		<Box as='article' bgColor='#fff' p='32px'>
+		<Box as='article' bgColor='#fff' p='32px' mb='56px'>
 			<Box mb='15px'>
-				<Text color='black' fontSize={['16px', '20px']}>
-					Decidí cambiar el aceite, tengo un Mitsubishi Outlander. Llegué a la
-					tienda, pensé que era mejor no ahorrar dinero y llevarse algo de alta
-					calidad. El vendedor recomendó Shell al principio, pero lo usé y,
-					francamente, no estaba satisfecho con todo. Por lo tanto, tomé
-					"Mobil". No hay quejas, estoy completamente satisfecho con la compra.
-				</Text>
+				{review.body.map(item => (
+					<Text key={item} color='black' fontSize={['16px', '20px']}>
+						{item}
+					</Text>
+				))}
 			</Box>
 			<Text color='black' fontSize={['16px', '20px']}>
 				Juanca Báez - Automovilista, corredor de fórmula 1
@@ -23,7 +35,7 @@ const ItemReview: React.FC = () => {
 	);
 };
 
-const Clientes = () => {
+const Clientes: React.FC<ReviewsProps> = ({ reviews }) => {
 	return (
 		<Layout>
 			<Header
@@ -32,7 +44,9 @@ const Clientes = () => {
 			/>
 			<Box bgColor='#155e9d' py='94px'>
 				<Box maxW='1220px' w='90%' m='0 auto'>
-					<ItemReview />
+					{reviews?.reviews?.map(item => (
+						<ItemReview key={item.id} review={item} />
+					))}
 				</Box>
 			</Box>
 		</Layout>

@@ -1,10 +1,25 @@
 import React from 'react';
+import { GetServerSideProps } from 'next';
 import { Box, Heading, Text } from '@chakra-ui/react';
 
-import Header from '../components/client/Header';
 import Layout from '../layout';
+import Header from '../components/client/Header';
+import { getSuccesses } from './success';
 
-const ItemReview: React.FC = () => {
+interface SuccessesProps {
+	successes: any;
+}
+
+interface SuccessProps {
+	success: any;
+}
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	const successes = await getSuccesses();
+	return { props: { successes } };
+};
+
+const ItemReview: React.FC<SuccessProps> = ({ success }) => {
 	return (
 		<Box as='article' p='32px'>
 			<Heading
@@ -16,34 +31,28 @@ const ItemReview: React.FC = () => {
 				py='24px'
 				// textTransform='uppercase'
 			>
-				Autopiezas CEISA
+				{success.title}
 			</Heading>
 			<Box px='26px' pb='26px' bgColor='#333'>
-				<Text color='white' fontSize={['16px', '20px']} pt='20px'>
-					Ha realizado una importante alianza con la empresa Kenport con lo cual
-					MOBIL Lubricantes se encuentra disponible para realizar entregas
-					programadas en Argentina, Uruguay, Bolivia y Paraguay realizando las
-					gestiones comerciales desde nuestro país a través de ATP.
-				</Text>
-				<Text color='white' fontSize={['16px', '20px']} mt='15px'>
-					Agregaron que MOBIL Lubricantes además ofrece una importante variedad
-					de servicios como valor agregado como entrega en todos los puertos del
-					país, logística eficiente, análisis de lubricantes a bordo, cartilla
-					de lubricación, acompañamiento permanente y bombeo de aceite a granel
-					entre otros.
-				</Text>
+				{success.description.map(item => (
+					<Text color='white' fontSize={['16px', '20px']} pt='20px' key={item}>
+						{item}
+					</Text>
+				))}
 			</Box>
 		</Box>
 	);
 };
 
-const Clientes = () => {
+const Clientes: React.FC<SuccessesProps> = ({ successes }) => {
 	return (
 		<Layout>
 			<Header title='Casos de éxito' image='/personas-2.png' />
 			<Box py='94px'>
 				<Box maxW='1220px' w='90%' m='0 auto'>
-					<ItemReview />
+					{successes?.infos?.map(item => (
+						<ItemReview key={item.id} success={item} />
+					))}
 				</Box>
 			</Box>
 		</Layout>
