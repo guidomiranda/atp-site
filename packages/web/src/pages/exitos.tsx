@@ -4,7 +4,7 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 
 import Layout from '../layout';
 import Header from '../components/client/Header';
-import { getSuccesses } from './success';
+import { getSuccesses } from '../utils';
 
 interface SuccessesProps {
 	successes: any;
@@ -29,7 +29,6 @@ const ItemReview: React.FC<SuccessProps> = ({ success }) => {
 				color='white'
 				textAlign='center'
 				py='24px'
-				// textTransform='uppercase'
 			>
 				{success.title}
 			</Heading>
