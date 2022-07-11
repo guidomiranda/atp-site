@@ -16,7 +16,16 @@ const Header: React.FC<HeaderProps> = ({ bg, title, description, page }) => {
 				bgImage={`url('/${bg}')`}
 				bgSize='cover'
 				bgPos='center'
+				position='relative'
 			>
+				<Box
+					bg='linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 80%)'
+					height='200px'
+					position='absolute'
+					width='100%'
+					bottom='0'
+					left='0'
+				/>
 				<Flex
 					maxW='1220px'
 					w='90%'

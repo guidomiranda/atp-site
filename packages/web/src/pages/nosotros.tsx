@@ -34,7 +34,7 @@ const About = () => {
 	return (
 		<Layout>
 			<Header
-				bg='banner-atp-nosotros.jpg'
+				bg='banner-nosotros.jpg'
 				title='Quienes somos'
 				description='ATP es una empresa con más de 40 años en el mercado que se encarga de distribuir productos y servicios de alta calidad.'
 			/>

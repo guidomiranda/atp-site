@@ -103,7 +103,7 @@ const Navbar = () => {
 					justifyContent={{ base: 'center', lg: 'initial' }}
 				>
 					<NavLink text='Inicio' link='/' />
-					<NavLink text='Nosotros' link='/about' />
+					<NavLink text='Nosotros' link='/nosotros' />
 					<Box
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
