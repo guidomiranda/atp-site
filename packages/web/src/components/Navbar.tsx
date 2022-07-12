@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { FaTimes, FaBars } from 'react-icons/fa';
+import router, { useRouter } from 'next/router';
 
 interface NavLinkProps {
 	text: string;
@@ -22,7 +23,7 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 						fontWeight='medium'
 						ml={{ base: '0', lg: '20px' }}
 						mb={{ base: '15px', lg: '0' }}
-						fontSize={{ base: '24px', lg: '16px' }}
+						fontSize={{ base: '24px', lg: '14px' }}
 					>
 						{text}
 					</Link>
@@ -38,7 +39,7 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 					fontWeight='medium'
 					ml={{ base: '0', lg: '20px' }}
 					mb={{ base: '15px', lg: '0' }}
-					fontSize={{ base: '24px', lg: '16px' }}
+					fontSize={{ base: '24px', lg: '14px' }}
 				>
 					{text}
 				</Text>
@@ -51,6 +52,8 @@ const Navbar = () => {
 	const [showMenu, setShowMenu] = useState<boolean>(false);
 	const [showSubmenuProduct, setShowSubmenuProduct] = useState<boolean>(false);
 
+	const { pathname } = useRouter();
+
 	const handleMouseEnter = () => setShowSubmenuProduct(true);
 	const handleMouseLeave = () => setShowSubmenuProduct(false);
 
@@ -59,8 +62,15 @@ const Navbar = () => {
 
 	useEffect(() => setShowMenu(false), []);
 
+	console.log(pathname);
+
 	return (
-		<Box height='100px' position='relative' zIndex='20'>
+		<Box
+			height='100px'
+			position='relative'
+			zIndex='20'
+			bgColor={pathname === '/contacto' ? '#111' : 'transparent'}
+		>
 			<Flex
 				height='100%'
 				alignItems='center'
@@ -99,7 +109,7 @@ const Navbar = () => {
 					w={{ base: '100vw', lg: 'initial' }}
 					h={{ base: '100vh', lg: 'initial' }}
 					flexDir={{ base: 'column', lg: 'row' }}
-					alignItems={{ base: 'center', lg: 'initial' }}
+					alignItems={{ base: 'center', lg: 'baseline' }}
 					justifyContent={{ base: 'center', lg: 'initial' }}
 				>
 					<NavLink text='Inicio' link='/' />
@@ -158,7 +168,22 @@ const Navbar = () => {
 						</Box>
 					</Box>
 					<NavLink text='Servicios' link='/services' />
-					<NavLink text='Contacto' link='/' />
+					<NavLink text='Contacto' link='/contacto' />
+					<Button
+						onClick={() => router.push('/')}
+						fontSize='14px'
+						bgColor='#d21a28'
+						minW='initial'
+						p='5px 10px'
+						color='#fff'
+						h='initial'
+						ml='20px'
+						_hover={{ backgroundColor: '#d21a28' }}
+						_active={{ backgroundColor: 'hsl(355, 77%, 62%)', outline: 'none' }}
+						_focus={{ outline: 'none' }}
+					>
+						Trabaja con nosotros
+					</Button>
 				</Flex>
 
 				<Button
