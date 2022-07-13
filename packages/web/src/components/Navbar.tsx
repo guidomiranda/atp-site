@@ -175,13 +175,13 @@ const Navbar = () => {
 					<NavLink text='Contacto' link='/contacto' />
 					<Button
 						onClick={() => router.push('/trabaja-con-nosotros')}
-						fontSize='14px'
+						fontSize={['22px', '14px']}
 						bgColor='#d21a28'
 						minW='initial'
 						p='5px 10px'
 						color='#fff'
 						h='initial'
-						ml='20px'
+						ml={['0', '20px']}
 						_hover={{ backgroundColor: '#d21a28' }}
 						_active={{ backgroundColor: 'hsl(355, 77%, 62%)', outline: 'none' }}
 						_focus={{ outline: 'none' }}
