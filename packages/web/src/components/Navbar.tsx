@@ -69,7 +69,11 @@ const Navbar = () => {
 			height='100px'
 			position='relative'
 			zIndex='20'
-			bgColor={pathname === '/contacto' ? '#111' : 'transparent'}
+			bgColor={
+				pathname === '/contacto' || pathname === '/trabaja-con-nosotros'
+					? '#111'
+					: 'transparent'
+			}
 		>
 			<Flex
 				height='100%'
@@ -170,7 +174,7 @@ const Navbar = () => {
 					<NavLink text='Servicios' link='/services' />
 					<NavLink text='Contacto' link='/contacto' />
 					<Button
-						onClick={() => router.push('/')}
+						onClick={() => router.push('/trabaja-con-nosotros')}
 						fontSize='14px'
 						bgColor='#d21a28'
 						minW='initial'
