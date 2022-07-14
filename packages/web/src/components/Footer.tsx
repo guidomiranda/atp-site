@@ -12,7 +12,12 @@ import {
 const Footer: React.FC = () => {
 	return (
 		<Box>
-			<Box py='72px' bgImage='url("/bg-products.png")'>
+			<Box
+				py='72px'
+				bgImage='url("/bg-products.png")'
+				bgPos='center'
+				bgSize='cover'
+			>
 				<Box maxW='1220px' m='0 auto' w='90%'>
 					<Box>
 						<Flex>
