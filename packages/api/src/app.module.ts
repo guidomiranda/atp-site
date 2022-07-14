@@ -20,6 +20,8 @@ import { SuccessService } from './success/success.service';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
 import { JwtService } from '@nestjs/jwt';
+import { LubVehLivianoController } from './lub-veh-liviano/lub-veh-liviano.controller';
+import { LubVehLivianoService } from './lub-veh-liviano/lub-veh-liviano.service';
 
 @Module({
   imports: [],
@@ -32,6 +34,7 @@ import { JwtService } from '@nestjs/jwt';
     ReviewController,
     CategoryController,
     SuccessController,
+    LubVehLivianoController,
     UserController,
   ],
   providers: [
@@ -44,6 +47,7 @@ import { JwtService } from '@nestjs/jwt';
     ReviewService,
     SuccessService,
     UserService,
+    LubVehLivianoService,
     JwtService,
     PrismaService,
   ],

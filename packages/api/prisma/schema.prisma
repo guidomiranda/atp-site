@@ -89,3 +89,16 @@ model User {
   role       String
   created_at String
 }
+
+model LubVehLiviano {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  nombre         String
+  descripcion    String[]
+  presentacion   String
+  status         Boolean
+  order          Int
+  indicado_para  String
+  especificacion String
+  created_at     String
+  updated_at     String
+}
