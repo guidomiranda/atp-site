@@ -7,8 +7,8 @@ export const products = [
 		],
 		more_info: false,
 		image: 'https://atp.netlify.app/assets/img-lubricantes-mobil.png',
-		target: true,
-		path: 'https://google.com',
+		target: false,
+		path: '/',
 	},
 	{
 		id: '2',

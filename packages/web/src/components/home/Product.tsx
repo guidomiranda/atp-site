@@ -105,7 +105,9 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 								_active={{ bgColor: '#841715' }}
 								onClick={() => router.push(product.path)}
 							>
-								<Text>VISITAR SITIO WEB OFICIAL</Text>
+								<Text fontWeight='normal' textTransform='uppercase'>
+									Ver producto
+								</Text>
 								<Text as='span' color='#fff' ml='10px'>
 									<FaArrowRight />
 								</Text>
