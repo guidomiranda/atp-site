@@ -81,7 +81,12 @@ const Header: React.FC<HeaderProps> = ({
 					</Box>
 				</Flex>
 			</Box>
-			<Box h='180px' bgColor={category ? '#3d3425' : '#fe5101'}>
+			<Box
+				h='180px'
+				bgColor={
+					category === 'lub' ? '#085e98' : category ? '#3d3425' : '#fe5101'
+				}
+			>
 				{children}
 			</Box>
 		</Box>

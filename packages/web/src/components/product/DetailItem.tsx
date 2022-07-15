@@ -1,8 +1,9 @@
-import { Grid, Text } from '@chakra-ui/react';
+import { Box, Grid, Text } from '@chakra-ui/react';
+import { isArray } from 'util';
 
 interface DetailItemProps {
 	title: string;
-	content: string;
+	content?: string | [];
 }
 
 const DetailItem: React.FC<DetailItemProps> = ({ title, content }) => {
@@ -16,7 +17,16 @@ const DetailItem: React.FC<DetailItemProps> = ({ title, content }) => {
 			<Text fontSize='12px' fontWeight='bold' color='#333'>
 				{title}
 			</Text>
-			<Text fontSize='12px'>{content}</Text>
+			{typeof content === 'string' && <Text fontSize='12px'>{content}</Text>}
+			{typeof content === 'object' && (
+				<Box>
+					{content.map(item => (
+						<Text as='li' fontSize='12px' key={item}>
+							{item}
+						</Text>
+					))}
+				</Box>
+			)}
 		</Grid>
 	);
 };

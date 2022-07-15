@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 
 import Layout from '../../../layout';
 import Header from '../../../components/product/Header';
-import Product from '../../../components/product/Product';
+import Product from '../../../components/product/lubricants/Product';
 import { getLubricantes } from '../../../utils/lubricants';
+import FilterHeader from '../../../components/product/lubricants/header';
 
 const HeaderProductFooter = () => {
 	return (
@@ -28,12 +29,12 @@ const HeaderProductFooter = () => {
 					Lubricantes
 				</Heading>
 				<Text color='#fff' mt='5px' textAlign={['center', 'left']}>
-					{/* Aceite | Combustible | Aire */}
+					Livianos | Pesados | Auxiliares | Motos
 				</Text>
 			</Box>
 			<Box>
 				<Image
-					src='/bannervox_logo.png'
+					src=''
 					alt=''
 					width={['130px', '180px']}
 					objectFit='cover'
@@ -46,15 +47,14 @@ const HeaderProductFooter = () => {
 
 const TypeLubricants: React.FC = () => {
 	const router = useRouter();
-	console.log(router.query.type);
 
-	const [filters, setFilters] = useState<any>(null);
+	const [products, setProducts] = useState<any>(null);
 
 	useEffect(() => {
 		(async () => {
 			if (!router.query.type) return;
 			const products = await getLubricantes(router?.query?.type as string);
-			console.log(products);
+			setProducts(products?.products);
 		})();
 	}, [router]);
 
@@ -62,19 +62,21 @@ const TypeLubricants: React.FC = () => {
 		<Layout>
 			<Header
 				bg='bannervox_fondo.jpg'
-				logo='/bannervox_logo.png'
-				product='/header-product-image.png'
+				logo=''
+				product='https://res.cloudinary.com/https-atp-com-py/image/upload/v1657916948/lubricantes/122_vaouys.png'
 				children={<HeaderProductFooter />}
-				// category={category}
+				category='lub'
 			/>
 
 			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>
-				{/* <FilterHeader query={query} push={push} /> */}
+				<FilterHeader query={router.query} push={router.push} />
 
-				<Box pt='56px' maxW={['100%', '60%']} m='0 auto'>
-					{filters?.map(item => (
-						<Product key={item.id} filter={item} />
-					))}
+				<Box pt='56px' maxW='1220px' w='90%' m='0 auto'>
+					<Grid gridTemplateColumns={['1fr', 'repeat(2,1fr)']} gap='32px'>
+						{products?.map(item => (
+							<Product key={item.id} product={item} />
+						))}
+					</Grid>
 				</Box>
 			</Box>
 		</Layout>

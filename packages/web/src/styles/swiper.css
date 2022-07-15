@@ -34,3 +34,9 @@
 .mySwiper-slide .swiper-button-prev {
 	color: #b41f1b !important;
 }
+
+.image-product img {
+	width: 200px !important;
+	object-fit: cover !important;
+	/* height: 200px !important; */
+}
