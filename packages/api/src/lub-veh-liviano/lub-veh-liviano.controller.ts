@@ -1,5 +1,16 @@
-import { Body, Controller, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Res,
+} from '@nestjs/common';
+
 import { CreateLubVehLiviano, UpdateLubVehLiviano } from './dto';
 import { LubVehLivianoService } from './lub-veh-liviano.service';
 
@@ -17,6 +28,7 @@ export class LubVehLivianoController {
     });
   }
 
+  @Patch('/:id')
   async update(
     @Res() res: Response,
     @Body() dto: UpdateLubVehLiviano,
@@ -30,6 +42,7 @@ export class LubVehLivianoController {
     });
   }
 
+  @Delete('/:id')
   async delete(@Res() res: Response, @Param('id') id: string) {
     const product = await this.service.delete(id);
     return res.status(HttpStatus.OK).json({
@@ -39,6 +52,7 @@ export class LubVehLivianoController {
     });
   }
 
+  @Get()
   async getAll(@Res() res: Response) {
     const products = await this.service.getAll();
     return res.status(HttpStatus.OK).json({
@@ -48,10 +62,11 @@ export class LubVehLivianoController {
     });
   }
 
+  @Get('/:id')
   async get(@Res() res: Response, @Param('id') id: string) {
     const product = await this.service.get(id);
     return res.status(HttpStatus.OK).json({
-      message: '',
+      message: 'Producto',
       success: true,
       product,
     });

@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -26,6 +27,10 @@ export class CreateLubVehLiviano {
   @IsArray()
   @IsNotEmpty()
   especificacion: string;
+
+  @IsArray()
+  @IsOptional()
+  image?: string;
 
   @IsBoolean()
   @IsNotEmpty()

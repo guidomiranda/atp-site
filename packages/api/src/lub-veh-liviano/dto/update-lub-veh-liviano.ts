@@ -27,6 +27,10 @@ export class UpdateLubVehLiviano {
   @IsOptional()
   especificacion?: string;
 
+  @IsArray()
+  @IsOptional()
+  image?: string;
+
   @IsBoolean()
   @IsOptional()
   status?: boolean;

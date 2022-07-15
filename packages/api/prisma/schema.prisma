@@ -94,6 +94,7 @@ model LubVehLiviano {
   id             String   @id @default(auto()) @map("_id") @db.ObjectId
   nombre         String
   descripcion    String[]
+  image          String?
   presentacion   String
   status         Boolean
   order          Int
