@@ -24,6 +24,9 @@ import { LubVehLivianoController } from './lub-veh-liviano/lub-veh-liviano.contr
 import { LubVehLivianoService } from './lub-veh-liviano/lub-veh-liviano.service';
 import { LubMotoController } from './lub-moto/lub-moto.controller';
 import { LubMotoService } from './lub-moto/lub-moto.service';
+import { LubAuxModule } from './lub-aux/lub-aux.module';
+import { LubAuxController } from './lub-aux/lub-aux.controller';
+import { LubAuxService } from './lub-aux/lub-aux.service';
 
 @Module({
   controllers: [
@@ -38,6 +41,7 @@ import { LubMotoService } from './lub-moto/lub-moto.service';
     LubVehLivianoController,
     UserController,
     LubMotoController,
+    LubAuxController,
   ],
   providers: [
     AppService,
@@ -51,6 +55,7 @@ import { LubMotoService } from './lub-moto/lub-moto.service';
     UserService,
     LubVehLivianoService,
     LubMotoService,
+    LubAuxService,
     JwtService,
     PrismaService,
   ],
