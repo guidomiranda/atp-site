@@ -22,9 +22,10 @@ import { UserService } from './user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { LubVehLivianoController } from './lub-veh-liviano/lub-veh-liviano.controller';
 import { LubVehLivianoService } from './lub-veh-liviano/lub-veh-liviano.service';
+import { LubMotoController } from './lub-moto/lub-moto.controller';
+import { LubMotoService } from './lub-moto/lub-moto.service';
 
 @Module({
-  imports: [],
   controllers: [
     AppController,
     BannerController,
@@ -36,6 +37,7 @@ import { LubVehLivianoService } from './lub-veh-liviano/lub-veh-liviano.service'
     SuccessController,
     LubVehLivianoController,
     UserController,
+    LubMotoController,
   ],
   providers: [
     AppService,
@@ -48,6 +50,7 @@ import { LubVehLivianoService } from './lub-veh-liviano/lub-veh-liviano.service'
     SuccessService,
     UserService,
     LubVehLivianoService,
+    LubMotoService,
     JwtService,
     PrismaService,
   ],
