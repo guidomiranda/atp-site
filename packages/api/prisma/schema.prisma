@@ -130,3 +130,19 @@ model LubAux {
   created_at    String
   updated_at    String
 }
+
+model LubVehPesado {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  nombre          String
+  descripcion     String[]
+  caracteristicas String[]
+  image           String
+  presentacion    String
+  atiende_excede  String
+  aprobado        String
+  status          Boolean
+  order           Int
+  rec_exxon_mob   String
+  created_at      String
+  updated_at      String
+}

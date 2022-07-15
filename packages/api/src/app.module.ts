@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { AppController } from './app.controller';
@@ -19,14 +20,14 @@ import { SuccessController } from './success/success.controller';
 import { SuccessService } from './success/success.service';
 import { UserController } from './user/user.controller';
 import { UserService } from './user/user.service';
-import { JwtService } from '@nestjs/jwt';
 import { LubVehLivianoController } from './lub-veh-liviano/lub-veh-liviano.controller';
 import { LubVehLivianoService } from './lub-veh-liviano/lub-veh-liviano.service';
 import { LubMotoController } from './lub-moto/lub-moto.controller';
 import { LubMotoService } from './lub-moto/lub-moto.service';
-import { LubAuxModule } from './lub-aux/lub-aux.module';
 import { LubAuxController } from './lub-aux/lub-aux.controller';
 import { LubAuxService } from './lub-aux/lub-aux.service';
+import { LubVehPesadoController } from './lub-veh-pesado/lub-veh-pesado.controller';
+import { LubVehPesadoService } from './lub-veh-pesado/lub-veh-pesado.service';
 
 @Module({
   controllers: [
@@ -42,6 +43,7 @@ import { LubAuxService } from './lub-aux/lub-aux.service';
     UserController,
     LubMotoController,
     LubAuxController,
+    LubVehPesadoController,
   ],
   providers: [
     AppService,
@@ -56,6 +58,7 @@ import { LubAuxService } from './lub-aux/lub-aux.service';
     LubVehLivianoService,
     LubMotoService,
     LubAuxService,
+    LubVehPesadoService,
     JwtService,
     PrismaService,
   ],
