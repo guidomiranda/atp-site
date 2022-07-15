@@ -25,7 +25,7 @@ const Product: React.FC<ProductProps> = ({ filter }) => {
 			</Box>
 			<Box>
 				<Text fontWeight='bold' color='#fe5101' fontSize='24px'>
-					ARL2203 VOX
+					{filter.name}
 				</Text>
 
 				<Box mt='10px'>
