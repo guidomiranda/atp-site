@@ -137,7 +137,10 @@ const Navbar = () => {
 							boxShadow='0px 0px 10px 0px rgba(0,0,0,0.6)'
 							p='10px'
 						>
-							<NextLink href='/lubricantes/lub-veh-liviano#main' passHref>
+							<NextLink
+								href='/product/lubricantes/lub-veh-liviano#main'
+								passHref
+							>
 								<Link
 									p='5px'
 									rounded='4px'
