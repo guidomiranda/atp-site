@@ -8,7 +8,7 @@ export const products = [
 		more_info: false,
 		image: 'https://atp.netlify.app/assets/img-lubricantes-mobil.png',
 		target: false,
-		path: '/',
+		path: '/lubricantes/lub-veh-liviano#main',
 	},
 	{
 		id: '2',
