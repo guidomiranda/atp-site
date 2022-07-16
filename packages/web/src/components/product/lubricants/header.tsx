@@ -8,8 +8,6 @@ interface FilterHeaderProps {
 }
 
 const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
-	console.log(query);
-
 	return (
 		<Box>
 			<Flex

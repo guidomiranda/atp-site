@@ -62,8 +62,6 @@ const Navbar = () => {
 
 	useEffect(() => setShowMenu(false), []);
 
-	console.log(pathname);
-
 	return (
 		<Box
 			height='100px'

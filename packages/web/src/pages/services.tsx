@@ -89,7 +89,7 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
 
 const Services = () => {
 	return (
-		<Layout>
+		<Layout title='Servicios'>
 			<Header
 				page='services'
 				title='Servicios'

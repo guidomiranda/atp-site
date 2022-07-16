@@ -32,7 +32,7 @@ const ValuesQuote: React.FC<ValuesQuoteProps> = ({ title, description }) => {
 
 const About = () => {
 	return (
-		<Layout>
+		<Layout title='Nosotros'>
 			<Header
 				bg='banner-nosotros.jpg'
 				title='Quienes somos'

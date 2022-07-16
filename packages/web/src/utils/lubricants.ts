@@ -6,7 +6,5 @@ export const getLubricantes = async (type: string) => {
 		url: `/${type}`,
 	});
 
-	console.log(data);
-
 	return data.data;
 };

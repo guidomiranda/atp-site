@@ -103,7 +103,7 @@ const BodyContactInfo = ({
 
 const Contacto = () => {
 	return (
-		<Layout>
+		<Layout title='Contacto'>
 			<Box mt='-100px' alignItems='center' h='100%' position='relative'>
 				<Grid
 					gridTemplateRows='3fr 1fr'

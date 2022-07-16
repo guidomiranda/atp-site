@@ -6,7 +6,7 @@ import Layout from '../layout';
 
 const trabajaConNosotros = () => {
 	return (
-		<Layout>
+		<Layout title='Trabaja con nosotros'>
 			<Box
 				py='72px'
 				bg='linear-gradient(180deg, rgba(12,21,38,1) 0%, rgba(74,77,79,1) 100%)'

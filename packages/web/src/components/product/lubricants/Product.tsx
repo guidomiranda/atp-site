@@ -9,8 +9,6 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ product }) => {
-	console.log(product);
-
 	return (
 		<Grid
 			gridTemplateColumns={['1fr', '1fr 2fr']}

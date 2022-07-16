@@ -21,7 +21,6 @@ export class BannerController {
   @Post('/create')
   async createBanner(@Res() res: Response, @Body() dto: CreateBannerDTO) {
     const banner = await this.bannerService.createBanner(dto);
-    console.log(dto);
 
     return res
       .status(HttpStatus.OK)
