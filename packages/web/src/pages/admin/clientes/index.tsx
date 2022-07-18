@@ -5,8 +5,8 @@ import AdminLayout from '../../../layout/admin';
 
 const ClientesAdmin = () => {
 	return (
-		<AdminLayout>
-			<Box>Clientes</Box>
+		<AdminLayout title='Clientes'>
+			<Box></Box>
 		</AdminLayout>
 	);
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Grid, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import User from './User';
 import Link from './Link';
@@ -11,6 +11,8 @@ import {
 	HiOutlineShoppingCart,
 	HiOutlineUserGroup,
 } from 'react-icons/hi';
+
+import Text from '../../components/admin/Text';
 
 const NavbarAdmin: React.FC = () => {
 	const router = useRouter();

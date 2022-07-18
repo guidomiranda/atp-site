@@ -1,11 +1,12 @@
 import React from 'react';
-import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
-import { HiChevronDown, HiChevronUp, HiOutlineCog } from 'react-icons/hi';
+import { Box, Button, Flex, Grid, Image } from '@chakra-ui/react';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
+
+import Text from '../../components/admin/Text';
 
 const User: React.FC = () => {
 	return (
-		<Grid gridTemplateColumns='40px 1fr' alignItems='center'>
+		<Grid gridTemplateColumns='40px 1fr' alignItems='center' cursor='pointer'>
 			<Box w='40px' h='40px'>
 				<Image
 					src='/avatar.jpg'
@@ -45,6 +46,7 @@ const User: React.FC = () => {
 						color='#3B4A67'
 						_hover={{ bgColor: 'transparent' }}
 						_active={{ bgColor: 'transparent' }}
+						_focus={{ shadow: 'none' }}
 					>
 						<Text fontSize='16px'>
 							<FaAngleUp />

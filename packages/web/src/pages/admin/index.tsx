@@ -1,12 +1,12 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 import AdminLayout from '../../layout/admin';
 
 const Admin = () => {
 	return (
-		<AdminLayout>
-			<Box>Home</Box>
+		<AdminLayout title='Bienvenido Lucas Lamas!'>
+			<Box></Box>
 		</AdminLayout>
 	);
 };

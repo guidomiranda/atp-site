@@ -5,8 +5,8 @@ import AdminLayout from '../../../layout/admin';
 
 const ExitosAdmin = () => {
 	return (
-		<AdminLayout>
-			<Box>Exitos</Box>
+		<AdminLayout title='Casos de éxitos'>
+			<Box></Box>
 		</AdminLayout>
 	);
 };

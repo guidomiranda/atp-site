@@ -7,7 +7,7 @@ class Document extends NextDocument {
 			<Html>
 				<Head>
 					<link
-						href='https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;900&display=swap'
+						href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Montserrat:wght@300;400;500;600;700;900&display=swap'
 						rel='stylesheet'
 					/>
 					<link rel='shortcut icon' href='/favicon.png' type='image/x-icon' />

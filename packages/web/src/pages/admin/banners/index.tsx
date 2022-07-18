@@ -5,8 +5,8 @@ import AdminLayout from '../../../layout/admin';
 
 const BannersAdmin = () => {
 	return (
-		<AdminLayout>
-			<Box>Banners</Box>
+		<AdminLayout title='Banners'>
+			<Box></Box>
 		</AdminLayout>
 	);
 };
