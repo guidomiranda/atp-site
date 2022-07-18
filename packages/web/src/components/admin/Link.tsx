@@ -14,8 +14,6 @@ interface LinkProps {
 const Link: React.FC<LinkProps> = ({ icon, name, path }) => {
 	const router = useRouter();
 
-	console.log(path);
-
 	return (
 		<NextLink href={path} passHref>
 			<LinkChakraUI
