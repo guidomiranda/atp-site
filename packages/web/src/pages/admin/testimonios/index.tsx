@@ -92,7 +92,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 				{testimonial.author.length >= 30 && '..'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				activo
+				{testimonial.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
 				{dayjs(testimonial.created_at).format('MMMM, DD YYYY')}
