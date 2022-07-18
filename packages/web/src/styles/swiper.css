@@ -40,3 +40,15 @@
 	object-fit: cover !important;
 	/* height: 200px !important; */
 }
+
+.swiper-pagination-bullet {
+	background-color: #333 !important;
+	opacity: 1 !important;
+	width: 15px !important;
+	height: 15px !important;
+	margin-bottom: 20px !important;
+}
+
+.swiper-pagination-bullet-active {
+	background-color: #fff !important;
+}

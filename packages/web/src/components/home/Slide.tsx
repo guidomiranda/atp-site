@@ -1,14 +1,15 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { FaArrowRight } from 'react-icons/fa';
 
-import { Navigation } from 'swiper';
+import { Navigation, Pagination } from 'swiper';
 
 import 'swiper/css/bundle';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { FaArrowRight } from 'react-icons/fa';
-import { useRouter } from 'next/router';
+import 'swiper/css/pagination';
 
 interface SlideProps {
 	slides: any;
@@ -17,17 +18,25 @@ interface SlideProps {
 const Slides: React.FC<SlideProps> = ({ slides }) => {
 	const router = useRouter();
 
+	const pagination = {
+		clickable: true,
+		renderBullet: function (index, className) {
+			return '<span class="' + className + '"></span>';
+		},
+	};
+
 	return (
 		<Box height={{ base: '100%', lg: '700px' }}>
 			<Swiper
+				pagination={pagination}
 				navigation={true}
-				modules={[Navigation]}
+				modules={[Navigation, Pagination]}
 				className='mySwiper mySwiper-slide'
 			>
 				{slides.map((slide: any) => (
 					<SwiperSlide
 						key={slide.id}
-						style={{ backgroundImage: `url(${slide.bg})` }}
+						style={{ backgroundImage: `url(${slide.bg})`, zIndex: -100 }}
 					>
 						<Flex
 							pt={{ base: '64px', lg: '0' }}
