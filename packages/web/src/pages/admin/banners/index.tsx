@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, Grid, Image } from '@chakra-ui/react';
 
 import AdminLayout from '../../../layout/admin';
@@ -43,6 +43,7 @@ const Header: React.FC = () => {
 				fontWeight='bold'
 				textTransform='uppercase'
 				fontSize='14px'
+				textAlign='center'
 			>
 				Fondo
 			</Box>
@@ -76,6 +77,8 @@ const Header: React.FC = () => {
 };
 
 const Banner: React.FC<BannerProps> = ({ banner }) => {
+	const [showImageLarge, setShowImageLarge] = useState<boolean>(false);
+
 	return (
 		<Grid
 			gridTemplateColumns={{
@@ -91,9 +94,39 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{banner.order}
 			</Box>
-			<Box color='#3B4A67' fontSize='14px'>
-				<Image src={banner.bg} alt='' w='100px' objectFit='contain' />
-			</Box>
+			<Grid
+				color='#3B4A67'
+				fontSize='14px'
+				position='relative'
+				placeItems='center'
+				onMouseEnter={() => setShowImageLarge(true)}
+				onMouseLeave={() => setShowImageLarge(false)}
+			>
+				<Box
+					display={showImageLarge ? 'block' : 'none'}
+					position='absolute'
+					bottom='-80px'
+					left='50%'
+					transform='translateX(-50%)'
+					w='150px'
+					margin='0 auto'
+					boxShadow='0px 0px 9px 2px rgba(0,0,0,0.3)'
+					rounded='sm'
+					overflow='hidden'
+				>
+					<Image src={banner.bg} alt='' w='150px' objectFit='contain' />
+				</Box>
+
+				<Image
+					src={banner.bg}
+					alt=''
+					w='45px'
+					h='45px'
+					objectFit='cover'
+					rounded='full'
+					objectPosition='center'
+				/>
+			</Grid>
 			<Box color='#3B4A67' fontSize='14px'>
 				{banner.title.slice(0, 20)}
 				{banner.title.length >= 30 && '..'}
