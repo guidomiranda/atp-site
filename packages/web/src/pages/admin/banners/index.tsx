@@ -1,30 +1,28 @@
 import React from 'react';
-import { Box, Button, Grid } from '@chakra-ui/react';
+import { Box, Button, Grid, Image } from '@chakra-ui/react';
 
 import AdminLayout from '../../../layout/admin';
 import dayjs from 'dayjs';
 import { FaTrash } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
 import { GetServerSideProps } from 'next';
+import { getBanners } from '../../../utils/banners';
 
 interface BannerProps {
 	banner: any;
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	// const banners = await
-
-	return {
-		props: {},
-	};
+	const banners = await getBanners();
+	return { props: { banners: banners.banners } };
 };
 
 const Header: React.FC = () => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '50px 300px 100px 100px 100px',
-				xl: '50px 1fr 100px 100px 100px',
+				base: '50px 100px 200px 100px 100px 100px',
+				xl: '50px 100px 1fr 100px 100px 100px',
 			}}
 			p='10px 30px'
 			bgColor='#F9FAFB'
@@ -46,7 +44,15 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
-				Imagen
+				Fondo
+			</Box>
+			<Box
+				color='#3B4A67'
+				fontWeight='bold'
+				textTransform='uppercase'
+				fontSize='14px'
+			>
+				Título
 			</Box>
 			<Box
 				color='#3B4A67'
@@ -73,8 +79,8 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '50px 300px 100px 100px 100px',
-				xl: '50px 1fr 100px 100px 100px',
+				base: '50px 100px 200px 100px 100px 100px',
+				xl: '50px 100px 1fr 100px 100px 100px',
 			}}
 			p='10px 30px'
 			borderBottom='1px solid #DCDFE5'
@@ -86,7 +92,10 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 				{banner.order}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{banner.title.slice(0, 40)}
+				<Image src={banner.bg} alt='' w='100px' objectFit='contain' />
+			</Box>
+			<Box color='#3B4A67' fontSize='14px'>
+				{banner.title.slice(0, 20)}
 				{banner.title.length >= 30 && '..'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
@@ -140,12 +149,14 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 	);
 };
 
-const BannersAdmin = () => {
+const BannersAdmin = ({ banners }) => {
 	return (
 		<AdminLayout title='Banners'>
 			<Box>
 				<Header />
-				<Banner banner={{}} />
+				{banners?.map((banner: any) => (
+					<Banner key={banner.id} banner={banner} />
+				))}
 			</Box>
 		</AdminLayout>
 	);
