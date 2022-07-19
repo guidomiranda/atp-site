@@ -8,8 +8,10 @@ import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
 import { getClients } from '../utils';
 import { slides_data, brands, products } from '../data';
+import { getBanners } from '../utils/banners';
 
-interface ClientProps {
+interface HomeProps {
+	banners: any;
 	clients: {
 		_id?: string;
 		title: string;
@@ -22,19 +24,21 @@ interface ClientProps {
 
 export const getServerSideProps: GetServerSideProps = async () => {
 	const data = await getClients();
+	const banners = await getBanners();
 
 	return {
 		props: {
 			clients: data,
+			banners: banners.banners,
 		},
 	};
 };
 
-const Home: React.FC<ClientProps> = ({ clients }) => {
+const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 	return (
 		<Layout title='Inicio'>
 			{/* Banner */}
-			<Banner />
+			<Banner banners={banners} />
 
 			{/* Product */}
 			<Box
