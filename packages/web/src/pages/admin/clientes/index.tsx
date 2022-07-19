@@ -87,9 +87,14 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{client.order}
 			</Box>
-			<Box color='#3B4A67' fontSize='14px'>
-				{client.title.slice(0, 40)}
-				{client.title.length >= 30 && '..'}
+			<Box
+				color='#3B4A67'
+				fontSize='14px'
+				whiteSpace='nowrap'
+				overflow='hidden'
+				textOverflow='ellipsis'
+			>
+				{client.title}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
 				{client.status ? 'activo' : 'inactivo'}

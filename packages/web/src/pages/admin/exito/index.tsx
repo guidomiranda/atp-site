@@ -87,9 +87,14 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{success.order}
 			</Box>
-			<Box color='#3B4A67' fontSize='14px'>
-				{success.title.slice(0, 40)}
-				{success.title.length >= 30 && '..'}
+			<Box
+				color='#3B4A67'
+				fontSize='14px'
+				whiteSpace='nowrap'
+				overflow='hidden'
+				textOverflow='ellipsis'
+			>
+				{success.title}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
 				{success.status ? 'activo' : 'inactivo'}

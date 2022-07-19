@@ -1,20 +1,32 @@
 import React, { useState } from 'react';
-import { Box, Button, Grid, Image } from '@chakra-ui/react';
-
-import AdminLayout from '../../../layout/admin';
-import dayjs from 'dayjs';
-import { FaTrash } from 'react-icons/fa';
-import { FiEdit } from 'react-icons/fi';
+import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
-import { getBanners } from '../../../utils/banners';
 
-interface BannerProps {
-	banner: any;
+// import HeaderLayout from '../../../components/client/Header';
+import Layout from '../../../layout/admin';
+import { getLubricantes } from '../../../utils/lubricants';
+import { FiEdit } from 'react-icons/fi';
+import { FaTrash } from 'react-icons/fa';
+import dayjs from 'dayjs';
+import { getBatteries, getProductsByLine } from '../../../utils';
+import { useRouter } from 'next/router';
+
+interface BateriasAdminProps {
+	baterias: any;
+}
+
+interface ProductProps {
+	product: any;
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const banners = await getBanners();
-	return { props: { banners: banners.banners } };
+	const baterias = await getBatteries();
+
+	return {
+		props: {
+			baterias: baterias.products,
+		},
+	};
 };
 
 const Header: React.FC = () => {
@@ -45,7 +57,7 @@ const Header: React.FC = () => {
 				fontSize='14px'
 				textAlign='center'
 			>
-				Fondo
+				Imagen
 			</Box>
 			<Box
 				color='#3B4A67'
@@ -53,7 +65,7 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
-				Título
+				Nombre
 			</Box>
 			<Box
 				color='#3B4A67'
@@ -76,9 +88,7 @@ const Header: React.FC = () => {
 	);
 };
 
-const Banner: React.FC<BannerProps> = ({ banner }) => {
-	const [showImageLarge, setShowImageLarge] = useState<boolean>(false);
-
+const Product: React.FC<ProductProps> = ({ product }) => {
 	return (
 		<Grid
 			gridTemplateColumns={{
@@ -92,33 +102,16 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 			cursor='pointer'
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
-				{banner.order}
+				{product.order}
 			</Box>
 			<Grid
 				color='#3B4A67'
 				fontSize='14px'
 				position='relative'
 				placeItems='center'
-				onMouseEnter={() => setShowImageLarge(true)}
-				onMouseLeave={() => setShowImageLarge(false)}
 			>
-				<Box
-					display={showImageLarge ? 'block' : 'none'}
-					position='absolute'
-					bottom='-80px'
-					left='50%'
-					transform='translateX(-50%)'
-					w='150px'
-					margin='0 auto'
-					boxShadow='0px 0px 9px 2px rgba(0,0,0,0.3)'
-					rounded='sm'
-					overflow='hidden'
-				>
-					<Image src={banner.bg} alt='' w='150px' objectFit='contain' />
-				</Box>
-
 				<Image
-					src={banner.bg}
+					src={product.image}
 					alt=''
 					w='45px'
 					h='45px'
@@ -134,13 +127,13 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 			>
-				{banner.title}
+				{product.title}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				{banner.status ? 'activo' : 'inactivo'}
+				{product.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(banner.created_at).format('MMMM, DD YYYY')}
+				{dayjs(product.created_at).format('MMMM, DD YYYY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'
@@ -187,17 +180,62 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 	);
 };
 
-const BannersAdmin = ({ banners }) => {
+const BateriasAdmin: React.FC<BateriasAdminProps> = ({ baterias }) => {
+	const router = useRouter();
+
 	return (
-		<AdminLayout title='Banners'>
-			<Box>
-				<Header />
-				{banners?.map((banner: any) => (
-					<Banner key={banner.id} banner={banner} />
-				))}
+		<Layout
+			title='Filtros'
+			footer={
+				<Flex>
+					<Button
+						minW='initial'
+						h='45px'
+						rounded='3px'
+						bgColor='#e5e7eb'
+						color='#3B4A67'
+						fontWeight='medium'
+						onClick={() => router.push('/admin/productos')}
+					>
+						Ver categorías
+					</Button>
+					<Button
+						ml='10px'
+						minW='initial'
+						h='45px'
+						rounded='3px'
+						bgColor='#FFF'
+						color='#3B4A67'
+						border='1px solid #3B4A67'
+						fontWeight='medium'
+					>
+						Crear producto
+					</Button>
+				</Flex>
+			}
+		>
+			<Box mb='72px'>
+				<Box as='article'>
+					<Flex alignItems='center' w='full' h='50px' bgColor='#E5E7EB'>
+						<Text
+							pl='20px'
+							textTransform='uppercase'
+							h='full'
+							lineHeight='50px'
+						>
+							Filtros de aire
+						</Text>
+					</Flex>
+					<Header />
+					<Box>
+						{baterias?.map(item => (
+							<Product key={item.id} product={item} />
+						))}
+					</Box>
+				</Box>
 			</Box>
-		</AdminLayout>
+		</Layout>
 	);
 };
 
-export default BannersAdmin;
+export default BateriasAdmin;

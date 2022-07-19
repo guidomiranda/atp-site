@@ -87,9 +87,14 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{testimonial.order}
 			</Box>
-			<Box color='#3B4A67' fontSize='14px'>
-				{testimonial.author.slice(0, 40)}
-				{testimonial.author.length >= 30 && '..'}
+			<Box
+				color='#3B4A67'
+				fontSize='14px'
+				whiteSpace='nowrap'
+				overflow='hidden'
+				textOverflow='ellipsis'
+			>
+				{testimonial.author}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
 				{testimonial.status ? 'activo' : 'inactivo'}
