@@ -7,6 +7,7 @@ import { FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
 import { getClients } from '../../../utils';
+import { useRouter } from 'next/router';
 
 interface ClientsProps {
 	client: any;
@@ -72,6 +73,8 @@ const Header: React.FC = () => {
 };
 
 const Clients: React.FC<ClientsProps> = ({ client }) => {
+	const router = useRouter();
+
 	return (
 		<Grid
 			gridTemplateColumns={{
@@ -82,7 +85,6 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 			borderBottom='1px solid #DCDFE5'
 			gap='0 32px'
 			alignItems='center'
-			cursor='pointer'
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{client.order}
@@ -93,6 +95,8 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				whiteSpace='nowrap'
 				overflow='hidden'
 				textOverflow='ellipsis'
+				cursor='pointer'
+				onClick={() => router.push('/admin/clientes/1')}
 			>
 				{client.title}
 			</Box>
@@ -122,6 +126,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() => router.push('/admin/clientes/1')}
 				>
 					<FiEdit />
 				</Button>
@@ -148,8 +153,29 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 };
 
 const ClientesAdmin = ({ clients }) => {
+	const router = useRouter();
+
 	return (
-		<AdminLayout title='Clientes'>
+		<AdminLayout
+			title='Clientes'
+			footer={
+				<Box>
+					<Button
+						ml='10px'
+						minW='initial'
+						h='45px'
+						rounded='3px'
+						bgColor='#FFF'
+						color='#3B4A67'
+						border='1px solid #3B4A67'
+						fontWeight='medium'
+						onClick={() => router.push('/admin/clientes/create')}
+					>
+						Crear cliente
+					</Button>
+				</Box>
+			}
+		>
 			<Box>
 				<Header />
 				{clients?.map(client => (

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { Box, Button, Grid } from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
@@ -72,6 +73,8 @@ const Header: React.FC = () => {
 };
 
 const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
+	const router = useRouter();
+
 	return (
 		<Grid
 			gridTemplateColumns={{
@@ -82,7 +85,6 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 			borderBottom='1px solid #DCDFE5'
 			gap='0 32px'
 			alignItems='center'
-			cursor='pointer'
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{testimonial.order}
@@ -93,6 +95,8 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 				whiteSpace='nowrap'
 				overflow='hidden'
 				textOverflow='ellipsis'
+				cursor='pointer'
+				onClick={() => router.push('/admin/testimonios/1')}
 			>
 				{testimonial.author}
 			</Box>
@@ -122,6 +126,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() => router.push('/admin/testimonios/1')}
 				>
 					<FiEdit />
 				</Button>
@@ -139,6 +144,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() => console.log('deleting')}
 				>
 					<FaTrash />
 				</Button>
@@ -148,8 +154,29 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 };
 
 const TestimoniosAdmin = ({ testimonials }) => {
+	const router = useRouter();
+
 	return (
-		<AdminLayout title='Testimonios'>
+		<AdminLayout
+			title='Testimonios'
+			footer={
+				<Box>
+					<Button
+						ml='10px'
+						minW='initial'
+						h='45px'
+						rounded='3px'
+						bgColor='#FFF'
+						color='#3B4A67'
+						border='1px solid #3B4A67'
+						fontWeight='medium'
+						onClick={() => router.push('/admin/testimonios/create')}
+					>
+						Crear testimonio
+					</Button>
+				</Box>
+			}
+		>
 			<Box>
 				<Header />
 				{testimonials?.map(testimonial => (
