@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
 interface HeaderProps {
 	title: string;
@@ -9,13 +10,18 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ bg, title, description, page }) => {
+	const router = useRouter();
+
 	return (
 		<Box h='100vh' mt='-100px'>
 			<Box
 				height='75vh'
 				bgImage={`url('/${bg}')`}
 				bgSize='cover'
-				bgPos={{ base: 'center', xl: 'center -200px' }}
+				bgPos={{
+					base: 'center',
+					xl: router.pathname === '/services' ? 'center' : 'center -200px',
+				}}
 				bgRepeat='no-repeat'
 				position='relative'
 			>
