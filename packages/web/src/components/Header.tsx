@@ -12,10 +12,11 @@ const Header: React.FC<HeaderProps> = ({ bg, title, description, page }) => {
 	return (
 		<Box h='100vh' mt='-100px'>
 			<Box
-				height='calc(100vh - 180px)'
+				height='75vh'
 				bgImage={`url('/${bg}')`}
 				bgSize='cover'
-				bgPos='center'
+				bgPos={{ base: 'center', xl: 'center -200px' }}
+				bgRepeat='no-repeat'
 				position='relative'
 			>
 				<Box
@@ -24,6 +25,14 @@ const Header: React.FC<HeaderProps> = ({ bg, title, description, page }) => {
 					position='absolute'
 					width='100%'
 					bottom='0'
+					left='0'
+				/>
+				<Box
+					bg='linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.6) 80%)'
+					height='200px'
+					position='absolute'
+					width='100%'
+					top='0'
 					left='0'
 				/>
 				<Flex
@@ -54,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ bg, title, description, page }) => {
 					</Flex>
 				</Flex>
 			</Box>
-			<Box h='180px' bgColor={page === 'services' ? '#0c1427' : '#015796'}>
+			<Box h='25vh' bgColor={page === 'services' ? '#0c1427' : '#015796'}>
 				<Flex
 					alignItems='center'
 					justifyContent='center'
