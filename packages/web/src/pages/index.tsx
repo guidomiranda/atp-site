@@ -52,11 +52,11 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 						</Heading>
 						<Box
 							position='absolute'
-							width='60px'
-							height='16px'
+							width='25px'
+							height='12px'
 							bgColor='#b41f1b'
 							right='0'
-							bottom='-18px'
+							bottom='-12px'
 						/>
 					</Flex>
 

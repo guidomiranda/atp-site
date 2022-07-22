@@ -49,15 +49,35 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 							justifyContent={{ base: 'center', lg: 'space-between' }}
 						>
 							<Box flex={{ base: 'initial', lg: '1' }} mr='20px'>
-								<Heading
-									fontWeight='bold'
-									fontSize={['32px', '48px']}
-									textAlign='left'
-									lineHeight={['32px', '48px']}
-									color='white'
-								>
-									{slide.title}
-								</Heading>
+								<Flex mb='30px'>
+									<Heading
+										fontWeight='bold'
+										fontSize={['32px', '52px']}
+										textAlign='left'
+										lineHeight={['32px', '48px']}
+										color='white'
+										w='auto'
+									>
+										<Text as='span'>
+											{slide.title.slice(0, slide.title.length - 1)}
+										</Text>
+										<Box position='relative' display='inline-flex'>
+											<Text as='span'>
+												{slide.title.charAt(slide.title.length - 1)}
+											</Text>
+
+											<Box
+												position='absolute'
+												width='25px'
+												height='12px'
+												bgColor='#b41f1b'
+												right='0'
+												bottom='-18px'
+											/>
+										</Box>
+									</Heading>
+								</Flex>
+
 								{slide.description.map((text: any) => (
 									<Text
 										key={text}

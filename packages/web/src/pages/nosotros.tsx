@@ -54,12 +54,12 @@ const About = () => {
 									Misión
 								</Heading>
 								<Box
-									width='60px'
-									height='15px'
+									width='25px'
+									height='12px'
 									bgColor='#b41f1b'
 									position='absolute'
 									right='0'
-									bottom='-15px'
+									bottom='-12px'
 								/>
 							</Flex>
 							<Text fontSize={['18px', '20px']} mt='26px' w={['100%', '90%']}>
@@ -94,12 +94,12 @@ const About = () => {
 									Visión
 								</Heading>
 								<Box
-									width='60px'
-									height='15px'
+									width='25px'
+									height='12px'
 									bgColor='#b41f1b'
 									position='absolute'
 									right='0'
-									bottom='-15px'
+									bottom='-12px'
 								/>
 							</Flex>
 							<Text fontSize={['18px', '20px']} mt='26px' w={['100%', '90%']}>
@@ -136,12 +136,12 @@ const About = () => {
 									Valores
 								</Heading>
 								<Box
-									width='60px'
-									height='15px'
+									width='25px'
+									height='12px'
 									bgColor='#b41f1b'
 									position='absolute'
 									right='0'
-									bottom='-15px'
+									bottom='-12px'
 								/>
 							</Flex>
 
@@ -194,12 +194,12 @@ const About = () => {
 								Vídeo Institucional
 							</Heading>
 							<Box
-								width='60px'
-								height='14px'
+								width='25px'
+								height='12px'
 								bgColor='#b41f1b'
 								position='absolute'
 								right='0'
-								bottom='-15px'
+								bottom='-12px'
 							/>
 						</Flex>
 					</Box>
@@ -227,12 +227,12 @@ const About = () => {
 							Representantes exclusivos
 						</Heading>
 						<Box
-							width='60px'
-							height='14px'
+							width='25px'
+							height='12px'
 							bgColor='#b41f1b'
 							position='absolute'
 							right='0'
-							bottom='-15px'
+							bottom='-12px'
 						/>
 					</Flex>
 				</Box>

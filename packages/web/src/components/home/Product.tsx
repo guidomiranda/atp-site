@@ -40,7 +40,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 							</Heading>
 							<Box
 								position='absolute'
-								w='50px'
+								w='25px'
 								height='12px'
 								bgColor='#b41f1b'
 								bottom='-12px'

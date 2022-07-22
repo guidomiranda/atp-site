@@ -71,10 +71,10 @@ const Header: React.FC<HeaderProps> = ({
 
 							<Box
 								position='absolute'
-								bottom='-15px'
-								w='60px'
+								bottom='-12px'
+								w='25px'
 								right='0'
-								h='15px'
+								h='12px'
 								bgColor='#b41f1b'
 							></Box>
 						</Flex>
