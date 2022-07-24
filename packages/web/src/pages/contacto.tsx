@@ -118,12 +118,21 @@ const Contacto = () => {
 					<Box h='100%' bgColor='#d21a28'></Box>
 				</Grid>
 
-				<Box maxW='1220px' m='0 auto' w='90%' color='#fff' mt='100px' py='56px'>
+				<Box
+					maxW='1220px'
+					m='0 auto'
+					w='90%'
+					color='#fff'
+					mt='100px'
+					py='64px'
+					pt={{ base: '32px', '2xl': '72px' }}
+				>
 					<Box>
 						<Heading fontSize='36px'>Estamos aquí</Heading>
 					</Box>
 
-					<Box mt='32px'>
+					<Box mt={{ base: '32px', '2xl': '48px' }}>
+						{/* <Box mt='32px'> */}
 						<BodyContactInfo
 							title='Casa Central'
 							name='Mariano Roque Alonso'
@@ -139,7 +148,7 @@ const Contacto = () => {
 				</Box>
 			</Box>
 
-			<Box maxW='1220px' m='0 auto' w='90%' pt='56px'>
+			<Box maxW='1220px' m='0 auto' w='90%' pt='96px'>
 				<BodyContactInfo
 					title='Sucursal ATP Ciudad del Este'
 					name='Ciudad del Este, Alto Paraná'
