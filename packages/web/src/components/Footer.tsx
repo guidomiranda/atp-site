@@ -76,16 +76,34 @@ const Footer: React.FC = () => {
 								</Link>
 							</Box>
 							<Flex alignItems='center'>
-								<Link href='/' fontSize='20px' color='white' ml='14px'>
+								<Link
+									href='https://www.facebook.com/ATP.PY'
+									fontSize='20px'
+									color='white'
+									ml='14px'
+									target='_blank'
+								>
 									<FaFacebookF />
 								</Link>
-								<Link href='/' fontSize='20px' color='white' ml='14px'>
+								<Link
+									href='https://www.instagram.com/atp.paraguay/'
+									fontSize='20px'
+									color='white'
+									ml='14px'
+									target='_blank'
+								>
 									<FaInstagram />
 								</Link>
-								<Link href='/' fontSize='20px' color='white' ml='14px'>
+								{/* <Link href='/' fontSize='20px' color='white' ml='14px'>
 									<FaTwitter />
-								</Link>
-								<Link href='/' fontSize='20px' color='white' ml='14px'>
+								</Link> */}
+								<Link
+									href='https://wa.me/+595971599000'
+									fontSize='20px'
+									color='white'
+									ml='14px'
+									target='_blank'
+								>
 									<FaWhatsapp />
 								</Link>
 							</Flex>
