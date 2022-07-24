@@ -77,7 +77,7 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 			<Slides slides={slides_data} />
 
 			{/* Brands */}
-			<Box py='64px'>
+			<Box py='128px'>
 				<Heading
 					fontWeight='black'
 					fontSize='48px'
@@ -89,6 +89,7 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 				<Text
 					color='#9ca3af'
 					mt='8px'
+					mb='32px'
 					textAlign='center'
 					fontSize='22px'
 					fontWeight='medium'
@@ -100,6 +101,7 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 					maxW='1220px'
 					m='0 auto'
 					w='90%'
+					alignItems='center'
 					gridTemplateColumns={{
 						base: '1fr',
 						sm: 'repeat(2, 1fr)',
