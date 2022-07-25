@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
+import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 
 import Layout from '../layout';
-import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 
 interface BodyContactInfo {
 	theme: string;
