@@ -110,7 +110,7 @@ const Footer: React.FC = () => {
 						</Flex>
 					</Flex>
 
-					<Box mt='48px'>
+					<Box mt='72px'>
 						<Text
 							color='white'
 							fontSize='12px'
