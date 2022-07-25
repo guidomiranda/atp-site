@@ -52,3 +52,7 @@
 .swiper-pagination-bullet-active {
 	background-color: #fff !important;
 }
+
+.select-chakraui-form {
+	padding-inline-start: 5px !important;
+}
