@@ -41,12 +41,13 @@ const TrabajaConNosotros = () => {
 						<Flex mt='70px' flexDir={['column', 'row']} justifyContent='center'>
 							<Box mx={['0', '32px']}>
 								<Button
+									w={['100%', '300px']}
 									textTransform='uppercase'
 									color='white'
 									bgColor='#b41f1b'
 									rounded='0'
-									h='45px'
-									p='0 32px'
+									h='48px'
+									p='0'
 									textAlign='center'
 									_hover={{ bgColor: '#b41f1b' }}
 									_active={{ bgColor: '#b41f1b' }}
@@ -56,12 +57,13 @@ const TrabajaConNosotros = () => {
 							</Box>
 							<Box mx={['0', '32px']} mt={['20px', '0']}>
 								<Button
+									w={['100%', '300px']}
 									textTransform='uppercase'
 									color='white'
 									bgColor='#b41f1b'
 									rounded='0'
-									h='45px'
-									p='0 32px'
+									h='48px'
+									p='0'
 									textAlign='center'
 									_hover={{ bgColor: '#b41f1b' }}
 									_active={{ bgColor: '#b41f1b' }}
