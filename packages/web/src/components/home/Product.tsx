@@ -117,7 +117,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 								onClick={() => router.push(product.path)}
 							>
 								<Text fontWeight='normal' textTransform='uppercase'>
-									Ver producto
+									Ver productos
 								</Text>
 								<Text as='span' color='#fff' ml='10px'>
 									<FaArrowRight />
