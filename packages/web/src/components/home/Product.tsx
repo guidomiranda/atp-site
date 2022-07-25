@@ -76,8 +76,10 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 
 					{product.more_info && (
 						<Box mt='20px'>
-							<Text fontWeight='bold'>¿Necesitas más información?</Text>
-							<Text>
+							<Text fontSize='20px' fontWeight='bold'>
+								¿Necesitas más información?
+							</Text>
+							<Text fontSize='20px'>
 								Visita de forma directo el sitio web oficial de la marca.
 							</Text>
 						</Box>
