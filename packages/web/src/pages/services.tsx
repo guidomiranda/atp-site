@@ -60,7 +60,7 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
 							</Heading>
 							<Box
 								position='absolute'
-								width='15px'
+								width='22px'
 								height='12px'
 								bgColor='#b41f1b'
 								left={['0', 'initial']}
