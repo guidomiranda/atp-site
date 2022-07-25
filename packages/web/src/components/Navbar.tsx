@@ -68,7 +68,9 @@ const Navbar = () => {
 			position='relative'
 			zIndex='20'
 			bgColor={
-				pathname === '/contacto' || pathname === '/trabaja-con-nosotros'
+				pathname === '/contacto' ||
+				pathname === '/trabaja-con-nosotros' ||
+				pathname === '/trabaja-con-nosotros/cv'
 					? '#111'
 					: 'transparent'
 			}

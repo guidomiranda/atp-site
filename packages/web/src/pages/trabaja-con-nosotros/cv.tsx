@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Button, Grid, Input, Text } from '@chakra-ui/react';
 import { AiOutlinePaperClip } from 'react-icons/ai';
 
-import Layout from '../layout';
+import Layout from '../../layout';
 
-const trabajaConNosotros = () => {
+const TrabajaConNosotrosCV = () => {
 	return (
 		<Layout title='Trabaja con nosotros'>
 			<Box
@@ -122,4 +122,4 @@ const trabajaConNosotros = () => {
 	);
 };
 
-export default trabajaConNosotros;
+export default TrabajaConNosotrosCV;
