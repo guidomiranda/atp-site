@@ -29,9 +29,9 @@ const Banner = ({ banners }) => {
 							<Box flex={{ base: 'initial', lg: '1' }}>
 								<Text
 									fontWeight='bold'
-									fontSize={['32px', '48px']}
+									fontSize={['32px', '56px']}
 									textAlign='left'
-									lineHeight={['32px', '48px']}
+									lineHeight={['32px', '56px']}
 									color='white'
 								>
 									{banner.title}

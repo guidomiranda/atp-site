@@ -47,7 +47,7 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 				{/* Product Banner */}
 				<Box textAlign='center'>
 					<Flex position='relative' display='inline-flex'>
-						<Heading fontSize='42px' fontWeight='black' color='#fff'>
+						<Heading fontSize='64px' fontWeight='black' color='#fff'>
 							Nuestros Productos
 						</Heading>
 						<Box

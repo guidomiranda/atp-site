@@ -32,10 +32,21 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				alignItems='center'
 				gap={{ base: '32px 0', lg: '0' }}
 			>
-				<Box p={{ base: '20px', lg: '32px 50px 44px 50px' }}>
+				<Flex
+					p={{
+						base: '20px',
+						lg: '32px 50px 44px 50px',
+					}}
+					flexDir='column'
+					justifyContent='space-between'
+				>
 					<Box>
 						<Flex mb='24px' display='inline-flex' position='relative'>
-							<Heading color='#fff' fontSize='48px' fontWeight='bold'>
+							<Heading
+								color='#fff'
+								fontSize={['32px', '62px']}
+								fontWeight={['bold', 'black']}
+							>
 								{product.title}
 							</Heading>
 							<Box
@@ -52,7 +63,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 								<Text
 									key={text}
 									color='#fff'
-									// fontSize='18px'
+									fontSize={['16px', '20px']}
 									width='100%'
 									textAlign='justify'
 									mb='20px'
@@ -114,7 +125,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 							</Button>
 						)}
 					</Box>
-				</Box>
+				</Flex>
 				<Box
 					alignSelf='flex-start'
 					p={{ base: '20px', lg: '0' }}
