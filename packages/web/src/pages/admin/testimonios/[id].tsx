@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import produce from 'immer';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import {
@@ -12,11 +13,11 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { BsArrowLeftShort } from 'react-icons/bs';
-import produce from 'immer';
+import { FaPlus, FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
 import { getReview, updateReview } from '../../../utils';
-import { FaPlus, FaTrash } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const testimonio = await getReview(context.query.id as string);
@@ -50,18 +51,18 @@ const TestimonioAdminEdit = ({ testimonio }) => {
 
 		const response = await updateReview(testimonial.id, testimonialUpdated);
 
-		if (response.status) {
-			console.log('actualizado');
-			router.push('/admin/testimonios');
+		if (response.success) {
+			toast.success('Actualizado correctamente!');
+			return router.push('/admin/testimonios');
 		} else {
-			console.log('error');
+			toast.error('Hubo un problema al actualizar');
 			router.push('/admin/testimonios');
 		}
 	};
 
 	return (
 		<AdminLayout
-			title='Nombre del autor'
+			title={testimonial.author}
 			back={
 				<Box>
 					<Button
