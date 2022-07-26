@@ -46,7 +46,7 @@ const HeaderProductFooter = () => {
 };
 
 const TypeFilter: React.FC = () => {
-	const { query, push } = useRouter();
+	const { query, push, pathname } = useRouter();
 	const [filters, setFilters] = useState<any>(null);
 
 	const getProductsLine = async () => {
@@ -76,7 +76,7 @@ const TypeFilter: React.FC = () => {
 			/>
 
 			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>
-				<FilterHeader query={query} push={push} />
+				<FilterHeader pathname={pathname} query={query} push={push} />
 
 				<Box pt='56px' maxW={['100%', '60%']} m='0 auto'>
 					{filters?.map(item => (
