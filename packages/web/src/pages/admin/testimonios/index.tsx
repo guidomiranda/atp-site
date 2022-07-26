@@ -1,13 +1,26 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-import { Box, Button, Grid } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Grid,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	ModalCloseButton,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 import dayjs from 'dayjs';
 
 import AdminLayout from '../../../layout/admin';
-import { getReviews } from '../../../utils';
+import { deleteReview, getReviews } from '../../../utils';
+import toast from 'react-hot-toast';
 
 interface TestimonialsProps {
 	testimonial: any;
@@ -74,6 +87,19 @@ const Header: React.FC = () => {
 
 const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 	const router = useRouter();
+	const { isOpen, onClose, onOpen } = useDisclosure();
+
+	const handleDeleteTestimonial = async () => {
+		const response = await deleteReview(testimonial.id);
+
+		if (response.success) {
+			toast.success('Eliminado correctamente!');
+			return router.push('/admin/testimonios');
+		} else {
+			toast.error('Hubo un problema al eliminar');
+			router.push('/admin/testimonios');
+		}
+	};
 
 	return (
 		<Grid
@@ -86,6 +112,28 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 			gap='0 32px'
 			alignItems='center'
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>¿Desea borrar el testimonio?</ModalHeader>
+
+					<ModalFooter>
+						<Button rounded='3px' colorScheme='gray' mr={3} onClick={onClose}>
+							Cerrar
+						</Button>
+						<Button
+							rounded='3px'
+							bgColor='gray.500'
+							color='#fff'
+							_hover={{ bgColor: 'gray.500' }}
+							onClick={handleDeleteTestimonial}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{testimonial.order}
 			</Box>
@@ -144,7 +192,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => console.log('deleting')}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>

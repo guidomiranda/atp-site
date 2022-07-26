@@ -43,6 +43,20 @@ const TestimonioAdminEdit = ({ testimonio }) => {
 	};
 
 	const handleTestimonialUpdate = async () => {
+		if (!testimonial.author || descriptionArray.length === 0) {
+			return toast('Todos los campos son obligatorios!', {
+				icon: '🤨',
+			});
+		}
+
+		const result = descriptionArray.some(item => item === '');
+
+		if (result) {
+			return toast('Todos los campos son obligatorios!', {
+				icon: '🤨',
+			});
+		}
+
 		const testimonialUpdated = {
 			...testimonial,
 			body: descriptionArray,
