@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { Navigation } from 'swiper';
+import { Navigation, Autoplay } from 'swiper';
 
 import 'swiper/css/bundle';
 import 'swiper/css';
@@ -11,7 +11,15 @@ import 'swiper/css/navigation';
 const Banner = ({ banners }) => {
 	return (
 		<Box mt='-100px' width='100%' height='100vh'>
-			<Swiper navigation={true} modules={[Navigation]} className='mySwiper'>
+			<Swiper
+				navigation={true}
+				autoplay={{
+					delay: 4500,
+					disableOnInteraction: false,
+				}}
+				modules={[Navigation, Autoplay]}
+				className='mySwiper-slide'
+			>
 				{banners?.map((banner: any) => (
 					<SwiperSlide
 						key={banner.id}
