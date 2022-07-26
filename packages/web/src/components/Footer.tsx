@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Image, Text, Link } from '@chakra-ui/react';
+import { Box, Flex, Image, Text, Link, Grid } from '@chakra-ui/react';
 import {
 	FaEnvelope,
 	FaFacebookF,
@@ -24,9 +24,17 @@ const Footer: React.FC = () => {
 							<Box>
 								<Image src='/logo-atp-blanco.png' alt='' w='160px' />
 							</Box>
-							<Box>
-								<Image src='/logo-brands.png' alt='' />
-							</Box>
+							<Grid
+								display={{ base: 'none', sm: 'grid', lg: 'none', xlg: 'grid' }}
+								gridTemplateColumns='repeat(3,1fr)'
+								alignItems='center'
+								gap='10px'
+								ml='20px'
+							>
+								<Image src='/mobil-logo.png' w='48px' objectFit='contain' />
+								<Image src='/route-logo.png' w='48px' objectFit='contain' />
+								<Image src='/vox-logo.png' w='48px' objectFit='contain' />
+							</Grid>
 						</Flex>
 					</Box>
 
