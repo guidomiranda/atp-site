@@ -1,9 +1,10 @@
-import { Button } from '@chakra-ui/react';
+import { Box, Button } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { FaAngleUp } from 'react-icons/fa';
 
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import Social from '../components/Social';
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -35,6 +36,17 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 			<Navbar />
 			{children}
 			<Footer />
+
+			<Box
+				position='fixed'
+				right='10px'
+				top='50%'
+				transform='translateY(-50%)'
+				// bgColor='#fff'
+				zIndex='20'
+			>
+				<Social />
+			</Box>
 
 			<Button
 				display={scrollPosition > 1800 ? 'grid' : 'none'}
