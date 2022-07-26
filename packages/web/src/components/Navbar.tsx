@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NextLink from 'next/link';
-import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Grid, Image, Link, Text } from '@chakra-ui/react';
 import { FaTimes, FaBars } from 'react-icons/fa';
 import router, { useRouter } from 'next/router';
 
@@ -95,9 +95,17 @@ const Navbar = () => {
 							</Link>
 						</NextLink>
 					</Box>
-					<Box display={{ base: 'none', xlg: 'block' }}>
-						<Image src='/logo-brands.png' height='60px' objectFit='contain' />
-					</Box>
+					<Grid
+						display={{ base: 'none', sm: 'grid', lg: 'none', xlg: 'grid' }}
+						gridTemplateColumns='repeat(3,1fr)'
+						alignItems='center'
+						gap='10px'
+						ml='20px'
+					>
+						<Image src='/mobil-logo.png' w='48px' objectFit='contain' />
+						<Image src='/route-logo.png' w='48px' objectFit='contain' />
+						<Image src='/vox-logo.png' w='48px' objectFit='contain' />
+					</Grid>
 				</Flex>
 
 				<Flex
