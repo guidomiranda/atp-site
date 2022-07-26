@@ -77,7 +77,6 @@ const Navbar = () => {
 	const [showSubmenuProduct, setShowSubmenuProduct] = useState<boolean>(false);
 
 	const { pathname } = useRouter();
-	console.log(pathname.split('/')[1]);
 
 	const handleMouseEnter = () => setShowSubmenuProduct(true);
 	const handleMouseLeave = () => setShowSubmenuProduct(false);
