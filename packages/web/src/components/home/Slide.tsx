@@ -4,7 +4,7 @@ import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FaArrowRight } from 'react-icons/fa';
 
-import { Navigation, Pagination } from 'swiper';
+import { Navigation, Pagination, Autoplay } from 'swiper';
 
 import 'swiper/css/bundle';
 import 'swiper/css';
@@ -30,7 +30,11 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 			<Swiper
 				pagination={pagination}
 				navigation={true}
-				modules={[Navigation, Pagination]}
+				autoplay={{
+					delay: 4500,
+					disableOnInteraction: false,
+				}}
+				modules={[Autoplay, Navigation, Pagination]}
 				className='mySwiper mySwiper-slide'
 			>
 				{slides.map((slide: any) => (
