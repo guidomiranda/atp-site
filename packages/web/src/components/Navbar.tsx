@@ -8,14 +8,18 @@ interface NavLinkProps {
 	text: string;
 	link?: string;
 	isLink?: boolean;
+	isActive?: boolean;
 }
 
-const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
+const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink, isActive }) => {
+	const { pathname } = useRouter();
+
 	return (
 		<>
 			{!isLink && (
 				<NextLink href={link} passHref>
 					<Link
+						position='relative'
 						_focus={{ outline: 0 }}
 						_hover={{ textDecoration: 'none' }}
 						textTransform='uppercase'
@@ -26,12 +30,23 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 						fontSize={{ base: '24px', lg: '14px' }}
 					>
 						{text}
+
+						<Box
+							display={isActive ? 'block' : 'none'}
+							w='20px'
+							h='6px'
+							position='absolute'
+							right='0'
+							bottom='-6px'
+							bgColor='#d21a28'
+						/>
 					</Link>
 				</NextLink>
 			)}
 
 			{isLink && (
 				<Text
+					position='relative'
 					_focus={{ outline: 0 }}
 					_hover={{ textDecoration: 'none' }}
 					textTransform='uppercase'
@@ -42,6 +57,15 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink }) => {
 					fontSize={{ base: '24px', lg: '14px' }}
 				>
 					{text}
+					<Box
+						display={isActive ? 'block' : 'none'}
+						w='20px'
+						h='6px'
+						position='absolute'
+						right='0'
+						bottom='-6px'
+						bgColor='#d21a28'
+					/>
 				</Text>
 			)}
 		</>
@@ -53,6 +77,7 @@ const Navbar = () => {
 	const [showSubmenuProduct, setShowSubmenuProduct] = useState<boolean>(false);
 
 	const { pathname } = useRouter();
+	console.log(pathname.split('/')[1]);
 
 	const handleMouseEnter = () => setShowSubmenuProduct(true);
 	const handleMouseLeave = () => setShowSubmenuProduct(false);
@@ -124,8 +149,12 @@ const Navbar = () => {
 					alignItems={{ base: 'center', lg: 'baseline' }}
 					justifyContent={{ base: 'center', lg: 'initial' }}
 				>
-					<NavLink text='Inicio' link='/' />
-					<NavLink text='Nosotros' link='/nosotros' />
+					<NavLink isActive={pathname === '/'} text='Inicio' link='/' />
+					<NavLink
+						isActive={pathname === '/nosotros'}
+						text='Nosotros'
+						link='/nosotros'
+					/>
 					<Box
 						onMouseEnter={handleMouseEnter}
 						onMouseLeave={handleMouseLeave}
@@ -133,7 +162,12 @@ const Navbar = () => {
 						pb={{ base: '0', lg: '10px' }}
 						cursor='pointer'
 					>
-						<NavLink isLink text='Productos' link='/product/aire' />
+						<NavLink
+							isActive={pathname.split('/')[1] === 'product'}
+							isLink
+							text='Productos'
+							link='/product/aire'
+						/>
 
 						<Box
 							display={showSubmenuProduct ? 'block' : 'none'}
@@ -182,8 +216,16 @@ const Navbar = () => {
 							</NextLink>
 						</Box>
 					</Box>
-					<NavLink text='Servicios' link='/services' />
-					<NavLink text='Contacto' link='/contacto' />
+					<NavLink
+						isActive={pathname === '/services'}
+						text='Servicios'
+						link='/services'
+					/>
+					<NavLink
+						isActive={pathname === '/contacto'}
+						text='Contacto'
+						link='/contacto'
+					/>
 					<Button
 						onClick={() => router.push('/trabaja-con-nosotros')}
 						fontSize={['22px', '14px']}
