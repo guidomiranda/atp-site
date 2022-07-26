@@ -216,7 +216,7 @@ const About = () => {
 				</Grid>
 			</Box>
 
-			<Box py='72px' maxW='1220px' m='0 auto' w='90%'>
+			<Box py='96px' maxW='1220px' m='0 auto' w='90%'>
 				<Box textAlign='center' mb='56px'>
 					<Flex display='inline-flex' position='relative'>
 						<Heading
@@ -239,29 +239,29 @@ const About = () => {
 
 				<Grid
 					gridTemplateColumns={['1fr', 'repeat(2,1fr)', 'repeat(3,1fr)']}
-					gap={['32px 0', '32px 0']}
+					gap={['72px 0', '32px 110px']}
 				>
-					<Grid placeItems='center'>
+					<Grid placeItems='center' px='32px'>
 						<Image
-							src='/logo-mobil-atp.jpg'
+							src='/logo-mobil-atp.png'
 							alt=''
 							width='100%'
 							objectFit='cover'
 							verticalAlign='top'
 						/>
 					</Grid>
-					<Grid placeItems='center'>
+					<Grid placeItems='center' px='32px'>
 						<Image
-							src='/logo-route-atp.jpg'
+							src='/logo-route-atp.png'
 							alt=''
 							width='100%'
 							objectFit='cover'
 							verticalAlign='top'
 						/>
 					</Grid>
-					<Grid placeItems='center'>
+					<Grid placeItems='center' px='32px'>
 						<Image
-							src='/logo-vox-atp.jpg'
+							src='/logo-vox-atp.png'
 							alt=''
 							width='100%'
 							objectFit='cover'

@@ -110,7 +110,7 @@ const Services = () => {
 				/>
 				<ArticleItem
 					title=' Control de los Lubricantes'
-					description='Ofrecemos servicio de análisis laboratoriales para determinar la vida útil de los lubricantes, evaluando así las condiciones de uso de maquinarias de nuestros clientes. Esto nos permite asesorarles en el mejor cuidado en el uso de sus equipos y brindarles los resultados con las recomendaciones de soluciones en'
+					description='Ofrecemos servicio de análisis laboratoriales para determinar la vida útil de los lubricantes, evaluando así las condiciones de uso de maquinarias de nuestros clientes. Esto nos permite asesorarles en el mejor cuidado en el uso de sus equipos y brindarles los resultados con las recomendaciones de soluciones en lubricación.'
 					image='/servicios-3.jpg'
 				/>
 				<ArticleItem
