@@ -96,7 +96,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 				cursor='pointer'
-				onClick={() => router.push('/admin/testimonios/1')}
+				onClick={() => router.push(`/admin/testimonios/${testimonial.id}`)}
 			>
 				{testimonial.author}
 			</Box>
@@ -126,7 +126,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push('/admin/testimonios/1')}
+					onClick={() => router.push(`/admin/testimonios/${testimonial.id}`)}
 				>
 					<FiEdit />
 				</Button>
