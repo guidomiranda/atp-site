@@ -96,7 +96,7 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 				cursor='pointer'
-				onClick={() => router.push('/admin/exito/1')}
+				onClick={() => router.push(`/admin/exito/${success.id}`)}
 			>
 				{success.title}
 			</Box>
@@ -126,7 +126,7 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push('/admin/exito/1')}
+					onClick={() => router.push(`/admin/exito/${success.id}`)}
 				>
 					<FiEdit />
 				</Button>
