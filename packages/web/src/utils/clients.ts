@@ -30,7 +30,7 @@ export const updateClient = async (id: string, clientInfo: any) => {
 
 export const createClient = async (clientInfo: any) => {
 	const data = await axios({
-		method: 'PATCH',
+		method: 'POST',
 		url: `/client/create`,
 		data: JSON.stringify(clientInfo),
 	});
@@ -40,7 +40,7 @@ export const createClient = async (clientInfo: any) => {
 
 export const deleteClient = async (id: string) => {
 	const data = await axios({
-		method: 'PATCH',
+		method: 'DELETE',
 		url: `/client/${id}`,
 	});
 

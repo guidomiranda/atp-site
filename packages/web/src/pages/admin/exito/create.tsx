@@ -27,7 +27,6 @@ const ExitoAdminCreate = () => {
 		order: 1,
 	});
 	const [descriptionArray, setDescriptionArray] = useState<any[]>(['']);
-	const [statusValue, setStatusValue] = useState<boolean>(true);
 
 	const handleAddDescriptionArray = () => {
 		setDescriptionArray([...descriptionArray, '']);
