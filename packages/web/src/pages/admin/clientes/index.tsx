@@ -1,13 +1,24 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { Box, Button, Grid } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Grid,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
-import { getClients } from '../../../utils';
+import { deleteClient, getClients } from '../../../utils';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 interface ClientsProps {
 	client: any;
@@ -74,6 +85,19 @@ const Header: React.FC = () => {
 
 const Clients: React.FC<ClientsProps> = ({ client }) => {
 	const router = useRouter();
+	const { isOpen, onClose, onOpen } = useDisclosure();
+
+	const handleDeleteClient = async () => {
+		const response = await deleteClient(client.id);
+
+		if (response.success) {
+			toast.success('Eliminado correctamente!');
+			return router.push('/admin/clientes');
+		} else {
+			toast.error('Hubo un problema al eliminar');
+			router.push('/admin/clientes');
+		}
+	};
 
 	return (
 		<Grid
@@ -86,6 +110,28 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 			gap='0 32px'
 			alignItems='center'
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>¿Desea borrar la información?</ModalHeader>
+
+					<ModalFooter>
+						<Button rounded='3px' colorScheme='gray' mr={3} onClick={onClose}>
+							Cerrar
+						</Button>
+						<Button
+							rounded='3px'
+							bgColor='gray.500'
+							color='#fff'
+							_hover={{ bgColor: 'gray.500' }}
+							onClick={handleDeleteClient}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{client.order}
 			</Box>
@@ -144,6 +190,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>
