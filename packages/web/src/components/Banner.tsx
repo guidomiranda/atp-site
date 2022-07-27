@@ -46,7 +46,9 @@ const Banner = ({ banners }) => {
 								</Text>
 							</Box>
 							<Box flex={{ base: 'initial', lg: '1' }}>
-								<Image src={banner.image} alt='' width='100%' height='100%' />
+								{banner.image && (
+									<Image src={banner.image} alt='' width='100%' height='100%' />
+								)}
 							</Box>
 						</Flex>
 					</SwiperSlide>

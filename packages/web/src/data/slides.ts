@@ -8,7 +8,7 @@ export const slides_data = [
 			'Puesto que creemos que la atención a nuestros clientes es tan importante como el crecimiento profesional y personal de nuestros compañeros',
 			'¡Contactá con nosotros para más info o realizar tus pedidos, nos aseguramos de entregar tu producto en cualquier punto!',
 		],
-		image: 'https://atp.netlify.app/assets/img_clientes.png',
+		image: '/personas-1.png',
 		path: '/clientes',
 	},
 	{
@@ -20,7 +20,7 @@ export const slides_data = [
 			'Enterate de los proyectos y casos de éxitos que diferentes marcas han obtenido al utilizar los productos de atp mobil.',
 			'¡Contactá con nosotros para más info o realizar tus pedidos, nos aseguramos de entregar tu producto en cualquier punto!',
 		],
-		image: 'https://atp.netlify.app/assets/personas-2.png',
+		image: '/personas-3.png',
 		path: '/exitos',
 	},
 	{
@@ -31,7 +31,7 @@ export const slides_data = [
 			'Quienes nos eligen siempre nos dan un retorno de su experiencia con los productos atp mobile.',
 			'Te dejamos sus historias y comentarios para que conozcas resultados.',
 		],
-		image: 'https://atp.netlify.app/assets/personas-3.png',
+		image: '/personas-2.png',
 		path: '/testimonios',
 	},
 ];

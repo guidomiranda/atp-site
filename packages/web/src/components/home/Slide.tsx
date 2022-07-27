@@ -26,7 +26,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 	};
 
 	return (
-		<Box height={{ base: '100%', lg: '700px' }}>
+		<Box height={{ base: '100%', lg: '100vh' }}>
 			<Swiper
 				pagination={pagination}
 				navigation={true}
@@ -90,7 +90,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 									</Text>
 								))}
 
-								<Box mt='26px'>
+								<Box mt='32px'>
 									<Button
 										width={{ base: '100%', lg: 'auto' }}
 										display='flex'
@@ -122,8 +122,9 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 									src={slide.image}
 									alt=''
 									width='100%'
-									height='450px'
-									objectFit='contain'
+									height={slide.image === '/personas-3.png' ? '70vh' : '900px'}
+									objectFit='cover'
+									objectPosition='bottom'
 								/>
 							</Box>
 						</Flex>
