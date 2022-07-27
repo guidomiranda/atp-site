@@ -8,3 +8,41 @@ export const getClients = async () => {
 
 	return data.data;
 };
+
+export const getClient = async (id: string) => {
+	const data = await axios({
+		method: 'GET',
+		url: `/client/${id}`,
+	});
+
+	return data.data;
+};
+
+export const updateClient = async (id: string, clientInfo: any) => {
+	const data = await axios({
+		method: 'PATCH',
+		url: `/client/${id}`,
+		data: JSON.stringify(clientInfo),
+	});
+
+	return data.data;
+};
+
+export const createClient = async (clientInfo: any) => {
+	const data = await axios({
+		method: 'PATCH',
+		url: `/client/create`,
+		data: JSON.stringify(clientInfo),
+	});
+
+	return data.data;
+};
+
+export const deleteClient = async (id: string) => {
+	const data = await axios({
+		method: 'PATCH',
+		url: `/client/${id}`,
+	});
+
+	return data.data;
+};

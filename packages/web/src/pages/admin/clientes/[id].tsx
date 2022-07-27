@@ -13,15 +13,56 @@ import {
 import { BsArrowLeftShort } from 'react-icons/bs';
 
 import AdminLayout from '../../../layout/admin';
+import { GetServerSideProps } from 'next';
+import { getClient, updateClient } from '../../../utils';
+import toast from 'react-hot-toast';
+import { FaPlus, FaTrash } from 'react-icons/fa';
+import produce from 'immer';
 
-const ClientAdminEdit = () => {
+export const getServerSideProps: GetServerSideProps = async context => {
+	const client = await getClient(context.query.id as string);
+	return { props: { client: client.client } };
+};
+
+const ClientAdminEdit = ({ client }) => {
 	const router = useRouter();
 
-	const [statusValue, setStatusValue] = useState<boolean>(true);
+	const [clientInfo, setClientInfo] = useState<any>(client);
+	const [descriptionArray, setDescriptionArray] = useState<any>(
+		client.description
+	);
+
+	const handleAddDescriptionArray = () => {
+		setDescriptionArray([...descriptionArray, '']);
+	};
+
+	const handleDeleteDescriptionArray = (body: any) => {
+		setDescriptionArray((current: any) =>
+			current.filter((item: any) => item !== body)
+		);
+	};
+
+	const handleUpdateClientInfo = async () => {
+		const clientInfoUpdated = {
+			...clientInfo,
+			description: descriptionArray,
+		};
+		delete clientInfoUpdated.id;
+
+		const response = await updateClient(clientInfo.id, clientInfoUpdated);
+
+		if (response.success) {
+			toast.success('Actualizado correctamente!');
+			return router.push('/admin/clientes');
+		} else {
+			toast.error('Hubo un problema al actualizar');
+			router.push('/admin/clientes');
+		}
+	};
 
 	return (
 		<AdminLayout
-			title='Título'
+			title={clientInfo.title}
 			back={
 				<Box>
 					<Button
@@ -44,7 +85,7 @@ const ClientAdminEdit = () => {
 			}
 		>
 			<Box padding='20px'>
-				<Grid gridTemplateColumns='repeat(2, 1fr)'>
+				<Box w={['100%', '90%', '80%']}>
 					<Box>
 						<Box mb='20px'>
 							<Text
@@ -56,7 +97,13 @@ const ClientAdminEdit = () => {
 							>
 								Título
 							</Text>
-							<Input rounded='3px' />
+							<Input
+								rounded='3px'
+								value={clientInfo.title}
+								onChange={e =>
+									setClientInfo({ ...clientInfo, title: e.target.value })
+								}
+							/>
 						</Box>
 
 						<Box mb='20px'>
@@ -70,7 +117,54 @@ const ClientAdminEdit = () => {
 								Descripción
 							</Text>
 							<Box>
-								<Textarea rounded='3px' resize='none' />
+								{descriptionArray?.map((item: any, index: number) => (
+									<Grid
+										gridTemplateColumns='1fr repeat(2, auto)'
+										key={index}
+										gap='0 10px'
+										alignItems='center'
+										mb='15px'
+									>
+										<Textarea
+											rounded='3px'
+											h='10rem'
+											resize='none'
+											value={item}
+											onChange={e => {
+												const text = e.target.value;
+												setDescriptionArray(currentDescription =>
+													produce(currentDescription, v => {
+														v[index] = text;
+													})
+												);
+											}}
+										/>
+										<Button
+											display='block'
+											minW='initial'
+											h='10rem'
+											bgColor='gray.200'
+											color='blue.700'
+											p='0 15px'
+											_hover={{ bgColor: 'gray.200' }}
+											onClick={handleAddDescriptionArray}
+										>
+											<FaPlus />
+										</Button>
+										<Button
+											display='block'
+											minW='initial'
+											h='10rem'
+											bgColor='gray.600'
+											color='#fff'
+											p='0 15px'
+											_hover={{ bgColor: 'gray.600' }}
+											onClick={() => handleDeleteDescriptionArray(item)}
+										>
+											<FaTrash />
+										</Button>
+									</Grid>
+								))}
 							</Box>
 						</Box>
 
@@ -80,13 +174,24 @@ const ClientAdminEdit = () => {
 								<Switch
 									id='email-alerts'
 									size={`lg`}
-									defaultChecked={statusValue}
-									onChange={() => setStatusValue(!statusValue)}
+									defaultChecked={clientInfo.status}
+									onChange={() =>
+										setClientInfo({ ...clientInfo, status: !clientInfo.status })
+									}
 								/>
 							</Flex>
 							<Flex alignItems='center'>
 								<Text mr='12px'>Orden:</Text>
-								<Input w='100px' />
+								<Input
+									w='100px'
+									value={clientInfo.order}
+									onChange={e =>
+										setClientInfo({
+											...clientInfo,
+											order: Number(e.target.value),
+										})
+									}
+								/>
 							</Flex>
 						</Flex>
 
@@ -99,12 +204,13 @@ const ClientAdminEdit = () => {
 								color='#fff'
 								px='32px'
 								_hover={{ bgColor: '#8C95A6' }}
+								onClick={handleUpdateClientInfo}
 							>
 								Actualizar información
 							</Button>
 						</Box>
 					</Box>
-				</Grid>
+				</Box>
 			</Box>
 		</AdminLayout>
 	);

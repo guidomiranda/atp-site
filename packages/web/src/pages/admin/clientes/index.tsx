@@ -96,7 +96,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 				cursor='pointer'
-				onClick={() => router.push('/admin/clientes/1')}
+				onClick={() => router.push(`/admin/clientes/${client.id}`)}
 			>
 				{client.title}
 			</Box>
@@ -126,7 +126,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push('/admin/clientes/1')}
+					onClick={() => router.push(`/admin/clientes/${client.id}`)}
 				>
 					<FiEdit />
 				</Button>
