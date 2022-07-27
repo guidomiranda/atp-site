@@ -27,3 +27,22 @@ export const updateSuccess = async (id: string, successInfo: any) => {
 
 	return data.data;
 };
+
+export const deleteSuccess = async (id: string) => {
+	const data = await axios({
+		method: 'DELETE',
+		url: `/success/${id}`,
+	});
+
+	return data.data;
+};
+
+export const createSuccess = async (successInfo: any) => {
+	const data = await axios({
+		method: 'POST',
+		url: `/success/create`,
+		data: JSON.stringify(successInfo),
+	});
+
+	return data.data;
+};

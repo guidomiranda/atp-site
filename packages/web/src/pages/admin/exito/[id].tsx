@@ -17,6 +17,7 @@ import { FaPlus, FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
 import { getSuccess, updateSuccess } from '../../../utils';
+import toast from 'react-hot-toast';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const success = await getSuccess(context.query.id as string);
@@ -50,7 +51,14 @@ const ExitoAdminEdit = ({ success }) => {
 		delete successInfoUpdated.id;
 
 		const response = await updateSuccess(successInfo.id, successInfoUpdated);
-		console.log(response);
+
+		if (response.success) {
+			toast.success('Actualizado correctamente!');
+			return router.push('/admin/exito');
+		} else {
+			toast.error('Hubo un problema al actualizar');
+			router.push('/admin/exito');
+		}
 	};
 
 	return (

@@ -10,8 +10,6 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalFooter,
-	ModalBody,
-	ModalCloseButton,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';

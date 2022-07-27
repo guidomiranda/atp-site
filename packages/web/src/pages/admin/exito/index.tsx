@@ -1,13 +1,24 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import { Box, Button, Grid } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Grid,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
-import { getSuccesses } from '../../../utils';
+import { deleteSuccess, getSuccesses } from '../../../utils';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 interface SuccessesProps {
 	success: any;
@@ -74,6 +85,19 @@ const Header: React.FC = () => {
 
 const Successes: React.FC<SuccessesProps> = ({ success }) => {
 	const router = useRouter();
+	const { isOpen, onClose, onOpen } = useDisclosure();
+
+	const handleDeleteTestimonial = async () => {
+		const response = await deleteSuccess(success.id);
+
+		if (response.success) {
+			toast.success('Eliminado correctamente!');
+			return router.push('/admin/exito');
+		} else {
+			toast.error('Hubo un problema al eliminar');
+			router.push('/admin/exito');
+		}
+	};
 
 	return (
 		<Grid
@@ -86,6 +110,28 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 			gap='0 32px'
 			alignItems='center'
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>¿Desea borrar la información?</ModalHeader>
+
+					<ModalFooter>
+						<Button rounded='3px' colorScheme='gray' mr={3} onClick={onClose}>
+							Cerrar
+						</Button>
+						<Button
+							rounded='3px'
+							bgColor='gray.500'
+							color='#fff'
+							_hover={{ bgColor: 'gray.500' }}
+							onClick={handleDeleteTestimonial}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{success.order}
 			</Box>
@@ -144,6 +190,7 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>
