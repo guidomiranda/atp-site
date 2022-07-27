@@ -55,12 +55,12 @@ const About = () => {
 										Misión
 									</Heading>
 									<Box
-										width='25px'
+										width='44px'
 										height='12px'
-										bgColor='#fff'
+										bgColor='#b41f1b'
 										position='absolute'
-										right='0'
-										bottom='-12px'
+										left='0'
+										top='-6px'
 									/>
 								</Flex>
 								<Text
@@ -100,12 +100,12 @@ const About = () => {
 										Visión
 									</Heading>
 									<Box
-										width='25px'
+										width='40px'
 										height='12px'
-										bgColor='#fff'
+										bgColor='#b41f1b'
 										position='absolute'
-										right='0'
-										bottom='-12px'
+										left='0'
+										top='-6px'
 									/>
 								</Flex>
 								<Text
@@ -147,12 +147,12 @@ const About = () => {
 										Valores
 									</Heading>
 									<Box
-										width='25px'
+										width='45px'
 										height='12px'
-										bgColor='#fff'
+										bgColor='#b41f1b'
 										position='absolute'
-										right='0'
-										bottom='-12px'
+										left='0'
+										top='-6px'
 									/>
 								</Flex>
 

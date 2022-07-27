@@ -29,11 +29,11 @@ const TrabajaConNosotros = () => {
 								</Heading>
 								<Box
 									position='absolute'
-									width='25px'
+									width='30px'
 									height='12px'
 									bgColor='#b41f1b'
-									right='0'
-									bottom='-12px'
+									left='0'
+									top='-8px'
 								/>
 							</Flex>
 						</Box>

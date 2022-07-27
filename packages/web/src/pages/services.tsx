@@ -10,6 +10,7 @@ interface ArticleItemProps {
 	description?: string;
 	image: string;
 	children?: React.ReactNode;
+	isBackground?: boolean;
 }
 
 interface ValuesQuoteProps {
@@ -36,9 +37,16 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
 	description,
 	image,
 	children,
+	isBackground,
 }) => {
 	return (
-		<Box bgImage='linear-gradient(rgb(236, 236, 237), rgb(254, 255, 254))'>
+		<Box
+			bgImage={
+				isBackground
+					? 'linear-gradient(rgb(236, 236, 237), rgb(254, 255, 254))'
+					: 'initial'
+			}
+		>
 			<Grid
 				py='96px'
 				gridTemplateColumns={['1fr', 'repeat(2, 1fr)']}
@@ -54,22 +62,23 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
 							<Heading
 								fontSize={['32px', '42px']}
 								fontWeight='black'
-								color='#015796'
+								color={isBackground ? '#015796' : '#fff'}
 							>
 								{title}
 							</Heading>
 							<Box
 								position='absolute'
-								width='22px'
+								width='30px'
 								height='12px'
 								bgColor='#b41f1b'
-								left={['0', 'initial']}
-								right={['initial', '0']}
-								bottom='-12px'
+								left='0'
+								top='-8px'
 							/>
 						</Flex>
 					</Box>
-					<Box mt='32px'>{children || description}</Box>
+					<Box mt='32px' color={isBackground ? '#000' : '#fff'}>
+						{children || description}
+					</Box>
 				</Box>
 
 				<Grid placeItems='center'>
@@ -98,23 +107,27 @@ const Services = () => {
 			/>
 
 			<Box>
-				<ArticleItem
-					title='Capacitación'
-					description='Creemos en la capacitación continua de nuestros clientes y sus empleados, y para ello ofrecemos cursos y charlas de capacitación en lubricantes. Estos cursos se realizan durante todo el año y en distintas partes del país. Los temas incluyen tipos de lubricantes, lubricación, almacenamiento, manoseo y descarte, divididos.'
-					image='/servicios-1.jpg'
-				/>
-				<ArticleItem
-					title=' Estudio de Planta'
-					description='Nuestra excelencia se refleja en la atención a los detalles a fin de identificar las necesidades de cada planta. Nuestros servicios industriales son planificados a través del estudio detallado de la operación y mantenimiento de la planta. En esta etapa son identificadas las soluciones de lubricación que llevará a la reducción de costos, al aumento de la productividad y a la reducción de los riesgos ambientales.'
-					image='/servicios-2.jpg'
-				/>
-				<ArticleItem
-					title=' Control de los Lubricantes'
-					description='Ofrecemos servicio de análisis laboratoriales para determinar la vida útil de los lubricantes, evaluando así las condiciones de uso de maquinarias de nuestros clientes. Esto nos permite asesorarles en el mejor cuidado en el uso de sus equipos y brindarles los resultados con las recomendaciones de soluciones en lubricación.'
-					image='/servicios-3.jpg'
-				/>
+				<Box bgImage='linear-gradient(rgb(13, 20, 38), rgb(87, 86, 84))'>
+					<ArticleItem
+						title='Capacitación'
+						description='Creemos en la capacitación continua de nuestros clientes y sus empleados, y para ello ofrecemos cursos y charlas de capacitación en lubricantes. Estos cursos se realizan durante todo el año y en distintas partes del país. Los temas incluyen tipos de lubricantes, lubricación, almacenamiento, manoseo y descarte, divididos.'
+						image='/servicios-1.jpg'
+					/>
+					<ArticleItem
+						title=' Estudio de Planta'
+						description='Nuestra excelencia se refleja en la atención a los detalles a fin de identificar las necesidades de cada planta. Nuestros servicios industriales son planificados a través del estudio detallado de la operación y mantenimiento de la planta. En esta etapa son identificadas las soluciones de lubricación que llevará a la reducción de costos, al aumento de la productividad y a la reducción de los riesgos ambientales.'
+						image='/servicios-2.jpg'
+					/>
+					<ArticleItem
+						title=' Control de los Lubricantes'
+						description='Ofrecemos servicio de análisis laboratoriales para determinar la vida útil de los lubricantes, evaluando así las condiciones de uso de maquinarias de nuestros clientes. Esto nos permite asesorarles en el mejor cuidado en el uso de sus equipos y brindarles los resultados con las recomendaciones de soluciones en lubricación.'
+						image='/servicios-3.jpg'
+					/>
+				</Box>
+
 				<ArticleItem
 					title='Servicios Especializados'
+					isBackground
 					children={
 						<Box>
 							<ValuesQuote description='Plano de Lubricación' />

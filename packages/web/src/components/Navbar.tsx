@@ -36,8 +36,8 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink, isActive }) => {
 							w='20px'
 							h='6px'
 							position='absolute'
-							right='0'
-							bottom='-6px'
+							left='0'
+							top='-6px'
 							bgColor='#d21a28'
 						/>
 					</Link>
@@ -62,8 +62,8 @@ const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink, isActive }) => {
 						w='20px'
 						h='6px'
 						position='absolute'
-						right='0'
-						bottom='-6px'
+						left='0'
+						top='-6px'
 						bgColor='#d21a28'
 					/>
 				</Text>
