@@ -87,7 +87,7 @@ const BodyContactInfo = ({
 				</Box>
 				<Box>
 					<iframe
-						src='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14439.579209630665!2d-57.5261383!3d-25.2067699!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc2322dd063698196!2sATP%20Paraguay!5e0!3m2!1sen!2spy!4v1657651488139!5m2!1sen!2spy'
+						src={urlLocation}
 						width='100%'
 						height={390}
 						style={{ border: 0 }}
@@ -142,7 +142,7 @@ const Contacto = () => {
 							address='Ruta 9 Dr. Carlos A. López km. 17,5 esquina Avda. Gral Díaz.'
 							image='/sucursales-contacto-central.jpg'
 							theme='dark'
-							urlLocation=''
+							urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7219.789598883976!2d-57.526138!3d-25.20677!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc2322dd063698196!2sATP%20Paraguay!5e0!3m2!1ses-419!2spy!4v1658949668539!5m2!1ses-419!2spy'
 						/>
 					</Box>
 				</Box>
@@ -158,7 +158,7 @@ const Contacto = () => {
 					address='Av Mariscal Lopez, Edificio Mainumby'
 					image='/sucursales-contacto-02.jpg'
 					theme='light'
-					urlLocation=''
+					urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d57617.72340443044!2d-54.635955!3d-25.501454!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x19dece88df51f516!2sMobil%20Lubricantes%20CDE!5e0!3m2!1ses!2spy!4v1658949776145!5m2!1ses!2spy'
 				/>
 
 				<BodyContactInfo
@@ -170,7 +170,7 @@ const Contacto = () => {
 					address='Av. Dr. Gaspar R. de Francia Nº 64'
 					image='/sucursales-contacto-03.jpg'
 					theme='light'
-					urlLocation=''
+					urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14211.857680734556!2d-55.635742!3d-27.062871000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd508fc56135094d3!2sCooperativa%20Colonias%20Unidas!5e0!3m2!1ses!2spy!4v1658949809087!5m2!1ses!2spy'
 				/>
 
 				<BodyContactInfo
@@ -182,7 +182,7 @@ const Contacto = () => {
 					address='Calle Fred Engen esq. Av. Central - Surtidor'
 					image='/sucursales-contacto-04.jpg'
 					theme='light'
-					urlLocation=''
+					urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14757.227807365756!2d-59.838004!3d-22.379783000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4fa22233292123d1!2sComplejo%20Industrial%20Cooperativa%20Chortitzer!5e0!3m2!1ses!2spy!4v1658949836105!5m2!1ses!2spy'
 				/>
 			</Box>
 

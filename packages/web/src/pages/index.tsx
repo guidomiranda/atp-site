@@ -52,15 +52,15 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 						</Heading>
 						<Box
 							position='absolute'
-							width='25px'
+							width='45px'
 							height='12px'
 							bgColor='#b41f1b'
-							right='0'
-							bottom='-12px'
+							left='0'
+							top='-6px'
 						/>
 					</Flex>
 
-					<Text mt='20px' color='#94a3b8' fontSize='20px'>
+					<Text mt='10px' color='#94a3b8' fontSize='20px'>
 						Calidad. Tecnología. Prestigio
 					</Text>
 				</Box>

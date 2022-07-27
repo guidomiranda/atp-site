@@ -51,11 +51,11 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 							</Heading>
 							<Box
 								position='absolute'
-								w='25px'
+								w='35px'
 								height='12px'
 								bgColor='#b41f1b'
-								bottom='-12px'
-								right='0'
+								top='-6px'
+								left='0'
 							/>
 						</Flex>
 						<Box>
@@ -66,7 +66,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 									fontSize={['16px', '20px']}
 									width='100%'
 									textAlign='justify'
-									mb='20px'
+									mb='10px'
 								>
 									{text}
 								</Text>

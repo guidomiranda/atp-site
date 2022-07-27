@@ -61,24 +61,20 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 										lineHeight={['32px', '48px']}
 										color='white'
 										w='auto'
+										position='relative'
 									>
 										<Text as='span'>
 											{slide.title.slice(0, slide.title.length - 1)}
 										</Text>
-										<Box position='relative' display='inline-flex'>
-											<Text as='span'>
-												{slide.title.charAt(slide.title.length - 1)}
-											</Text>
 
-											<Box
-												position='absolute'
-												width='25px'
-												height='12px'
-												bgColor='#b41f1b'
-												right='0'
-												bottom='-18px'
-											/>
-										</Box>
+										<Box
+											position='absolute'
+											width='32px'
+											height='12px'
+											bgColor='#b41f1b'
+											left='0'
+											top='-16px'
+										/>
 									</Heading>
 								</Flex>
 

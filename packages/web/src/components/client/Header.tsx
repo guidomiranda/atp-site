@@ -31,11 +31,11 @@ const Header: React.FC<HeaderProps> = ({ title, image }) => {
 						</Heading>
 						<Box
 							position='absolute'
-							width='60px'
-							height='16px'
+							width='30px'
+							height='14px'
 							bgColor='#b41f1b'
-							right='0'
-							bottom='-18px'
+							left='0'
+							top='-16px'
 						/>
 					</Flex>
 				</Box>
