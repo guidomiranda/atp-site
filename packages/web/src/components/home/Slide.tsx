@@ -63,9 +63,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 										w='auto'
 										position='relative'
 									>
-										<Text as='span'>
-											{slide.title.slice(0, slide.title.length - 1)}
-										</Text>
+										<Text as='span'>{slide.title}</Text>
 
 										<Box
 											position='absolute'

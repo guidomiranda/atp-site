@@ -61,9 +61,9 @@ const TypeLubricants: React.FC = () => {
 	return (
 		<Layout>
 			<Header
-				bg='lubricantes-atp-banner.jpg'
+				bg='lubricantes-atp.jpg'
 				logo=''
-				product='https://res.cloudinary.com/https-atp-com-py/image/upload/v1657916948/lubricantes/122_vaouys.png'
+				product=''
 				children={<HeaderProductFooter />}
 				category='lub'
 			/>
