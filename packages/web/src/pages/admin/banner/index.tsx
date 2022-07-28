@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Box, Button, Grid, Image } from '@chakra-ui/react';
-
-import AdminLayout from '../../../layout/admin';
+import { GetServerSideProps } from 'next';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { Box, Button, Grid, Image, Link } from '@chakra-ui/react';
 import dayjs from 'dayjs';
 import { FaTrash } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
-import { GetServerSideProps } from 'next';
+
+import AdminLayout from '../../../layout/admin';
 import { getBanners } from '../../../utils/banners';
 
 interface BannerProps {
@@ -77,6 +79,9 @@ const Header: React.FC = () => {
 };
 
 const Banner: React.FC<BannerProps> = ({ banner }) => {
+	const router = useRouter();
+	console.log(banner.id);
+
 	const [showImageLarge, setShowImageLarge] = useState<boolean>(false);
 
 	return (
@@ -89,7 +94,6 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 			borderBottom='1px solid #DCDFE5'
 			gap='0 32px'
 			alignItems='center'
-			cursor='pointer'
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{banner.order}
@@ -105,19 +109,22 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 				<Box
 					display={showImageLarge ? 'block' : 'none'}
 					position='absolute'
-					bottom='-80px'
+					bottom='-57px'
 					left='50%'
 					transform='translateX(-50%)'
-					w='150px'
+					w='100%'
+					h='50px'
 					margin='0 auto'
 					boxShadow='0px 0px 9px 2px rgba(0,0,0,0.3)'
 					rounded='sm'
 					overflow='hidden'
+					zIndex='200'
 				>
-					<Image src={banner.bg} alt='' w='150px' objectFit='contain' />
+					<Image src={banner.bg} alt='' h='50px' objectFit='cover' />
 				</Box>
 
 				<Image
+					cursor='pointer'
 					src={banner.bg}
 					alt=''
 					w='45px'
@@ -127,15 +134,18 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 					objectPosition='center'
 				/>
 			</Grid>
-			<Box
-				color='#3B4A67'
-				fontSize='14px'
-				whiteSpace='nowrap'
-				overflow='hidden'
-				textOverflow='ellipsis'
-			>
-				{banner.title}
-			</Box>
+			<NextLink href={`/admin/banner/${banner.id}`}>
+				<Link
+					color='#3B4A67'
+					fontSize='14px'
+					whiteSpace='nowrap'
+					overflow='hidden'
+					textOverflow='ellipsis'
+					cursor='pointer'
+				>
+					{banner.title}
+				</Link>
+			</NextLink>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
 				{banner.status ? 'activo' : 'inactivo'}
 			</Box>
@@ -162,6 +172,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() => router.push(`/admin/banners/${banner.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -192,7 +203,7 @@ const BannersAdmin = ({ banners }) => {
 		<AdminLayout title='Banners'>
 			<Box>
 				<Header />
-				{banners?.map((banner: any) => (
+				{banners.map((banner: any) => (
 					<Banner key={banner.id} banner={banner} />
 				))}
 			</Box>

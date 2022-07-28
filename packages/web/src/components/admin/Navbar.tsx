@@ -80,7 +80,7 @@ const NavbarAdmin: React.FC = () => {
 				<Link
 					icon={<HiOutlinePhotograph />}
 					name='Banners'
-					path='/admin/banners'
+					path='/admin/banner'
 				/>
 			</Box>
 

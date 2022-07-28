@@ -8,3 +8,12 @@ export const getBanners = async () => {
 
 	return data.data;
 };
+
+export const getBanner = async (id: string) => {
+	const data = await axios({
+		method: 'GET',
+		url: `/banner/${id}`,
+	});
+
+	return data.data;
+};

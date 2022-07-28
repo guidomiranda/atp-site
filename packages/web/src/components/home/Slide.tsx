@@ -44,7 +44,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 					>
 						<Flex
 							pt={{ base: '64px', lg: '0' }}
-							maxW='1220px'
+							maxW='1290px'
 							m='0 auto'
 							w='90%'
 							height='100%'
@@ -52,7 +52,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 							flexDir={{ base: 'column', lg: 'row' }}
 							justifyContent={{ base: 'center', lg: 'space-between' }}
 						>
-							<Box flex={{ base: 'initial', lg: '1' }} mr='20px'>
+							<Box flex={{ base: 'initial', lg: '0.7' }} mr='20px'>
 								<Flex mb='30px'>
 									<Heading
 										fontWeight='bold'
@@ -117,12 +117,17 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 								mt={{ base: '32px', lg: '0' }}
 								ml='20px'
 								alignSelf='flex-end'
+								position='relative'
+								w='full'
 							>
 								<Image
+									// position='absolute'
+									// top='0'
+									// left='0'
 									src={slide.image}
 									alt=''
 									width='100%'
-									height={slide.image === '/personas-3.png' ? '70vh' : '900px'}
+									height='90vh'
 									objectFit='cover'
 									objectPosition='bottom'
 								/>
