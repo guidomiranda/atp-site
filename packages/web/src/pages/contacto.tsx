@@ -1,5 +1,15 @@
 import React from 'react';
-import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Flex,
+	Grid,
+	Heading,
+	Image,
+	Input,
+	Text,
+	Textarea,
+} from '@chakra-ui/react';
 import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
 
 import Layout from '../layout';
@@ -186,8 +196,107 @@ const Contacto = () => {
 				/>
 			</Box>
 
-			<Box pb='0' ml='-15px' mt='-20px'>
-				<Image src='/aceite-splash-copia.png' mb='-40px' alt='' width='700px' />
+			<Box
+				bgImage='linear-gradient(rgb(13, 20, 38), rgb(87, 86, 84))'
+				py='72px'
+				mt='128px'
+				position='relative'
+			>
+				<Box
+					pb='0'
+					ml='-15px'
+					mt='-20px'
+					position='absolute'
+					left='0'
+					bottom='0'
+					// transform='translateY(-50%)'
+				>
+					<Image
+						src='/aceite-splash-copia.png'
+						mb='-40px'
+						alt=''
+						width='700px'
+					/>
+				</Box>
+				<Grid
+					gridTemplateColumns={{ base: '1fr', md: 'repeat(2,1fr)' }}
+					maxW='1220px'
+					m='0 auto'
+					w='90%'
+				>
+					<Box />
+					<Box>
+						<Text fontWeight='bold' color='#fff' fontSize='26px' mb='15px'>
+							Contáctenos
+						</Text>
+
+						<Box mb='20px'>
+							<Input
+								rounded='2px'
+								border='2px solid'
+								color='#fff'
+								borderColor='#076098'
+								placeholder='Nombre y Apellido*'
+								_placeholder={{ color: '#fff' }}
+							/>
+						</Box>
+						<Box mb='20px'>
+							<Input
+								rounded='2px'
+								border='2px solid'
+								color='#fff'
+								borderColor='#076098'
+								placeholder='Email'
+								_placeholder={{ color: '#fff' }}
+							/>
+						</Box>
+						<Box mb='20px'>
+							<Input
+								rounded='2px'
+								border='2px solid'
+								color='#fff'
+								borderColor='#076098'
+								placeholder='Teléfono*'
+								_placeholder={{ color: '#fff' }}
+							/>
+						</Box>
+						<Box mb='20px'>
+							<Input
+								rounded='2px'
+								border='2px solid'
+								color='#fff'
+								borderColor='#076098'
+								placeholder='Asunto*'
+								_placeholder={{ color: '#fff' }}
+							/>
+						</Box>
+						<Box mb='20px'>
+							<Textarea
+								rounded='2px'
+								border='2px solid'
+								color='#fff'
+								borderColor='#076098'
+								placeholder='Escriba su mensaje aquí*'
+								height='7rem'
+								_placeholder={{ color: '#fff' }}
+							/>
+						</Box>
+						<Box>
+							<Button
+								minW='initial'
+								h='45px'
+								bgColor='#076098'
+								px='32px'
+								py='0'
+								color='#fff'
+								rounded='2px'
+								_hover={{ bgColor: '#076098' }}
+							>
+								Enviar
+							</Button>
+						</Box>
+					</Box>
+				</Grid>
 			</Box>
 		</Layout>
 	);
