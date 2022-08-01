@@ -62,7 +62,7 @@ const TypeLubricants: React.FC = () => {
 		<Layout>
 			<Header
 				bg='lubricantes-atp.jpg'
-				logo=''
+				logo='/logo-mobil_banner.png'
 				product=''
 				children={<HeaderProductFooter />}
 				category='lub'

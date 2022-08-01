@@ -112,7 +112,7 @@ const Navbar = () => {
 						<NextLink href='/' passHref>
 							<Link _focus={{ outline: 0 }}>
 								<Image
-									src='/logo.png'
+									src='/logo-atp.png'
 									height={{ base: '60px', lg: '70px' }}
 									objectFit='contain'
 								/>
@@ -121,14 +121,18 @@ const Navbar = () => {
 					</Box>
 					<Grid
 						display={{ base: 'none', sm: 'grid', lg: 'none', xlg: 'grid' }}
-						gridTemplateColumns='repeat(3,1fr)'
+						// gridTemplateColumns='repeat(3,1fr)'
 						alignItems='center'
 						gap='10px'
 						ml='20px'
 					>
-						<Image src='/mobil-logo.png' w='48px' objectFit='contain' />
-						<Image src='/route-logo.png' w='48px' objectFit='contain' />
-						<Image src='/vox-logo.png' w='48px' objectFit='contain' />
+						<Image
+							src='/logos-mobil-route-vox.png'
+							w='160px'
+							objectFit='contain'
+						/>
+						{/* <Image src='/route-logo.png' w='48px' objectFit='contain' /> */}
+						{/* <Image src='/vox-logo.png' w='48px' objectFit='contain' /> */}
 					</Grid>
 				</Flex>
 

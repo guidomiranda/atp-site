@@ -1,6 +1,11 @@
 import React from 'react';
 import { Flex, Link, LinkProps } from '@chakra-ui/react';
-import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa';
+import {
+	FaFacebookF,
+	FaInstagram,
+	FaLinkedin,
+	FaWhatsapp,
+} from 'react-icons/fa';
 
 interface LinkSocialProps extends LinkProps {
 	icon: JSX.Element;
@@ -36,8 +41,13 @@ const Social: React.FC = () => {
 				url='https://www.facebook.com/ATP.PY'
 			/>
 			<LinkSocial
+				mb='20px'
 				icon={<FaInstagram />}
 				url='https://www.instagram.com/atp.paraguay/'
+			/>
+			<LinkSocial
+				icon={<FaLinkedin />}
+				url='https://www.linkedin.com/company/atp-paraguay/'
 			/>
 		</Flex>
 	);

@@ -4,6 +4,7 @@ import {
 	FaEnvelope,
 	FaFacebookF,
 	FaInstagram,
+	FaLinkedin,
 	FaPhoneAlt,
 	FaTwitter,
 	FaWhatsapp,
@@ -22,18 +23,22 @@ const Footer: React.FC = () => {
 					<Box>
 						<Flex>
 							<Box>
-								<Image src='/logo-atp-blanco.png' alt='' w='160px' />
+								<Image src='/logo-atp-blanco.png' alt='' w='220px' />
 							</Box>
 							<Grid
 								display={{ base: 'none', sm: 'grid', lg: 'none', xlg: 'grid' }}
-								gridTemplateColumns='repeat(3,1fr)'
+								// gridTemplateColumns='repeat(3,1fr)'
 								alignItems='center'
 								gap='10px'
 								ml='20px'
 							>
-								<Image src='/mobil-logo.png' w='48px' objectFit='contain' />
-								<Image src='/route-logo.png' w='48px' objectFit='contain' />
-								<Image src='/vox-logo.png' w='48px' objectFit='contain' />
+								<Image
+									src='/logos-mobil-route-vox.png'
+									w='160px'
+									objectFit='contain'
+								/>
+								{/* <Image src='/route-logo.png' w='48px' objectFit='contain' />
+								<Image src='/vox-logo.png' w='48px' objectFit='contain' /> */}
 							</Grid>
 						</Flex>
 					</Box>
@@ -113,6 +118,15 @@ const Footer: React.FC = () => {
 									target='_blank'
 								>
 									<FaWhatsapp />
+								</Link>
+								<Link
+									href='https://www.linkedin.com/company/atp-paraguay/'
+									fontSize='20px'
+									color='white'
+									ml='14px'
+									target='_blank'
+								>
+									<FaLinkedin />
 								</Link>
 							</Flex>
 						</Flex>
