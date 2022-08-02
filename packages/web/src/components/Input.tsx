@@ -6,13 +6,13 @@ const Input: React.FC<InputProps> = ({ ...rest }) => {
 		<InputChakraUI
 			{...rest}
 			border='0'
-			borderBottom='1px solid #fff'
+			borderBottom='1px solid #015796'
 			rounded='0'
-			color='#fff'
+			color='#015796'
 			pb='3px'
 			px='5px'
 			bgColor='transparent'
-			_placeholder={{ color: '#fff', opacity: 0.8 }}
+			_placeholder={{ color: '#015796', opacity: 0.8 }}
 			_focus={{ shadow: 0, borderColor: '#b41f1b' }}
 		/>
 	);

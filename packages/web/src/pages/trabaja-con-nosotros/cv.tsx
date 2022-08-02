@@ -4,6 +4,7 @@ import {
 	Button,
 	Flex,
 	Grid,
+	Heading,
 	Radio,
 	RadioGroup,
 	Text,
@@ -20,20 +21,27 @@ const TrabajaConNosotrosCV = () => {
 		<Layout title='Trabaja con nosotros'>
 			<Box
 				py='72px'
-				bg='linear-gradient(180deg, rgba(12,21,38,1) 0%, rgba(74,77,79,1) 100%)'
+				// bg='linear-gradient(180deg, rgba(12,21,38,1) 0%, rgba(74,77,79,1) 100%)'
 				borderBottom='32px solid #d21a28'
 			>
 				<Box maxW='960px' m='0 auto' w='90%'>
 					<Box>
-						<Text fontSize='42px' color='#fff' fontWeight='bold'>
-							Trabaja con nosotro
-							<Text as='span' textDecor='underline'>
-								s
-							</Text>
-						</Text>
+						<Flex position='relative' display='inline-flex'>
+							<Heading fontSize='48px' fontWeight='black' color='#015796'>
+								Trabaja con nosotros
+							</Heading>
+							<Box
+								position='absolute'
+								width='30px'
+								height='12px'
+								bgColor='#b41f1b'
+								left='0'
+								top='-8px'
+							/>
+						</Flex>
 
 						<Text
-							color='#fff'
+							color='#015796'
 							fontWeight='bold'
 							fontSize='22px'
 							mt='20px'
@@ -43,7 +51,7 @@ const TrabajaConNosotrosCV = () => {
 							DÉJANOS TU CV
 						</Text>
 
-						<Text color='#fff' mt='20px' pb='7px'>
+						<Text color='#015796' mt='20px' pb='7px'>
 							Número de Documento*:
 						</Text>
 					</Box>
@@ -65,7 +73,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='passport'
 										>
@@ -76,7 +84,7 @@ const TrabajaConNosotrosCV = () => {
 									<Flex alignItems='center'>
 										<Text
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='ci'
 											fontSize='14px'
@@ -99,12 +107,15 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input placeholder='Fecha de nacimiento*' />
+									<Text color='#015796' pb='7px'>
+										Fecha de nacimiento*
+									</Text>
+									<Input type='date' placeholder='Fecha de nacimiento*' />
 								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Text color='#fff' pb='7px'>
+								<Text color='#015796' pb='7px'>
 									Estado civil*:
 								</Text>
 
@@ -115,14 +126,14 @@ const TrabajaConNosotrosCV = () => {
 									gridTemplateColumns={[
 										'1fr',
 										'repeat(2, 1fr)',
-										'repeat(5, auto)',
+										'repeat(4, auto)',
 									]}
 								>
 									<Flex alignItems='center'>
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='soltero'
 										>
@@ -135,7 +146,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='casado'
 										>
@@ -148,7 +159,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='viudo'
 										>
@@ -161,7 +172,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='otro-estado'
 										>
@@ -174,14 +185,14 @@ const TrabajaConNosotrosCV = () => {
 										/>
 									</Flex>
 
-									<Flex>
+									{/* <Flex>
 										<Input placeholder='Especificar' />
-									</Flex>
+									</Flex> */}
 								</RadioGroup>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Text color='#fff' pb='7px'>
+								<Text color='#015796' pb='7px'>
 									Género*:
 								</Text>
 
@@ -199,7 +210,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='hombre'
 										>
@@ -212,7 +223,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='mujer'
 										>
@@ -225,7 +236,7 @@ const TrabajaConNosotrosCV = () => {
 										<Text
 											fontSize='14px'
 											as='label'
-											color='#fff'
+											color='#015796'
 											mr='10px'
 											htmlFor='otro-genero'
 										>
@@ -238,15 +249,21 @@ const TrabajaConNosotrosCV = () => {
 										/>
 									</Flex>
 
-									<Flex>
+									{/* <Flex>
 										<Input placeholder='Especificar' />
-									</Flex>
+									</Flex> */}
 								</RadioGroup>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input placeholder='Cantidad de hijos' />
+									<Select>
+										<option value=''>Cantidad de hijos</option>
+										<option value=''>1</option>
+										<option value=''>2</option>
+										<option value=''>3</option>
+										<option value=''>3+</option>
+									</Select>
 								</Box>
 							</Box>
 
@@ -273,8 +290,12 @@ const TrabajaConNosotrosCV = () => {
 								w={{ base: '100%', lg: '60%' }}
 								gap='32px'
 							>
-								<Select></Select>
-								<Select></Select>
+								<Select>
+									<option value=''>Departamento*</option>
+								</Select>
+								<Select>
+									<option value=''>Ciudad*</option>
+								</Select>
 							</Grid>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
@@ -287,16 +308,26 @@ const TrabajaConNosotrosCV = () => {
 								<Box w='100%' h='4px' bgColor='#d21a28' mt='48px' />
 							</Box>
 
-							<Text color='#fff' fontWeight='bold' fontSize='22px' pb='7px'>
+							<Text color='#015796' fontWeight='bold' fontSize='22px' pb='7px'>
 								CARGO AL QUE SE POSTULA
 							</Text>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Select></Select>
+								<Select>
+									<option value=''>Área</option>
+								</Select>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Select></Select>
+								<Select>
+									<option value=''>Cargo*</option>
+									<option value=''>Administración</option>
+									<option value=''>Comercial</option>
+									<option value=''>Logística</option>
+									<option value=''>RRHH</option>
+									<option value=''>Marketing</option>
+									<option value=''>Servicios Generales</option>
+								</Select>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
@@ -332,23 +363,16 @@ const TrabajaConNosotrosCV = () => {
 									_focus={{ borderColor: 'hsl(355, 77%, 60%)' }}
 									_active={{ bgColor: 'transparent' }}
 								>
-									<Text color='#fff'>Adjuntar Currículum Vitae</Text>
-									<Text color='#fff' fontSize='22px'>
+									<Text color='#015796'>Adjuntar Currículum Vitae*</Text>
+									<Text color='#015796' fontSize='22px'>
 										<AiOutlinePaperClip />
 									</Text>
 								</Button>
-								<Text color='#fff' fontSize='sm' mt='3px' pl='10px'>
+								<Text color='#015796' fontSize='sm' mt='3px' pl='10px'>
 									nombre-archivo.pdf
 								</Text>
 							</Box>
 						</Grid>
-
-						<Box w={{ base: '100%', lg: '60%' }} mt='32px'>
-							<Text color='#d9d9d9'>
-								Obs. Todas las opciones marcadas con un * deben ser de rellenado
-								obligatorio.
-							</Text>
-						</Box>
 
 						<Box mt='32px'>
 							<Button

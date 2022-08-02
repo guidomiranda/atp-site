@@ -10,10 +10,10 @@ const TrabajaConNosotros = () => {
 	return (
 		<Layout>
 			<Box
-				bgImage="url('/fondo-2.jpg')"
 				bgSize='cover'
 				bgPos='center'
-				h='400px'
+				py={{ base: '4rem', lg: '6rem 6rem 7rem 6rem' }}
+				borderBottom='15px solid #b41f1b'
 			>
 				<Box maxW='1220px' w='90%' m='0 auto' h='full'>
 					<Flex
@@ -24,7 +24,7 @@ const TrabajaConNosotros = () => {
 					>
 						<Box ml={['0', '72px']}>
 							<Flex position='relative' display='inline-flex'>
-								<Heading fontSize='48px' fontWeight='black' color='#fff'>
+								<Heading fontSize='48px' fontWeight='black' color='#015796'>
 									Trabaja con nosotros
 								</Heading>
 								<Box
@@ -38,7 +38,7 @@ const TrabajaConNosotros = () => {
 							</Flex>
 						</Box>
 
-						<Flex mt='70px' flexDir={['column', 'row']} justifyContent='center'>
+						<Flex mt='50px' flexDir={['column', 'row']} justifyContent='center'>
 							<Box mx={['0', '32px']}>
 								<Button
 									w={['100%', '300px']}
@@ -46,13 +46,14 @@ const TrabajaConNosotros = () => {
 									color='white'
 									bgColor='#b41f1b'
 									rounded='0'
-									h='48px'
+									h='150px'
 									p='0'
 									textAlign='center'
 									_hover={{ bgColor: '#b41f1b' }}
 									_active={{ bgColor: '#b41f1b' }}
 								>
-									Búsquedas Vigentes
+									Búsquedas
+									<br /> Vigentes
 								</Button>
 							</Box>
 							<Box mx={['0', '32px']} mt={['20px', '0']}>
@@ -62,14 +63,15 @@ const TrabajaConNosotros = () => {
 									color='white'
 									bgColor='#b41f1b'
 									rounded='0'
-									h='48px'
+									h='150px'
 									p='0'
 									textAlign='center'
 									_hover={{ bgColor: '#b41f1b' }}
 									_active={{ bgColor: '#b41f1b' }}
 									onClick={() => router.push('/trabaja-con-nosotros/cv')}
 								>
-									DÉJANOS TU CV
+									DÉJANOS
+									<br /> TU CV
 								</Button>
 							</Box>
 						</Flex>
