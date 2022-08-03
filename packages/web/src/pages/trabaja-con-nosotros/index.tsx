@@ -51,6 +51,9 @@ const TrabajaConNosotros = () => {
 									textAlign='center'
 									_hover={{ bgColor: '#b41f1b' }}
 									_active={{ bgColor: '#b41f1b' }}
+									onClick={() =>
+										router.push('/trabaja-con-nosotros/busquedas-vigentes')
+									}
 								>
 									Búsquedas
 									<br /> Vigentes

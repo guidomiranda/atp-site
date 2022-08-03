@@ -56,3 +56,27 @@
 .select-chakraui-form {
 	padding-inline-start: 5px !important;
 }
+
+.reset-css h1 {
+	font-size: 32px;
+}
+
+.reset-css h2 {
+	font-size: 24px;
+}
+
+.reset-css p {
+	margin: 10px 0;
+}
+
+.reset-css ul {
+	list-style: disc !important;
+	padding-left: 20px !important;
+	padding: initial;
+}
+
+.reset-css ol {
+	/* list-style: disc !important; */
+	padding-left: 20px !important;
+	padding: initial;
+}

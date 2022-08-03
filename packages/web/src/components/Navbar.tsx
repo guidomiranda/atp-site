@@ -94,7 +94,8 @@ const Navbar = () => {
 			bgColor={
 				pathname === '/contacto' ||
 				pathname === '/trabaja-con-nosotros' ||
-				pathname === '/trabaja-con-nosotros/cv'
+				pathname === '/trabaja-con-nosotros/cv' ||
+				pathname === '/trabaja-con-nosotros/busquedas-vigentes'
 					? '#111'
 					: 'transparent'
 			}
