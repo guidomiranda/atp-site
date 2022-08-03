@@ -8,8 +8,10 @@ import {
 	Image,
 	Text,
 } from '@chakra-ui/react';
+import { FaArrowRight } from 'react-icons/fa';
 
 import Layout from '../../layout';
+import router, { useRouter } from 'next/router';
 
 const articlesData = [
 	{
@@ -80,6 +82,8 @@ const NavLink = ({ value, children, setCurrentValue, currentValue }) => {
 };
 
 const ArticleItem = ({ article }) => {
+	const router = useRouter();
+
 	return (
 		<Grid
 			gridTemplateColumns={{ base: '1fr', lg: '1.5fr 2fr' }}
@@ -171,7 +175,28 @@ const BusquedasVigentes = () => {
 			>
 				<Box>
 					{renderArticles.length === 0 ? (
-						<Box textAlign='center'>No hay ofertas en esta categoría</Box>
+						<Box textAlign='center'>
+							<Text>
+								Por el momento no existen búsquedas vigentes, de igual manera
+								déjanos tu CV
+							</Text>
+							<Button
+								bgColor='#b41f1b'
+								color='#fff'
+								py='10px'
+								px='32px'
+								rounded='2px'
+								mt='15px'
+								_hover={{ bgColor: '#b41f1b' }}
+								_active={{ bgColor: '#b41f1b' }}
+								onClick={() => router.push('/trabaja-con-nosotros/cv')}
+							>
+								Déjanos tu CV
+								<Text as='span' ml='7px'>
+									<FaArrowRight />
+								</Text>
+							</Button>
+						</Box>
 					) : (
 						renderArticles.map(item => (
 							<ArticleItem key={item.id} article={item} />

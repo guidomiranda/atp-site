@@ -320,7 +320,7 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Select>
-									<option value=''>Cargo*</option>
+									<option value=''>Departamento*</option>
 									<option value=''>Administración</option>
 									<option value=''>Comercial</option>
 									<option value=''>Logística</option>
@@ -346,7 +346,7 @@ const TrabajaConNosotrosCV = () => {
 								<Input display='none' type='file' />
 								<Button
 									border='0'
-									borderBottom='1px solid #fff'
+									borderBottom='1px solid #015796'
 									rounded='0'
 									_hover={{ borderColor: '#d21a28' }}
 									pl='10px'
@@ -363,13 +363,13 @@ const TrabajaConNosotrosCV = () => {
 									_focus={{ borderColor: 'hsl(355, 77%, 60%)' }}
 									_active={{ bgColor: 'transparent' }}
 								>
-									<Text color='#015796'>Adjuntar Currículum Vitae*</Text>
+									<Text color='#015796'>Adjuntar archivo y/o CV*</Text>
 									<Text color='#015796' fontSize='22px'>
 										<AiOutlinePaperClip />
 									</Text>
 								</Button>
 								<Text color='#015796' fontSize='sm' mt='3px' pl='10px'>
-									nombre-archivo.pdf
+									{/* nombre-archivo.pdf */}
 								</Text>
 							</Box>
 						</Grid>
