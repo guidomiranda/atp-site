@@ -94,7 +94,7 @@ const TrabajaConNosotrosCV = () => {
 										<Radio colorScheme='red' id='ci' value='ci' />
 									</Flex>
 									<Flex>
-										<Input placeholder='Número*' />
+										<Input type='number' placeholder='Número*' />
 									</Flex>
 								</RadioGroup>
 							</Box>
@@ -269,7 +269,7 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input placeholder='Teléfono/celular*' />
+									<Input type='number' placeholder='Teléfono/celular*' />
 								</Box>
 							</Box>
 
@@ -314,7 +314,7 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Select>
-									<option value=''>Área</option>
+									<option value=''>Cargo</option>
 								</Select>
 							</Box>
 
@@ -332,7 +332,7 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input placeholder='Expectativa salarial*' />
+									<Input type='number' placeholder='Expectativa salarial*' />
 								</Box>
 							</Box>
 
