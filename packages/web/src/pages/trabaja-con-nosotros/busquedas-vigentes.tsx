@@ -53,7 +53,7 @@ const profiles = [
 	{ id: '13', title: 'RRHH', value: 'rrhh' },
 	{ id: '14', title: 'Marketing', value: 'marketing' },
 	{ id: '15', title: 'Servicios Generales', value: 'serv-generales' },
-	{ id: '0', title: 'Otras', value: 'otras' },
+	// { id: '0', title: 'Otras', value: 'otras' },
 ];
 
 const NavLink = ({ value, children, setCurrentValue, currentValue }) => {
