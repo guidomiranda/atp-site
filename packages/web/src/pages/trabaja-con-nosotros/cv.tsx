@@ -313,9 +313,9 @@ const TrabajaConNosotrosCV = () => {
 							</Text>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Select>
-									<option value=''>Cargo</option>
-								</Select>
+								<Box>
+									<Input placeholder='Cargo*' />
+								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
