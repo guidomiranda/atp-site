@@ -1,13 +1,14 @@
 import React from 'react';
-import { Box, Flex, Grid, Heading, Image } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
 
 interface HeaderProps {
 	title: string;
 	image: string;
 	bg?: string;
+	description?: string[];
 }
 
-const Header: React.FC<HeaderProps> = ({ title, image }) => {
+const Header: React.FC<HeaderProps> = ({ title, image, description }) => {
 	return (
 		<Box mt='-100px' height='100vh' bgImage='url("/fondo-2.jpg")'>
 			<Grid
@@ -22,21 +23,30 @@ const Header: React.FC<HeaderProps> = ({ title, image }) => {
 			>
 				<Box alignSelf={['flex-end', 'flex-end', 'initial']}>
 					<Flex position='relative' display='inline-flex'>
-						<Heading
-							fontSize={['32px', '42px']}
-							fontWeight='black'
-							color='#fff'
-						>
-							{title}
-						</Heading>
-						<Box
-							position='absolute'
-							width='30px'
-							height='14px'
-							bgColor='#b41f1b'
-							left='0'
-							top='-16px'
-						/>
+						<Box>
+							<Heading
+								fontSize={['32px', '42px']}
+								fontWeight='black'
+								color='#fff'
+							>
+								{title}
+							</Heading>
+							{!description
+								? null
+								: description.map(text => (
+										<Text key={text} color='#fff' fontSize='20px' mt='32px'>
+											{text}
+										</Text>
+								  ))}
+							<Box
+								position='absolute'
+								width='30px'
+								height='14px'
+								bgColor='#b41f1b'
+								left='0'
+								top='-16px'
+							/>
+						</Box>
 					</Flex>
 				</Box>
 				<Box alignSelf='flex-end'>

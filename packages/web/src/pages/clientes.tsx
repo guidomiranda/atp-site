@@ -1,10 +1,11 @@
 import React from 'react';
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Grid, Heading, Image, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 import Header from '../components/client/Header';
 import Layout from '../layout';
 import { getClients } from '../utils';
+import { clients } from '../data/clients';
 
 interface ClientsProps {
 	clients: any;
@@ -40,16 +41,34 @@ const ItemReview: React.FC<ClientProps> = ({ client }) => {
 	);
 };
 
-const Clientes: React.FC<ClientsProps> = ({ clients }) => {
+const Clientes: React.FC<ClientsProps> = () => {
 	return (
 		<Layout>
-			<Header title='Conoce a nuestros clientes' image='/img_clientes.png' />
-			<Box bgColor='#0a101e' pt='94px' pb='38'>
-				<Box maxW='1220px' w='90%' m='0 auto'>
+			<Header
+				title='Conoce a nuestros clientes'
+				description={[
+					'Nuestros clientes, líderes y referentes del mercado paraguayo, nos impulsan y respaldan en nuestra misión de proveer productos y servicios de verdadera calidad. En nuestro Canal Consumo, trabajamos con diversos sectores como el industrial, construcción civil y vial, agrícola, transporte y naviero. Además, trabajamos con las cooperativas más grandes y exigentes del país. En los último años, nos expandimos a nuevas zonas geográficas, gracias a nuestro Canal Reventa, con lubricentros, talleres, casas de repuestos y EE.SS.',
+				]}
+				image='/personas-1.png'
+			/>
+			<Box bgColor='#fff' py='96px' maxW='1270px' w='90%' m='0 auto'>
+				{/* <Box maxW='1220px' w='90%' m='0 auto'>
 					{clients.clients?.map(item => (
 						<ItemReview key={item.id} client={item} />
 					))}
-				</Box>
+				</Box> */}
+				<Grid gridTemplateColumns='repeat(6, 1fr)' gap='20px'>
+					{clients.map((client: any) => (
+						<Grid placeItems='center' key={client.id}>
+							<Image src={client.image} alt='' w='100%' />
+						</Grid>
+					))}
+				</Grid>
+
+				<Text textAlign='center' mt='48px'>
+					Estas empresas son solo algunas de las muchas que confían y apuestan a
+					ATP ¡Y seguimos creciendo!
+				</Text>
 			</Box>
 		</Layout>
 	);
