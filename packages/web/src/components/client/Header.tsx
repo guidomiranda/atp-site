@@ -10,15 +10,20 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title, image, description }) => {
 	return (
-		<Box mt='-100px' height='100vh' bgImage='url("/fondo-2.jpg")'>
+		<Box
+			mt='-100px'
+			height={{ base: '100%', lg: '100vh' }}
+			bgImage='url("/fondo-2.jpg")'
+		>
 			<Grid
 				gridTemplateColumns={['1fr', '1fr', 'repeat(2,1fr)']}
-				gridTemplateRows={['repeat(2,1fr)', 'initial']}
+				gridTemplateRows={['repeat(2,auto)', 'initial']}
 				gap={['32px 0', '0 64px']}
 				height='100%'
 				maxW='1220px'
 				m='0 auto'
 				w='90%'
+				pt={{ base: '100px', lg: '0' }}
 				alignItems='center'
 			>
 				<Box alignSelf={['flex-end', 'flex-end', 'initial']}>
@@ -34,7 +39,12 @@ const Header: React.FC<HeaderProps> = ({ title, image, description }) => {
 							{!description
 								? null
 								: description.map(text => (
-										<Text key={text} color='#fff' fontSize='20px' mt='32px'>
+										<Text
+											key={text}
+											color='#fff'
+											fontSize={{ base: '14px', lg: '20px' }}
+											mt='32px'
+										>
 											{text}
 										</Text>
 								  ))}
@@ -55,7 +65,7 @@ const Header: React.FC<HeaderProps> = ({ title, image, description }) => {
 						alt=''
 						width={['initial', '100%']}
 						objectFit='contain'
-						h={['450px', '600px']}
+						h={['100%', '600px']}
 						objectPosition='bottom'
 					/>
 				</Box>

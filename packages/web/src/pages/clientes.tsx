@@ -57,7 +57,15 @@ const Clientes: React.FC<ClientsProps> = () => {
 						<ItemReview key={item.id} client={item} />
 					))}
 				</Box> */}
-				<Grid gridTemplateColumns='repeat(6, 1fr)' gap='20px'>
+				<Grid
+					gridTemplateColumns={[
+						'repeat(2, 1fr)',
+						'repeat(4, 1fr)',
+						'repeat(5, 1fr)',
+						'repeat(6, 1fr)',
+					]}
+					gap='20px'
+				>
 					{clients.map((client: any) => (
 						<Grid placeItems='center' key={client.id}>
 							<Image src={client.image} alt='' w='100%' />
