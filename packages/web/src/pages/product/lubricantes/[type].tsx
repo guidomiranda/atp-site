@@ -61,7 +61,7 @@ const TypeLubricants: React.FC = () => {
 	return (
 		<Layout>
 			<Header
-				bg='lubricantes-atp.jpg'
+				bg='lubricantes-atp-banner.jpg'
 				logo='/logo-mobil_banner.png'
 				product=''
 				children={<HeaderProductFooter />}
