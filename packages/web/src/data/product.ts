@@ -6,7 +6,8 @@ export const products = [
 			'Mobil tiene una línea de lubricantes exclusivas para cada segmento de operación que cumple con las especificaciones mas diversas del mercado, ya sea con Mobil Delvac TM para camiones pesados y livianos, Mobil Super TM para automóviles, Mobil Super Moto TM para motos, y Mobil TM para industrias, generamos movimiento para todo tipo de vehículos y motores.',
 		],
 		more_info: false,
-		image: 'https://atp.netlify.app/assets/img-lubricantes-mobil.png',
+		image:
+			'https://res.cloudinary.com/https-atp-com-py/image/upload/v1660160566/lubricantes/img-lubricantes-mobil_dvls0h.png',
 		target: false,
 		path: '/product/lubricantes/lub-veh-liviano#main',
 	},

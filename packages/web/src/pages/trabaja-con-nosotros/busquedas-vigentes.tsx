@@ -39,7 +39,7 @@ const articlesData = [
 
 const profiles = [
 	{ id: '1', title: 'Todas', value: 'todas' },
-	{ id: '2', title: 'Administración y t.l', value: 'administracion' },
+	{ id: '2', title: 'Administración', value: 'administracion' },
 	// { id: '3', title: 'Ambiental', value: 'ambiental' },
 	{ id: '4', title: 'Comercial', value: 'comercial' },
 	// { id: '5', title: 'Compras', value: 'compras' },
