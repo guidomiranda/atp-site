@@ -15,6 +15,8 @@ import Input from '../../components/Input';
 
 import Layout from '../../layout';
 import Select from '../../components/Select';
+import { cities } from '../../data/cities';
+import { dptos } from '../../data/dptos';
 
 const TrabajaConNosotrosCV = () => {
 	return (
@@ -292,9 +294,16 @@ const TrabajaConNosotrosCV = () => {
 							>
 								<Select>
 									<option value=''>Departamento*</option>
+									{dptos.map(dpto => (
+										<option value=''>{dpto}</option>
+									))}
 								</Select>
+
 								<Select>
 									<option value=''>Ciudad*</option>
+									{cities.map(city => (
+										<option value=''>{city}</option>
+									))}
 								</Select>
 							</Grid>
 
