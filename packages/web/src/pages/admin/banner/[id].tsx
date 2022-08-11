@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
+import React, { useEffect, useRef, useState } from 'react';
 import produce from 'immer';
+import toast from 'react-hot-toast';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import {
 	Box,
@@ -15,10 +16,11 @@ import {
 } from '@chakra-ui/react';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import { FaPlus, FaTrash } from 'react-icons/fa';
-import toast from 'react-hot-toast';
 
 import AdminLayout from '../../../layout/admin';
-import { getBanner, updateSuccess } from '../../../utils';
+import { getBanner, updateBanner, updateSuccess } from '../../../utils';
+import { FileType } from '../../../interfaces/image';
+import { useImage } from '../../../hooks/useImage';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const banner = await getBanner(context.query.id as string);
@@ -26,12 +28,31 @@ export const getServerSideProps: GetServerSideProps = async context => {
 };
 
 const BannerAdminEdit = ({ banner }) => {
-	console.log(banner.bg);
-
 	const router = useRouter();
 
-	const [bannerInfo, setBannerInfo] = useState<any>({});
-	const [descriptionArray, setDescriptionArray] = useState<any>([]);
+	const [bannerInfo, setBannerInfo] = useState<any>(banner);
+	const [descriptionArray, setDescriptionArray] = useState<any[]>(
+		banner.description
+	);
+
+	const inputImgRef = useRef(null);
+	const [imageExist, setImageExist] = useState(banner.bg);
+	const [image, setImage] = useState<string | null>(null);
+	const [fileImage, setFileImage] = useState<FileType | string | Blob>();
+
+	const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const target = e.currentTarget as HTMLInputElement;
+		const file = target.files[0];
+		const image = URL.createObjectURL(file);
+		setImage(image);
+		setImageExist(image);
+		setFileImage(file);
+	};
+
+	useEffect(() => {
+		setImage(null);
+		setFileImage(null);
+	}, []);
 
 	const handleAddDescriptionArray = () => {
 		setDescriptionArray([...descriptionArray, '']);
@@ -44,21 +65,43 @@ const BannerAdminEdit = ({ banner }) => {
 	};
 
 	const handleUpdateSuccessInfo = async () => {
-		const successInfoUpdated = {
-			...bannerInfo,
-			description: descriptionArray,
-		};
+		if (image) {
+			const responseImage = await useImage(fileImage as string, 'banner');
 
-		delete successInfoUpdated.id;
+			const bannerInfoUpdated = {
+				...bannerInfo,
+				bg: responseImage,
+				description: descriptionArray,
+			};
 
-		const response = await updateSuccess(bannerInfo.id, successInfoUpdated);
+			delete bannerInfoUpdated.id;
 
-		if (response.success) {
-			toast.success('Actualizado correctamente!');
-			return router.push('/admin/exito');
+			const response = await updateBanner(bannerInfo.id, bannerInfoUpdated);
+
+			if (response.success) {
+				toast.success('Actualizado correctamente!');
+				return router.push('/admin/banner');
+			} else {
+				toast.error('Hubo un problema al actualizar');
+				return router.push('/admin/banner');
+			}
 		} else {
-			toast.error('Hubo un problema al actualizar');
-			router.push('/admin/exito');
+			const bannerInfoUpdated = {
+				...bannerInfo,
+				description: descriptionArray,
+			};
+
+			delete bannerInfoUpdated.id;
+
+			const response = await updateBanner(bannerInfo.id, bannerInfoUpdated);
+
+			if (response.success) {
+				toast.success('Actualizado correctamente!');
+				return router.push('/admin/banner');
+			} else {
+				toast.error('Hubo un problema al actualizar');
+				return router.push('/admin/banner');
+			}
 		}
 	};
 
@@ -72,7 +115,7 @@ const BannerAdminEdit = ({ banner }) => {
 						h='45px'
 						rounded='3px'
 						bgColor='#e5e7eb'
-						onClick={() => router.push('/admin/exito')}
+						onClick={() => router.push('/admin/banner')}
 						display='flex'
 						alignItems='center'
 					>
@@ -113,7 +156,7 @@ const BannerAdminEdit = ({ banner }) => {
 								fontSize='12px'
 								fontWeight='medium'
 								textTransform='uppercase'
-								mb='5px'
+								mb='10px'
 								color='#555'
 							>
 								Descripción
@@ -167,6 +210,24 @@ const BannerAdminEdit = ({ banner }) => {
 										</Button>
 									</Grid>
 								))}
+
+								{descriptionArray.length === 0 && (
+									<Button
+										display='block'
+										minW='initial'
+										h='auto'
+										rounded='3px'
+										border='1px solid #8C95A6'
+										color='#8C95A6'
+										bgColor='#fff'
+										p='15px 32px'
+										fontWeight='medium'
+										_hover={{ bgColor: '#fff' }}
+										onClick={handleAddDescriptionArray}
+									>
+										Agregar descripción
+									</Button>
+								)}
 							</Box>
 						</Box>
 
@@ -180,20 +241,43 @@ const BannerAdminEdit = ({ banner }) => {
 							>
 								Fondo
 							</Text>
+
 							<Box>
 								{banner.bg && (
 									<Image
-										src={bannerInfo.bg}
-										w='200px'
+										src={image || bannerInfo.bg}
+										// w='200px'
 										h='200px'
 										verticalAlign='top'
 										alt='Dan Abramov'
-										// width={376}
-										// height={190}
-										// layout='fixed'
-										objectFit='cover'
+										objectFit='contain'
 									/>
 								)}
+							</Box>
+
+							<Box mt='20px'>
+								<Button
+									bgColor='transparent'
+									borderRadius={`3px`}
+									h={`50px`}
+									minW={`initial`}
+									p={`0 28px`}
+									border='1px solid #3B4A67'
+									onClick={() => inputImgRef.current.click()}
+									_focus={{ shadow: 0 }}
+									color='#3B4A67'
+									fontWeight={`normal`}
+									_hover={{ backgroundColor: `#FFF` }}
+									_active={{ backgroundColor: `#FFF` }}
+								>
+									Cambiar imagen
+								</Button>
+								<Input
+									ref={inputImgRef}
+									type='file'
+									onChange={handleChangeImage}
+									display='none'
+								/>
 							</Box>
 						</Box>
 

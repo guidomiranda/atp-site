@@ -80,7 +80,6 @@ const Header: React.FC = () => {
 
 const Banner: React.FC<BannerProps> = ({ banner }) => {
 	const router = useRouter();
-	console.log(banner.id);
 
 	const [showImageLarge, setShowImageLarge] = useState<boolean>(false);
 
@@ -105,6 +104,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 				placeItems='center'
 				onMouseEnter={() => setShowImageLarge(true)}
 				onMouseLeave={() => setShowImageLarge(false)}
+				onClick={() => router.push(`/admin/banner/${banner.id}`)}
 			>
 				<Box
 					display={showImageLarge ? 'block' : 'none'}
@@ -172,7 +172,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push(`/admin/banners/${banner.id}`)}
+					onClick={() => router.push(`/admin/banner/${banner.id}`)}
 				>
 					<FiEdit />
 				</Button>

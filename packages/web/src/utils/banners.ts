@@ -17,3 +17,13 @@ export const getBanner = async (id: string) => {
 
 	return data.data;
 };
+
+export const updateBanner = async (id: string, bannerInfo: any) => {
+	const data = await axios({
+		method: 'PATCH',
+		url: `/banner/${id}`,
+		data: JSON.stringify(bannerInfo),
+	});
+
+	return data.data;
+};

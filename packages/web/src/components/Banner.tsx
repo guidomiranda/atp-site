@@ -41,9 +41,19 @@ const Banner = ({ banners }) => {
 									textAlign='left'
 									lineHeight={['32px', '56px']}
 									color='white'
+									mb='25px'
 								>
 									{banner.title}
 								</Text>
+
+								<Box>
+									{banner.description &&
+										banner.description.map(item => (
+											<Text mt='15px' textAlign='left' key={item} color='#fff'>
+												{item}
+											</Text>
+										))}
+								</Box>
 							</Box>
 							<Box flex={{ base: 'initial', lg: '1' }}>
 								{banner.image && (
