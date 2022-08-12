@@ -17,10 +17,17 @@ import Layout from '../../layout';
 import Select from '../../components/Select';
 import { cities } from '../../data/cities';
 import { dptos } from '../../data/dptos';
+import Header from '../../components/Header';
 
 const TrabajaConNosotrosCV = () => {
 	return (
 		<Layout title='Trabaja con nosotros'>
+			<Header
+				bg='banner-nosotros.jpg'
+				title='Trabaja con nosotros'
+				description='Forma parte del equipo humano de ATP. Si consideras que tenés lo necesario para unirte y aportarnos de tu conocimiento y talento, por favor completa el formulario para considerar tu postulación. Somos personas ambiciosas, comprometidas y con muchas ganas de seguir creciendo.'
+			/>
+
 			<Box
 				py='72px'
 				// bg='linear-gradient(180deg, rgba(12,21,38,1) 0%, rgba(74,77,79,1) 100%)'

@@ -3,12 +3,12 @@ import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 // import HeaderLayout from '../../../components/client/Header';
-import Layout from '../../../layout/admin';
-import { getLubricantes } from '../../../utils/lubricants';
+import Layout from '../../../../layout/admin';
+import { getLubricantes } from '../../../../utils/lubricants';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 import dayjs from 'dayjs';
-import { getBatteries, getProductsByLine } from '../../../utils';
+import { getBatteries, getProductsByLine } from '../../../../utils';
 import { useRouter } from 'next/router';
 
 interface BateriasAdminProps {
@@ -89,6 +89,8 @@ const Header: React.FC = () => {
 };
 
 const Product: React.FC<ProductProps> = ({ product }) => {
+	const router = useRouter();
+
 	return (
 		<Grid
 			gridTemplateColumns={{
@@ -109,6 +111,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				fontSize='14px'
 				position='relative'
 				placeItems='center'
+				onClick={() => router.push(`/admin/productos/baterias/${product.id}`)}
 			>
 				<Image
 					src={product.image}
@@ -126,6 +129,8 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				whiteSpace='nowrap'
 				overflow='hidden'
 				textOverflow='ellipsis'
+				cursor='pointer'
+				onClick={() => router.push(`/admin/productos/baterias/${product.id}`)}
 			>
 				{product.title}
 			</Box>
@@ -155,6 +160,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() => router.push(`/admin/productos/baterias/${product.id}`)}
 				>
 					<FiEdit />
 				</Button>

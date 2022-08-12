@@ -18,7 +18,7 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
-import { getBanner, updateBanner, updateSuccess } from '../../../utils';
+import { getBanner, updateBanner } from '../../../utils';
 import { FileType } from '../../../interfaces/image';
 import { useImage } from '../../../hooks/useImage';
 
