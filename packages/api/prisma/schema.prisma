@@ -146,3 +146,18 @@ model LubVehPesado {
   created_at      String
   updated_at      String
 }
+
+model Filtros {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  nombre       String
+  linea        String
+  altura       String
+  dia_ext      String
+  rosca        String
+  tipo         String
+  val_anti_ret String
+  val_ali      String
+  modelo       String
+  created_at   DateTime @default(now())
+  updated_at   DateTime
+}

@@ -28,6 +28,8 @@ import { LubAuxController } from './lub-aux/lub-aux.controller';
 import { LubAuxService } from './lub-aux/lub-aux.service';
 import { LubVehPesadoController } from './lub-veh-pesado/lub-veh-pesado.controller';
 import { LubVehPesadoService } from './lub-veh-pesado/lub-veh-pesado.service';
+import { FiltrosController } from './filtros/filtros.controller';
+import { FiltrosService } from './filtros/filtros.service';
 
 @Module({
   controllers: [
@@ -44,6 +46,7 @@ import { LubVehPesadoService } from './lub-veh-pesado/lub-veh-pesado.service';
     LubMotoController,
     LubAuxController,
     LubVehPesadoController,
+    FiltrosController,
   ],
   providers: [
     AppService,
@@ -60,7 +63,9 @@ import { LubVehPesadoService } from './lub-veh-pesado/lub-veh-pesado.service';
     LubAuxService,
     LubVehPesadoService,
     JwtService,
+    FiltrosService,
     PrismaService,
   ],
+  imports: [],
 })
 export class AppModule {}
