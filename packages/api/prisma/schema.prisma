@@ -185,3 +185,20 @@ model Lubricantes {
   created_at      DateTime  @default(now())
   updated_at      DateTime?
 }
+
+model Baterias {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre     String
+  imagen     String
+  categoria  String?
+  capacidad  String?
+  cca10      String?
+  polaridad  String?
+  largo      String?
+  ancho      String?
+  altura     String?
+  estado     Boolean   @default(true)
+  orden      Int       @default(1)
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+}

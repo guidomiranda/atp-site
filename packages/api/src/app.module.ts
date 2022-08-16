@@ -32,6 +32,8 @@ import { FiltrosController } from './filtros/filtros.controller';
 import { FiltrosService } from './filtros/filtros.service';
 import { LubricantesController } from './lubricantes/lubricantes.controller';
 import { LubricantesService } from './lubricantes/lubricantes.service';
+import { BateriasController } from './baterias/baterias.controller';
+import { BateriasService } from './baterias/baterias.service';
 
 @Module({
   controllers: [
@@ -50,6 +52,7 @@ import { LubricantesService } from './lubricantes/lubricantes.service';
     LubVehPesadoController,
     FiltrosController,
     LubricantesController,
+    BateriasController,
   ],
   providers: [
     AppService,
@@ -68,6 +71,7 @@ import { LubricantesService } from './lubricantes/lubricantes.service';
     JwtService,
     FiltrosService,
     LubricantesService,
+    BateriasService,
     PrismaService,
   ],
 })
