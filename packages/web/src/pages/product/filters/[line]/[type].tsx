@@ -62,7 +62,6 @@ const TypeFilter: React.FC = () => {
 		(async () => {
 			const dataFiltered = await getProductsLine();
 			setFilters(dataFiltered);
-			console.log(filters);
 		})();
 	}, [query]);
 

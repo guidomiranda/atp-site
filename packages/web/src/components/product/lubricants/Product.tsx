@@ -18,7 +18,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 		>
 			<Box className='image-product'>
 				<LazyLoadImage
-					src={product.image} // use normal <img> attributes as props
+					src={product.imagen} // use normal <img> attributes as props
 					width='100%'
 					effect='blur'
 				/>
