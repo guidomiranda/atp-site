@@ -8,7 +8,9 @@ export class FiltrosService {
   constructor(private prisma: PrismaService) {}
 
   async createFiltro(dto: Prisma.FiltrosCreateInput) {
-    return this.prisma.filtros.create({ data: dto });
+    return this.prisma.filtros.create({
+      data: { ...dto, updated_at: new Date() },
+    });
   }
 
   async updateFiltro(id: string, dto: Prisma.FiltrosUpdateInput) {
