@@ -15,9 +15,9 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 				alignItems={['flex-start', 'center']}
 				flexDir={['column', 'row']}
 			>
-				<NextLink href='/product/lubricantes/lub-veh-liviano#main' passHref>
+				<NextLink href='/product/lubricantes/veh-liviano#main' passHref>
 					<Link
-						color={query.type === 'lub-veh-liviano' ? '#fe5101' : '#000'}
+						color={query.type === 'veh-liviano' ? '#fe5101' : '#000'}
 						fontWeight='bold'
 						_hover={{ textDecoration: 'none' }}
 						mb={['10px', '0']}
@@ -33,9 +33,9 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 					mx='10px'
 					display={['none', 'block']}
 				/>
-				<NextLink href='/product/lubricantes/lub-moto#main' passHref>
+				<NextLink href='/product/lubricantes/moto#main' passHref>
 					<Link
-						color={query.type === 'lub-moto' ? '#fe5101' : '#000'}
+						color={query.type === 'moto' ? '#fe5101' : '#000'}
 						fontWeight='bold'
 						_hover={{ textDecoration: 'none' }}
 						mb={['10px', '0']}
@@ -51,9 +51,9 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 					mx='10px'
 					display={['none', 'block']}
 				/>
-				<NextLink href='/product/lubricantes/lub-aux#main' passHref>
+				<NextLink href='/product/lubricantes/auxiliares#main' passHref>
 					<Link
-						color={query.type === 'lub-aux' ? '#fe5101' : '#000'}
+						color={query.type === 'auxiliares' ? '#fe5101' : '#000'}
 						fontWeight='bold'
 						_hover={{ textDecoration: 'none' }}
 						mb={['10px', '0']}
@@ -69,9 +69,9 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 					mx='10px'
 					display={['none', 'block']}
 				/>
-				<NextLink href='/product/lubricantes/lub-veh-pesado#main' passHref>
+				<NextLink href='/product/lubricantes/veh-pesado#main' passHref>
 					<Link
-						color={query.type === 'lub-veh-pesado' ? '#fe5101' : '#000'}
+						color={query.type === 'veh-pesado' ? '#fe5101' : '#000'}
 						fontWeight='bold'
 						_hover={{ textDecoration: 'none' }}
 						mb={['10px', '0']}

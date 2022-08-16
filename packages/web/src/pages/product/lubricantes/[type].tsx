@@ -54,10 +54,12 @@ const TypeLubricants: React.FC = () => {
 		(async () => {
 			if (!router.query.type) return;
 			const products = await getLubricantes(router?.query?.type as string);
-			setProducts(products?.products);
+			setProducts(products?.data);
+			console.log(products);
 		})();
 	}, [router]);
 
+	console.log(router?.query?.type);
 	return (
 		<Layout>
 			<Header
