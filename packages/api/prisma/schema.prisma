@@ -155,6 +155,8 @@ model Filtros {
   altura       String?
   dia_ext      String?
   dia_int      String?
+  estado       Boolean   @default(true)
+  orden        Int       @default(1)
   rosca        String?
   tipo         String
   val_anti_ret String?
@@ -162,4 +164,24 @@ model Filtros {
   modelo       String?
   created_at   DateTime  @default(now())
   updated_at   DateTime?
+}
+
+model Lubricantes {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId()
+  nombre          String
+  descripcion     String[]
+  imagen          String
+  linea           String
+  presentacion    String?
+  estado          Boolean   @default(true)
+  orden           Int       @default(1)
+  indicado_para   String?
+  especificacion  String?
+  rec_honda       Boolean
+  rec_exxon_mob   Boolean
+  caracteristicas String[]
+  atiende_excede  String?
+  aprobado        String?
+  created_at      DateTime  @default(now())
+  updated_at      DateTime?
 }
