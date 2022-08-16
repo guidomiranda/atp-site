@@ -18,26 +18,24 @@ const Product: React.FC<ProductProps> = ({ filter }) => {
 		>
 			<Box>
 				<LazyLoadImage
-					src={filter.image} // use normal <img> attributes as props
+					src={filter.imagen} // use normal <img> attributes as props
 					width='100%'
 					effect='blur'
 				/>
 			</Box>
 			<Box>
 				<Text fontWeight='bold' color='#fe5101' fontSize='24px'>
-					{filter.name}
+					{filter.nombre}
 				</Text>
 
 				<Box mt='10px'>
-					{filter.height && (
-						<DetailItem title='Altura' content={filter.height} />
+					{filter.altura && (
+						<DetailItem title='Altura' content={filter.altura} />
 					)}
 					{filter.dia_ext && (
 						<DetailItem title='Dia.Ext.' content={filter.dia_ext} />
 					)}
-					{filter.thread && (
-						<DetailItem title='Rosca' content={filter.thread} />
-					)}
+					{filter.rosca && <DetailItem title='Rosca' content={filter.rosca} />}
 					{filter.val_anti_ret && (
 						<DetailItem
 							title='Válvula anti retorno'
@@ -47,8 +45,8 @@ const Product: React.FC<ProductProps> = ({ filter }) => {
 					{filter.val_ali && (
 						<DetailItem title='Válvula alívio' content={filter.val_ali} />
 					)}
-					{filter.model && (
-						<DetailItem title='Modelo Vehículo' content={filter.model} />
+					{filter.modelo && (
+						<DetailItem title='Modelo Vehículo' content={filter.modelo} />
 					)}
 				</Box>
 			</Box>

@@ -51,8 +51,8 @@ const TypeFilter: React.FC = () => {
 
 	const getProductsLine = async () => {
 		const data = await getProductsByLine(query?.line as string);
-		const dataFiltered = data.filters.filter(
-			(item: any) => item.type === query?.type
+		const dataFiltered = data.data.filter(
+			(item: any) => item.tipo === query?.type
 		);
 
 		return dataFiltered;
@@ -62,6 +62,7 @@ const TypeFilter: React.FC = () => {
 		(async () => {
 			const dataFiltered = await getProductsLine();
 			setFilters(dataFiltered);
+			console.log(filters);
 		})();
 	}, [query]);
 
@@ -72,16 +73,21 @@ const TypeFilter: React.FC = () => {
 				logo='/bannervox_logo.png'
 				product='/header-product-image.png'
 				children={<HeaderProductFooter />}
-				// category={category}
 			/>
 
 			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>
 				<FilterHeader pathname={pathname} query={query} push={push} />
 
 				<Box pt='56px' maxW={['100%', '60%']} m='0 auto'>
-					{filters?.map(item => (
-						<Product key={item.id} filter={item} />
-					))}
+					{filters.length === 0 ? (
+						<Box>
+							<Text textAlign='center'>
+								No existe producto en esta categoría
+							</Text>
+						</Box>
+					) : (
+						filters?.map(item => <Product key={item.id} filter={item} />)
+					)}
 				</Box>
 			</Box>
 		</Layout>
