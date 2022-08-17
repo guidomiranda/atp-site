@@ -4,7 +4,7 @@ import { GetServerSideProps } from 'next';
 
 // import HeaderLayout from '../../../components/client/Header';
 import Layout from '../../../layout/admin';
-import { getLubricantes } from '../../../utils/lubricants';
+import { getAllLubricantes, getLubricantes } from '../../../utils/lubricants';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 import dayjs from 'dayjs';
@@ -14,24 +14,15 @@ interface ProductLubVehLivianoProps {
 	product: any;
 }
 interface LubricantesAdminProps {
-	lubVehLiviano: any;
-	lubMoto: any;
-	lubAux: any;
-	lubVehPesado: any;
+	lubricantes: any;
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const lubVehLiviano = await getLubricantes('lub-veh-liviano');
-	const lubMoto = await getLubricantes('lub-moto');
-	const lubAux = await getLubricantes('lub-aux');
-	const lubVehPesado = await getLubricantes('lub-veh-pesado');
+	const lubricantes = await getAllLubricantes();
 
 	return {
 		props: {
-			lubVehLiviano: lubVehLiviano.products,
-			lubMoto: lubMoto.products,
-			lubAux: lubAux.products,
-			lubVehPesado: lubVehPesado.products,
+			lubricantes: lubricantes.data,
 		},
 	};
 };
@@ -40,8 +31,8 @@ const Header: React.FC = () => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '50px 100px 200px 100px 100px 100px',
-				xl: '50px 100px 1fr 100px 100px 100px',
+				base: '50px 70px 200px 100px 100px 100px 100px',
+				xl: '50px 70px 1fr 100px 100px 100px 100px',
 			}}
 			p='10px 30px'
 			bgColor='#F9FAFB'
@@ -80,6 +71,14 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
+				Línea
+			</Box>
+			<Box
+				color='#3B4A67'
+				fontWeight='bold'
+				textTransform='uppercase'
+				fontSize='14px'
+			>
 				Estado
 			</Box>
 			<Box
@@ -95,14 +94,12 @@ const Header: React.FC = () => {
 	);
 };
 
-const ProductLubVehLiviano: React.FC<ProductLubVehLivianoProps> = ({
-	product,
-}) => {
+const ProductLub: React.FC<ProductLubVehLivianoProps> = ({ product }) => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '50px 100px 200px 100px 100px 100px',
-				xl: '50px 100px 1fr 100px 100px 100px',
+				base: '50px 70px 200px 100px 100px 100px 100px',
+				xl: '50px 70px 1fr 100px 100px 100px 100px',
 			}}
 			p='10px 30px'
 			borderBottom='1px solid #DCDFE5'
@@ -111,7 +108,7 @@ const ProductLubVehLiviano: React.FC<ProductLubVehLivianoProps> = ({
 			cursor='pointer'
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
-				{product.order}
+				{product.orden}
 			</Box>
 			<Grid
 				color='#3B4A67'
@@ -120,7 +117,7 @@ const ProductLubVehLiviano: React.FC<ProductLubVehLivianoProps> = ({
 				placeItems='center'
 			>
 				<Image
-					src={product.image}
+					src={product.imagen}
 					alt=''
 					w='45px'
 					h='45px'
@@ -138,11 +135,14 @@ const ProductLubVehLiviano: React.FC<ProductLubVehLivianoProps> = ({
 			>
 				{product.nombre}
 			</Box>
+			<Box color='#3B4A67' fontSize='12px' textTransform='uppercase'>
+				{product.linea}
+			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				{product.status ? 'activo' : 'inactivo'}
+				{product.estado ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(product.created_at).format('MMMM, DD YYYY')}
+				{dayjs(product.created_at).format('DD/MM/YYYY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'
@@ -189,12 +189,7 @@ const ProductLubVehLiviano: React.FC<ProductLubVehLivianoProps> = ({
 	);
 };
 
-const LubricantesAdmin: React.FC<LubricantesAdminProps> = ({
-	lubVehLiviano,
-	lubMoto,
-	lubAux,
-	lubVehPesado,
-}) => {
+const LubricantesAdmin: React.FC<LubricantesAdminProps> = ({ lubricantes }) => {
 	const router = useRouter();
 
 	return (
@@ -237,70 +232,13 @@ const LubricantesAdmin: React.FC<LubricantesAdminProps> = ({
 							h='full'
 							lineHeight='50px'
 						>
-							Lubricantes para vehículos livianos
+							Todos los productos de lubricantes
 						</Text>
 					</Flex>
 					<Header />
 					<Box>
-						{lubVehLiviano?.map(item => (
-							<ProductLubVehLiviano key={item.id} product={item} />
-						))}
-					</Box>
-				</Box>
-
-				<Box as='article'>
-					<Flex alignItems='center' w='full' h='50px' bgColor='#E5E7EB'>
-						<Text
-							pl='20px'
-							textTransform='uppercase'
-							h='full'
-							lineHeight='50px'
-						>
-							Lubricantes para motos
-						</Text>
-					</Flex>
-					<Header />
-					<Box>
-						{lubMoto?.map(item => (
-							<ProductLubVehLiviano key={item.id} product={item} />
-						))}
-					</Box>
-				</Box>
-
-				<Box as='article'>
-					<Flex alignItems='center' w='full' h='50px' bgColor='#E5E7EB'>
-						<Text
-							pl='20px'
-							textTransform='uppercase'
-							h='full'
-							lineHeight='50px'
-						>
-							Lubricantes Auxiliares
-						</Text>
-					</Flex>
-					<Header />
-					<Box>
-						{lubAux?.map(item => (
-							<ProductLubVehLiviano key={item.id} product={item} />
-						))}
-					</Box>
-				</Box>
-
-				<Box as='article'>
-					<Flex alignItems='center' w='full' h='50px' bgColor='#E5E7EB'>
-						<Text
-							pl='20px'
-							textTransform='uppercase'
-							h='full'
-							lineHeight='50px'
-						>
-							Lubricantes para vehículos pesados
-						</Text>
-					</Flex>
-					<Header />
-					<Box>
-						{lubVehPesado?.map(item => (
-							<ProductLubVehLiviano key={item.id} product={item} />
+						{lubricantes?.map(item => (
+							<ProductLub key={item.id} product={item} />
 						))}
 					</Box>
 				</Box>

@@ -97,11 +97,13 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				base: '50px 100px 200px 100px 100px 100px',
 				xl: '50px 100px 1fr 100px 100px 100px',
 			}}
-			p='10px 30px'
+			p='0 30px'
 			borderBottom='1px solid #DCDFE5'
 			gap='0 32px'
 			alignItems='center'
 			cursor='pointer'
+			transition='all 300ms ease'
+			_hover={{ bgColor: '#f2f2f2' }}
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{product.order}
@@ -131,6 +133,8 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				textOverflow='ellipsis'
 				cursor='pointer'
 				onClick={() => router.push(`/admin/productos/baterias/${product.id}`)}
+				lineHeight='66px'
+				h='full'
 			>
 				{product.title}
 			</Box>
@@ -138,7 +142,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				{product.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(product.created_at).format('MMMM, DD YYYY')}
+				{dayjs(product.created_at).format('DD/MM/YYYY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'

@@ -8,7 +8,7 @@ import { getLubricantes } from '../../../utils/lubricants';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 import dayjs from 'dayjs';
-import { getProductsByLine } from '../../../utils';
+import { getProducts, getProductsByLine } from '../../../utils';
 import { useRouter } from 'next/router';
 
 interface ProductProps {
@@ -20,11 +20,11 @@ interface FiltroAdminProps {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const filtros = await getProductsByLine('liviana');
+	const filtros = await getProducts();
 
 	return {
 		props: {
-			filtros: filtros.filters,
+			filtros: filtros.data,
 		},
 	};
 };
@@ -33,8 +33,8 @@ const Header: React.FC = () => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '50px 100px 200px 100px 100px 100px',
-				xl: '50px 100px 1fr 100px 100px 100px',
+				base: '50px 70px 200px 100px 100px 100px 100px',
+				xl: '50px 70px 1fr 100px 100px 100px 100px',
 			}}
 			p='10px 30px'
 			bgColor='#F9FAFB'
@@ -73,6 +73,14 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
+				Tipo
+			</Box>
+			<Box
+				color='#3B4A67'
+				fontWeight='bold'
+				textTransform='uppercase'
+				fontSize='14px'
+			>
 				Estado
 			</Box>
 			<Box
@@ -92,8 +100,8 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '50px 100px 200px 100px 100px 100px',
-				xl: '50px 100px 1fr 100px 100px 100px',
+				base: '50px 70px 200px 100px 100px 100px 100px',
+				xl: '50px 70px 1fr 100px 100px 100px 100px',
 			}}
 			p='10px 30px'
 			borderBottom='1px solid #DCDFE5'
@@ -102,7 +110,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 			cursor='pointer'
 		>
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
-				{product.order}
+				{product.orden}
 			</Box>
 			<Grid
 				color='#3B4A67'
@@ -111,7 +119,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				placeItems='center'
 			>
 				<Image
-					src={product.image}
+					src={product.imagen}
 					alt=''
 					w='45px'
 					h='45px'
@@ -127,13 +135,16 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 			>
-				{product.name}
+				{product.nombre}
+			</Box>
+			<Box color='#3B4A67' fontSize='12px' textTransform='uppercase'>
+				{product.tipo}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				{product.status ? 'activo' : 'inactivo'}
+				{product.estado ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(product.created_at).format('MMMM, DD YYYY')}
+				{dayjs(product.created_at).format('DD/MM/YYYY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'
@@ -183,18 +194,6 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 const FiltrosAdmin: React.FC<FiltroAdminProps> = ({ filtros }) => {
 	const router = useRouter();
 
-	const filtrosAire = filtros?.filter(
-		(product: any) => product.type === 'aire'
-	);
-
-	const filtrosAceite = filtros?.filter(
-		(product: any) => product.type === 'aceite'
-	);
-
-	const filtrosCombustible = filtros?.filter(
-		(product: any) => product.type === 'combustible'
-	);
-
 	return (
 		<Layout
 			title='Filtros'
@@ -235,50 +234,12 @@ const FiltrosAdmin: React.FC<FiltroAdminProps> = ({ filtros }) => {
 							h='full'
 							lineHeight='50px'
 						>
-							Filtros de aire
+							Todos los productos de filtro
 						</Text>
 					</Flex>
 					<Header />
 					<Box>
-						{filtrosAire?.map(item => (
-							<Product key={item.id} product={item} />
-						))}
-					</Box>
-				</Box>
-
-				<Box as='article'>
-					<Flex alignItems='center' w='full' h='50px' bgColor='#E5E7EB'>
-						<Text
-							pl='20px'
-							textTransform='uppercase'
-							h='full'
-							lineHeight='50px'
-						>
-							Filtros de aceite
-						</Text>
-					</Flex>
-					<Header />
-					<Box>
-						{filtrosAceite?.map(item => (
-							<Product key={item.id} product={item} />
-						))}
-					</Box>
-				</Box>
-
-				<Box as='article'>
-					<Flex alignItems='center' w='full' h='50px' bgColor='#E5E7EB'>
-						<Text
-							pl='20px'
-							textTransform='uppercase'
-							h='full'
-							lineHeight='50px'
-						>
-							Filtros de combustible
-						</Text>
-					</Flex>
-					<Header />
-					<Box>
-						{filtrosCombustible?.map(item => (
+						{filtros?.map(item => (
 							<Product key={item.id} product={item} />
 						))}
 					</Box>
