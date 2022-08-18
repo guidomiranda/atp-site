@@ -108,7 +108,7 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 						md: 'repeat(3, 1fr)',
 						lg: 'repeat(4, 1fr)',
 					}}
-					gap='20px'
+					gap='96px'
 				>
 					{brands.map((brand, i) => (
 						<Grid key={i} placeItems='center'>

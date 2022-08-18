@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
 					>
 						<Box mb={{ base: '20px', md: '0' }}>
 							<Text color='white'>
-								Ruta 9 Dr. Carlos A. López km. 17,5 – Esquina Avda.
+								Ruta Transchaco Km. 17,5 – Esquina Avda.
 							</Text>
 							<Text color='white'>
 								Gral. Díaz. Mariano Roque Alonso, Paraguay.

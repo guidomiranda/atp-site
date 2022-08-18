@@ -1,26 +1,29 @@
 export const brands = [
 	{
-		url: 'https://atp.netlify.app/assets/logo-volskwagen.png',
+		url: '/work-1.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-GreatWall.png',
+		url: '/work-2.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-audi.png',
+		url: '/work-3.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-porsche.png',
+		url: '/work-4.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-honda.png',
+		url: '/work-5.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-scania.png',
+		url: '/work-6.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-chevrolet.png',
+		url: '/work-7.png',
 	},
 	{
-		url: 'https://atp.netlify.app/assets/logo-nissan.png',
+		url: '/work-8.png',
+	},
+	{
+		url: '/work-9.png',
 	},
 ];
