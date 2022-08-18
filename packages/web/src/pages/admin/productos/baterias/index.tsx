@@ -14,7 +14,6 @@ import {
 	ModalContent,
 	ModalHeader,
 	ModalFooter,
-	ModalBody,
 	useDisclosure,
 } from '@chakra-ui/react';
 import { FaTrash } from 'react-icons/fa';
@@ -109,10 +108,10 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 		const response = await deleteBattery(product.id);
 
 		if (response.success) {
-			toast.success('Creado correctamente!');
+			toast.success('Eliminado correctamente!');
 			return router.push('/admin/productos/baterias');
 		} else {
-			toast.error('Hubo un problema al crear');
+			toast.error('Hubo un problema al eliminar');
 			return router.push('/admin/productos/baterias');
 		}
 	};

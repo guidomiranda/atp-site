@@ -77,7 +77,6 @@ const TypeFilter: React.FC = () => {
 			<Box id='#main' maxW='1220px' m='0 auto' w='90%' py='72px'>
 				<FilterHeader pathname={pathname} query={query} push={push} />
 
-				{console.log(filters)}
 				<Box pt='56px' maxW={['100%', '60%']} m='0 auto'>
 					{!filters || !filters[0] ? (
 						<Box>

@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
-import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Flex,
+	Grid,
+	Image,
+	Text,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	useDisclosure,
+} from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
+import dayjs from 'dayjs';
 
-// import HeaderLayout from '../../../components/client/Header';
-import Layout from '../../../layout/admin';
-import { getLubricantes } from '../../../utils/lubricants';
+import Layout from '../../../../layout/admin';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
-import dayjs from 'dayjs';
-import { getProducts, getProductsByLine } from '../../../utils';
-import { useRouter } from 'next/router';
+import { deleteFiltro, getProducts } from '../../../../utils';
+import toast from 'react-hot-toast';
 
 interface ProductProps {
 	product: any;
@@ -97,18 +109,62 @@ const Header: React.FC = () => {
 };
 
 const Product: React.FC<ProductProps> = ({ product }) => {
+	const router = useRouter();
+
+	const { isOpen, onClose, onOpen } = useDisclosure();
+
+	const handleDeleteProduct = async () => {
+		const response = await deleteFiltro(product.id);
+
+		if (response.success) {
+			toast.success('Eliminado correctamente!');
+			return router.push('/admin/productos/filtros');
+		} else {
+			toast.error('Hubo un problema al eliminar');
+			return router.push('/admin/productos/filtros');
+		}
+	};
+
 	return (
 		<Grid
 			gridTemplateColumns={{
 				base: '50px 70px 200px 100px 100px 100px 100px',
 				xl: '50px 70px 1fr 100px 100px 100px 100px',
 			}}
-			p='10px 30px'
+			p='0 30px'
 			borderBottom='1px solid #DCDFE5'
 			gap='0 32px'
 			alignItems='center'
 			cursor='pointer'
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent borderRadius='3px'>
+					<ModalHeader>¿Desea eliminar este producto?</ModalHeader>
+
+					<ModalFooter>
+						<Button
+							borderRadius='3px'
+							border='1px solid #d0d0d0'
+							bgColor='#fff'
+							mr={3}
+							onClick={onClose}
+						>
+							Cerrar
+						</Button>
+						<Button
+							borderRadius='3px'
+							bgColor='#8C95A6'
+							_hover={{ bgColor: '#8C95A6' }}
+							color='#fff'
+							onClick={handleDeleteProduct}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{product.orden}
 			</Box>
@@ -134,6 +190,8 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 				whiteSpace='nowrap'
 				overflow='hidden'
 				textOverflow='ellipsis'
+				lineHeight='66px'
+				onClick={() => router.push(`/admin/productos/filtros/${product.id}`)}
 			>
 				{product.nombre}
 			</Box>
@@ -166,6 +224,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() => router.push(`/admin/productos/filtros/${product.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -183,6 +242,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>
@@ -219,6 +279,7 @@ const FiltrosAdmin: React.FC<FiltroAdminProps> = ({ filtros }) => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
+						onClick={() => router.push('/admin/productos/filtros/create')}
 					>
 						Crear producto
 					</Button>

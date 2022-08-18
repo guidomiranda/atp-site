@@ -11,7 +11,19 @@ import toast from 'react-hot-toast';
 
 const BatteryCreateAdmin = () => {
 	const router = useRouter();
-	const [batteryInfo, setBatteryInfo] = useState<any>({});
+	const [batteryInfo, setBatteryInfo] = useState<any>({
+		capacity: '',
+		category: '',
+		cca10: '',
+		height: '',
+		image: '',
+		large: '',
+		order: 1,
+		polarity: '',
+		status: true,
+		title: '',
+		width: '',
+	});
 
 	const inputImgRef = useRef(null);
 	const [imageExist, setImageExist] = useState(null);
@@ -40,8 +52,6 @@ const BatteryCreateAdmin = () => {
 			order: 1,
 			image: responseImage,
 		};
-
-		console.log(batteryInfo);
 
 		const response = await createBattery(bannerInfoCreated);
 
