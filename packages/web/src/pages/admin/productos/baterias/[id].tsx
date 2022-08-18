@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import produce from 'immer';
 import toast from 'react-hot-toast';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
@@ -12,20 +11,13 @@ import {
 	Input,
 	Switch,
 	Text,
-	Textarea,
 } from '@chakra-ui/react';
 import { BsArrowLeftShort } from 'react-icons/bs';
-import { FaPlus, FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../../layout/admin';
-import {
-	getBanner,
-	getBattery,
-	updateBanner,
-	updateBattery,
-} from '../../../../utils';
 import { FileType } from '../../../../interfaces/image';
 import { useImage } from '../../../../hooks/useImage';
+import { getBattery, updateBattery } from '../../../../utils';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const battery = await getBattery(context.query.id as string);

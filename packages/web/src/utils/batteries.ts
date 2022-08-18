@@ -27,3 +27,22 @@ export const updateBattery = async (id: string, batteryInfo: any) => {
 
 	return data.data;
 };
+
+export const createBattery = async (batteryInfo: any) => {
+	const data = await axios({
+		method: 'POST',
+		url: `/product/create`,
+		data: JSON.stringify(batteryInfo),
+	});
+
+	return data.data;
+};
+
+export const deleteBattery = async (id: string) => {
+	const data = await axios({
+		method: 'DELETE',
+		url: `/product/${id}`,
+	});
+
+	return data.data;
+};

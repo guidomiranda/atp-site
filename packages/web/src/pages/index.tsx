@@ -6,8 +6,8 @@ import Layout from '../layout';
 import Banner from '../components/Banner';
 import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
-import { slides_data, brands, products } from '../data';
 import { getBanners, getClients } from '../utils';
+import { slides_data, brands, products } from '../data';
 
 interface HomeProps {
 	banners: any;

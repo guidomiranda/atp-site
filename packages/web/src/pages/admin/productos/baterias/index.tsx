@@ -1,15 +1,28 @@
 import React, { useState } from 'react';
-import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
-
-// import HeaderLayout from '../../../components/client/Header';
-import Layout from '../../../../layout/admin';
-import { getLubricantes } from '../../../../utils/lubricants';
-import { FiEdit } from 'react-icons/fi';
-import { FaTrash } from 'react-icons/fa';
 import dayjs from 'dayjs';
-import { getBatteries, getProductsByLine } from '../../../../utils';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import {
+	Box,
+	Button,
+	Flex,
+	Grid,
+	Image,
+	Text,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	useDisclosure,
+} from '@chakra-ui/react';
+import { FaTrash } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
+
+import Layout from '../../../../layout/admin';
+import { deleteBattery, getBatteries } from '../../../../utils';
+import toast from 'react-hot-toast';
 
 interface BateriasAdminProps {
 	baterias: any;
@@ -90,6 +103,19 @@ const Header: React.FC = () => {
 
 const Product: React.FC<ProductProps> = ({ product }) => {
 	const router = useRouter();
+	const { isOpen, onClose, onOpen } = useDisclosure();
+
+	const handleDeleteProduct = async () => {
+		const response = await deleteBattery(product.id);
+
+		if (response.success) {
+			toast.success('Creado correctamente!');
+			return router.push('/admin/productos/baterias');
+		} else {
+			toast.error('Hubo un problema al crear');
+			return router.push('/admin/productos/baterias');
+		}
+	};
 
 	return (
 		<Grid
@@ -105,6 +131,34 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 			transition='all 300ms ease'
 			_hover={{ bgColor: '#f2f2f2' }}
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent borderRadius='3px'>
+					<ModalHeader>¿Desea eliminar este producto?</ModalHeader>
+
+					<ModalFooter>
+						<Button
+							borderRadius='3px'
+							border='1px solid #d0d0d0'
+							bgColor='#fff'
+							mr={3}
+							onClick={onClose}
+						>
+							Cerrar
+						</Button>
+						<Button
+							borderRadius='3px'
+							bgColor='#8C95A6'
+							_hover={{ bgColor: '#8C95A6' }}
+							color='#fff'
+							onClick={handleDeleteProduct}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{product.order}
 			</Box>
@@ -182,6 +236,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>
@@ -218,6 +273,7 @@ const BateriasAdmin: React.FC<BateriasAdminProps> = ({ baterias }) => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
+						onClick={() => router.push('/admin/productos/baterias/create')}
 					>
 						Crear producto
 					</Button>
