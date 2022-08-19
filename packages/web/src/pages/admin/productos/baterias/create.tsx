@@ -90,7 +90,7 @@ const BatteryCreateAdmin = () => {
 				}
 			>
 				<Box padding='20px'>
-					<Box w={['100%', '90%', '80%']}>
+					<Box w={['100%']}>
 						<Box>
 							<Grid
 								gridTemplateColumns={{

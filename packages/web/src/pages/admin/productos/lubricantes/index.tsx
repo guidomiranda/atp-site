@@ -1,14 +1,31 @@
 import React, { useState } from 'react';
-import { Box, Button, Flex, Grid, Image, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Flex,
+	Grid,
+	Image,
+	Text,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 // import HeaderLayout from '../../../components/client/Header';
-import Layout from '../../../layout/admin';
-import { getAllLubricantes, getLubricantes } from '../../../utils/lubricants';
+import Layout from '../../../../layout/admin';
+import {
+	deleteLubricante,
+	getAllLubricantes,
+} from '../../../../utils/lubricants';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 
 interface ProductLubVehLivianoProps {
 	product: any;
@@ -95,18 +112,61 @@ const Header: React.FC = () => {
 };
 
 const ProductLub: React.FC<ProductLubVehLivianoProps> = ({ product }) => {
+	const router = useRouter();
+	const { isOpen, onClose, onOpen } = useDisclosure();
+
+	const handleDeleteProduct = async () => {
+		const response = await deleteLubricante(product.id);
+
+		if (response.success) {
+			toast.success('Eliminado correctamente!');
+			return router.push('/admin/productos/lubricantes');
+		} else {
+			toast.error('Hubo un problema al eliminar');
+			return router.push('/admin/productos/lubricantes');
+		}
+	};
+
 	return (
 		<Grid
 			gridTemplateColumns={{
 				base: '50px 70px 200px 100px 100px 100px 100px',
 				xl: '50px 70px 1fr 100px 100px 100px 100px',
 			}}
-			p='10px 30px'
+			p='0 30px'
 			borderBottom='1px solid #DCDFE5'
 			gap='0 32px'
 			alignItems='center'
 			cursor='pointer'
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent borderRadius='3px'>
+					<ModalHeader>¿Desea eliminar este producto?</ModalHeader>
+
+					<ModalFooter>
+						<Button
+							borderRadius='3px'
+							border='1px solid #d0d0d0'
+							bgColor='#fff'
+							mr={3}
+							onClick={onClose}
+						>
+							Cerrar
+						</Button>
+						<Button
+							borderRadius='3px'
+							bgColor='#8C95A6'
+							_hover={{ bgColor: '#8C95A6' }}
+							color='#fff'
+							onClick={handleDeleteProduct}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{product.orden}
 			</Box>
@@ -132,6 +192,11 @@ const ProductLub: React.FC<ProductLubVehLivianoProps> = ({ product }) => {
 				whiteSpace='nowrap'
 				overflow='hidden'
 				textOverflow='ellipsis'
+				h='full'
+				lineHeight='66px'
+				onClick={() =>
+					router.push(`/admin/productos/lubricantes/${product.id}`)
+				}
 			>
 				{product.nombre}
 			</Box>
@@ -164,6 +229,9 @@ const ProductLub: React.FC<ProductLubVehLivianoProps> = ({ product }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
+					onClick={() =>
+						router.push(`/admin/productos/lubricantes/${product.id}`)
+					}
 				>
 					<FiEdit />
 				</Button>
@@ -181,6 +249,7 @@ const ProductLub: React.FC<ProductLubVehLivianoProps> = ({ product }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>
@@ -217,6 +286,7 @@ const LubricantesAdmin: React.FC<LubricantesAdminProps> = ({ lubricantes }) => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
+						onClick={() => router.push('/admin/productos/lubricantes/create')}
 					>
 						Crear producto
 					</Button>
