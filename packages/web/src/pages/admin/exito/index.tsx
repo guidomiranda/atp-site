@@ -1,5 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import toast from 'react-hot-toast';
 import {
 	Box,
 	Button,
@@ -11,27 +12,29 @@ import {
 	ModalFooter,
 	useDisclosure,
 } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
 
 import AdminLayout from '../../../layout/admin';
-import { deleteSuccess, getSuccesses } from '../../../utils';
-import { useRouter } from 'next/router';
-import toast from 'react-hot-toast';
+import Text from '../../../components/admin/Text';
+import axios from '../../../config/axios';
+import { deleteSuccess } from '../../../utils';
 
 interface SuccessesProps {
 	success: any;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const successes = await getSuccesses();
-	return {
-		props: {
-			successes: successes.infos,
-		},
-	};
-};
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/success',
+		});
+		return data.data.infos;
+	});
+}
 
 const Header: React.FC = () => {
 	return (
@@ -199,8 +202,10 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 	);
 };
 
-const ExitosAdmin = ({ successes }) => {
+const ExitosAdmin = () => {
 	const router = useRouter();
+	const { data, isFetching } = usePosts();
+	console.log(data);
 
 	return (
 		<AdminLayout
@@ -225,9 +230,13 @@ const ExitosAdmin = ({ successes }) => {
 		>
 			<Box>
 				<Header />
-				{successes?.map(success => (
-					<Successes key={success.id} success={success} />
-				))}
+				{isFetching ? (
+					<Grid placeItems='center' h='200px'>
+						<Text>Cargando..</Text>
+					</Grid>
+				) : (
+					data?.map(success => <Successes key={success.id} success={success} />)
+				)}
 			</Box>
 		</AdminLayout>
 	);

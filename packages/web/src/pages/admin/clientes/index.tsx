@@ -1,5 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import toast from 'react-hot-toast';
 import {
 	Box,
 	Button,
@@ -11,27 +12,29 @@ import {
 	ModalFooter,
 	useDisclosure,
 } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
 
 import AdminLayout from '../../../layout/admin';
-import { deleteClient, getClients } from '../../../utils';
-import { useRouter } from 'next/router';
-import toast from 'react-hot-toast';
+import Text from '../../../components/admin/Text';
+import axios from '../../../config/axios';
+import { deleteClient } from '../../../utils';
 
 interface ClientsProps {
 	client: any;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const clients = await getClients();
-	return {
-		props: {
-			clients: clients.clients,
-		},
-	};
-};
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/client',
+		});
+		return data.data.clients;
+	});
+}
 
 const Header: React.FC = () => {
 	return (
@@ -199,8 +202,9 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	);
 };
 
-const ClientesAdmin = ({ clients }) => {
+const ClientesAdmin = () => {
 	const router = useRouter();
+	const { data, isFetching } = usePosts();
 
 	return (
 		<AdminLayout
@@ -225,9 +229,13 @@ const ClientesAdmin = ({ clients }) => {
 		>
 			<Box>
 				<Header />
-				{clients?.map(client => (
-					<Clients key={client.id} client={client} />
-				))}
+				{isFetching ? (
+					<Grid placeItems='center' h='200px'>
+						<Text>Cargando..</Text>
+					</Grid>
+				) : (
+					data?.map(client => <Clients key={client.id} client={client} />)
+				)}
 			</Box>
 		</AdminLayout>
 	);

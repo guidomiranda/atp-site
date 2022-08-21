@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
+import dayjs from 'dayjs';
+import toast from 'react-hot-toast';
 import {
 	Box,
 	Button,
@@ -14,24 +15,26 @@ import {
 } from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
-import dayjs from 'dayjs';
 
 import AdminLayout from '../../../layout/admin';
-import { deleteReview, getReviews } from '../../../utils';
-import toast from 'react-hot-toast';
+import axios from '../../../config/axios';
+import Text from '../../../components/admin/Text';
+import { deleteReview } from '../../../utils';
+import { useQuery } from '@tanstack/react-query';
 
 interface TestimonialsProps {
 	testimonial: any;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const testimonials = await getReviews();
-	return {
-		props: {
-			testimonials: testimonials.reviews,
-		},
-	};
-};
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/review',
+		});
+		return data.data.reviews;
+	});
+}
 
 const Header: React.FC = () => {
 	return (
@@ -199,8 +202,9 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 	);
 };
 
-const TestimoniosAdmin = ({ testimonials }) => {
+const TestimoniosAdmin = () => {
 	const router = useRouter();
+	const { data, isFetching } = usePosts();
 
 	return (
 		<AdminLayout
@@ -225,9 +229,15 @@ const TestimoniosAdmin = ({ testimonials }) => {
 		>
 			<Box>
 				<Header />
-				{testimonials?.map(testimonial => (
-					<Testimonials key={testimonial.id} testimonial={testimonial} />
-				))}
+				{isFetching ? (
+					<Grid placeItems='center' h='200px'>
+						<Text>Cargando..</Text>
+					</Grid>
+				) : (
+					data?.map(testimonial => (
+						<Testimonials key={testimonial.id} testimonial={testimonial} />
+					))
+				)}
 			</Box>
 		</AdminLayout>
 	);
