@@ -27,3 +27,22 @@ export const updateBanner = async (id: string, bannerInfo: any) => {
 
 	return data.data;
 };
+
+export const createBanner = async (bannerInfo: any) => {
+	const data = await axios({
+		method: 'POST',
+		url: `/banner/create`,
+		data: JSON.stringify(bannerInfo),
+	});
+
+	return data.data;
+};
+
+export const deleteBanner = async (id: string) => {
+	const data = await axios({
+		method: 'DELETE',
+		url: `/banner/${id}`,
+	});
+
+	return data.data;
+};

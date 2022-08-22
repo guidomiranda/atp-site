@@ -2,7 +2,19 @@ import React, { useState } from 'react';
 import NextLink from 'next/link';
 import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
-import { Box, Button, Grid, Image, Link } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Grid,
+	Image,
+	Link,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	useDisclosure,
+} from '@chakra-ui/react';
 import { FaTrash } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
 import { useQuery } from '@tanstack/react-query';
@@ -10,6 +22,8 @@ import { useQuery } from '@tanstack/react-query';
 import AdminLayout from '../../../layout/admin';
 import Text from '../../../components/admin/Text';
 import axios from '../../../config/axios';
+import { deleteBanner } from '../../../utils';
+import toast from 'react-hot-toast';
 
 interface BannerProps {
 	banner: any;
@@ -87,8 +101,21 @@ const Header: React.FC = () => {
 
 const Banner: React.FC<BannerProps> = ({ banner }) => {
 	const router = useRouter();
+	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const [showImageLarge, setShowImageLarge] = useState<boolean>(false);
+
+	const handleDeleteClient = async () => {
+		const response = await deleteBanner(banner.id);
+
+		if (response.success) {
+			toast.success('Eliminado correctamente!');
+			return router.push('/admin/banner');
+		} else {
+			toast.error('Hubo un problema al eliminar');
+			router.push('/admin/banner');
+		}
+	};
 
 	return (
 		<Grid
@@ -101,6 +128,28 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 			gap='0 32px'
 			alignItems='center'
 		>
+			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>¿Desea borrar la información?</ModalHeader>
+
+					<ModalFooter>
+						<Button rounded='3px' colorScheme='gray' mr={3} onClick={onClose}>
+							Cerrar
+						</Button>
+						<Button
+							rounded='3px'
+							bgColor='gray.500'
+							color='#fff'
+							_hover={{ bgColor: 'gray.500' }}
+							onClick={handleDeleteClient}
+						>
+							Eliminar
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
+
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
 				{banner.order}
 			</Box>
@@ -127,7 +176,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 					overflow='hidden'
 					zIndex='200'
 				>
-					<Image src={banner.bg} alt='' h='50px' objectFit='cover' />
+					<Image src={banner.bg} alt='' h='50px' w='full' objectFit='cover' />
 				</Box>
 
 				<Image
@@ -156,7 +205,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
 				{banner.status ? 'activo' : 'inactivo'}
 			</Box>
-			<Box color='#3B4A67' fontSize='14px'>
+			<Box color='#3B4A67' fontSize='12px'>
 				{dayjs(banner.created_at).format('MMMM, DD YYYY')}
 			</Box>
 			<Grid
@@ -197,6 +246,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 					justifyContent='center'
 					_hover={{ bgColor: '#8C95A6' }}
 					_focus={{ shadow: 'none' }}
+					onClick={onOpen}
 				>
 					<FaTrash />
 				</Button>
@@ -206,10 +256,30 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 };
 
 const BannersAdmin = () => {
+	const router = useRouter();
 	const { data, isFetching } = usePosts();
 
 	return (
-		<AdminLayout title='Banners'>
+		<AdminLayout
+			title='Banners'
+			footer={
+				<Box>
+					<Button
+						ml='10px'
+						minW='initial'
+						h='45px'
+						rounded='3px'
+						bgColor='#FFF'
+						color='#3B4A67'
+						border='1px solid #3B4A67'
+						fontWeight='medium'
+						onClick={() => router.push('/admin/banner/create')}
+					>
+						Crear cliente
+					</Button>
+				</Box>
+			}
+		>
 			<Box>
 				<Header />
 				{isFetching ? (
