@@ -33,7 +33,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({
 			>
 				<Text>No tiene acceso a esta página</Text>
 				<Button mt={`15px`} onClick={() => router.push('/admin/login')}>
-					Regresar al inicio
+					Iniciar sesión
 				</Button>
 			</Flex>
 		);

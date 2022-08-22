@@ -1,7 +1,8 @@
 import { Box, Button, Flex, Grid, Image, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import Text from '../../components/admin/Text';
 import { UserContext } from '../../context/UserContext';
 import { UserAuth } from '../../hooks/useAuth';
 
@@ -9,7 +10,7 @@ import { loginUser } from '../../utils/user';
 
 const Login = () => {
 	const router = useRouter();
-	const { login } = UserAuth();
+	const { user, login } = UserAuth();
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -30,6 +31,23 @@ const Login = () => {
 			router.push('/admin');
 		}
 	};
+
+	if (user) {
+		return (
+			<Flex
+				alignItems={`center`}
+				justifyContent={`center`}
+				height={`100vh`}
+				overflow={`hidden`}
+				flexDir={`column`}
+			>
+				<Text>Tienes una cuenta iniciada</Text>
+				<Button mt={`15px`} onClick={() => router.push('/admin')}>
+					Volver al inicio
+				</Button>
+			</Flex>
+		);
+	}
 
 	return (
 		<Box height={`100vh`} overflow={`hidden`}>
