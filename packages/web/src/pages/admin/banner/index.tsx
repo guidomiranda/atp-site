@@ -1,23 +1,30 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
 import NextLink from 'next/link';
+import dayjs from 'dayjs';
 import { useRouter } from 'next/router';
 import { Box, Button, Grid, Image, Link } from '@chakra-ui/react';
-import dayjs from 'dayjs';
 import { FaTrash } from 'react-icons/fa';
 import { FiEdit } from 'react-icons/fi';
+import { useQuery } from '@tanstack/react-query';
 
 import AdminLayout from '../../../layout/admin';
-import { getBanners } from '../../../utils/banners';
+import Text from '../../../components/admin/Text';
+import axios from '../../../config/axios';
 
 interface BannerProps {
 	banner: any;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const banners = await getBanners();
-	return { props: { banners: banners.banners } };
-};
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/banner',
+		});
+
+		return data.data.banners;
+	});
+}
 
 const Header: React.FC = () => {
 	return (
@@ -198,14 +205,20 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 	);
 };
 
-const BannersAdmin = ({ banners }) => {
+const BannersAdmin = () => {
+	const { data, isFetching } = usePosts();
+
 	return (
 		<AdminLayout title='Banners'>
 			<Box>
 				<Header />
-				{banners.map((banner: any) => (
-					<Banner key={banner.id} banner={banner} />
-				))}
+				{isFetching ? (
+					<Grid placeItems='center' h='200px'>
+						<Text>Cargando..</Text>
+					</Grid>
+				) : (
+					data?.map((banner: any) => <Banner key={banner.id} banner={banner} />)
+				)}
 			</Box>
 		</AdminLayout>
 	);
