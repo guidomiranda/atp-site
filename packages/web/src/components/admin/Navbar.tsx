@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Flex, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import User from './User';
@@ -13,9 +13,11 @@ import {
 } from 'react-icons/hi';
 
 import Text from '../../components/admin/Text';
+import { UserContext } from '../../context/UserContext';
 
 const NavbarAdmin: React.FC = () => {
 	const router = useRouter();
+	const { user } = useContext(UserContext);
 
 	return (
 		<Box
@@ -51,7 +53,7 @@ const NavbarAdmin: React.FC = () => {
 
 			{/* User info */}
 			<Box p='20px'>
-				<User />
+				<User user={user} />
 			</Box>
 
 			{/* Nav Links */}
