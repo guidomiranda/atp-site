@@ -16,7 +16,7 @@ const User: React.FC<UserIprops> = ({ user }) => {
 		<Grid gridTemplateColumns='40px 1fr' alignItems='center' cursor='pointer'>
 			<Box w='40px' h='40px'>
 				<Image
-					src='/avatar.jpg'
+					src='/profile.png'
 					alt=''
 					w='100%'
 					h='100%'
