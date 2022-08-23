@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import {
 	Box,
@@ -18,7 +17,6 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import AdminLayout from '../../../../layout/admin';
 import { FileType } from '../../../../interfaces/image';
 import { useImage } from '../../../../hooks/useImage';
-import { updateFiltro } from '../../../../utils';
 
 import produce from 'immer';
 import { FaPlus, FaTrash } from 'react-icons/fa';
@@ -533,6 +531,10 @@ const LubricantesAdminCreate = () => {
 									/>
 								)}
 							</Box>
+
+							<Text color='#333' fontSize='12px' mt='20px'>
+								Tamaño recomendado 800px x 800px
+							</Text>
 
 							<Box mt='20px'>
 								<Button

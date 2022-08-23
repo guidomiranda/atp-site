@@ -295,6 +295,15 @@ const BatteryCreateAdmin = () => {
 									)}
 								</Box>
 
+								<Text
+									color='#333'
+									fontSize='12px'
+									textTransform='uppercase'
+									mt='20px'
+								>
+									Tamaño recomendado 800px x 800px
+								</Text>
+
 								<Box mt='20px'>
 									<Button
 										bgColor='transparent'

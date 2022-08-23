@@ -248,6 +248,10 @@ const BannerAdminCreate = () => {
 								)}
 							</Box>
 
+							<Text color='#333' fontSize='12px' mt='20px'>
+								Tamaño recomendado 1900px x 600px
+							</Text>
+
 							<Box mt='20px'>
 								<Button
 									bgColor='transparent'
