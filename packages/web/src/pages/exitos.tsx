@@ -46,7 +46,7 @@ const ItemReview: React.FC<SuccessProps> = ({ success }) => {
 const Clientes: React.FC<SuccessesProps> = ({ successes }) => {
 	return (
 		<Layout>
-			<Header title='Casos de éxito' image='/personas-2.png' />
+			<Header title='Casos de éxito' image='/personas-3.png' />
 			<Box py='94px'>
 				<Box maxW='1220px' w='90%' m='0 auto'>
 					{successes?.infos?.map(item => (

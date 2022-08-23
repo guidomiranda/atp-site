@@ -29,22 +29,27 @@ const ItemReview: React.FC<ReviewProps> = ({ review }) => {
 				))}
 			</Box>
 			<Text color='black' fontSize={['16px', '20px']}>
-				Juanca Báez - Automovilista, corredor de fórmula 1
+				{review.author}
 			</Text>
 		</Box>
 	);
 };
 
 const Clientes: React.FC<ReviewsProps> = ({ reviews }) => {
+	const testimonios = reviews?.reviews?.filter(item => item.status === true);
+	const testimoniosOrdered = testimonios?.sort(
+		(a: any, b: any) => a.order - b.order
+	);
+
 	return (
 		<Layout>
 			<Header
 				title='Testimonios de quienes nos eligen'
-				image='/personas-3.png'
+				image='/personas-2.png'
 			/>
 			<Box bgColor='#155e9d' py='94px'>
 				<Box maxW='1220px' w='90%' m='0 auto'>
-					{reviews?.reviews?.map(item => (
+					{testimoniosOrdered?.map(item => (
 						<ItemReview key={item.id} review={item} />
 					))}
 				</Box>
