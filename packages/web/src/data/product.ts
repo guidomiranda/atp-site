@@ -9,7 +9,7 @@ export const products = [
 		image:
 			'https://res.cloudinary.com/https-atp-com-py/image/upload/v1660160566/lubricantes/img-lubricantes-mobil_dvls0h.png',
 		target: false,
-		path: '/product/lubricantes/lub-veh-liviano#main',
+		path: '/product/lubricantes/veh-pesado#main',
 	},
 	{
 		id: '2',

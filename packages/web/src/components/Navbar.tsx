@@ -12,8 +12,6 @@ interface NavLinkProps {
 }
 
 const NavLink: React.FC<NavLinkProps> = ({ text, link, isLink, isActive }) => {
-	const { pathname } = useRouter();
-
 	return (
 		<>
 			{!isLink && (
@@ -183,7 +181,7 @@ const Navbar = () => {
 							boxShadow='0px 0px 10px 0px rgba(0,0,0,0.6)'
 							p='10px'
 						>
-							<NextLink href='/product/lubricantes/veh-liviano#main' passHref>
+							<NextLink href='/product/lubricantes/veh-pesado#main' passHref>
 								<Link
 									p='5px'
 									rounded='4px'

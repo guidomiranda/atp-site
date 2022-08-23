@@ -15,6 +15,42 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 				alignItems={['flex-start', 'center']}
 				flexDir={['column', 'row']}
 			>
+				<NextLink href='/product/lubricantes/veh-pesado#main' passHref>
+					<Link
+						color={query.type === 'veh-pesado' ? '#fe5101' : '#000'}
+						fontWeight='bold'
+						_hover={{ textDecoration: 'none' }}
+						mb={['10px', '0']}
+						fontSize={['18px', '16px']}
+					>
+						Línea para vehículos pesados
+					</Link>
+				</NextLink>
+				<Box
+					w='3px'
+					bgColor='#000'
+					height='20px'
+					mx='10px'
+					display={['none', 'block']}
+				/>
+				<NextLink href='/product/lubricantes/auxiliares#main' passHref>
+					<Link
+						color={query.type === 'auxiliares' ? '#fe5101' : '#000'}
+						fontWeight='bold'
+						_hover={{ textDecoration: 'none' }}
+						mb={['10px', '0']}
+						fontSize={['18px', '16px']}
+					>
+						Auxiliares
+					</Link>
+				</NextLink>
+				<Box
+					w='3px'
+					bgColor='#000'
+					height='20px'
+					mx='10px'
+					display={['none', 'block']}
+				/>
 				<NextLink href='/product/lubricantes/veh-liviano#main' passHref>
 					<Link
 						color={query.type === 'veh-liviano' ? '#fe5101' : '#000'}
@@ -51,35 +87,6 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 					mx='10px'
 					display={['none', 'block']}
 				/>
-				<NextLink href='/product/lubricantes/auxiliares#main' passHref>
-					<Link
-						color={query.type === 'auxiliares' ? '#fe5101' : '#000'}
-						fontWeight='bold'
-						_hover={{ textDecoration: 'none' }}
-						mb={['10px', '0']}
-						fontSize={['18px', '16px']}
-					>
-						Auxiliares
-					</Link>
-				</NextLink>
-				<Box
-					w='3px'
-					bgColor='#000'
-					height='20px'
-					mx='10px'
-					display={['none', 'block']}
-				/>
-				<NextLink href='/product/lubricantes/veh-pesado#main' passHref>
-					<Link
-						color={query.type === 'veh-pesado' ? '#fe5101' : '#000'}
-						fontWeight='bold'
-						_hover={{ textDecoration: 'none' }}
-						mb={['10px', '0']}
-						fontSize={['18px', '16px']}
-					>
-						Línea para vehículos pesados
-					</Link>
-				</NextLink>
 			</Flex>
 		</Box>
 	);
