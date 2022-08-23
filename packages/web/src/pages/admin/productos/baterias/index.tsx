@@ -249,7 +249,7 @@ const BateriasAdmin: React.FC<BateriasAdminProps> = ({ baterias }) => {
 
 	return (
 		<Layout
-			title='Filtros'
+			title='Baterías'
 			footer={
 				<Flex>
 					<Button
@@ -288,7 +288,7 @@ const BateriasAdmin: React.FC<BateriasAdminProps> = ({ baterias }) => {
 							h='full'
 							lineHeight='50px'
 						>
-							Filtros de aire
+							Todos los productos de Batería
 						</Text>
 					</Flex>
 					<Header />
