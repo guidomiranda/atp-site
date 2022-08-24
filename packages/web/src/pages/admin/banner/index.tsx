@@ -275,7 +275,7 @@ const BannersAdmin = () => {
 						fontWeight='medium'
 						onClick={() => router.push('/admin/banner/create')}
 					>
-						Crear cliente
+						Crear banner
 					</Button>
 				</Box>
 			}
