@@ -58,6 +58,9 @@ const TypeLubricants: React.FC = () => {
 		})();
 	}, [router]);
 
+	const productsFiltered = products?.filter(item => item.estado === true);
+	const productsOrdered = productsFiltered.sort((a, b) => a.order - b.order);
+
 	return (
 		<Layout>
 			<Header
@@ -73,7 +76,7 @@ const TypeLubricants: React.FC = () => {
 
 				<Box pt='56px' maxW='1220px' w='90%' m='0 auto'>
 					<Grid gridTemplateColumns={['1fr', 'repeat(2,1fr)']} gap='32px'>
-						{products?.map(item => (
+						{productsOrdered?.map(item => (
 							<Product key={item.id} product={item} />
 						))}
 					</Grid>
