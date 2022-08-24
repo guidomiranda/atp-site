@@ -180,7 +180,7 @@ const Contacto = () => {
 					address='Av. Carlos Antonio López C/ Posadas.'
 					image='/sucursales-contacto-04.jpg'
 					theme='light'
-					urlLocation=''
+					urlLocation='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3544.635441076201!2d-55.86770248494623!3d-27.324595782951942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x447847d528db3b54!2zMjfCsDE5JzI4LjUiUyA1NcKwNTEnNTUuOSJX!5e0!3m2!1ses!2spy!4v1661373751741!5m2!1ses!2spy'
 				/>
 			</Box>
 
