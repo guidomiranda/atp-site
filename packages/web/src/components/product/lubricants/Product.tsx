@@ -35,7 +35,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
 					{product.descripcion && (
 						<DetailItem title='Descripción' content={product.descripcion[0]} />
 					)}
-					{product.caracteristicas && (
+					{product.caracteristicas.length > 0 && (
 						<DetailItem
 							title='Característica'
 							content={product.caracteristicas}

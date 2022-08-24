@@ -43,12 +43,12 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 						style={{ backgroundImage: `url(${slide.bg})`, zIndex: -100 }}
 					>
 						<Flex
-							pt={{ base: '64px', lg: '0' }}
+							pt={{ base: '64px', lg: '13%' }}
 							maxW='1290px'
 							m='0 auto'
 							w='90%'
 							height='100%'
-							alignItems='center'
+							alignItems='flex-start'
 							flexDir={{ base: 'column', lg: 'row' }}
 							justifyContent={{ base: 'center', lg: 'space-between' }}
 						>

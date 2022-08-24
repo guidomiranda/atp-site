@@ -16,15 +16,16 @@ const Header: React.FC<HeaderProps> = ({ title, image, description }) => {
 			bgImage='url("/fondo-2.jpg")'
 		>
 			<Grid
-				gridTemplateColumns={['1fr', '1fr', 'repeat(2,1fr)']}
+				gridTemplateColumns={['1fr', '1fr', '1fr 1.3fr']}
 				gridTemplateRows={['repeat(2,auto)', 'initial']}
 				gap={['32px 0', '0 64px']}
 				height='100%'
-				maxW='1220px'
+				maxW='1370px'
 				m='0 auto'
 				w='90%'
-				pt={{ base: '100px', lg: '0' }}
-				alignItems='center'
+				pt={{ base: '100px', lg: '13%' }}
+
+				// alignItems='center'
 			>
 				<Box alignSelf={['flex-end', 'flex-end', 'initial']}>
 					<Flex position='relative' display='inline-flex'>

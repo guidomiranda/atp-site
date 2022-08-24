@@ -80,13 +80,6 @@ const FilterHeader: React.FC<FilterHeaderProps> = ({ query, push }) => {
 						Línea para motos
 					</Link>
 				</NextLink>
-				<Box
-					w='3px'
-					bgColor='#000'
-					height='20px'
-					mx='10px'
-					display={['none', 'block']}
-				/>
 			</Flex>
 		</Box>
 	);
