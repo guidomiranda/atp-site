@@ -163,36 +163,24 @@ const Contacto = () => {
 					title='Sucursal ATP Ciudad del Este'
 					name='Ciudad del Este, Alto Paraná'
 					email=''
-					phone1='+595 21 674 900'
+					phone1='021 - 238 6800'
 					phone2=''
-					address='Av Mariscal Lopez, Edificio Mainumby'
+					address='Av. Buenos Aires c/ valois Rivarola'
 					image='/sucursales-contacto-02.jpg'
 					theme='light'
-					urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d57617.72340443044!2d-54.635955!3d-25.501454!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x19dece88df51f516!2sMobil%20Lubricantes%20CDE!5e0!3m2!1ses!2spy!4v1658949776145!5m2!1ses!2spy'
+					urlLocation='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3601.2415884690477!2d-54.636128!3d-25.4969882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f6858304111fe1%3A0x859f22c146add485!2sATP%20Mobil%20Lubricantes%20Suc%20CDE!5e0!3m2!1ses!2spy!4v1661372662593!5m2!1ses!2spy'
 				/>
 
 				<BodyContactInfo
-					title='Cooperativa Colonias Unidas'
-					name='Obligado, Itapúa'
+					title='Sucursal ATP Encarnación'
+					name='Encarnación, Itapúa'
 					email=''
-					phone1='+595 71 218 1000'
+					phone1='0983 840 179 '
 					phone2=''
-					address='Av. Dr. Gaspar R. de Francia Nº 64'
-					image='/sucursales-contacto-03.jpg'
-					theme='light'
-					urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14211.857680734556!2d-55.635742!3d-27.062871000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd508fc56135094d3!2sCooperativa%20Colonias%20Unidas!5e0!3m2!1ses!2spy!4v1658949809087!5m2!1ses!2spy'
-				/>
-
-				<BodyContactInfo
-					title='Cooperativa Chortitzer Ltda.'
-					name='Loma Plata, Boquerón'
-					email=''
-					phone1='+595 492 418 268'
-					phone2=''
-					address='Calle Fred Engen esq. Av. Central - Surtidor'
+					address='Av. Carlos Antonio López C/ Posadas.'
 					image='/sucursales-contacto-04.jpg'
 					theme='light'
-					urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14757.227807365756!2d-59.838004!3d-22.379783000000003!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4fa22233292123d1!2sComplejo%20Industrial%20Cooperativa%20Chortitzer!5e0!3m2!1ses!2spy!4v1658949836105!5m2!1ses!2spy'
+					urlLocation=''
 				/>
 			</Box>
 

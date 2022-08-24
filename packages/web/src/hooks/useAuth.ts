@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import jwt from 'jwt-decode';
 

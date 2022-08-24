@@ -43,8 +43,8 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 						style={{ backgroundImage: `url(${slide.bg})`, zIndex: -100 }}
 					>
 						<Flex
-							pt={{ base: '64px', lg: '13%' }}
-							maxW='1290px'
+							pt={{ base: '64px', lg: '12%' }}
+							maxW='1400px'
 							m='0 auto'
 							w='90%'
 							height='100%'
@@ -62,6 +62,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 										color='white'
 										w='auto'
 										position='relative'
+										mb='32px'
 									>
 										<Text as='span'>{slide.title}</Text>
 
