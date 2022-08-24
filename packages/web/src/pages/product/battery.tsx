@@ -56,6 +56,11 @@ const Products = ({ batteries }) => {
 	const { pathname } = useRouter();
 	const category = pathname.split('/')[pathname.split('/').length - 1];
 
+	const batteriesFiltered = batteries.products.filter(
+		item => item.status === true
+	);
+	const batteriesOrdered = batteriesFiltered.sort((a, b) => a.order - b.order);
+
 	return (
 		<Layout>
 			<Header
@@ -88,7 +93,7 @@ const Products = ({ batteries }) => {
 					]}
 					gap='32px 56px'
 				>
-					{batteries.products?.map(battery => (
+					{batteriesOrdered?.map(battery => (
 						<Product key={battery.id} battery={battery} />
 					))}
 				</Grid>

@@ -149,7 +149,7 @@ const Contacto = () => {
 							email='info@atp.com.py'
 							phone1='+595 21 238 6800'
 							phone2='+595 971 599 000'
-							address='Ruta 9 Dr. Carlos A. López km. 17,5 esquina Avda. Gral Díaz.'
+							address=' Ruta Transchaco km 17,5 esquina Avda. Gral Díaz.'
 							image='/sucursales-contacto-central.jpg'
 							theme='dark'
 							urlLocation='https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7219.789598883976!2d-57.526138!3d-25.20677!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc2322dd063698196!2sATP%20Paraguay!5e0!3m2!1ses-419!2spy!4v1658949668539!5m2!1ses-419!2spy'
