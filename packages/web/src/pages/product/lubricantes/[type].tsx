@@ -29,7 +29,7 @@ const HeaderProductFooter = () => {
 					Lubricantes
 				</Heading>
 				<Text color='#fff' mt='5px' textAlign={['center', 'left']}>
-					Livianos | Motos| Pesados | Auxiliares
+					Livianos | Motos | Pesados | Auxiliares
 				</Text>
 			</Box>
 			<Box>
