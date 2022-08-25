@@ -59,7 +59,7 @@ const TypeLubricants: React.FC = () => {
 	}, [router]);
 
 	const productsFiltered = products?.filter(item => item.estado === true);
-	const productsOrdered = productsFiltered.sort((a, b) => a.order - b.order);
+	const productsOrdered = productsFiltered?.sort((a, b) => a.order - b.order);
 
 	return (
 		<Layout>
