@@ -34,6 +34,8 @@ import { LubricantesController } from './lubricantes/lubricantes.controller';
 import { LubricantesService } from './lubricantes/lubricantes.service';
 import { BateriasController } from './baterias/baterias.controller';
 import { BateriasService } from './baterias/baterias.service';
+import { VacanciasController } from './vacancias/vacancias.controller';
+import { VacanciasService } from './vacancias/vacancias.service';
 
 @Module({
   controllers: [
@@ -53,6 +55,7 @@ import { BateriasService } from './baterias/baterias.service';
     FiltrosController,
     LubricantesController,
     BateriasController,
+    VacanciasController,
   ],
   providers: [
     AppService,
@@ -72,7 +75,9 @@ import { BateriasService } from './baterias/baterias.service';
     FiltrosService,
     LubricantesService,
     BateriasService,
+    VacanciasService,
     PrismaService,
   ],
+  imports: [],
 })
 export class AppModule {}

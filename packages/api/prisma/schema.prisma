@@ -202,3 +202,17 @@ model Baterias {
   created_at DateTime  @default(now())
   updated_at DateTime?
 }
+
+model Vacancias {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  titulo     String
+  imagen     String
+  preguntas  String[]
+  requisitos String[]
+  vigencia   String
+  area       String
+  estado     Boolean   @default(true)
+  orden      Int       @default(1)
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+}
