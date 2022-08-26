@@ -111,7 +111,7 @@ const Services = () => {
 					<ArticleItem
 						title='Capacitación'
 						description='Creemos en la capacitación continua de nuestros clientes y sus empleados, y para ello ofrecemos cursos y charlas de capacitación en lubricantes. Estos cursos se realizan durante todo el año y en distintas partes del país. Los temas incluyen tipos de lubricantes, lubricación, almacenamiento, manoseo y descarte, divididos.'
-						image='/servicios-1.jpg'
+						image='/capacitacion.jpeg'
 					/>
 					<ArticleItem
 						title=' Estudio de Planta'
