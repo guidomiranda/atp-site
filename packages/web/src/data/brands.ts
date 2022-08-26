@@ -26,4 +26,7 @@ export const brands = [
 	{
 		url: '/work-9.png',
 	},
+	{
+		url: '/volswagen.png',
+	},
 ];
