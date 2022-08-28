@@ -12,6 +12,19 @@ import { FaArrowRight } from 'react-icons/fa';
 
 import Layout from '../../layout';
 import router, { useRouter } from 'next/router';
+import { useQuery } from '@tanstack/react-query';
+import axios from '../../config/axios';
+
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/vacancias',
+		});
+
+		return data.data.data;
+	});
+}
 
 const articlesData = [
 	{
@@ -95,13 +108,42 @@ const ArticleItem = ({ article }) => {
 			py='56px'
 		>
 			<Box>
-				<Image src={article.image} w='full' alt='' />
+				<Image src={article?.imagen} w='full' alt='' />
 			</Box>
 			<Box>
-				<div
-					className='reset-css'
-					dangerouslySetInnerHTML={{ __html: article.body }}
-				/>
+				<Box>
+					<Text fontWeight='bold'>{article?.titulo}</Text>
+
+					<Box mt='5px'>
+						<Text
+							fontWeight='bold'
+							my='5px'
+							display={article?.preguntas?.length === 0 ? 'none' : 'block'}
+						>
+							¿Tenés experiencia desarrollando las siguientes actividades?
+						</Text>
+						{article?.preguntas?.map((item: any) => (
+							<Text as='li'>{item}</Text>
+						))}
+					</Box>
+
+					<Box mt='15px'>
+						<Text
+							display={article?.requisitos?.length === 0 ? 'none' : 'block'}
+							fontWeight='bold'
+							my='5px'
+						>
+							Algunos requisitos para este cargo:
+						</Text>
+						{article?.requisitos?.map((item: any) => (
+							<Text as='li'>{item}</Text>
+						))}
+					</Box>
+
+					<Box mt='20px'>
+						<Text>Vigencia hasta el {article?.vigencia}</Text>
+					</Box>
+				</Box>
 
 				<Box mt='20px'>
 					<Button
@@ -110,6 +152,7 @@ const ArticleItem = ({ article }) => {
 						py='6px'
 						px='32px'
 						rounded='2px'
+						onClick={() => router.push('/trabaja-con-nosotros/cv#main')}
 					>
 						Postular
 					</Button>
@@ -122,10 +165,12 @@ const ArticleItem = ({ article }) => {
 const BusquedasVigentes = () => {
 	const [currentValue, setCurrentValue] = useState<string>('todas');
 
+	const { data: allArticles, isFetching } = usePosts();
+
 	const renderArticles =
 		currentValue === 'todas'
-			? articlesData
-			: articlesData.filter(item => item.category === currentValue);
+			? allArticles
+			: allArticles?.filter(item => item.category === currentValue);
 
 	return (
 		<Layout>
@@ -164,7 +209,7 @@ const BusquedasVigentes = () => {
 					Búsquedas Vigentes
 				</Heading>
 				<Text as='span' ml='7px' color='#333' fontSize='20px' fontWeight='bold'>
-					({renderArticles.length})
+					({renderArticles?.length})
 				</Text>
 			</Flex>
 			<Grid
@@ -177,7 +222,7 @@ const BusquedasVigentes = () => {
 				alignItems='start'
 			>
 				<Box>
-					{renderArticles.length === 0 ? (
+					{renderArticles?.length === 0 ? (
 						<Box textAlign='center'>
 							<Text>
 								Por el momento no existen búsquedas vigentes, de igual manera
@@ -199,6 +244,10 @@ const BusquedasVigentes = () => {
 									<FaArrowRight />
 								</Text>
 							</Button>
+						</Box>
+					) : isFetching ? (
+						<Box>
+							<Text>Cargando..</Text>
 						</Box>
 					) : (
 						renderArticles.map(item => (

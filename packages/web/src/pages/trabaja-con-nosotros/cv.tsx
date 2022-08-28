@@ -33,7 +33,7 @@ const TrabajaConNosotrosCV = () => {
 				// bg='linear-gradient(180deg, rgba(12,21,38,1) 0%, rgba(74,77,79,1) 100%)'
 				borderBottom='32px solid #d21a28'
 			>
-				<Box maxW='960px' m='0 auto' w='90%'>
+				<Box maxW='960px' m='0 auto' w='90%' id='main'>
 					<Box>
 						<Flex position='relative' display='inline-flex'>
 							<Heading fontSize='48px' fontWeight='black' color='#015796'>
