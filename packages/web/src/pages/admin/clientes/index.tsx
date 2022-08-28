@@ -153,7 +153,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				{client.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(client.created_at).format('MMMM, DD YYYY')}
+				{dayjs(client.created_at).format('DD/MM/YY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'

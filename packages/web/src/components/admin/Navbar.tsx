@@ -11,6 +11,7 @@ import {
 	HiOutlineShoppingCart,
 	HiOutlineUserGroup,
 } from 'react-icons/hi';
+import { TbBuildingFactory } from 'react-icons/tb';
 
 import Text from '../../components/admin/Text';
 import { UserContext } from '../../context/UserContext';
@@ -83,6 +84,11 @@ const NavbarAdmin: React.FC = () => {
 					icon={<HiOutlinePhotograph />}
 					name='Banners'
 					path='/admin/banner'
+				/>
+				<Link
+					icon={<TbBuildingFactory />}
+					name='Vacancias'
+					path='/admin/vacancias'
 				/>
 			</Box>
 

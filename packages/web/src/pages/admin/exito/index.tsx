@@ -153,7 +153,7 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 				{success.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(success.created_at).format('MMMM, DD YYYY')}
+				{dayjs(success.created_at).format('DD/MM/YY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'

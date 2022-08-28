@@ -206,7 +206,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 				{banner.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='12px'>
-				{dayjs(banner.created_at).format('MMMM, DD YYYY')}
+				{dayjs(banner.created_at).format('DD/MM/YY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'
