@@ -53,20 +53,11 @@ const articlesData = [
 const profiles = [
 	{ id: '1', title: 'Todas', value: 'todas' },
 	{ id: '2', title: 'Administración', value: 'administracion' },
-	// { id: '3', title: 'Ambiental', value: 'ambiental' },
 	{ id: '4', title: 'Comercial', value: 'comercial' },
-	// { id: '5', title: 'Compras', value: 'compras' },
-	// { id: '6', title: 'Comunicación', value: 'comunicacion' },
-	// { id: '7', title: 'Financiera', value: 'financiera' },
-	// { id: '8', title: 'Forestal', value: 'forestal' },
-	// { id: '9', title: 'Industrial', value: 'industrial' },
-	{ id: '10', title: 'Logística', value: 'logistica' },
-	// { id: '11', title: 'Social', value: 'social' },
-	// { id: '12', title: 'Talento humano', value: 'talento-humano' },
-	{ id: '13', title: 'RRHH', value: 'rrhh' },
-	{ id: '14', title: 'Marketing', value: 'marketing' },
-	{ id: '15', title: 'Servicios Generales', value: 'serv-generales' },
-	// { id: '0', title: 'Otras', value: 'otras' },
+	{ id: '5', title: 'Logística', value: 'logistica' },
+	{ id: '6', title: 'RRHH', value: 'rrhh' },
+	{ id: '7', title: 'Marketing', value: 'marketing' },
+	{ id: '8', title: 'Servicios Generales', value: 'serv-generales' },
 ];
 
 const NavLink = ({ value, children, setCurrentValue, currentValue }) => {

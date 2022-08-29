@@ -95,10 +95,10 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.push('/admin/clientes');
+			return router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			router.push('/admin/clientes');
+			return router.reload();
 		}
 	};
 
@@ -153,7 +153,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				{client.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(client.created_at).format('MMMM, DD YYYY')}
+				{dayjs(client.created_at).format('DD/MM/YY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'

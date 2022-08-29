@@ -15,24 +15,24 @@ import {
 } from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
 
 import AdminLayout from '../../../layout/admin';
 import axios from '../../../config/axios';
 import Text from '../../../components/admin/Text';
-import { deleteReview } from '../../../utils';
-import { useQuery } from '@tanstack/react-query';
+import { deleteVacancia } from '../../../utils/vacancias';
 
-interface TestimonialsProps {
-	testimonial: any;
+interface VancanciasProps {
+	vacancia: any;
 }
 
 function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
 			method: 'GET',
-			url: '/review',
+			url: '/vacancias',
 		});
-		return data.data.reviews;
+		return data.data.data;
 	});
 }
 
@@ -86,19 +86,19 @@ const Header: React.FC = () => {
 	);
 };
 
-const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
+const Testimonials: React.FC<VancanciasProps> = ({ vacancia }) => {
 	const router = useRouter();
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const handleDeleteTestimonial = async () => {
-		const response = await deleteReview(testimonial.id);
+		const response = await deleteVacancia(vacancia.id);
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.reload();
+			router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			return router.reload();
+			router.reload();
 		}
 	};
 
@@ -116,7 +116,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 			<Modal isOpen={isOpen} onClose={onClose} isCentered>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>¿Desea borrar el testimonio?</ModalHeader>
+					<ModalHeader>¿Desea borrar la vacancia?</ModalHeader>
 
 					<ModalFooter>
 						<Button rounded='3px' colorScheme='gray' mr={3} onClick={onClose}>
@@ -136,7 +136,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 			</Modal>
 
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
-				{testimonial.order}
+				{vacancia.orden}
 			</Box>
 			<Box
 				color='#3B4A67'
@@ -145,15 +145,15 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 				cursor='pointer'
-				onClick={() => router.push(`/admin/testimonios/${testimonial.id}`)}
+				onClick={() => router.push(`/admin/vacancias/${vacancia.id}`)}
 			>
-				{testimonial.author}
+				{vacancia?.titulo}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				{testimonial.status ? 'activo' : 'inactivo'}
+				{vacancia?.estado ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(testimonial.created_at).format('DD/MM/YY')}
+				{dayjs(vacancia.created_at).format('DD/MM/YY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'
@@ -175,7 +175,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ testimonial }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push(`/admin/testimonios/${testimonial.id}`)}
+					onClick={() => router.push(`/admin/vacancias/${vacancia.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -220,9 +220,9 @@ const TestimoniosAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/admin/testimonios/create')}
+						onClick={() => router.push('/admin/vacancias/create')}
 					>
-						Crear testimonio
+						Crear vacancia
 					</Button>
 				</Box>
 			}
@@ -234,8 +234,8 @@ const TestimoniosAdmin = () => {
 						<Text>Cargando..</Text>
 					</Grid>
 				) : (
-					data?.map(testimonial => (
-						<Testimonials key={testimonial.id} testimonial={testimonial} />
+					data?.map((vacancia: any) => (
+						<Testimonials key={vacancia.id} vacancia={vacancia} />
 					))
 				)}
 			</Box>

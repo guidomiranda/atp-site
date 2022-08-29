@@ -95,10 +95,10 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.push('/admin/exito');
+			return router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			router.push('/admin/exito');
+			return router.reload();
 		}
 	};
 
@@ -153,7 +153,7 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 				{success.status ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(success.created_at).format('MMMM, DD YYYY')}
+				{dayjs(success.created_at).format('DD/MM/YY')}
 			</Box>
 			<Grid
 				gridTemplateColumns='repeat(2, 1fr)'
