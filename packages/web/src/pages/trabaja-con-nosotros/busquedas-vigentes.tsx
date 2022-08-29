@@ -164,7 +164,7 @@ const BusquedasVigentes = () => {
 	const renderArticles =
 		currentValue === 'todas'
 			? allArticles
-			: allArticles?.filter(item => item.category === currentValue);
+			: allArticles?.filter(item => item.area === currentValue);
 
 	return (
 		<Layout>

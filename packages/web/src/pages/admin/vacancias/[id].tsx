@@ -9,6 +9,7 @@ import {
 	Grid,
 	Image,
 	Input,
+	Select,
 	Switch,
 	Text,
 	Textarea,
@@ -31,6 +32,15 @@ export const getServerSideProps: GetServerSideProps = async context => {
 		},
 	};
 };
+
+const profiles = [
+	{ id: '2', title: 'Administración', value: 'administracion' },
+	{ id: '4', title: 'Comercial', value: 'comercial' },
+	{ id: '5', title: 'Logística', value: 'logistica' },
+	{ id: '6', title: 'RRHH', value: 'rrhh' },
+	{ id: '7', title: 'Marketing', value: 'marketing' },
+	{ id: '8', title: 'Servicios Generales', value: 'serv-generales' },
+];
 
 const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 	const router = useRouter();
@@ -384,22 +394,48 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 							</Box>
 						</Box>
 
-						<Box w={['100%', '20%']} mb='20px'>
-							<Text
-								fontSize='12px'
-								fontWeight='medium'
-								textTransform='uppercase'
-								mb='5px'
-								color='#555'
-							>
-								Vigencia
-							</Text>
-							<Input
-								type='date'
-								value={vigenciaInfo}
-								onChange={e => setVigenciaInfo(e.target.value)}
-							/>
-						</Box>
+						<Flex mb='20px' alignItems='center'>
+							<Box mr='20px'>
+								<Text
+									fontSize='12px'
+									fontWeight='medium'
+									textTransform='uppercase'
+									mb='5px'
+									color='#555'
+								>
+									Vigencia
+								</Text>
+								<Input
+									type='date'
+									value={vigenciaInfo}
+									onChange={e => setVigenciaInfo(e.target.value)}
+								/>
+							</Box>
+							<Box>
+								<Text
+									fontSize='12px'
+									fontWeight='medium'
+									textTransform='uppercase'
+									mb='5px'
+									color='#555'
+								>
+									Área
+								</Text>
+								<Select
+									value={vacancia?.area}
+									onChange={e =>
+										setVacancia({ ...vacancia, area: e.target.value })
+									}
+								>
+									<option value=''>Seleccione un área</option>
+									{profiles.map(item => (
+										<option key={item.id} value={item.value}>
+											{item.title}
+										</option>
+									))}
+								</Select>
+							</Box>
+						</Flex>
 
 						<Flex>
 							<Flex alignItems='center' mr='20px'>
