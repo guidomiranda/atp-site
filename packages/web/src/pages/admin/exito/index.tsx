@@ -95,10 +95,10 @@ const Successes: React.FC<SuccessesProps> = ({ success }) => {
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.push('/admin/exito');
+			return router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			router.push('/admin/exito');
+			return router.reload();
 		}
 	};
 

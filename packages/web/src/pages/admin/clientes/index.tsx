@@ -95,10 +95,10 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.push('/admin/clientes');
+			return router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			router.push('/admin/clientes');
+			return router.reload();
 		}
 	};
 

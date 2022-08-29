@@ -9,6 +9,7 @@ import {
 	Grid,
 	Image,
 	Input,
+	Select,
 	Switch,
 	Text,
 	Textarea,
@@ -17,38 +18,32 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 
 import AdminLayout from '../../../layout/admin';
-import { getVacancia, updateVacancia } from '../../../utils/vacancias';
+import { createVacancia } from '../../../utils/vacancias';
 import { FileType } from '../../../interfaces/image';
-import { GetServerSideProps } from 'next';
 import { useImage } from '../../../hooks/useImage';
 
-export const getServerSideProps: GetServerSideProps = async context => {
-	const data = await getVacancia(context.query.id as string);
+const profiles = [
+	{ id: '2', title: 'Administración', value: 'administracion' },
+	{ id: '4', title: 'Comercial', value: 'comercial' },
+	{ id: '5', title: 'Logística', value: 'logistica' },
+	{ id: '6', title: 'RRHH', value: 'rrhh' },
+	{ id: '7', title: 'Marketing', value: 'marketing' },
+	{ id: '8', title: 'Servicios Generales', value: 'serv-generales' },
+];
 
-	return {
-		props: {
-			vacanciaInfo: data.data,
-		},
-	};
-};
-
-const VacanciaAdminEdit = ({ vacanciaInfo }) => {
+const VacanciaAdminCreate = () => {
 	const router = useRouter();
 
-	const [vacancia, setVacancia] = useState<any>(vacanciaInfo);
+	const [vacancia, setVacancia] = useState<any>({});
+
+	const [preguntasArray, setPreguntasArray] = useState<any>(['']);
+	const [vigenciaInfo, setVigenciaInfo] = useState<string>('');
+	const [requisitosArray, setRequisitosArray] = useState<any>(['']);
 
 	const inputImgRef = useRef(null);
-	const [imageExist, setImageExist] = useState(vacanciaInfo.imagen);
+	const [imageExist, setImageExist] = useState<string>('');
 	const [image, setImage] = useState<string | null>(null);
 	const [fileImage, setFileImage] = useState<FileType | string | Blob>();
-
-	const [preguntasArray, setPreguntasArray] = useState<any>(
-		vacancia?.preguntas
-	);
-	const [vigenciaInfo, setVigenciaInfo] = useState<string>(vacancia?.vigencia);
-	const [requisitosArray, setRequisitosArray] = useState<any>(
-		vacancia?.requisitos
-	);
 
 	const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.currentTarget as HTMLInputElement;
@@ -58,6 +53,11 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 		setImageExist(image);
 		setFileImage(file);
 	};
+
+	useEffect(() => {
+		setImage(null);
+		setFileImage(null);
+	}, []);
 
 	const handleAddDescriptionArray = () => {
 		setPreguntasArray([...preguntasArray, '']);
@@ -79,11 +79,6 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 		);
 	};
 
-	useEffect(() => {
-		setImage(null);
-		setFileImage(null);
-	}, []);
-
 	const handleVacancialUpdate = async () => {
 		if (!vacancia.titulo || preguntasArray.length === 0) {
 			return toast('Todos los campos son obligatorios!', {
@@ -94,6 +89,12 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 		const result = preguntasArray?.some(item => item === '');
 
 		if (result) {
+			return toast('Todos los campos son obligatorios!', {
+				icon: '🤨',
+			});
+		}
+
+		if (!image || !fileImage) {
 			return toast('Todos los campos son obligatorios!', {
 				icon: '🤨',
 			});
@@ -113,47 +114,24 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 			});
 		}
 
-		if (image) {
-			const responseImage = await useImage(fileImage as string, 'vacancias');
+		const responseImage = await useImage(fileImage as string, 'vacancias');
 
-			const vacanciaUpdated = {
-				...vacancia,
-				preguntas: preguntasArray,
-				requisitos: requisitosArray,
-				vigencia: vigenciaInfo,
-				imagen: responseImage,
-			};
+		const vacanciaUpdated = {
+			...vacancia,
+			preguntas: preguntasArray,
+			requisitos: requisitosArray,
+			vigencia: vigenciaInfo,
+			imagen: responseImage,
+		};
 
-			delete vacanciaUpdated.id;
+		const response = await createVacancia(vacanciaUpdated);
 
-			const response = await updateVacancia(vacancia.id, vacanciaUpdated);
-
-			if (response.success) {
-				toast.success('Actualizado correctamente!');
-				return router.push('/admin/vacancias');
-			} else {
-				toast.error('Hubo un problema al actualizar');
-				router.push('/admin/vacancias');
-			}
+		if (response.success) {
+			toast.success('Creado correctamente!');
+			return router.push('/admin/vacancias');
 		} else {
-			const vacanciaUpdated = {
-				...vacancia,
-				preguntas: preguntasArray,
-				requisitos: requisitosArray,
-				vigencia: vigenciaInfo,
-			};
-
-			delete vacanciaUpdated.id;
-
-			const response = await updateVacancia(vacancia.id, vacanciaUpdated);
-
-			if (response.success) {
-				toast.success('Actualizado correctamente!');
-				return router.push('/admin/vacancias');
-			} else {
-				toast.error('Hubo un problema al actualizar');
-				router.push('/admin/vacancias');
-			}
+			toast.error('Hubo un problema al crear');
+			router.push('/admin/vacancias');
 		}
 	};
 
@@ -328,6 +306,49 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 							</Box>
 						</Grid>
 
+						<Flex mb='20px' alignItems='center'>
+							<Box mr='20px'>
+								<Text
+									fontSize='12px'
+									fontWeight='medium'
+									textTransform='uppercase'
+									mb='5px'
+									color='#555'
+								>
+									Vigencia
+								</Text>
+								<Input
+									width='200px'
+									type='date'
+									value={vigenciaInfo}
+									onChange={e => setVigenciaInfo(e.target.value)}
+								/>
+							</Box>
+							<Box>
+								<Text
+									fontSize='12px'
+									fontWeight='medium'
+									textTransform='uppercase'
+									mb='5px'
+									color='#555'
+								>
+									Área
+								</Text>
+								<Select
+									onChange={e =>
+										setVacancia({ ...vacancia, area: e.target.value })
+									}
+								>
+									<option value={null}>Seleccione un área</option>
+									{profiles.map(item => (
+										<option key={item.id} value={item.value}>
+											{item.title}
+										</option>
+									))}
+								</Select>
+							</Box>
+						</Flex>
+
 						<Box mb='20px'>
 							<Text
 								fontSize='12px'
@@ -340,9 +361,9 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 							</Text>
 
 							<Box>
-								{vacanciaInfo.imagen && (
+								{image && (
 									<Image
-										src={image || vacanciaInfo.imagen}
+										src={image}
 										h='200px'
 										verticalAlign='top'
 										alt='Dan Abramov'
@@ -373,7 +394,7 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 										return inputImgRef.current.click();
 									}}
 								>
-									Cambiar imagen
+									{image ? 'Cambiar imagen' : 'Añadir imagen'}
 								</Button>
 								<Input
 									ref={inputImgRef}
@@ -383,52 +404,6 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 								/>
 							</Box>
 						</Box>
-
-						<Box w={['100%', '20%']} mb='20px'>
-							<Text
-								fontSize='12px'
-								fontWeight='medium'
-								textTransform='uppercase'
-								mb='5px'
-								color='#555'
-							>
-								Vigencia
-							</Text>
-							<Input
-								type='date'
-								value={vigenciaInfo}
-								onChange={e => setVigenciaInfo(e.target.value)}
-							/>
-						</Box>
-
-						<Flex>
-							<Flex alignItems='center' mr='20px'>
-								<Text mr='12px'>Estado:</Text>
-								<Switch
-									size={`lg`}
-									defaultChecked={vacancia?.estado}
-									onChange={() =>
-										setVacancia({
-											...vacancia,
-											estado: vacancia.estado ? false : true,
-										})
-									}
-								/>
-							</Flex>
-							<Flex alignItems='center'>
-								<Text mr='12px'>Orden:</Text>
-								<Input
-									w='100px'
-									value={vacancia?.orden}
-									onChange={e =>
-										setVacancia({
-											...vacancia,
-											orden: Number(e.target.value),
-										})
-									}
-								/>
-							</Flex>
-						</Flex>
 
 						<Box mt='30px'>
 							<Button
@@ -441,7 +416,7 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 								_hover={{ bgColor: '#8C95A6' }}
 								onClick={handleVacancialUpdate}
 							>
-								Actualizar información
+								Crear información
 							</Button>
 						</Box>
 					</Box>
@@ -451,4 +426,4 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 	);
 };
 
-export default VacanciaAdminEdit;
+export default VacanciaAdminCreate;

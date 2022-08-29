@@ -15,12 +15,12 @@ import {
 } from '@chakra-ui/react';
 import { FiEdit } from 'react-icons/fi';
 import { FaTrash } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
 
 import AdminLayout from '../../../layout/admin';
 import axios from '../../../config/axios';
 import Text from '../../../components/admin/Text';
-import { deleteReview } from '../../../utils';
-import { useQuery } from '@tanstack/react-query';
+import { deleteVacancia } from '../../../utils/vacancias';
 
 interface VancanciasProps {
 	vacancia: any;
@@ -91,14 +91,14 @@ const Testimonials: React.FC<VancanciasProps> = ({ vacancia }) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const handleDeleteTestimonial = async () => {
-		const response = await deleteReview(vacancia.id);
+		const response = await deleteVacancia(vacancia.id);
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.push('/admin/vacancias');
+			router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			router.push('/admin/vacancias');
+			router.reload();
 		}
 	};
 
@@ -116,7 +116,7 @@ const Testimonials: React.FC<VancanciasProps> = ({ vacancia }) => {
 			<Modal isOpen={isOpen} onClose={onClose} isCentered>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>¿Desea borrar el testimonio?</ModalHeader>
+					<ModalHeader>¿Desea borrar la vacancia?</ModalHeader>
 
 					<ModalFooter>
 						<Button rounded='3px' colorScheme='gray' mr={3} onClick={onClose}>

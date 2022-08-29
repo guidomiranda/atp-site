@@ -110,10 +110,10 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
-			return router.push('/admin/banner');
+			return router.reload();
 		} else {
 			toast.error('Hubo un problema al eliminar');
-			router.push('/admin/banner');
+			return router.reload();
 		}
 	};
 

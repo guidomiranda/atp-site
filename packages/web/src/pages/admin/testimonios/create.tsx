@@ -6,7 +6,6 @@ import {
 	Flex,
 	Grid,
 	Input,
-	Switch,
 	Text,
 	Textarea,
 } from '@chakra-ui/react';
