@@ -9,6 +9,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import { FaArrowRight } from 'react-icons/fa';
+import dayjs from 'dayjs';
 
 import Layout from '../../layout';
 import router, { useRouter } from 'next/router';
@@ -132,7 +133,9 @@ const ArticleItem = ({ article }) => {
 					</Box>
 
 					<Box mt='20px'>
-						<Text>Vigencia hasta el {article?.vigencia}</Text>
+						<Text>
+							Vigencia hasta el {dayjs(article?.vigencia).format('DD/MM/YY')}
+						</Text>
 					</Box>
 				</Box>
 
