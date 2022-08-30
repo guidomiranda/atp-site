@@ -40,7 +40,7 @@ const About = () => {
 			/>
 			<Box bgImage='linear-gradient(rgb(13, 20, 38), rgb(87, 86, 84))'>
 				<Box maxW='1220px' m='0 auto' w='90%' py='128px'>
-					<Box as='article' mb='96px'>
+					<Box as='article' mb='128px'>
 						<Grid
 							gridTemplateColumns={{ base: '1fr', md: 'repeat(2,1fr)' }}
 							gap={{ base: '48px 0', md: '0 64px' }}
@@ -120,7 +120,7 @@ const About = () => {
 							</Box>
 							<Box>
 								<Image
-									src='/img-equipo-atp.jpg'
+									src='/img_vision.jpeg'
 									alt=''
 									width='100%'
 									objectFit='cover'
@@ -131,7 +131,7 @@ const About = () => {
 					</Box>
 				</Box>
 
-				<Box py='72px'>
+				<Box pt='0' pb='64px'>
 					<Box maxW='1220px' m='0 auto' w='90%'>
 						<Grid
 							gridTemplateColumns={{ base: '1fr', md: 'repeat(2,1fr)' }}
@@ -188,6 +188,61 @@ const About = () => {
 							</Box>
 						</Grid>
 					</Box>
+				</Box>
+
+				<Box
+					as='article'
+					mb='32px'
+					maxW='1220px'
+					w='90%'
+					m='0 auto'
+					pt='96px'
+					pb='128px'
+				>
+					<Grid
+						gridTemplateColumns={{ base: '1fr', md: 'repeat(2,1fr)' }}
+						gap={{ base: '48px 0', md: '0 64px' }}
+					>
+						<Box>
+							<Flex display='inline-flex' position='relative'>
+								<Heading
+									fontWeight='black'
+									color='#fff'
+									fontSize={{ base: '40px', md: '56px' }}
+								>
+									Infraestructura
+								</Heading>
+								<Box
+									width='40px'
+									height='12px'
+									bgColor='#b41f1b'
+									position='absolute'
+									left='0'
+									top='-6px'
+								/>
+							</Flex>
+							<Text
+								fontSize={['18px', '20px']}
+								mt='26px'
+								w={['100%', '90%']}
+								color='#fff'
+							>
+								Cuenta con un plantel altamente capacitado. El área logística
+								dispone de unidades de transporte de 0,7 a 15 toneladas y un
+								depósito techado para 1.500.000 litros, garantizando el perfecto
+								estado de los productos.
+							</Text>
+						</Box>
+						<Box>
+							<Image
+								src='/img-equipo-atp.jpg'
+								alt=''
+								width='100%'
+								objectFit='cover'
+								verticalAlign='top'
+							/>
+						</Box>
+					</Grid>
 				</Box>
 			</Box>
 
