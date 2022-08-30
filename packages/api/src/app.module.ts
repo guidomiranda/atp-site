@@ -36,6 +36,10 @@ import { BateriasController } from './baterias/baterias.controller';
 import { BateriasService } from './baterias/baterias.service';
 import { VacanciasController } from './vacancias/vacancias.controller';
 import { VacanciasService } from './vacancias/vacancias.service';
+import { ClientesController } from './clientes/clientes.controller';
+import { MarcasController } from './marcas/marcas.controller';
+import { ClientesService } from './clientes/clientes.service';
+import { MarcasService } from './marcas/marcas.service';
 
 @Module({
   controllers: [
@@ -56,6 +60,8 @@ import { VacanciasService } from './vacancias/vacancias.service';
     LubricantesController,
     BateriasController,
     VacanciasController,
+    ClientesController,
+    MarcasController,
   ],
   providers: [
     AppService,
@@ -76,6 +82,8 @@ import { VacanciasService } from './vacancias/vacancias.service';
     LubricantesService,
     BateriasService,
     VacanciasService,
+    ClientesService,
+    MarcasService,
     PrismaService,
   ],
   imports: [],

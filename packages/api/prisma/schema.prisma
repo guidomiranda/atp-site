@@ -216,3 +216,25 @@ model Vacancias {
   created_at DateTime  @default(now())
   updated_at DateTime?
 }
+
+model Marcas {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre     String
+  link       String
+  imagen     String
+  estado     Boolean   @default(true)
+  orden      Int       @default(1)
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+}
+
+model Clientes {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre     String
+  link       String
+  imagen     String
+  estado     Boolean   @default(true)
+  orden      Int       @default(1)
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+}
