@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 import Layout from '../layout';
@@ -8,6 +8,8 @@ import Product from '../components/home/Product';
 import Slides from '../components/home/Slide';
 import { getBanners, getClients } from '../utils';
 import { slides_data, brands, products } from '../data';
+import { useQuery } from '@tanstack/react-query';
+import axios from '../config/axios';
 
 interface HomeProps {
 	banners: any;
@@ -19,6 +21,16 @@ interface HomeProps {
 		order: number;
 		createdAt: Date;
 	};
+}
+
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/marcas',
+		});
+		return data.data.data;
+	});
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
@@ -34,6 +46,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 const Home: React.FC<HomeProps> = ({ clients, banners }) => {
+	const { data: marcas, isFetching } = usePosts();
+
 	return (
 		<Layout title='Inicio'>
 			{/* Banner */}
@@ -110,9 +124,11 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 					}}
 					gap='96px'
 				>
-					{brands.map((brand, i) => (
+					{marcas.map((brand, i) => (
 						<Grid key={i} placeItems='center'>
-							<Image src={brand.url} alt='' />
+							<Link href={brand.link} target='_blank'>
+								<Image src={brand.imagen} alt='' />
+							</Link>
 						</Grid>
 					))}
 				</Grid>
