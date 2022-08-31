@@ -12,7 +12,7 @@ export const getClients = async () => {
 export const getClient = async (id: string) => {
 	const data = await axios({
 		method: 'GET',
-		url: `/client/${id}`,
+		url: `/clientes/${id}`,
 	});
 
 	return data.data;
@@ -21,7 +21,7 @@ export const getClient = async (id: string) => {
 export const updateClient = async (id: string, clientInfo: any) => {
 	const data = await axios({
 		method: 'PATCH',
-		url: `/client/${id}`,
+		url: `/clientes/${id}`,
 		data: JSON.stringify(clientInfo),
 	});
 
@@ -31,7 +31,7 @@ export const updateClient = async (id: string, clientInfo: any) => {
 export const createClient = async (clientInfo: any) => {
 	const data = await axios({
 		method: 'POST',
-		url: `/client/create`,
+		url: `/clientes/create`,
 		data: JSON.stringify(clientInfo),
 	});
 
@@ -41,7 +41,7 @@ export const createClient = async (clientInfo: any) => {
 export const deleteClient = async (id: string) => {
 	const data = await axios({
 		method: 'DELETE',
-		url: `/client/${id}`,
+		url: `/clientes/${id}`,
 	});
 
 	return data.data;

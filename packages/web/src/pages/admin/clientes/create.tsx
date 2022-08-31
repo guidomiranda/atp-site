@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
 	Box,
 	Button,
 	Flex,
 	Grid,
+	Image,
 	Input,
 	Switch,
 	Text,
@@ -13,52 +14,51 @@ import {
 import { BsArrowLeftShort } from 'react-icons/bs';
 
 import AdminLayout from '../../../layout/admin';
+import { GetServerSideProps } from 'next';
+import { createClient, getClient, updateClient } from '../../../utils';
 import toast from 'react-hot-toast';
-import { createClient } from '../../../utils';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import produce from 'immer';
+import { FileType } from '../../../interfaces/image';
+import { useImage } from '../../../hooks/useImage';
 
-const ClientAdminCreate = () => {
+const ClientAdminEdit = () => {
 	const router = useRouter();
 
 	const [clientInfo, setClientInfo] = useState<any>({
-		title: '',
-		status: true,
-		order: 1,
+		nombre: '',
+		link: '',
 	});
-	const [descriptionArray, setDescriptionArray] = useState<any[]>(['']);
 
-	const handleAddDescriptionArray = () => {
-		setDescriptionArray([...descriptionArray, '']);
+	const inputImgRef = useRef(null);
+	const [imageExist, setImageExist] = useState(null);
+	const [image, setImage] = useState<string | null>(null);
+	const [fileImage, setFileImage] = useState<FileType | string | Blob>();
+
+	const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const target = e.currentTarget as HTMLInputElement;
+		const file = target.files[0];
+		const image = URL.createObjectURL(file);
+		setImage(image);
+		setImageExist(image);
+		setFileImage(file);
 	};
 
-	const handleDeleteDescriptionArray = (body: any) => {
-		setDescriptionArray((current: any) =>
-			current.filter((item: any) => item !== body)
-		);
-	};
-
-	const handleCreateSuccessInfo = async () => {
-		if (!clientInfo.title || descriptionArray.length === 0) {
+	const handleUpdateClientInfo = async () => {
+		if (!clientInfo.nombre || !image) {
 			return toast('Todos los campos son obligatorios!', {
 				icon: '🤨',
 			});
 		}
 
-		const result = descriptionArray.some(item => item === '');
+		const responseImage = await useImage(fileImage as string, 'clientes');
 
-		if (result) {
-			return toast('Todos los campos son obligatorios!', {
-				icon: '🤨',
-			});
-		}
-
-		const clientInfoCreated = {
+		const clientInfoUpdated = {
 			...clientInfo,
-			description: descriptionArray,
+			imagen: responseImage,
 		};
 
-		const response = await createClient(clientInfoCreated);
+		const response = await createClient(clientInfoUpdated);
 
 		if (response.success) {
 			toast.success('Creado correctamente!');
@@ -71,7 +71,7 @@ const ClientAdminCreate = () => {
 
 	return (
 		<AdminLayout
-			title='Crear cliente'
+			title={clientInfo.nombre}
 			back={
 				<Box>
 					<Button
@@ -104,13 +104,13 @@ const ClientAdminCreate = () => {
 								mb='5px'
 								color='#555'
 							>
-								Título
+								Nombre
 							</Text>
 							<Input
 								rounded='3px'
-								value={clientInfo.title}
+								value={clientInfo.nombre}
 								onChange={e =>
-									setClientInfo({ ...clientInfo, title: e.target.value })
+									setClientInfo({ ...clientInfo, nombre: e.target.value })
 								}
 							/>
 						</Box>
@@ -123,84 +123,72 @@ const ClientAdminCreate = () => {
 								mb='5px'
 								color='#555'
 							>
-								Descripción
+								Link
 							</Text>
-							<Box>
-								{descriptionArray?.map((item: any, index: number) => (
-									<Grid
-										gridTemplateColumns='1fr repeat(2, auto)'
-										key={index}
-										gap='0 10px'
-										alignItems='center'
-										mb='15px'
-									>
-										<Textarea
-											rounded='3px'
-											h='10rem'
-											resize='none'
-											value={item}
-											onChange={e => {
-												const text = e.target.value;
-												setDescriptionArray(currentDescription =>
-													produce(currentDescription, v => {
-														v[index] = text;
-													})
-												);
-											}}
-										/>
-										<Button
-											display='block'
-											minW='initial'
-											h='10rem'
-											bgColor='gray.200'
-											color='blue.700'
-											p='0 15px'
-											_hover={{ bgColor: 'gray.200' }}
-											onClick={handleAddDescriptionArray}
-										>
-											<FaPlus />
-										</Button>
-										<Button
-											display='block'
-											minW='initial'
-											h='10rem'
-											bgColor='gray.600'
-											color='#fff'
-											p='0 15px'
-											_hover={{ bgColor: 'gray.600' }}
-											onClick={() => handleDeleteDescriptionArray(item)}
-										>
-											<FaTrash />
-										</Button>
-									</Grid>
-								))}
-							</Box>
+							<Input
+								rounded='3px'
+								value={clientInfo.link}
+								onChange={e =>
+									setClientInfo({ ...clientInfo, link: e.target.value })
+								}
+							/>
 						</Box>
 
-						<Flex>
-							{/* <Flex alignItems='center' mr='20px'>
-								<Text mr='12px'>Estado:</Text>
-								<Switch
-									id='email-alerts'
-									size={`lg`}
-									defaultChecked={statusValue}
-									onChange={() => setStatusValue(!statusValue)}
-								/>
-							</Flex> */}
-							<Flex alignItems='center'>
-								<Text mr='12px'>Orden:</Text>
+						<Box mb='20px'>
+							<Text
+								fontSize='12px'
+								fontWeight='medium'
+								textTransform='uppercase'
+								mb='5px'
+								color='#555'
+							>
+								Imagen
+							</Text>
+
+							<Box>
+								{image && (
+									<Image
+										src={image || image}
+										h='200px'
+										verticalAlign='top'
+										alt={clientInfo.nombre}
+										objectFit='contain'
+									/>
+								)}
+							</Box>
+
+							<Text color='#333' fontSize='12px' mt='20px'>
+								Tamaño recomendado 800px x 800px
+							</Text>
+
+							<Box mt='15px'>
+								<Button
+									bgColor='transparent'
+									borderRadius={`3px`}
+									h={`50px`}
+									minW={`initial`}
+									p={`0 28px`}
+									border='1px solid #3B4A67'
+									_focus={{ shadow: 0 }}
+									color='#3B4A67'
+									fontWeight={`normal`}
+									_hover={{ backgroundColor: `#FFF` }}
+									_active={{ backgroundColor: `#FFF` }}
+									onClick={() => {
+										console.log('hello');
+										return inputImgRef.current.click();
+									}}
+								>
+									{image ? 'Cambiar imagen' : 'Añadir imagen'}
+								</Button>
 								<Input
-									w='100px'
-									value={clientInfo.order}
-									onChange={e =>
-										setClientInfo({
-											...clientInfo,
-											order: Number(e.target.value),
-										})
-									}
+									ref={inputImgRef}
+									type='file'
+									onChange={handleChangeImage}
+									display='none'
 								/>
-							</Flex>
-						</Flex>
+							</Box>
+						</Box>
 
 						<Box mt='30px'>
 							<Button
@@ -211,9 +199,9 @@ const ClientAdminCreate = () => {
 								color='#fff'
 								px='32px'
 								_hover={{ bgColor: '#8C95A6' }}
-								onClick={handleCreateSuccessInfo}
+								onClick={handleUpdateClientInfo}
 							>
-								Crear cliente
+								Crear información
 							</Button>
 						</Box>
 					</Box>
@@ -223,4 +211,4 @@ const ClientAdminCreate = () => {
 	);
 };
 
-export default ClientAdminCreate;
+export default ClientAdminEdit;

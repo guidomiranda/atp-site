@@ -30,9 +30,9 @@ function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
 			method: 'GET',
-			url: '/client',
+			url: '/clientes',
 		});
-		return data.data.clients;
+		return data.data.data;
 	});
 }
 
@@ -136,7 +136,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 			</Modal>
 
 			<Box color='#3B4A67' fontSize='14px' textAlign='center'>
-				{client.order}
+				{client.orden}
 			</Box>
 			<Box
 				color='#3B4A67'
@@ -147,10 +147,10 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				cursor='pointer'
 				onClick={() => router.push(`/admin/clientes/${client.id}`)}
 			>
-				{client.title}
+				{client.nombre}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				{client.status ? 'activo' : 'inactivo'}
+				{client.estado ? 'activo' : 'inactivo'}
 			</Box>
 			<Box color='#3B4A67' fontSize='14px'>
 				{dayjs(client.created_at).format('DD/MM/YY')}
