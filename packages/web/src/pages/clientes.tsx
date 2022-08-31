@@ -1,11 +1,13 @@
 import React from 'react';
-import { Box, Grid, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 import Header from '../components/client/Header';
 import Layout from '../layout';
 import { getClients } from '../utils';
 import { clients } from '../data/clients';
+import { useQuery } from '@tanstack/react-query';
+import axios from '../config/axios';
 
 interface ClientsProps {
 	clients: any;
@@ -19,6 +21,16 @@ export const getServerSideProps: GetServerSideProps = async () => {
 	const clients = await getClients();
 	return { props: { clients } };
 };
+
+function usePosts() {
+	return useQuery(['posts'], async () => {
+		const data = await axios({
+			method: 'GET',
+			url: '/clientes',
+		});
+		return data.data.data;
+	});
+}
 
 const ItemReview: React.FC<ClientProps> = ({ client }) => {
 	return (
@@ -42,6 +54,8 @@ const ItemReview: React.FC<ClientProps> = ({ client }) => {
 };
 
 const Clientes: React.FC<ClientsProps> = () => {
+	const { data: clientes, isFetching } = usePosts();
+
 	return (
 		<Layout>
 			<Header
@@ -52,11 +66,6 @@ const Clientes: React.FC<ClientsProps> = () => {
 				image='/personas-1.png'
 			/>
 			<Box bgColor='#fff' py='96px' maxW='1270px' w='90%' m='0 auto'>
-				{/* <Box maxW='1220px' w='90%' m='0 auto'>
-					{clients.clients?.map(item => (
-						<ItemReview key={item.id} client={item} />
-					))}
-				</Box> */}
 				<Grid
 					gridTemplateColumns={[
 						'repeat(2, 1fr)',
@@ -66,9 +75,11 @@ const Clientes: React.FC<ClientsProps> = () => {
 					]}
 					gap='20px'
 				>
-					{clients.map((client: any) => (
+					{clientes.map((client: any) => (
 						<Grid placeItems='center' key={client.id}>
-							<Image src={client.image} alt='' w='100%' />
+							<Link href={client.link} target='_blank'>
+								<Image src={client.imagen} alt='' w='100%' />
+							</Link>
 						</Grid>
 					))}
 				</Grid>
