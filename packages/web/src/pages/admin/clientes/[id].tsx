@@ -4,12 +4,10 @@ import {
 	Box,
 	Button,
 	Flex,
-	Grid,
 	Image,
 	Input,
 	Switch,
 	Text,
-	Textarea,
 } from '@chakra-ui/react';
 import { BsArrowLeftShort } from 'react-icons/bs';
 
@@ -17,8 +15,7 @@ import AdminLayout from '../../../layout/admin';
 import { GetServerSideProps } from 'next';
 import { getClient, updateClient } from '../../../utils';
 import toast from 'react-hot-toast';
-import { FaPlus, FaTrash } from 'react-icons/fa';
-import produce from 'immer';
+
 import { FileType } from '../../../interfaces/image';
 import { useImage } from '../../../hooks/useImage';
 
@@ -31,9 +28,6 @@ const ClientAdminEdit = ({ client }) => {
 	const router = useRouter();
 
 	const [clientInfo, setClientInfo] = useState<any>(client);
-	const [descriptionArray, setDescriptionArray] = useState<any>(
-		client.description
-	);
 
 	const inputImgRef = useRef(null);
 	const [imageExist, setImageExist] = useState(client.imagen);

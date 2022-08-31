@@ -12,6 +12,7 @@ import {
 	HiOutlineUserGroup,
 } from 'react-icons/hi';
 import { TbBuildingFactory } from 'react-icons/tb';
+import { BiStore } from 'react-icons/bi';
 
 import Text from '../../components/admin/Text';
 import { UserContext } from '../../context/UserContext';
@@ -90,6 +91,7 @@ const NavbarAdmin: React.FC = () => {
 					name='Vacancias'
 					path='/admin/vacancias'
 				/>
+				<Link icon={<BiStore />} name='Marcas' path='/admin/marcas' />
 			</Box>
 
 			{/* Categories */}
