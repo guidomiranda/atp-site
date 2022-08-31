@@ -1,25 +1,37 @@
 import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Button, Image, Input, Text } from '@chakra-ui/react';
+import {
+	Box,
+	Button,
+	Flex,
+	Image,
+	Input,
+	Switch,
+	Text,
+} from '@chakra-ui/react';
 import { BsArrowLeftShort } from 'react-icons/bs';
 
 import AdminLayout from '../../../layout/admin';
-import { createClient } from '../../../utils';
+import { GetServerSideProps } from 'next';
+import { updateClient } from '../../../utils';
 import toast from 'react-hot-toast';
 
 import { FileType } from '../../../interfaces/image';
 import { useImage } from '../../../hooks/useImage';
+import { getMarca, updateMarcas } from '../../../utils/marcas';
 
-const ClientAdminEdit = () => {
+export const getServerSideProps: GetServerSideProps = async context => {
+	const client = await getMarca(context.query.id as string);
+	return { props: { client: client.data } };
+};
+
+const ClientAdminEdit = ({ client }) => {
 	const router = useRouter();
 
-	const [clientInfo, setClientInfo] = useState<any>({
-		nombre: '',
-		link: '',
-	});
+	const [clientInfo, setClientInfo] = useState<any>(client);
 
 	const inputImgRef = useRef(null);
-	const [imageExist, setImageExist] = useState(null);
+	const [imageExist, setImageExist] = useState(client.imagen);
 	const [image, setImage] = useState<string | null>(null);
 	const [fileImage, setFileImage] = useState<FileType | string | Blob>();
 
@@ -33,27 +45,45 @@ const ClientAdminEdit = () => {
 	};
 
 	const handleUpdateClientInfo = async () => {
-		if (!clientInfo.nombre || !image) {
+		if (!clientInfo.nombre || !clientInfo.imagen) {
 			return toast('Todos los campos son obligatorios!', {
 				icon: '🤨',
 			});
 		}
 
-		const responseImage = await useImage(fileImage as string, 'clientes');
+		if (image) {
+			const responseImage = await useImage(fileImage as string, 'marcas');
 
-		const clientInfoUpdated = {
-			...clientInfo,
-			imagen: responseImage,
-		};
+			const clientInfoUpdated = {
+				...clientInfo,
+				imagen: responseImage,
+			};
+			delete clientInfoUpdated.id;
 
-		const response = await createClient(clientInfoUpdated);
+			const response = await updateMarcas(clientInfo.id, clientInfoUpdated);
 
-		if (response.success) {
-			toast.success('Creado correctamente!');
-			return router.push('/admin/clientes');
+			if (response.success) {
+				toast.success('Actualizado correctamente!');
+				return router.push('/admin/marcas');
+			} else {
+				toast.error('Hubo un problema al actualizar');
+				router.push('/admin/marcas');
+			}
 		} else {
-			toast.error('Hubo un problema al crear');
-			router.push('/admin/clientes');
+			const clientInfoUpdated = {
+				...clientInfo,
+			};
+			delete clientInfoUpdated.id;
+
+			const response = await updateMarcas(clientInfo.id, clientInfoUpdated);
+
+			if (response.success) {
+				toast.success('Actualizado correctamente!');
+				return router.push('/admin/marcas');
+			} else {
+				toast.error('Hubo un problema al actualizar');
+				router.push('/admin/marcas');
+			}
 		}
 	};
 
@@ -67,7 +97,7 @@ const ClientAdminEdit = () => {
 						h='45px'
 						rounded='3px'
 						bgColor='#e5e7eb'
-						onClick={() => router.push('/admin/clientes')}
+						onClick={() => router.push('/admin/marcas')}
 						display='flex'
 						alignItems='center'
 					>
@@ -134,12 +164,12 @@ const ClientAdminEdit = () => {
 							</Text>
 
 							<Box>
-								{image && (
+								{client.imagen && (
 									<Image
-										src={image || image}
+										src={image || client.imagen}
 										h='200px'
 										verticalAlign='top'
-										alt={clientInfo.nombre}
+										alt={client.nombre}
 										objectFit='contain'
 									/>
 								)}
@@ -167,7 +197,7 @@ const ClientAdminEdit = () => {
 										return inputImgRef.current.click();
 									}}
 								>
-									{image ? 'Cambiar imagen' : 'Añadir imagen'}
+									Cambiar imagen
 								</Button>
 								<Input
 									ref={inputImgRef}
@@ -177,6 +207,33 @@ const ClientAdminEdit = () => {
 								/>
 							</Box>
 						</Box>
+
+						<Flex>
+							<Flex alignItems='center' mr='20px'>
+								<Text mr='12px'>Estado:</Text>
+								<Switch
+									id='email-alerts'
+									size={`lg`}
+									defaultChecked={clientInfo.estado}
+									onChange={() =>
+										setClientInfo({ ...clientInfo, estado: !clientInfo.estado })
+									}
+								/>
+							</Flex>
+							<Flex alignItems='center'>
+								<Text mr='12px'>Orden:</Text>
+								<Input
+									w='100px'
+									value={clientInfo.orden}
+									onChange={e =>
+										setClientInfo({
+											...clientInfo,
+											orden: Number(e.target.value),
+										})
+									}
+								/>
+							</Flex>
+						</Flex>
 
 						<Box mt='30px'>
 							<Button
@@ -189,7 +246,7 @@ const ClientAdminEdit = () => {
 								_hover={{ bgColor: '#8C95A6' }}
 								onClick={handleUpdateClientInfo}
 							>
-								Crear información
+								Actualizar información
 							</Button>
 						</Box>
 					</Box>

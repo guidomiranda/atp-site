@@ -21,6 +21,7 @@ import AdminLayout from '../../../layout/admin';
 import Text from '../../../components/admin/Text';
 import axios from '../../../config/axios';
 import { deleteClient } from '../../../utils';
+import { deleteMarca } from '../../../utils/marcas';
 
 interface ClientsProps {
 	client: any;
@@ -30,7 +31,7 @@ function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
 			method: 'GET',
-			url: '/clientes',
+			url: '/marcas',
 		});
 		return data.data.data;
 	});
@@ -91,7 +92,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const handleDeleteClient = async () => {
-		const response = await deleteClient(client.id);
+		const response = await deleteMarca(client.id);
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
@@ -145,7 +146,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				overflow='hidden'
 				textOverflow='ellipsis'
 				cursor='pointer'
-				onClick={() => router.push(`/admin/clientes/${client.id}`)}
+				onClick={() => router.push(`/admin/marcas/${client.id}`)}
 			>
 				{client.nombre}
 			</Box>
@@ -175,7 +176,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push(`/admin/clientes/${client.id}`)}
+					onClick={() => router.push(`/admin/marcas/${client.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -220,9 +221,9 @@ const ClientesAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/admin/clientes/create')}
+						onClick={() => router.push('/admin/marcas/create')}
 					>
-						Crear cliente
+						Crear marca
 					</Button>
 				</Box>
 			}

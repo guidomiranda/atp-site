@@ -1,47 +1,47 @@
 import axios from '../config/axios';
 
-export const getClients = async () => {
+export const getMarcas = async () => {
 	const data = await axios({
 		method: 'GET',
-		url: '/client',
+		url: '/marcas',
 	});
 
 	return data.data;
 };
 
-export const getClient = async (id: string) => {
+export const getMarca = async (id: string) => {
 	const data = await axios({
 		method: 'GET',
-		url: `/clientes/${id}`,
+		url: `/marcas/${id}`,
 	});
 
 	return data.data;
 };
 
-export const updateClient = async (id: string, clientInfo: any) => {
+export const updateMarcas = async (id: string, clientInfo: any) => {
 	const data = await axios({
 		method: 'PATCH',
-		url: `/clientes/${id}`,
+		url: `/marcas/${id}`,
 		data: JSON.stringify(clientInfo),
 	});
 
 	return data.data;
 };
 
-export const createClient = async (clientInfo: any) => {
+export const createMarca = async (clientInfo: any) => {
 	const data = await axios({
 		method: 'POST',
-		url: `/clientes/create`,
+		url: `/marcas/create`,
 		data: JSON.stringify(clientInfo),
 	});
 
 	return data.data;
 };
 
-export const deleteClient = async (id: string) => {
+export const deleteMarca = async (id: string) => {
 	const data = await axios({
 		method: 'DELETE',
-		url: `/clientes/${id}`,
+		url: `/marcas/${id}`,
 	});
 
 	return data.data;
