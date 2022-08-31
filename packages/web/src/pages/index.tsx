@@ -34,18 +34,16 @@ function usePosts() {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-	const data = await getClients();
 	const banners = await getBanners();
 
 	return {
 		props: {
-			clients: data,
 			banners: banners.banners,
 		},
 	};
 };
 
-const Home: React.FC<HomeProps> = ({ clients, banners }) => {
+const Home: React.FC<HomeProps> = ({ banners }) => {
 	const { data: marcas, isFetching } = usePosts();
 
 	return (
@@ -124,7 +122,7 @@ const Home: React.FC<HomeProps> = ({ clients, banners }) => {
 					}}
 					gap='96px'
 				>
-					{marcas.map((brand, i) => (
+					{marcas?.map((brand, i) => (
 						<Grid key={i} placeItems='center'>
 							<Link href={brand.link} target='_blank'>
 								<Image src={brand.imagen} alt='' />

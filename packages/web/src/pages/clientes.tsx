@@ -17,11 +17,6 @@ interface ClientProps {
 	client: any;
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
-	const clients = await getClients();
-	return { props: { clients } };
-};
-
 function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
@@ -75,7 +70,7 @@ const Clientes: React.FC<ClientsProps> = () => {
 					]}
 					gap='20px'
 				>
-					{clientes.map((client: any) => (
+					{clientes?.map((client: any) => (
 						<Grid placeItems='center' key={client.id}>
 							<Link href={client.link} target='_blank'>
 								<Image src={client.imagen} alt='' w='100%' />
