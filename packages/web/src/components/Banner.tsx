@@ -10,7 +10,7 @@ import 'swiper/css/navigation';
 
 const Banner = ({ banners }) => {
 	return (
-		<Box mt='-100px' width='100%' height='100vh'>
+		<Box mt='-100px' width='100%' height={{ base: '200px', lg: '100vh' }}>
 			<Swiper
 				navigation={true}
 				autoplay={{
@@ -23,9 +23,14 @@ const Banner = ({ banners }) => {
 				{banners?.map((banner: any) => (
 					<SwiperSlide
 						key={banner.id}
-						style={{ backgroundImage: `url(${banner.bg})` }}
+						style={{
+							backgroundImage: `url(${banner.bg})`,
+							backgroundSize: 'cover',
+							backgroundRepeat: 'no-repeat',
+						}}
 					>
 						<Flex
+							display={{ base: 'none', lg: 'flex' }}
 							maxW='1220px'
 							m='0 auto'
 							w='90%'
@@ -37,9 +42,9 @@ const Banner = ({ banners }) => {
 							<Box flex={{ base: 'initial', lg: '1' }}>
 								<Text
 									fontWeight='bold'
-									fontSize={['32px', '56px']}
-									textAlign='left'
-									lineHeight={['32px', '56px']}
+									fontSize={['20px', '32px', '56px']}
+									textAlign={['center', 'left']}
+									lineHeight={['16px', '32px', '56px']}
 									color='white'
 									mb='25px'
 								>
@@ -57,7 +62,12 @@ const Banner = ({ banners }) => {
 							</Box>
 							<Box flex={{ base: 'initial', lg: '1' }}>
 								{banner.image && (
-									<Image src={banner.image} alt='' width='100%' height='100%' />
+									<Image
+										src={banner.image}
+										alt=''
+										width={{ base: '50px', lg: '100%' }}
+										height={{ base: 'initial', lg: '100%' }}
+									/>
 								)}
 							</Box>
 						</Flex>

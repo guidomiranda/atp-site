@@ -112,7 +112,7 @@ const Navbar = () => {
 							<Link _focus={{ outline: 0 }}>
 								<Image
 									src='/logo-atp.png'
-									height={{ base: '60px', lg: '70px' }}
+									height={{ base: '50px', lg: '70px' }}
 									objectFit='contain'
 								/>
 							</Link>
@@ -130,8 +130,6 @@ const Navbar = () => {
 							w='160px'
 							objectFit='contain'
 						/>
-						{/* <Image src='/route-logo.png' w='48px' objectFit='contain' /> */}
-						{/* <Image src='/vox-logo.png' w='48px' objectFit='contain' /> */}
 					</Grid>
 				</Flex>
 
@@ -180,6 +178,7 @@ const Navbar = () => {
 							bgColor='white'
 							boxShadow='0px 0px 10px 0px rgba(0,0,0,0.6)'
 							p='10px'
+							zIndex='30000'
 						>
 							<NextLink href='/product/lubricantes/veh-liviano#main' passHref>
 								<Link

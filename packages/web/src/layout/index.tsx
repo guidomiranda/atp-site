@@ -39,11 +39,14 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 
 			<Box
 				position='fixed'
-				right='10px'
-				top='50%'
+				right={{ base: '0', lg: '10px' }}
+				top={{ base: 'initial', lg: '50%' }}
+				bottom={{ base: '48px', lg: 'initial' }}
+				left={{ base: '0', lg: 'initial' }}
 				transform='translateY(-50%)'
-				// bgColor='#fff'
+				w={{ base: '240px', lg: 'initial' }}
 				zIndex='20'
+				m='auto'
 			>
 				<Social />
 			</Box>
@@ -60,8 +63,8 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 				_hover={{ bgColor: '#d21a28' }}
 				position='fixed'
 				zIndex='20'
-				bottom='32px'
-				right='48px'
+				bottom={{ base: '78px', lg: '32px' }}
+				right={{ base: '32px', lg: '48px' }}
 				fontSize='20px'
 				onClick={handleToUp}
 			>

@@ -59,7 +59,11 @@ const Home: React.FC<HomeProps> = ({ banners }) => {
 				{/* Product Banner */}
 				<Box textAlign='center'>
 					<Flex position='relative' display='inline-flex'>
-						<Heading fontSize='64px' fontWeight='black' color='#fff'>
+						<Heading
+							fontSize={{ base: '32px', lg: '64px' }}
+							fontWeight='black'
+							color='#fff'
+						>
 							Nuestros Productos
 						</Heading>
 						<Box
@@ -78,7 +82,13 @@ const Home: React.FC<HomeProps> = ({ banners }) => {
 				</Box>
 
 				{/* Product Main */}
-				<Box pt='60px' maxW='1220px' w='90%' m='0 auto' mt='32px'>
+				<Box
+					pt={{ base: '10px', lg: '60px' }}
+					maxW='1220px'
+					w='90%'
+					m='0 auto'
+					mt='32px'
+				>
 					{products.map(item => (
 						<Product key={item.id} product={item} />
 					))}
@@ -115,12 +125,11 @@ const Home: React.FC<HomeProps> = ({ banners }) => {
 					w='90%'
 					alignItems='center'
 					gridTemplateColumns={{
-						base: '1fr',
-						sm: 'repeat(2, 1fr)',
+						base: 'repeat(2, 1fr)',
 						md: 'repeat(3, 1fr)',
 						lg: 'repeat(4, 1fr)',
 					}}
-					gap='96px'
+					gap={{ base: '32px', lg: '96px' }}
 				>
 					{marcas?.map((brand, i) => (
 						<Grid key={i} placeItems='center'>

@@ -35,6 +35,20 @@
 	color: #b41f1b !important;
 }
 
+@media (max-width: 768px) {
+	.swiper-slide img {
+		width: 200px;
+	}
+
+	.mySwiper-slide .swiper-button-next {
+		display: none;
+	}
+
+	.mySwiper-slide .swiper-button-prev {
+		display: none;
+	}
+}
+
 .image-product img {
 	width: 200px !important;
 	object-fit: cover !important;
@@ -79,4 +93,10 @@
 	/* list-style: disc !important; */
 	padding-left: 20px !important;
 	padding: initial;
+}
+
+@media (max-width: 768px) {
+	.image-slides {
+		width: 280px !important;
+	}
 }
