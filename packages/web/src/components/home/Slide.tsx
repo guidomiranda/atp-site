@@ -114,7 +114,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 							<Box
 								flex={{ base: 'initial', lg: '1' }}
 								mt={{ base: '32px', lg: '0' }}
-								ml='20px'
+								ml={{ base: '0', lg: '20px' }}
 								alignSelf='flex-end'
 								position='relative'
 								w='full'
@@ -123,12 +123,14 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 									// position='absolute'
 									// top='0'
 									// left='0'
+									className='image-slides'
 									src={slide.image}
 									alt=''
-									width='100%'
-									height='90vh'
+									width='400px'
+									height={{ base: 'initial', lg: '90vh' }}
 									objectFit='cover'
 									objectPosition='bottom'
+									m={['auto', 'initial']}
 								/>
 							</Box>
 						</Flex>
