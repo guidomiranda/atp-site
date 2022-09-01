@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
 import { PrismaService } from '../prisma/prisma.service';
@@ -41,6 +42,11 @@ import { MarcasController } from './marcas/marcas.controller';
 import { ClientesService } from './clientes/clientes.service';
 import { MarcasService } from './marcas/marcas.service';
 
+import { ContactoController } from './contacto/contacto.controller';
+import { ContactoService } from './contacto/contacto.service';
+
+import { MailModule } from './mail/mail.module';
+
 @Module({
   controllers: [
     AppController,
@@ -62,6 +68,7 @@ import { MarcasService } from './marcas/marcas.service';
     VacanciasController,
     ClientesController,
     MarcasController,
+    ContactoController,
   ],
   providers: [
     AppService,
@@ -85,7 +92,13 @@ import { MarcasService } from './marcas/marcas.service';
     ClientesService,
     MarcasService,
     PrismaService,
+    ContactoService,
   ],
-  imports: [],
+  imports: [
+    MailModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+  ],
 })
 export class AppModule {}
