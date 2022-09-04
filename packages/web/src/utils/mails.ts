@@ -14,3 +14,18 @@ export const sendMailContact = async (data: any) => {
 		return null;
 	}
 };
+
+export const sendMailWork = async (data: any) => {
+	try {
+		const response = await axios({
+			method: 'POST',
+			url: '/contacto/postulacion',
+			data: JSON.stringify(data),
+		});
+
+		return response.data;
+	} catch (error) {
+		console.log(error);
+		return null;
+	}
+};
