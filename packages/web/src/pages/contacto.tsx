@@ -11,6 +11,9 @@ import {
 	Textarea,
 } from '@chakra-ui/react';
 import { FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { sendMailContact } from '../utils/mails';
 
 import Layout from '../layout';
 
@@ -112,6 +115,37 @@ const BodyContactInfo = ({
 };
 
 const Contacto = () => {
+	const [name, setName] = useState('');
+	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
+	const [subject, setSubject] = useState('');
+	const [message, setMessage] = useState('');
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+
+		if (!name || !email || !phone || !subject || !message) {
+			return toast.error('Todos los campos son obligatorios');
+		}
+
+		const data = { name, email, phone, subject, message };
+
+		const response = await sendMailContact(data);
+
+		if (!response.success) {
+			toast.error('Se ha producido un error');
+		}
+
+		if (response.success) {
+			toast.success('Datos enviados correctamente');
+			setName('');
+			setEmail('');
+			setPhone('');
+			setSubject('');
+			setMessage('');
+		}
+	}
+
 	return (
 		<Layout title='Contacto'>
 			<Box mt='-100px' alignItems='center' h='100%' position='relative'>
@@ -213,7 +247,7 @@ const Contacto = () => {
 					w='90%'
 				>
 					<Box />
-					<Box>
+					<Box as='form' onSubmit={handleSubmit}>
 						<Text fontWeight='bold' color='#fff' fontSize='26px' mb='15px'>
 							Contáctenos
 						</Text>
@@ -226,16 +260,21 @@ const Contacto = () => {
 								borderColor='#076098'
 								placeholder='Nombre y Apellido*'
 								_placeholder={{ color: '#fff' }}
+								value={name}
+								onChange={e => setName(e.target.value)}
 							/>
 						</Box>
 						<Box mb='20px'>
 							<Input
+								type={`email`}
 								rounded='2px'
 								border='2px solid'
 								color='#fff'
 								borderColor='#076098'
 								placeholder='Email'
 								_placeholder={{ color: '#fff' }}
+								value={email}
+								onChange={e => setEmail(e.target.value)}
 							/>
 						</Box>
 						<Box mb='20px'>
@@ -246,6 +285,8 @@ const Contacto = () => {
 								borderColor='#076098'
 								placeholder='Teléfono*'
 								_placeholder={{ color: '#fff' }}
+								value={phone}
+								onChange={e => setPhone(e.target.value)}
 							/>
 						</Box>
 						<Box mb='20px'>
@@ -256,6 +297,8 @@ const Contacto = () => {
 								borderColor='#076098'
 								placeholder='Asunto*'
 								_placeholder={{ color: '#fff' }}
+								value={subject}
+								onChange={e => setSubject(e.target.value)}
 							/>
 						</Box>
 						<Box mb='20px'>
@@ -267,10 +310,13 @@ const Contacto = () => {
 								placeholder='Escriba su mensaje aquí*'
 								height='7rem'
 								_placeholder={{ color: '#fff' }}
+								value={message}
+								onChange={e => setMessage(e.target.value)}
 							/>
 						</Box>
 						<Box>
 							<Button
+								type={`submit`}
 								minW='initial'
 								h='45px'
 								bgColor='#076098'
