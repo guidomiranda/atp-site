@@ -48,30 +48,30 @@ const TrabajaConNosotrosCV = () => {
 		name: '',
 	});
 
-	const handleChange = (e) => {
+	const handleChange = e => {
 		const target = e.target;
 		setData({
 			...data,
-			[target.name]: target.value
-		})
-	}
+			[target.name]: target.value,
+		});
+	};
 
-	const handleFileChange = (e) => {
+	const handleFileChange = e => {
 		setFile({
 			file: e.target.files[0],
-			name: e.target.files[0].name
+			name: e.target.files[0].name,
 		});
-	}
+	};
 
 	const handleClick = () => {
 		document.getElementById('file').click();
-	}
+	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 
 		let formData = new FormData();
-		for (let key in data ) {
+		for (let key in data) {
 			formData.append(key, data[key]);
 		}
 		const { file, name } = fileData;
@@ -88,7 +88,7 @@ const TrabajaConNosotrosCV = () => {
 
 			setData(initialState);
 		}
-	}
+	};
 
 	return (
 		<Layout title='Trabaja con nosotros'>
@@ -159,7 +159,12 @@ const TrabajaConNosotrosCV = () => {
 										>
 											Pasaporte
 										</Text>
-										<Radio onChange={e => handleChange(e) } colorScheme='red' id='passport' value='passport' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='passport'
+											value='passport'
+										/>
 									</Flex>
 									<Flex alignItems='center'>
 										<Text
@@ -171,17 +176,33 @@ const TrabajaConNosotrosCV = () => {
 										>
 											C.I
 										</Text>
-										<Radio onChange={e => handleChange(e) } colorScheme='red' id='ci' value='ci' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='ci'
+											value='ci'
+										/>
 									</Flex>
 									<Flex>
-										<Input isRequired name='identifier_number' onChange={e => handleChange(e)} type='number' placeholder='Número*' />
+										<Input
+											isRequired
+											name='identifier_number'
+											onChange={e => handleChange(e)}
+											type='number'
+											placeholder='Número*'
+										/>
 									</Flex>
 								</RadioGroup>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='name' onChange={e => handleChange(e)} placeholder='Nombre y Apellido*' />
+									<Input
+										isRequired
+										name='name'
+										onChange={e => handleChange(e)}
+										placeholder='Nombre y Apellido*'
+									/>
 								</Box>
 							</Box>
 
@@ -190,7 +211,13 @@ const TrabajaConNosotrosCV = () => {
 									<Text color='#015796' pb='7px'>
 										Fecha de nacimiento*
 									</Text>
-									<Input isRequired name='birthday' onChange={e => handleChange(e)} type='date' placeholder='Fecha de nacimiento*' />
+									<Input
+										isRequired
+										name='birthday'
+										onChange={e => handleChange(e)}
+										type='date'
+										placeholder='Fecha de nacimiento*'
+									/>
 								</Box>
 							</Box>
 
@@ -220,7 +247,12 @@ const TrabajaConNosotrosCV = () => {
 										>
 											Soltero/a
 										</Text>
-										<Radio onChange={e => handleChange(e)} colorScheme='red' id='soltero' value='soltero' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='soltero'
+											value='soltero'
+										/>
 									</Flex>
 
 									<Flex alignItems='center'>
@@ -233,7 +265,12 @@ const TrabajaConNosotrosCV = () => {
 										>
 											Casado/a
 										</Text>
-										<Radio onChange={e => handleChange(e)} colorScheme='red' id='casado' value='casado' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='casado'
+											value='casado'
+										/>
 									</Flex>
 
 									<Flex alignItems='center'>
@@ -246,7 +283,12 @@ const TrabajaConNosotrosCV = () => {
 										>
 											Viudo/a
 										</Text>
-										<Radio onChange={e => handleChange(e)} colorScheme='red' id='viudo' value='viudo' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='viudo'
+											value='viudo'
+										/>
 									</Flex>
 
 									<Flex alignItems='center'>
@@ -260,7 +302,8 @@ const TrabajaConNosotrosCV = () => {
 											Otro
 										</Text>
 										<Radio
-											onChange={e => handleChange(e)} colorScheme='red'
+											onChange={e => handleChange(e)}
+											colorScheme='red'
 											id='otro-estado'
 											value='otro-estado'
 										/>
@@ -298,7 +341,12 @@ const TrabajaConNosotrosCV = () => {
 										>
 											Hombre
 										</Text>
-										<Radio onChange={e => handleChange(e)} colorScheme='red' id='hombre' value='hombre' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='hombre'
+											value='hombre'
+										/>
 									</Flex>
 
 									<Flex alignItems='center'>
@@ -311,7 +359,12 @@ const TrabajaConNosotrosCV = () => {
 										>
 											Mujer
 										</Text>
-										<Radio onChange={e => handleChange(e)} colorScheme='red' id='mujer' value='mujer' />
+										<Radio
+											onChange={e => handleChange(e)}
+											colorScheme='red'
+											id='mujer'
+											value='mujer'
+										/>
 									</Flex>
 
 									<Flex alignItems='center'>
@@ -325,7 +378,8 @@ const TrabajaConNosotrosCV = () => {
 											Otro
 										</Text>
 										<Radio
-											onChange={e => handleChange(e)} colorScheme='red'
+											onChange={e => handleChange(e)}
+											colorScheme='red'
 											id='otro-genero'
 											value='otro-genero'
 										/>
@@ -339,7 +393,11 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Select name='children' onChange={e => handleChange(e)} isRequired>
+									<Select
+										name='children'
+										onChange={e => handleChange(e)}
+										isRequired
+									>
 										<option value=''>Cantidad de hijos</option>
 										<option value='0'>Ninguno</option>
 										<option value='1'>1</option>
@@ -352,19 +410,36 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='phone' onChange={e => handleChange(e)} type='number' placeholder='Teléfono/celular*' />
+									<Input
+										isRequired
+										name='phone'
+										onChange={e => handleChange(e)}
+										type='number'
+										placeholder='Teléfono/celular*'
+									/>
 								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='email' onChange={e => handleChange(e)} type='email' placeholder='E-mail*' />
+									<Input
+										isRequired
+										name='email'
+										onChange={e => handleChange(e)}
+										type='email'
+										placeholder='E-mail*'
+									/>
 								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='direction' onChange={e => handleChange(e)} placeholder='Dirección*' />
+									<Input
+										isRequired
+										name='direction'
+										onChange={e => handleChange(e)}
+										placeholder='Dirección*'
+									/>
 								</Box>
 							</Box>
 
@@ -376,21 +451,30 @@ const TrabajaConNosotrosCV = () => {
 								<Select name='state' onChange={e => handleChange(e)} isRequired>
 									<option value=''>Departamento*</option>
 									{dptos.map((dpto, key) => (
-										<option id={`dpto-${key}`} value={dpto}>{dpto}</option>
+										<option id={`dpto-${key}`} value={dpto}>
+											{dpto}
+										</option>
 									))}
 								</Select>
 
 								<Select name='city' onChange={e => handleChange(e)} isRequired>
 									<option value=''>Ciudad*</option>
 									{cities.map((city, key) => (
-										<option id={`city-${key}`} value={city}>{city}</option>
+										<option id={`city-${key}`} value={city}>
+											{city}
+										</option>
 									))}
 								</Select>
 							</Grid>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='profession' onChange={e => handleChange(e)} placeholder='Profesión*' />
+									<Input
+										isRequired
+										name='profession'
+										onChange={e => handleChange(e)}
+										placeholder='Profesión*'
+									/>
 								</Box>
 							</Box>
 
@@ -404,36 +488,67 @@ const TrabajaConNosotrosCV = () => {
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='position' onChange={e => handleChange(e)} placeholder='Cargo*' />
+									<Input
+										isRequired
+										name='position'
+										onChange={e => handleChange(e)}
+										placeholder='Cargo*'
+									/>
 								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Select name='department' onChange={e => handleChange(e)} isRequired>
+								<Select
+									name='department'
+									onChange={e => handleChange(e)}
+									isRequired
+								>
 									<option value=''>Departamento*</option>
 									<option value='administracion'>Administración</option>
 									<option value='comercial'>Comercial</option>
 									<option value='logistica'>Logística</option>
 									<option value='rrhh'>RRHH</option>
 									<option value='marketing'>Marketing</option>
-									<option value='servicios-generales'>Servicios Generales</option>
+									<option value='servicios-generales'>
+										Servicios Generales
+									</option>
 								</Select>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='salary_expectation' onChange={e => handleChange(e)} type='number' placeholder='Expectativa salarial*' />
+									<Input
+										isRequired
+										name='salary_expectation'
+										onChange={e => handleChange(e)}
+										type='number'
+										placeholder='Expectativa salarial*'
+									/>
 								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
-									<Input isRequired name='linkedin' onChange={e => handleChange(e)} type='url' placeholder='Link URL de perfil de LinkedIn' />
+									<Input
+										isRequired
+										name='linkedin'
+										onChange={e => handleChange(e)}
+										type='url'
+										placeholder='Link URL de perfil de LinkedIn'
+									/>
 								</Box>
 							</Box>
 
 							<Box w={{ base: '100%', lg: '60%' }}>
-								<Input isRequired id='file' accept='application/pdf' name='file' onChange={(e) => handleFileChange(e)} display='none' type='file' />
+								<Input
+									isRequired
+									id='file'
+									accept='application/pdf'
+									name='file'
+									onChange={e => handleFileChange(e)}
+									display='none'
+									type='file'
+								/>
 								<Button
 									onClick={() => handleClick()}
 									border='0'
@@ -454,13 +569,21 @@ const TrabajaConNosotrosCV = () => {
 									_focus={{ borderColor: 'hsl(355, 77%, 60%)' }}
 									_active={{ bgColor: 'transparent' }}
 								>
-									<Text color='#015796'>Adjuntar archivo y/o CV*</Text>
+									<Text color='#015796'>
+										{fileData.name ? 'Cambiar' : 'Adjuntar'} archivo y/o CV*
+									</Text>
 									<Text color='#015796' fontSize='22px'>
 										<AiOutlinePaperClip />
 									</Text>
 								</Button>
-								<Text color='#015796' fontSize='sm' mt='3px' pl='10px'>
-									{/* nombre-archivo.pdf */}
+								<Text
+									fontWeight='bold'
+									color='#015796'
+									fontSize='sm'
+									mt='3px'
+									pl='10px'
+								>
+									{fileData.name}
 								</Text>
 							</Box>
 						</Grid>
