@@ -81,6 +81,8 @@ const TrabajaConNosotrosCV = () => {
 
 		if (response.success) {
 			toast.success('Datos enviados correctamente');
+
+			setData(initialState);
 		}
 	}
 
