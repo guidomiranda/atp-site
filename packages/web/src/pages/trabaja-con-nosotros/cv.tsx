@@ -43,7 +43,10 @@ const TrabajaConNosotrosCV = () => {
 		linkedin: '',
 	};
 	const [data, setData] = useState(initialState);
-	const [fileData, setFile] = useState({});
+	const [fileData, setFile] = useState({
+		file: '',
+		name: '',
+	});
 
 	const handleChange = (e) => {
 		const target = e.target;
@@ -71,7 +74,8 @@ const TrabajaConNosotrosCV = () => {
 		for (let key in data ) {
 			formData.append(key, data[key]);
 		}
-		formData.append('resume', fileData.file, fileData.name);
+		const { file, name } = fileData;
+		formData.append('resume', file, name);
 
 		const response = await sendMailWork(formData);
 
