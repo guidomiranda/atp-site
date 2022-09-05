@@ -20,7 +20,10 @@ export const sendMailWork = async (data: any) => {
 		const response = await axios({
 			method: 'POST',
 			url: '/contacto/postulacion',
-			data: JSON.stringify(data),
+			data: data,
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
 		});
 
 		return response.data;
