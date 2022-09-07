@@ -20,7 +20,7 @@ const LinkSocial: React.FC<LinkSocialProps> = ({ icon, url, ...rest }) => {
 			href={url}
 			target='_blank'
 			color='#fff'
-			fontSize={['28px', '24px']}
+			fontSize={['26px', '24px']}
 		>
 			{icon}
 		</Link>
@@ -39,17 +39,17 @@ const Social: React.FC = () => {
 			border='1px solid #fff'
 		>
 			<LinkSocial
-				mb={{ base: '0', lg: '20px' }}
+				mb={{ base: '0', lg: '10px' }}
 				icon={<FaWhatsapp />}
 				url='https://wa.me/+595971599000'
 			/>
 			<LinkSocial
-				mb={{ base: '0', lg: '20px' }}
+				mb={{ base: '0', lg: '10px' }}
 				icon={<FaFacebookF />}
 				url='https://www.facebook.com/ATP.PY'
 			/>
 			<LinkSocial
-				mb={{ base: '0', lg: '20px' }}
+				mb={{ base: '0', lg: '10px' }}
 				icon={<FaInstagram />}
 				url='https://www.instagram.com/atp.paraguay/'
 			/>

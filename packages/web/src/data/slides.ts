@@ -8,7 +8,8 @@ export const slides_data = [
 			'Puesto que creemos que la atención a nuestros clientes es tan importante como el crecimiento profesional y personal de nuestros compañeros',
 			'¡Contactá con nosotros para más info o realizar tus pedidos, nos aseguramos de entregar tu producto en cualquier punto!',
 		],
-		image: '/personas-1.png',
+		image:
+			'https://res.cloudinary.com/https-atp-com-py/image/upload/v1662570424/clientes/conoce-a-nuestros-clientes_bv95zr.jpg',
 		path: '/clientes',
 	},
 	// {
