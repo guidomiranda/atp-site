@@ -35,7 +35,7 @@ const About = () => {
 		<Layout title='Nosotros'>
 			<Header
 				bg='banner-nosotros.jpg'
-				title='Quienes somos'
+				title='¿Quienes somos?'
 				description='ATP es una empresa con más de 40 años en el mercado que se encarga de distribuir productos y servicios de alta calidad.'
 			/>
 			<Box bgImage='linear-gradient(rgb(13, 20, 38), rgb(87, 86, 84))'>
