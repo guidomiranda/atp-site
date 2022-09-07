@@ -20,7 +20,7 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 
 	const pagination = {
 		clickable: true,
-		renderBullet: function (index, className) {
+		renderBullet: function (className: any) {
 			return '<span class="' + className + '"></span>';
 		},
 	};
@@ -43,16 +43,17 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 						style={{ backgroundImage: `url(${slide.bg})`, zIndex: -100 }}
 					>
 						<Flex
-							pt={{ base: '64px', lg: '12%' }}
+							pt={{ base: '64px', lg: '0%' }}
+							pb={{ base: '64px', lg: 0 }}
 							maxW='1400px'
 							m='0 auto'
 							w='90%'
 							height='100%'
-							alignItems='flex-start'
+							alignItems='center'
 							flexDir={{ base: 'column', lg: 'row' }}
 							justifyContent={{ base: 'center', lg: 'space-between' }}
 						>
-							<Box flex={{ base: 'initial', lg: '0.7' }} mr='20px'>
+							<Box flex={{ base: 'initial', lg: '0.8' }} mr='20px'>
 								<Flex mb='30px'>
 									<Heading
 										fontWeight='bold'
@@ -114,8 +115,8 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 							<Box
 								flex={{ base: 'initial', lg: '1' }}
 								mt={{ base: '32px', lg: '0' }}
-								ml={{ base: '0', lg: '20px' }}
-								alignSelf='flex-end'
+								ml={{ base: '0', lg: '30px' }}
+								alignSelf='center'
 								position='relative'
 								w='full'
 							>
@@ -127,7 +128,6 @@ const Slides: React.FC<SlideProps> = ({ slides }) => {
 									src={slide.image}
 									alt=''
 									width='400px'
-									height={{ base: 'initial', lg: '90vh' }}
 									objectFit='cover'
 									objectPosition='bottom'
 									m={['auto', 'initial']}

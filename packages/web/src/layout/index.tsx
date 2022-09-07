@@ -54,10 +54,10 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 
 			<Box
 				position='fixed'
-				right={{ base: '0', lg: '10px' }}
-				top={{ base: 'initial', lg: '50%' }}
+				right={{ base: 'initial', lg: '1px' }}
+				top={{ base: 'initial', lg: '70%' }}
 				bottom={{ base: '48px', lg: 'initial' }}
-				left={{ base: '0', lg: 'initial' }}
+				left={{ base: '26px', lg: 'initial' }}
 				transform='translateY(-50%)'
 				w={{ base: '240px', lg: 'initial' }}
 				zIndex='20'
