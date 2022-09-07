@@ -136,6 +136,7 @@ const About = () => {
 						<Grid
 							gridTemplateColumns={{ base: '1fr', md: 'repeat(2,1fr)' }}
 							gap={{ base: '48px 0', md: '0 72px' }}
+							alignItems='center'
 						>
 							<Box>
 								<Flex display='inline-flex' position='relative'>
@@ -184,7 +185,7 @@ const About = () => {
 								</Box>
 							</Box>
 							<Box>
-								<Image src='/img-valores-atp.jpg' alt='' />
+								<Image src='/valores.jpeg' alt='' />
 							</Box>
 						</Grid>
 					</Box>
