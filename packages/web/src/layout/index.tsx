@@ -54,12 +54,12 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 
 			<Box
 				position='fixed'
-				right={{ base: 'initial', lg: '1px' }}
+				right={{ base: '0', lg: '1px' }}
 				top={{ base: 'initial', lg: '70%' }}
-				bottom={{ base: '48px', lg: 'initial' }}
-				left={{ base: '26px', lg: 'initial' }}
-				transform='translateY(-50%)'
-				w={{ base: '240px', lg: 'initial' }}
+				bottom={{ base: '20px', lg: 'initial' }}
+				left={{ base: '0', lg: 'initial' }}
+				transform={{ base: 'initial', lg: 'translateY(-50%)' }}
+				w={{ base: '300px', lg: 'initial' }}
 				zIndex='20'
 				m='auto'
 			>
@@ -78,8 +78,8 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 				_hover={{ bgColor: '#d21a28' }}
 				position='fixed'
 				zIndex='20'
-				bottom={{ base: '78px', lg: '32px' }}
-				right={{ base: '32px', lg: '48px' }}
+				bottom={{ base: '90px', lg: '32px' }}
+				right={{ base: '32px', lg: '32px' }}
 				fontSize='20px'
 				onClick={handleToUp}
 			>
