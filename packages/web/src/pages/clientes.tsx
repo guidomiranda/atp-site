@@ -58,7 +58,6 @@ const Clientes: React.FC<ClientsProps> = () => {
 				description={[
 					'Nuestros clientes, líderes y referentes del mercado paraguayo, nos impulsan y respaldan en nuestra misión de proveer productos y servicios de verdadera calidad. En nuestro Canal Consumo, trabajamos con diversos sectores como el industrial, construcción civil y vial, agrícola, transporte y naviero. Además, trabajamos con las cooperativas más grandes y exigentes del país. En los último años, nos expandimos a nuevas zonas geográficas, gracias a nuestro Canal Reventa, con lubricentros, talleres, casas de repuestos y EE.SS.',
 				]}
-<<<<<<< HEAD
 				image='/personas-1.png'
 			/> */}
 
@@ -85,10 +84,6 @@ const Clientes: React.FC<ClientsProps> = () => {
 				</Box>
 			</Box>
 
-=======
-			image='/personas-1.png'
-			/>
->>>>>>> aeefc6c7a97d3ea172f9ccb7a3bf42ffcb6ce0b9
 			<Box bgColor='#fff' py='96px' maxW='1270px' w='90%' m='0 auto'>
 				<Grid
 					gridTemplateColumns={[
