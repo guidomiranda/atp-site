@@ -67,10 +67,15 @@ const Clientes: React.FC<ClientsProps> = () => {
 				// height={{ base: '100%', lg: '100vh' }}
 				bgImage='url("/fondo-2.jpg")'
 				py='100px'
+				pt='148px'
 				bgSize='cover'
 				bgPos='center top'
 			>
 				<Box maxW='1220px' w='90%' m='0 auto'>
+					<Heading fontSize={['32px', '42px']} fontWeight='black' color='#fff'>
+						¿Quiénes somos?
+					</Heading>
+
 					<Text color='#fff' fontSize={{ base: '14px', lg: '20px' }} mt='32px'>
 						Nuestros clientes, líderes y referentes del mercado paraguayo, nos
 						impulsan y respaldan en nuestra misión de proveer productos y
