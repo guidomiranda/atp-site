@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
 import Header from '../components/client/Header';
@@ -67,14 +67,31 @@ const Clientes: React.FC<ClientsProps> = () => {
 				// height={{ base: '100%', lg: '100vh' }}
 				bgImage='url("/fondo-2.jpg")'
 				py='100px'
-				pt='148px'
+				pt='156px'
 				bgSize='cover'
 				bgPos='center top'
 			>
 				<Box maxW='1220px' w='90%' m='0 auto'>
-					<Heading fontSize={['32px', '42px']} fontWeight='black' color='#fff'>
-						¿Quiénes somos?
-					</Heading>
+					<Flex position='relative' display='inline-flex'>
+						<Box
+							position='absolute'
+							width='30px'
+							height='14px'
+							bgColor='#b41f1b'
+							left='0'
+							top='-16px'
+						/>
+
+						<Box>
+							<Heading
+								fontSize={['32px', '42px']}
+								fontWeight='black'
+								color='#fff'
+							>
+								¿Quiénes somos?
+							</Heading>
+						</Box>
+					</Flex>
 
 					<Text color='#fff' fontSize={{ base: '14px', lg: '20px' }} mt='32px'>
 						Nuestros clientes, líderes y referentes del mercado paraguayo, nos
