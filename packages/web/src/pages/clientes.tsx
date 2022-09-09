@@ -88,7 +88,7 @@ const Clientes: React.FC<ClientsProps> = () => {
 								fontWeight='black'
 								color='#fff'
 							>
-								¿Quiénes somos?
+								Conoce a nuestros clientes
 							</Heading>
 						</Box>
 					</Flex>
