@@ -64,6 +64,7 @@ const Clientes: React.FC<ClientsProps> = () => {
 			<Box
 				mt='-100px'
 				// height={{ base: '100%', lg: '100vh' }}
+				// height={{ base: '100%', lg: '100vh' }}
 				bgImage='url("/fondo-2.jpg")'
 				py='100px'
 				bgSize='cover'
