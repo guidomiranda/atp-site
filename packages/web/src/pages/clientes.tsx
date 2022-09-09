@@ -53,13 +53,36 @@ const Clientes: React.FC<ClientsProps> = () => {
 
 	return (
 		<Layout>
-			<Header
+			{/* <Header
 				title='Conoce a nuestros clientes'
 				description={[
 					'Nuestros clientes, líderes y referentes del mercado paraguayo, nos impulsan y respaldan en nuestra misión de proveer productos y servicios de verdadera calidad. En nuestro Canal Consumo, trabajamos con diversos sectores como el industrial, construcción civil y vial, agrícola, transporte y naviero. Además, trabajamos con las cooperativas más grandes y exigentes del país. En los último años, nos expandimos a nuevas zonas geográficas, gracias a nuestro Canal Reventa, con lubricentros, talleres, casas de repuestos y EE.SS.',
 				]}
 				image='/personas-1.png'
-			/>
+			/> */}
+
+			<Box
+				mt='-100px'
+				// height={{ base: '100%', lg: '100vh' }}
+				bgImage='url("/fondo-2.jpg")'
+				py='100px'
+				bgSize='cover'
+				bgPos='center top'
+			>
+				<Box maxW='1220px' w='90%' m='0 auto'>
+					<Text color='#fff' fontSize={{ base: '14px', lg: '20px' }} mt='32px'>
+						Nuestros clientes, líderes y referentes del mercado paraguayo, nos
+						impulsan y respaldan en nuestra misión de proveer productos y
+						servicios de verdadera calidad. En nuestro Canal Consumo, trabajamos
+						con diversos sectores como el industrial, construcción civil y vial,
+						agrícola, transporte y naviero. Además, trabajamos con las
+						cooperativas más grandes y exigentes del país. En los último años,
+						nos expandimos a nuevas zonas geográficas, gracias a nuestro Canal
+						Reventa, con lubricentros, talleres, casas de repuestos y EE.SS.
+					</Text>
+				</Box>
+			</Box>
+
 			<Box bgColor='#fff' py='96px' maxW='1270px' w='90%' m='0 auto'>
 				<Grid
 					gridTemplateColumns={[
