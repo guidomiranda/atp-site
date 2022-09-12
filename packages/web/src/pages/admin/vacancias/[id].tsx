@@ -95,7 +95,7 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 	}, []);
 
 	const handleVacancialUpdate = async () => {
-		if (!vacancia.titulo || preguntasArray.length === 0) {
+		if (!vacancia.titulo) {
 			return toast('Todos los campos son obligatorios!', {
 				icon: '🤨',
 			});
