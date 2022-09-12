@@ -227,12 +227,23 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 								<Box>
 									{preguntasArray?.map((item: any, index: number) => (
 										<Grid
-											gridTemplateColumns='1fr repeat(2, auto)'
+											gridTemplateColumns='30px 1fr repeat(2, auto)'
 											key={index}
 											gap='0 10px'
 											alignItems='center'
 											mb='15px'
 										>
+											<Grid
+												placeItems='center'
+												h='full'
+												bgColor='gray.100'
+												fontWeight='semibold'
+												color='blue.700'
+												rounded='3px'
+											>
+												{index + 1}
+											</Grid>
+
 											<Textarea
 												rounded='3px'
 												h='10rem'
@@ -274,6 +285,21 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 										</Grid>
 									))}
 								</Box>
+
+								<Button
+									minW='initial'
+									h='3rem'
+									mt='10px'
+									bgColor='gray.200'
+									rounded='2px'
+									color='blue.700'
+									p='0 15px'
+									_hover={{ bgColor: 'gray.200' }}
+									onClick={() => handleAddDescriptionArray()}
+									display={preguntasArray.length > 0 ? 'none' : 'block'}
+								>
+									Agregar pregunta
+								</Button>
 							</Box>
 							<Box>
 								<Text
@@ -288,12 +314,23 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 								<Box>
 									{requisitosArray?.map((item: any, index: number) => (
 										<Grid
-											gridTemplateColumns='1fr repeat(2, auto)'
+											gridTemplateColumns='30px 1fr repeat(2, auto)'
 											key={index}
 											gap='0 10px'
 											alignItems='center'
 											mb='15px'
 										>
+											<Grid
+												placeItems='center'
+												h='full'
+												bgColor='gray.100'
+												fontWeight='semibold'
+												color='blue.700'
+												rounded='3px'
+											>
+												{index + 1}
+											</Grid>
+
 											<Textarea
 												rounded='3px'
 												h='10rem'
@@ -335,6 +372,21 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 										</Grid>
 									))}
 								</Box>
+
+								<Button
+									minW='initial'
+									h='3rem'
+									mt='10px'
+									bgColor='gray.200'
+									rounded='2px'
+									color='blue.700'
+									p='0 15px'
+									_hover={{ bgColor: 'gray.200' }}
+									onClick={() => handleAddDescriptionArray()}
+									display={requisitosArray.length > 0 ? 'none' : 'block'}
+								>
+									Agregar requisito
+								</Button>
 							</Box>
 						</Grid>
 
