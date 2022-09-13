@@ -108,19 +108,6 @@ const ArticleItem = ({ article }) => {
 
 					<Box mt='5px'>
 						<Text
-							fontWeight='bold'
-							my='5px'
-							display={article?.preguntas?.length === 0 ? 'none' : 'block'}
-						>
-							¿Tenés experiencia desarrollando las siguientes actividades?
-						</Text>
-						{article?.preguntas?.map((item: any) => (
-							<Text as='li'>{item}</Text>
-						))}
-					</Box>
-
-					<Box mt='15px'>
-						<Text
 							display={article?.requisitos?.length === 0 ? 'none' : 'block'}
 							fontWeight='bold'
 							my='5px'
@@ -128,6 +115,19 @@ const ArticleItem = ({ article }) => {
 							Algunos requisitos para este cargo:
 						</Text>
 						{article?.requisitos?.map((item: any) => (
+							<Text as='li'>{item}</Text>
+						))}
+					</Box>
+
+					<Box mt='15px'>
+						<Text
+							fontWeight='bold'
+							my='5px'
+							display={article?.preguntas?.length === 0 ? 'none' : 'block'}
+						>
+							Ofrecemos
+						</Text>
+						{article?.preguntas?.map((item: any) => (
 							<Text as='li'>{item}</Text>
 						))}
 					</Box>
