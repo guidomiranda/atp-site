@@ -80,8 +80,8 @@ const VacanciaAdminCreate = () => {
 	};
 
 	const handleVacancialUpdate = async () => {
-		if (!vacancia.titulo || preguntasArray.length === 0) {
-			return toast('Todos los campos son obligatorios!', {
+		if (!vacancia.titulo) {
+			return toast('El título es obligatorio!', {
 				icon: '🤨',
 			});
 		}
@@ -190,67 +190,6 @@ const VacanciaAdminCreate = () => {
 									mb='5px'
 									color='#555'
 								>
-									Preguntas
-								</Text>
-								<Box>
-									{preguntasArray?.map((item: any, index: number) => (
-										<Grid
-											gridTemplateColumns='1fr repeat(2, auto)'
-											key={index}
-											gap='0 10px'
-											alignItems='center'
-											mb='15px'
-										>
-											<Textarea
-												rounded='3px'
-												h='10rem'
-												resize='none'
-												value={item}
-												onChange={e => {
-													const text = e.target.value;
-													setPreguntasArray(currentDescription =>
-														produce(currentDescription, v => {
-															v[index] = text;
-														})
-													);
-												}}
-											/>
-											<Button
-												display='block'
-												minW='initial'
-												h='10rem'
-												bgColor='gray.200'
-												color='blue.700'
-												p='0 15px'
-												_hover={{ bgColor: 'gray.200' }}
-												onClick={handleAddDescriptionArray}
-											>
-												<FaPlus />
-											</Button>
-											<Button
-												display='block'
-												minW='initial'
-												h='10rem'
-												bgColor='gray.600'
-												color='#fff'
-												p='0 15px'
-												_hover={{ bgColor: 'gray.600' }}
-												onClick={() => handleDeleteDescriptionArray(item)}
-											>
-												<FaTrash />
-											</Button>
-										</Grid>
-									))}
-								</Box>
-							</Box>
-							<Box>
-								<Text
-									fontSize='12px'
-									fontWeight='medium'
-									textTransform='uppercase'
-									mb='5px'
-									color='#555'
-								>
 									Requisitos
 								</Text>
 								<Box>
@@ -303,6 +242,97 @@ const VacanciaAdminCreate = () => {
 										</Grid>
 									))}
 								</Box>
+
+								<Button
+									minW='initial'
+									h='3rem'
+									mt='10px'
+									bgColor='gray.200'
+									rounded='2px'
+									color='blue.700'
+									p='0 15px'
+									_hover={{ bgColor: 'gray.200' }}
+									onClick={() => handleAddDescriptionArray()}
+									display={requisitosArray.length > 0 ? 'none' : 'block'}
+								>
+									Agregar requisito
+								</Button>
+							</Box>
+							<Box>
+								<Text
+									fontSize='12px'
+									fontWeight='medium'
+									textTransform='uppercase'
+									mb='5px'
+									color='#555'
+								>
+									Ofrecemos
+								</Text>
+								<Box>
+									{preguntasArray?.map((item: any, index: number) => (
+										<Grid
+											gridTemplateColumns='1fr repeat(2, auto)'
+											key={index}
+											gap='0 10px'
+											alignItems='center'
+											mb='15px'
+										>
+											<Textarea
+												rounded='3px'
+												h='10rem'
+												resize='none'
+												value={item}
+												onChange={e => {
+													const text = e.target.value;
+													setPreguntasArray(currentDescription =>
+														produce(currentDescription, v => {
+															v[index] = text;
+														})
+													);
+												}}
+											/>
+											<Button
+												display='block'
+												minW='initial'
+												h='10rem'
+												bgColor='gray.200'
+												color='blue.700'
+												p='0 15px'
+												_hover={{ bgColor: 'gray.200' }}
+												onClick={handleAddDescriptionArray}
+											>
+												<FaPlus />
+											</Button>
+											<Button
+												display='block'
+												minW='initial'
+												h='10rem'
+												bgColor='gray.600'
+												color='#fff'
+												p='0 15px'
+												_hover={{ bgColor: 'gray.600' }}
+												onClick={() => handleDeleteDescriptionArray(item)}
+											>
+												<FaTrash />
+											</Button>
+										</Grid>
+									))}
+								</Box>
+
+								<Button
+									minW='initial'
+									h='3rem'
+									mt='10px'
+									bgColor='gray.200'
+									rounded='2px'
+									color='blue.700'
+									p='0 15px'
+									_hover={{ bgColor: 'gray.200' }}
+									onClick={() => handleAddRequisitosArray()}
+									display={preguntasArray.length > 0 ? 'none' : 'block'}
+								>
+									Agregar item
+								</Button>
 							</Box>
 						</Grid>
 

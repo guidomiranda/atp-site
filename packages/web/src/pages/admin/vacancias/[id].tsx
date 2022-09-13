@@ -96,7 +96,7 @@ const VacanciaAdminEdit = ({ vacanciaInfo }) => {
 
 	const handleVacancialUpdate = async () => {
 		if (!vacancia.titulo) {
-			return toast('Todos los campos son obligatorios!', {
+			return toast('El título es obligatorio!', {
 				icon: '🤨',
 			});
 		}
