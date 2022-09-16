@@ -1,12 +1,8 @@
 import React from 'react';
 import { Box, Flex, Grid, Heading, Image, Link, Text } from '@chakra-ui/react';
-import { GetServerSideProps } from 'next';
-
-import Header from '../components/client/Header';
-import Layout from '../layout';
-import { getClients } from '../utils';
-import { clients } from '../data/clients';
 import { useQuery } from '@tanstack/react-query';
+
+import Layout from '../layout';
 import axios from '../config/axios';
 
 interface ClientsProps {
@@ -27,44 +23,13 @@ function usePosts() {
 	});
 }
 
-const ItemReview: React.FC<ClientProps> = ({ client }) => {
-	return (
-		<Box as='article' bgColor='#155e9d' p='32px' mb='56px'>
-			<Heading fontSize={['32px', '42px']} fontWeight='normal' color='white'>
-				{client.title}
-			</Heading>
-			<Box mt='20px'>
-				{client.description.map(item => (
-					<Text color='white' fontSize={['16px', '20px']} mt='15px' key={item}>
-						{item}
-					</Text>
-				))}
-			</Box>
-			<Text color='white' fontSize={['16px', '20px']} mt='15px'>
-				¡Contactá con nosotros para más info o realizar tus pedidos, nos
-				aseguramos de entregar tu producto en cualquier punto!
-			</Text>
-		</Box>
-	);
-};
-
 const Clientes: React.FC<ClientsProps> = () => {
 	const { data: clientes, isFetching } = usePosts();
 
 	return (
 		<Layout>
-			{/* <Header
-				title='Conoce a nuestros clientes'
-				description={[
-					'Nuestros clientes, líderes y referentes del mercado paraguayo, nos impulsan y respaldan en nuestra misión de proveer productos y servicios de verdadera calidad. En nuestro Canal Consumo, trabajamos con diversos sectores como el industrial, construcción civil y vial, agrícola, transporte y naviero. Además, trabajamos con las cooperativas más grandes y exigentes del país. En los último años, nos expandimos a nuevas zonas geográficas, gracias a nuestro Canal Reventa, con lubricentros, talleres, casas de repuestos y EE.SS.',
-				]}
-				image='/personas-1.png'
-			/> */}
-
 			<Box
 				mt='-100px'
-				// height={{ base: '100%', lg: '100vh' }}
-				// height={{ base: '100%', lg: '100vh' }}
 				bgImage='url("/fondo-2.jpg")'
 				py='100px'
 				pt='156px'
