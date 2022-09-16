@@ -1,7 +1,7 @@
 import axiosPackage from 'axios';
 
 const axios = axiosPackage.create({
-	baseURL: 'https://atp-lrhot.ondigitalocean.app/',
+	baseURL: 'https://dolphin-app-g3w9y.ondigitalocean.app/',
 	headers: {
 		'Content-Type': 'application/json',
 	},
