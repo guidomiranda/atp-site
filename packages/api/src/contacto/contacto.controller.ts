@@ -24,22 +24,36 @@ export class ContactoController {
 
   @Post()
   async sendMailContact(@Res() res: Response, @Body() dto: MailContactoDTO) {
-    await this.service.sendMailContact(dto);
-
-    return res.status(HttpStatus.OK).json({
-      message: 'Datos enviados',
-      success: true,
-    });
+    try {
+      await this.service.sendMailContact(dto);
+  
+      return res.status(HttpStatus.OK).json({
+        message: 'Datos enviados',
+        success: true,
+      });
+    } catch (error) {
+      return res.status(HttpStatus.OK).json({
+        message: error.message,
+        success: false,
+      });
+    }
   }
 
   @Post('/postulacion')
   @UseInterceptors(FileInterceptor('resume'))
   async sendMailWork(@Res() res: Response, @Body() dto: MailTrabajoDTO, @UploadedFile() file) {
-    await this.service.sendMailWork(dto, file.buffer);
-
-    return res.status(HttpStatus.OK).json({
-      message: 'Datos enviados',
-      success: true,
-    });
+    try {
+      await this.service.sendMailWork(dto, file.buffer);
+  
+      return res.status(HttpStatus.OK).json({
+        message: 'Datos enviados',
+        success: true,
+      });
+    } catch (error) {
+      return res.status(HttpStatus.OK).json({
+        message: error.message,
+        success: false,
+      });
+    }
   }
 }
