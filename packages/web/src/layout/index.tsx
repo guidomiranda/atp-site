@@ -32,14 +32,15 @@ const Layout: React.FC<LayoutProps> = ({ children, title }) => {
 		<>
 			<head>
 				<title>{title ? `ATP - ${title}` : 'ATP'}</title>
-				<script
+				{/* 				<script
 					dangerouslySetInnerHTML={{
 						__html: `<iframe src="https://www.googletagmanager.com/gtag/js?id=G-PGB10Q1D11" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
 					}}
-				></script>
+				></script> */}
 				<script
 					dangerouslySetInnerHTML={{
 						__html: `
+							<iframe src="https://www.googletagmanager.com/gtag/js?id=G-PGB10Q1D11" height="0" width="0" style="display: none; visibility: hidden;"></iframe>
 							window.dataLayer = window.dataLayer || [];
 							function gtag(){dataLayer.push(arguments);}
 							gtag('js', new Date());
