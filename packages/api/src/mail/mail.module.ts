@@ -13,14 +13,11 @@ import { ConfigService } from '@nestjs/config';
         transport: {
           host: config.get('MAIL_HOST'),
           port: config.get('MAIL_PORT'),
-          secure: true,
+          secure: false,
           auth: {
             user: config.get('MAIL_USER'),
             pass: config.get('MAIL_PASSWORD'),
-          },
-          tls: {
-            rejectUnauthorized: false
-        }
+          }
         },
         defaults: {
           from: `"Sitio Web" <${config.get('MAIL_FROM')}>`,
