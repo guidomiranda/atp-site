@@ -208,7 +208,7 @@ const TestimoniosAdmin = () => {
 
 	return (
 		<AdminLayout
-			title='Testimonios'
+			title='Vacancias'
 			footer={
 				<Box>
 					<Button
