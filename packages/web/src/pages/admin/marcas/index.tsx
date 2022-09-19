@@ -209,7 +209,7 @@ const ClientesAdmin = () => {
 
 	return (
 		<AdminLayout
-			title='Clientes'
+			title='Marcas'
 			footer={
 				<Box>
 					<Button
