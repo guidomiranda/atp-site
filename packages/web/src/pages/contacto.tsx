@@ -120,6 +120,7 @@ const Contacto = () => {
 	const [phone, setPhone] = useState('');
 	const [subject, setSubject] = useState('');
 	const [message, setMessage] = useState('');
+	const [isDisabled, setDisabled] = useState(false);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -128,10 +129,16 @@ const Contacto = () => {
 			return toast.error('Todos los campos son obligatorios');
 		}
 
+		setDisabled(true);
+		toast.loading('Enviando datos...');
+
 		const data = { name, email, phone, subject, message };
 
 		const response = await sendMailContact(data);
 
+		toast.dismiss();
+		setDisabled(false);
+		
 		if (!response.success) {
 			toast.error('Se ha producido un error');
 		}
@@ -325,6 +332,7 @@ const Contacto = () => {
 								color='#fff'
 								rounded='2px'
 								_hover={{ bgColor: '#076098' }}
+								disabled={isDisabled}
 							>
 								Enviar
 							</Button>
