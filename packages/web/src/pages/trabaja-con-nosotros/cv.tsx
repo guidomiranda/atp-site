@@ -537,7 +537,6 @@ const TrabajaConNosotrosCV = () => {
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
 									<Input
-										isRequired
 										name='linkedin'
 										onChange={e => handleChange(e)}
 										type='url'

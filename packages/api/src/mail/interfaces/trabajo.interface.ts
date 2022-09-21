@@ -15,5 +15,5 @@ export interface TrabajoInterface {
     position: string,
     department: string,
     salary_expectation: string,
-    linkedin: string
+    linkedin?: string
 }
