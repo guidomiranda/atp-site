@@ -13,7 +13,7 @@ export class MailService {
 
   async sendMailContacto(contacto: ContactoInterface) {
     await this.mailerService.sendMail({
-      to: this.config.get('MAIL_TO'),
+      to: this.config.get('MAIL_TO_CONTACT'),
       subject: 'Nuevo contacto',
       template: './contacto',
       context: {
