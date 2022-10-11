@@ -43,6 +43,7 @@ const TrabajaConNosotrosCV = () => {
 		linkedin: '',
 	};
 	const [data, setData] = useState(initialState);
+	const [isDisabled, setDisabled] = useState(false);
 	const [fileData, setFile] = useState({
 		file: '',
 		name: '',
@@ -70,6 +71,9 @@ const TrabajaConNosotrosCV = () => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 
+		setDisabled(true);
+		toast.loading('Enviando datos...');
+
 		let formData = new FormData();
 		for (let key in data) {
 			formData.append(key, data[key]);
@@ -78,6 +82,9 @@ const TrabajaConNosotrosCV = () => {
 		formData.append('resume', file, name);
 
 		const response = await sendMailWork(formData);
+
+		toast.dismiss();
+		setDisabled(false);
 
 		if (!response.success) {
 			toast.error('Se ha producido un error');
@@ -530,7 +537,6 @@ const TrabajaConNosotrosCV = () => {
 							<Box w={{ base: '100%', lg: '60%' }}>
 								<Box>
 									<Input
-										isRequired
 										name='linkedin'
 										onChange={e => handleChange(e)}
 										type='url'
@@ -599,6 +605,7 @@ const TrabajaConNosotrosCV = () => {
 								p='0 48px'
 								_hover={{ bgColor: '#d21a28' }}
 								_active={{ bgColor: '#d21a28' }}
+								disabled={isDisabled}
 							>
 								Enviar
 							</Button>
