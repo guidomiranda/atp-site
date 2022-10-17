@@ -215,7 +215,7 @@ export const Promocion = ({ hiddenForm }) => {
 									'repeat(3, auto)',
 								]}
 							>
-								<Flex alignItems='center'>
+								<Flex mt='10px' alignItems='center'>
 									<Text
 										as='label'
 										color='#015796'
@@ -241,7 +241,7 @@ export const Promocion = ({ hiddenForm }) => {
 							</RadioGroup>
 						</Box>
 
-						<Box w={{ base: '100%', lg: '60%' }}>
+						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Box>
 								<Input
 									isRequired
@@ -255,7 +255,7 @@ export const Promocion = ({ hiddenForm }) => {
 							</Box>
 						</Box>
 
-						<Box w={{ base: '100%', lg: '60%' }}>
+						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Text
 								as='label'
 								color='#015796'
@@ -273,7 +273,7 @@ export const Promocion = ({ hiddenForm }) => {
 							</Box>
 						</Box>
 
-						<Box w={{ base: '100%', lg: '60%' }}>
+						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Text
 								as='label'
 								color='#015796'
