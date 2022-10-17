@@ -28,6 +28,7 @@
     "react-icons": "^4.4.0",
     "react-lazy-load-image-component": "^1.5.4",
     "react-markdown": "^8.0.3",
+    "react-to-pdf": "^0.0.14",
     "swiper": "^8.2.4"
   },
   "devDependencies": {

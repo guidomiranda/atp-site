@@ -7,6 +7,7 @@ import theme from '../styles/theme';
 import { UserProvider } from '../context/UserContext';
 
 import '../styles/swiper.css';
+import '../styles/styles.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const queryClient = new QueryClient();
