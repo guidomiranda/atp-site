@@ -14,9 +14,9 @@ export const Voucher = ({
 }) => {
 	const ref = React.createRef();
 	const options = {
-		orientation: 'landscape',
-		unit: 'in',
-		format: [10, 5],
+		//orientation: 'landscape',
+		//unit: 'in',
+		//format: [10, 5],
 	};
 	const fileName = `voucher#${data.voucherCodigo}.pdf`;
 
