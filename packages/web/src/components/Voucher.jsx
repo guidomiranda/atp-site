@@ -21,17 +21,16 @@ export const Voucher = ({
 	const fileName = `voucher#${data.voucherCodigo}.pdf`;
 
 	const handleReturn = () => {
-		// document.getElementById('productos').value = 0;
-		//setHiddenForm(false);
-		//setHiddenVoucher(true);
-		// setFormData(initialState);
-		// setProductoNombre('');
-		// setProductoId('');
+		document.getElementById('productos').value = 0;
+		setHiddenForm(false);
+		setHiddenVoucher(true);
+		setFormData(initialState);
+		setProductoNombre('');
+		setProductoId('');
 	};
 	return (
 		<>
-			{/* <Box id='container' className='voucher-layout' hidden={hiddenVoucher}> */}
-			<Box id='container' className='voucher-layout' hidden={false}>
+			<Box id='container' className='voucher-layout' hidden={hiddenVoucher}>
 				<Box id='container-pdf' ref={ref} className='voucher-layout-pdf'>
 					<Image className='voucher-img' src='/logo-mobil-route.png' />
 					<Box>
