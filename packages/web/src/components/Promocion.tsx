@@ -154,7 +154,7 @@ export const Promocion = ({ hiddenForm }) => {
 		const voucher = {
 			promocionId: formData.promocionId,
 			usuarioId: formData.usuarioId,
-			productoId: formData.productoId
+			productoId
 		};
 
 		const data = await axios({

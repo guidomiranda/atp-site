@@ -291,8 +291,8 @@ model Usuario {
   empresaUsuario  Empresa @relation(fields: [empresaId], references: [id])
   empresaId       String  @unique
   usuarios        Voucher[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @default(now()) @updatedAt
+  created_at      DateTime?  @default(now())
+  updated_at      DateTime?  @default(now()) @updatedAt
 }
 
 model Voucher {
