@@ -58,13 +58,14 @@
 	align-content: center;
 	text-align: center;
 	margin: 5% auto;
+	padding-left: 20%;
 }
 
 .voucher-button {
 	height: 45px;
 	background-color: #d21a28;
 	color: #fff;
-	padding: 0 48px;
+	padding: 20 48px;
 	width: 50px;
 	font-weight: bold;
 }
@@ -79,4 +80,11 @@
 
 .pdf {
 	background-color: #d21a28;
+}
+
+.voucher-img {
+	width: fit-content;
+	align-content: center;
+	text-align: center;
+	margin: 5% auto;
 }
