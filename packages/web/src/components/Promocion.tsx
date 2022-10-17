@@ -6,7 +6,7 @@ import {
 	Heading,
 	Radio,
 	RadioGroup,
-	Text
+	Text,
 } from '@chakra-ui/react';
 import Input from '../components/Input';
 import LayoutMin from '../components/LayoutMin';
@@ -27,7 +27,7 @@ export const Promocion = ({ hiddenForm }) => {
 		usuarioCodigo: '',
 		usuarioId: '',
 		fecha: '',
-		voucherCodigo: ''
+		voucherCodigo: '',
 	};
 	const [formData, setFormData] = useState(initialState);
 	const [isDisabled, setDisabled] = useState(false);
@@ -42,7 +42,7 @@ export const Promocion = ({ hiddenForm }) => {
 		const getProducto = async () => {
 			const data = await axios({
 				method: 'GET',
-				url: `/productos`
+				url: `/productos`,
 			});
 			const resProducto = data.data.data;
 			setProducto(resProducto);
@@ -60,7 +60,7 @@ export const Promocion = ({ hiddenForm }) => {
 		setFormData({
 			...formData,
 			productoId,
-			productoNombre
+			productoNombre,
 		});
 		e.preventDefault();
 	};
@@ -68,7 +68,7 @@ export const Promocion = ({ hiddenForm }) => {
 	const getProductoNombre = async () => {
 		const data = await axios({
 			method: 'GET',
-			url: `/productos/${productoId}`
+			url: `/productos/${productoId}`,
 		});
 		const resProductoNombre = await data.data.data.nombre;
 
@@ -84,15 +84,14 @@ export const Promocion = ({ hiddenForm }) => {
 		setFormData({
 			...formData,
 			productoId,
-			productoNombre
+			productoNombre,
 		});
-
 	}, [productoId]);
 
 	const handleChange = e => {
 		setFormData({
 			...formData,
-			[e.target.name]: e.target.value
+			[e.target.name]: e.target.value,
 		});
 	};
 
@@ -116,9 +115,8 @@ export const Promocion = ({ hiddenForm }) => {
 				fecha: dateFormat.format(v.fecha),
 				voucherCodigo: v.codigo,
 				productoId,
-				productoNombre
+				productoNombre,
 			});
-
 		});
 		setHiddenForm(true);
 		setHiddenVoucher(false);
@@ -132,7 +130,7 @@ export const Promocion = ({ hiddenForm }) => {
 	const fetchUsuario = async (usuarioCodigo: string) => {
 		const data = await axios({
 			method: 'GET',
-			url: `/usuarios/codigo/${usuarioCodigo}`
+			url: `/usuarios/codigo/${usuarioCodigo}`,
 		});
 		const usuario = data.data.data;
 
@@ -140,7 +138,7 @@ export const Promocion = ({ hiddenForm }) => {
 			...formData,
 			nombre: usuario?.nombre,
 			usuarioCodigo: usuario?.codigo,
-			usuarioId: usuario?.id
+			usuarioId: usuario?.id,
 		});
 	};
 
@@ -150,17 +148,16 @@ export const Promocion = ({ hiddenForm }) => {
 	};
 
 	const createVaucher = async formData => {
-
 		const voucher = {
 			promocionId: formData.promocionId,
 			usuarioId: formData.usuarioId,
-			productoId
+			productoId,
 		};
 
 		const data = await axios({
 			method: 'POST',
 			url: '/vouchers/create/',
-			data: voucher
+			data: voucher,
 		});
 
 		return data.data.data;
@@ -172,7 +169,11 @@ export const Promocion = ({ hiddenForm }) => {
 				<Box maxW='960px' m='0 auto' w='90%' id='main'>
 					<Box>
 						<Flex position='relative' display='inline-flex'>
-							<Heading fontSize='48px' fontWeight='black' color='#015796'>
+							<Heading
+								fontSize={{ base: '32px', lg: '48px' }}
+								fontWeight='black'
+								color='#015796'
+							>
 								PROMOCIONES
 							</Heading>
 							<Box
@@ -200,148 +201,149 @@ export const Promocion = ({ hiddenForm }) => {
 					</Box>
 
 					<Box as='form'>
-							<Box w={{ base: '100%', lg: '60%' }}>
-								<Text color='#015796' mt='20px' pb='7px' fontWeight='bold'>
-									Número de Documento:
-								</Text>
-								<RadioGroup
-									display='grid'
-									name='identifier_type'
-									gap={{ base: '20px', lg: '0' }}
-									gridTemplateColumns={[
-										'1fr',
-										'repeat(2, 1fr)',
-										'repeat(3, auto)'
-									]}
-								>
-									<Flex alignItems='center'>
-										<Text
-											as='label'
-											color='#015796'
-											mr='10px'
-											htmlFor='ci'
-											fontSize='14px'
-											fontWeight='bold'
-										>
-											RiderID
-										</Text>
-										<Radio colorScheme='red' id='ci' value='ci' />
-									</Flex>
-									<Flex>
-										<Input
-											isRequired
-											name='identifier_number'
-											onChange={handleChangeUsuarioCodigo}
-											type='number'
-											placeholder='Número*'
-											value={formData.usuarioCodigo}
-										/>
-									</Flex>
-								</RadioGroup>
-							</Box>
-
-							<Box w={{ base: '100%', lg: '60%' }}>
-								<Box>
+						<Box w={{ base: '100%', lg: '60%' }}>
+							<Text color='#015796' mt='20px' pb='7px' fontWeight='bold'>
+								Número de Documento:
+							</Text>
+							<RadioGroup
+								display='grid'
+								name='identifier_type'
+								gap={{ base: '20px', lg: '0' }}
+								gridTemplateColumns={[
+									'1fr',
+									'repeat(2, 1fr)',
+									'repeat(3, auto)',
+								]}
+							>
+								<Flex alignItems='center'>
+									<Text
+										as='label'
+										color='#015796'
+										mr='10px'
+										htmlFor='ci'
+										fontSize='14px'
+										fontWeight='bold'
+									>
+										RiderID
+									</Text>
+									<Radio colorScheme='red' id='ci' value='ci' />
+								</Flex>
+								<Flex>
 									<Input
 										isRequired
-										color='#015796'
-										name='name'
-										placeholder='Nombre y Apellido*'
-										isReadOnly={true}
-										value={formData.nombre}
-										onChange={handleChange}
+										name='identifier_number'
+										onChange={handleChangeUsuarioCodigo}
+										type='number'
+										placeholder='Número*'
+										value={formData.usuarioCodigo}
 									/>
-								</Box>
+								</Flex>
+							</RadioGroup>
+						</Box>
+
+						<Box w={{ base: '100%', lg: '60%' }}>
+							<Box>
+								<Input
+									isRequired
+									color='#015796'
+									name='name'
+									placeholder='Nombre y Apellido*'
+									isReadOnly={true}
+									value={formData.nombre}
+									onChange={handleChange}
+								/>
 							</Box>
+						</Box>
 
-							<Box w={{ base: '100%', lg: '60%' }}>
-								<Text
-									as='label'
-									color='#015796'
-									mr='10px'
-									htmlFor='ci'
-									fontSize='14px'
-									fontWeight='bold'
-								>
-									Empresa
-								</Text>
-								<Box>
-									<Select name='empresa' isRequired>
-										<option value='0'>PEDIDOS YA</option>
-									</Select>
-								</Box>
+						<Box w={{ base: '100%', lg: '60%' }}>
+							<Text
+								as='label'
+								color='#015796'
+								mr='10px'
+								htmlFor='ci'
+								fontSize='14px'
+								fontWeight='bold'
+							>
+								Empresa
+							</Text>
+							<Box>
+								<Select w='full' name='empresa' isRequired>
+									<option value='0'>PEDIDOS YA</option>
+								</Select>
 							</Box>
+						</Box>
 
-							<Box w={{ base: '100%', lg: '60%' }}>
-								<Text
-									as='label'
-									color='#015796'
-									mr='10px'
-									htmlFor='ci'
-									fontSize='14px'
-									fontWeight='bold'
-								>
-									Producto
-								</Text>
+						<Box w={{ base: '100%', lg: '60%' }}>
+							<Text
+								as='label'
+								color='#015796'
+								mr='10px'
+								htmlFor='ci'
+								fontSize='14px'
+								fontWeight='bold'
+							>
+								Producto
+							</Text>
 
-								<Box
-									as='label'
-									color='#015796'
-									mr='10px'
-									fontSize='25px'
-									fontWeight='Bold'
+							<Box
+								as='label'
+								color='#015796'
+								mr='10px'
+								fontSize='25px'
+								fontWeight='Bold'
+							>
+								<select
+									className='select-promotion'
+									id='productos'
+									name='productos'
+									onChange={e => handleChangeProducto(e)}
 								>
-									<select
-										id='productos'
-										name='productos'
-										onChange={e => handleChangeProducto(e)}
-									>
-										<option value={0}>
-											--Selecciona tu producto en promoción *--
+									<option value={0}>
+										--Selecciona tu producto en promoción *--
+									</option>
+									{producto.map(getProduto => (
+										<option key={getProduto.id} value={getProduto.id}>
+											{' '}
+											{getProduto.nombre}
 										</option>
-										{producto.map(getProduto => (
-											<option key={getProduto.id} value={getProduto.id}>
-												{' '}
-												{getProduto.nombre}
-											</option>
-										))}
-									</select>
-								</Box>
+									))}
+								</select>
 							</Box>
+						</Box>
 
-							<Box mt='32px'>
-								<Button
-									type={`submit`}
-									minW='initial'
-									h='45px'
-									bgColor='#d21a28'
-									color='#fff'
-									rounded='none'
-									p='0 48px'
-									_hover={{ bgColor: '#d21a28' }}
-									_active={{ bgColor: '#d21a28' }}
-									disabled={isDisabled}
-									onClick={handleSubmit}
-								>
-									Enviar
-								</Button>
-								<Button
-									type={`submit`}
-									minW='initial'
-									h='45px'
-									bgColor='#d21a28'
-									color='#fff'
-									rounded='none'
-									p='0 48px'
-									_hover={{ bgColor: '#d21a28' }}
-									_active={{ bgColor: '#d21a28' }}
-									disabled={isDisabled}
-									onClick={handleCancel}
-									ml={'7px'}
-								>
-									Cancelar
-								</Button>
-							</Box>
+						<Box mt='32px'>
+							<Button
+								type={`submit`}
+								minW='initial'
+								h='45px'
+								bgColor='#d21a28'
+								color='#fff'
+								rounded='none'
+								p='0 48px'
+								_hover={{ bgColor: '#d21a28' }}
+								_active={{ bgColor: '#d21a28' }}
+								disabled={isDisabled}
+								onClick={handleSubmit}
+							>
+								Enviar
+							</Button>
+							<Button
+								type={`submit`}
+								minW='initial'
+								h='45px'
+								bgColor='#d21a28'
+								color='#fff'
+								rounded='none'
+								p='0 48px'
+								_hover={{ bgColor: '#d21a28' }}
+								_active={{ bgColor: '#d21a28' }}
+								disabled={isDisabled}
+								onClick={handleCancel}
+								ml={'7px'}
+							>
+								Cancelar
+							</Button>
+						</Box>
 					</Box>
 				</Box>
 			</Box>
