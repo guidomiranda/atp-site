@@ -22,8 +22,8 @@ export const Voucher = ({
 
 	const handleReturn = () => {
 		document.getElementById('productos').value = 0;
-		setHiddenForm(false);
-		setHiddenVoucher(true);
+		//setHiddenForm(false);
+		//setHiddenVoucher(true);
 		setFormData(initialState);
 		setProductoNombre('');
 		setProductoId('');
@@ -74,7 +74,7 @@ export const Voucher = ({
 								backgroundColor: '#d21a28',
 								color: '#fff',
 								padding: '0 48px',
-								marginLeft: '10%',
+								marginLeft: '25%',
 							}}
 							onClick={toPdf}
 						>
