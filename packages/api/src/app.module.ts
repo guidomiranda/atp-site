@@ -47,6 +47,27 @@ import { ContactoService } from './contacto/contacto.service';
 
 import { MailModule } from './mail/mail.module';
 
+import { EmpresaController } from './empresa/empresa.controller';
+import { EmpresaService } from './empresa/empresa.service';
+
+import { UsuarioController } from './usuario/usuario.controller';
+import { UsuarioService } from './usuario/usuario.service';
+
+import { PromocionController } from './promocion/promocion.controller';
+import { PromocionService } from './promocion/promocion.service';
+
+import { PromocionDetalleController } from './promocionDetalle/promocionDetalle.controller';
+import { PromocionDetalleService } from './promocionDetalle/promocionDetalle.service';
+
+import { VoucherController } from './voucher/voucher.controller';
+import { VoucherService } from './voucher/voucher.service';
+
+import { SequenceController } from './sequence/sequence.controller';
+import { SequenceService } from './sequence/sequence.service';
+
+import { ProductoController } from './producto/producto.controller';
+import { ProductoService } from './producto/producto.service';
+
 @Module({
   controllers: [
     AppController,
@@ -69,6 +90,13 @@ import { MailModule } from './mail/mail.module';
     ClientesController,
     MarcasController,
     ContactoController,
+    EmpresaController,
+    UsuarioController,
+    PromocionController,
+    PromocionDetalleController,
+    VoucherController,
+    SequenceController,
+    ProductoController,
   ],
   providers: [
     AppService,
@@ -93,6 +121,13 @@ import { MailModule } from './mail/mail.module';
     MarcasService,
     PrismaService,
     ContactoService,
+    EmpresaService,
+    UsuarioService,
+    PromocionService,
+    PromocionDetalleService,
+    VoucherService,
+    SequenceService,
+    ProductoService,
   ],
   imports: [
     MailModule,

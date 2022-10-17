@@ -6,25 +6,25 @@ const breakpoints = {
 	lg: '62em',
 	xlg: '72em',
 	xl: '80em',
-	'2xl': '96em',
+	'2xl': '96em'
 };
 
 const theme = extendTheme({
 	styles: {
 		global: {
 			body: {
-				fontFamily: 'Montserrat, sans-serif',
-			},
-		},
+				fontFamily: 'Montserrat, sans-serif'
+			}
+		}
 	},
 	colors: {
 		primary: {
 			light: '#f7fafc',
-			dark: '#1a202c',
+			dark: '#1a202c'
 		},
-		secondary: 'rgb(211,75,21)',
+		secondary: 'rgb(211,75,21)'
 	},
-	breakpoints,
+	breakpoints
 });
 
 export default theme;

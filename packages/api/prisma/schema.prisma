@@ -238,3 +238,96 @@ model Clientes {
   created_at DateTime  @default(now())
   updated_at DateTime?
 }
+
+// Seccion: PROMOCION
+model Promocion {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre            String
+  link              String
+  imagen            String
+  estado            Boolean   @default(true)
+  orden             Int       @default(1)
+  porcentaje        Int?
+  monto             Int?
+  fechaInicio       DateTime? @default(now()) 
+  fechaFin          DateTime?
+  promociones       PromocionDetalle[]
+  promocionVouchers Voucher[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+}
+
+model PromocionDetalle {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  promocion   Promocion @relation(fields: [promocionId], references: [id])
+  promocionId String   
+  empresa     Empresa   @relation(fields: [empresaId], references: [id])
+  empresaId   String    @unique
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt  
+}
+
+model Empresa {
+  id              String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre          String
+  link            String
+  imagen          String
+  estado          Boolean   @default(true)
+  orden           Int       @default(1)
+  empresa         PromocionDetalle?
+  empresaUsuario  Usuario[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+}
+
+model Usuario {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  cedula          String?
+  codigo          String?
+  nombre          String
+  estado          Boolean @default(true)
+  telefono        String?
+  email           String?
+  empresaUsuario  Empresa @relation(fields: [empresaId], references: [id])
+  empresaId       String  @unique
+  usuarios        Voucher[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+}
+
+model Voucher {
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  codigo              Int
+  fecha               DateTime  @default(now())
+  cedula              String?
+  estado              Boolean @default(true)
+  telefono            String?
+  promocionVoucher    Promocion @relation(fields: [promocionId], references: [id])
+  promocionId         String
+  promocionProducto   Producto @relation(fields: [productoId], references: [id])
+  productoId          String  
+  usuario             Usuario   @relation(fields: [usuarioId], references: [id])
+  usuarioId           String    @unique
+  created_at          DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt
+}
+
+model Sequence {
+  id      String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre  String    @unique @default("voucher")
+  seq     Int       @default(0)
+}
+
+model Producto {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre     String    @unique
+  codigo     Int
+  estado     Boolean   @default(true)
+  orden      Int       @default(1)
+  productos  Voucher[]
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+}
+
+
+// EndSeccion: PROMOCION
