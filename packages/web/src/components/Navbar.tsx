@@ -101,7 +101,7 @@ const Navbar = () => {
 			<Flex
 				height='100%'
 				alignItems='center'
-				maxW='1220px'
+				maxW='1370px'
 				w='90%'
 				m='0 auto'
 				justifyContent='space-between'
@@ -218,6 +218,11 @@ const Navbar = () => {
 						isActive={pathname === '/services'}
 						text='Servicios'
 						link='/services'
+					/>
+					<NavLink
+						isActive={pathname === '/promociones'}
+						text='Promociones'
+						link='/promociones'
 					/>
 					<NavLink
 						isActive={pathname === '/contacto'}
