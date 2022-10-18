@@ -15,8 +15,8 @@ export const Voucher = ({
 	const ref = React.createRef();
 	const options = {
 		//orientation: 'landscape',
-		//unit: 'in',
-		//format: [10, 5],
+		unit: 'in',
+		format: [6, 5],
 	};
 	const fileName = `voucher#${data.voucherCodigo}.pdf`;
 
@@ -28,10 +28,11 @@ export const Voucher = ({
 		setProductoNombre('');
 		setProductoId('');
 	};
+
 	return (
 		<>
 			<Box id='container' className='voucher-layout' hidden={hiddenVoucher}>
-				<Box id='container-pdf' ref={ref} className='voucher-layout-pdf'>
+				<Box id='container-pdf' className='voucher-layout-pdf' ref={ref}>
 					<Image className='voucher-img' src='/logo-mobil-route.png' />
 					<Box>
 						<div>
@@ -62,9 +63,8 @@ export const Voucher = ({
 					filename={fileName}
 					onComplete={handleReturn}
 					options={options}
-					// x={700}
-					// y={700}
-					// scale={0.8}
+					y={1}
+					scale={0.6}
 				>
 					{({ toPdf }) => (
 						<button
@@ -74,7 +74,7 @@ export const Voucher = ({
 								backgroundColor: '#d21a28',
 								color: '#fff',
 								padding: '0 48px',
-								marginLeft: '10%',
+								marginLeft: '5%',
 							}}
 							onClick={toPdf}
 						>
