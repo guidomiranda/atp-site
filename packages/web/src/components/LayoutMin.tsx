@@ -1,4 +1,5 @@
 import { Box, Button } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FaAngleUp } from 'react-icons/fa';
 
@@ -28,6 +29,8 @@ const LayoutMin: React.FC<LayoutMinProps> = ({ children, title }) => {
 		};
 	}, []);
 
+	const router = useRouter();
+
 	return (
 		<>
 			<head>
@@ -44,19 +47,16 @@ const LayoutMin: React.FC<LayoutMinProps> = ({ children, title }) => {
 					}}
 				></script>
 			</head>
-			<Box
-        		bgColor='#383752'		
-			>
+			<Box bgColor='#383752'>
 				<Navbar />
-				
 			</Box>
-				{children}
+			{children}
 			<Box>
 				<Footer />
 			</Box>
-		
 
 			<Box
+				display={router.pathname === '/promociones' ? 'none' : 'block'}
 				position='fixed'
 				right={{ base: '0', lg: '1px' }}
 				top={{ base: 'initial', lg: '70%' }}
