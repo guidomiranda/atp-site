@@ -327,22 +327,6 @@ export const Promocion = ({ hiddenForm }) => {
 							>
 								Enviar
 							</Button>
-							<Button
-								type={`submit`}
-								minW='initial'
-								h='45px'
-								bgColor='#d21a28'
-								color='#fff'
-								rounded='none'
-								p='0 48px'
-								_hover={{ bgColor: '#d21a28' }}
-								_active={{ bgColor: '#d21a28' }}
-								disabled={isDisabled}
-								onClick={handleCancel}
-								ml={'7px'}
-							>
-								Cancelar
-							</Button>
 						</Box>
 					</Box>
 				</Box>
