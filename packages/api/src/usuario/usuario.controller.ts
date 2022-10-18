@@ -10,6 +10,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
+import { FormDataRequest } from 'nestjs-form-data';
 
 import { UsuarioService } from './usuario.service';
 
@@ -20,6 +21,27 @@ export class UsuarioController {
   @Post('/create')
   async create(@Res() res: Response, @Body() dto: any) {
     const cliente = await this.service.create(dto);
+    return res.status(HttpStatus.OK).json({
+      message: 'Creado',
+      success: true,
+      data: cliente,
+    });
+  }
+
+  @Post('/createAll')
+  async createAll(@Res() res: Response, @Body() dto: any) {
+    const cliente = await this.service.createAll(dto);
+    return res.status(HttpStatus.OK).json({
+      message: 'Creado',
+      success: true,
+      data: cliente,
+    });
+  }
+
+  @Post('/import')
+  @FormDataRequest()
+  async createCSV(@Res() res: Response, @Body() dto: any) {
+    const cliente = await this.service.createCSV(dto);
     return res.status(HttpStatus.OK).json({
       message: 'Creado',
       success: true,
