@@ -13,6 +13,6 @@ async function bootstrap() {
   app.use(urlencoded({ extended: true, limit: '50mb' }));
 
   const server = await app.listen(8080);
-  server.setTimeout(18000000000);
+  server.setTimeout(1800000);
 }
 bootstrap();
