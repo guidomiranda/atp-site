@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { NestjsFormDataModule } from 'nestjs-form-data';
 
 import { PrismaService } from '../prisma/prisma.service';
 import { AppController } from './app.controller';
@@ -131,6 +132,7 @@ import { ProductoService } from './producto/producto.service';
   ],
   imports: [
     MailModule,
+    NestjsFormDataModule,
     ConfigModule.forRoot({
       isGlobal: true,
     }),
