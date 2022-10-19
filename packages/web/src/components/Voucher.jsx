@@ -52,12 +52,12 @@ export const Voucher = ({
 	}, []);
 
 	const handleReturn = () => {
-		document.getElementById('productos').value = 0;
 		setHiddenForm(false);
 		setHiddenVoucher(true);
 		setFormData(initialState);
 		setProductoNombre('');
 		setProductoId('');
+		document.getElementById('productos').value = 0;
 	};
 
 	return (
