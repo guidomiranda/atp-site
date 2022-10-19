@@ -46,40 +46,23 @@
 }
 
 .voucher-layout {
-	background-color: #d21a28;
 	width: fit-content;
 	align-content: center;
 	text-align: center;
 	margin: 5% auto;
-	border-color: #000;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
 }
 
 .voucher-body {
-	background-color: rgb(53, 163, 25);
 	width: fit-content;
 	align-content: center;
 	text-align: center;
-	border-color: #000;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
 }
 
 .voucher-layout-pdf {
-	background-color: rgb(0, 0, 0);
 	margin-top: 50% auto;
 	width: fit-content;
 	align-content: center;
 	text-align: center;
-	border-top-width: 5px;
-	border-right-width: 5px;
-	border-bottom-width: 5px;
-	border-left-width: 5px;
 }
 
 .voucher-button {

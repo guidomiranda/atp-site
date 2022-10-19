@@ -163,8 +163,7 @@ export const Promocion = ({ hiddenForm }) => {
 
 	return (
 		<LayoutMin title='Promocion'>
-			{/* <Box py='72px' borderBottom='32px solid #d21a28' hidden={isHiddenForm}> */}
-			<Box py='72px' borderBottom='32px solid #d21a28' hidden={false}>
+			<Box py='72px' borderBottom='32px solid #d21a28' hidden={isHiddenForm}>
 				<Box maxW='960px' m='0 auto' w='90%' id='main'>
 					<Box>
 						<Flex position='relative' display='inline-flex'>

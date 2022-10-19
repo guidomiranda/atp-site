@@ -21,7 +21,7 @@ export const Voucher = ({
 	const initialDimension = {
 		dimX: -0.09,
 		dimY: 1,
-		vScale: 0.6,
+		vScale: 0.57,
 	};
 	const [{ dimX, dimY, vScale }, setDimensions] = useState(initialDimension);
 
@@ -43,7 +43,7 @@ export const Voucher = ({
 			setDimensions({
 				dimX: 1.66,
 				dimY: 1,
-				vScale: 0.6,
+				vScale: 0.5,
 			});
 		} else {
 			console.log('No estás usando un móvil');
@@ -51,26 +51,21 @@ export const Voucher = ({
 		}
 	}, []);
 
-	console.log('dimX: ', dimX);
-	console.log('dimY: ', dimY);
-	console.log('vScale', vScale);
-
 	const handleReturn = () => {
-		// document.getElementById('productos').value = 0;
-		// setHiddenForm(false);
-		// setHiddenVoucher(true);
-		// setFormData(initialState);
-		// setProductoNombre('');
-		// setProductoId('');
+		document.getElementById('productos').value = 0;
+		setHiddenForm(false);
+		setHiddenVoucher(true);
+		setFormData(initialState);
+		setProductoNombre('');
+		setProductoId('');
 	};
 
 	return (
 		<>
-			{/* <Box id='container' className='voucher-layout' hidden={hiddenVoucher}> */}
 			<Box
 				id='container'
 				className='voucher-layout'
-				hidden={false}
+				hidden={hiddenVoucher}
 				maxW='960px'
 				m='0 auto'
 				w='90%'
