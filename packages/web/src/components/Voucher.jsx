@@ -19,7 +19,7 @@ export const Voucher = ({
 		format: [5, 5],
 	};
 	const initialDimension = {
-		dimX: 0.19,
+		dimX: -0.09,
 		dimY: 1,
 		vScale: 0.6,
 	};
@@ -28,6 +28,7 @@ export const Voucher = ({
 	const fileName = `voucher#${data.voucherCodigo}.pdf`;
 
 	useEffect(() => {
+		console.log('useEfect funcando');
 		let navegador = navigator.userAgent;
 		if (
 			navigator.userAgent.match(/Android/i) ||
@@ -38,17 +39,15 @@ export const Voucher = ({
 			navigator.userAgent.match(/BlackBerry/i) ||
 			navigator.userAgent.match(/Windows Phone/i)
 		) {
-			console.log(navigator);
 			console.log('Estás usando un dispositivo móvil!!');
 			setDimensions({
-				dimX: 1.6,
+				dimX: 1.66,
 				dimY: 1,
 				vScale: 0.6,
 			});
 		} else {
-			console.log(navigator);
 			console.log('No estás usando un móvil');
-			setDimensions(initialsDimension);
+			setDimensions(initialDimension);
 		}
 	}, []);
 
