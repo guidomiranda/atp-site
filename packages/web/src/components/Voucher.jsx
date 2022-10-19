@@ -129,7 +129,7 @@ export const Voucher = ({
 	);
 };
 
-export async function getStaticProps(context) {
+export async function getServerSideProps(context) {
 	const window = window;
 	const navigator = navigator;
 	return { window, navigator };
