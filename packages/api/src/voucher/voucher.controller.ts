@@ -41,6 +41,20 @@ export class VoucherController {
     });
   }
 
+  @Patch('codigo/:codigo')
+  async updateCodigo(
+    @Res() res: Response,
+    @Param('codigo') codigo: string,
+    @Body() dto: any,
+  ) {
+    const voucher = await this.service.updateCodigo(codigo, dto);
+    return res.status(HttpStatus.OK).json({
+      message: 'Actualizado',
+      success: true,
+      data: voucher,
+    });
+  }
+
   @Delete('/:id')
   async delete(@Res() res: Response, @Param('id') id: string) {
     const voucher = await this.service.delete(id);
