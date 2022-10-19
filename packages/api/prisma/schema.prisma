@@ -297,20 +297,18 @@ model Usuario {
 
 model Voucher {
   id                  String    @id @default(auto()) @map("_id") @db.ObjectId
-  codigo              Int
+  codigo              Int       @unique
   fecha               DateTime  @default(now())
-  cedula              String?
-  canjeado            Boolean @default(false)
+  canjeado            Boolean   @default(false)
   canjeadoFecha       DateTime?
-  telefono            String?
   promocionVoucher    Promocion @relation(fields: [promocionId], references: [id])
   promocionId         String
-  promocionProducto   Producto @relation(fields: [productoId], references: [id])
+  promocionProducto   Producto  @relation(fields: [productoId], references: [id])
   productoId          String  
   usuario             Usuario   @relation(fields: [usuarioId], references: [id])
   usuarioId           String    @unique
   created_at          DateTime  @default(now())
-  updated_at  DateTime  @default(now()) @updatedAt
+  updated_at          DateTime  @default(now()) @updatedAt
 }
 
 model Sequence {

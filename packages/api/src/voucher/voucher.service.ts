@@ -20,6 +20,13 @@ export class VoucherService {
     });
   }
 
+  updateCodigo(codigo: string, dto: any) {
+    return this.prisma.voucher.update({
+      where: { codigo: parseInt(codigo) },
+      data: { ...dto },
+    });
+  }
+
   delete(id: string) {
     return this.prisma.voucher.delete({ where: { id } });
   }
