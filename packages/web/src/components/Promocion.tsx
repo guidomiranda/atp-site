@@ -118,8 +118,6 @@ export const Promocion = ({ hiddenForm }) => {
 				productoNombre,
 			});
 		});
-		setHiddenForm(true);
-		setHiddenVoucher(false);
 	};
 
 	const handleCancel = e => {

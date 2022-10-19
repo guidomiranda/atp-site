@@ -26,7 +26,7 @@
 
 .voucher-label-l {
 	color: #000;
-	margin-top: 35px;
+	padding-top: 35px;
 	padding-bottom: 7px;
 	font-weight: bold;
 	font-size: 23px;
@@ -36,7 +36,7 @@
 .voucher-data-l {
 	color: #d21a28;
 	margin-top: 20px;
-	padding-left: 10px;
+	padding-left: 0px;
 	font-weight: bold;
 	font-size: 25px;
 }
@@ -52,20 +52,23 @@
 	margin: 5% auto;
 }
 
+.voucher-body {
+	width: fit-content;
+	align-content: center;
+	text-align: center;
+}
+
 .voucher-layout-pdf {
 	margin-top: 50% auto;
 	width: fit-content;
 	align-content: center;
 	text-align: center;
-	margin: 5% auto;
-	padding-left: 5%;
 }
 
 .voucher-button {
 	height: 45px;
 	background-color: #d21a28;
 	color: #fff;
-	padding: 20 48px;
 	width: 50px;
 	font-weight: bold;
 }
@@ -74,7 +77,6 @@
 	height: 45px;
 	background-color: #d21a28;
 	color: #fff;
-	padding: 0 48px;
 	font-weight: bold;
 }
 
