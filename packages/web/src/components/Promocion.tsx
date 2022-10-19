@@ -171,6 +171,7 @@ export const Promocion = ({ hiddenForm }) => {
 								fontSize={{ base: '32px', lg: '48px' }}
 								fontWeight='black'
 								color='#015796'
+								fontFamily='Montserrat,sans-serif'
 							>
 								PROMOCIONES
 							</Heading>
