@@ -53,7 +53,6 @@ export const Voucher = ({
 	console.log('dimensionesfsfsdfds', dimX);
 
 	const handleReturn = () => {
-		alert('first');
 		setHiddenForm(false);
 		setHiddenVoucher(true);
 		setFormData(initialState);
