@@ -70,6 +70,7 @@ export const Voucher = ({
 				maxW='960px'
 				m='0 auto'
 				w='90%'
+				p='4% 0 4% 0'
 			>
 				<Box
 					id='container-pdf'
