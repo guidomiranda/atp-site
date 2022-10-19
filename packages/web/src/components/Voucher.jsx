@@ -50,7 +50,7 @@ export const Voucher = ({
 			setDimensions(initialDimension);
 		}
 	}, []);
-
+	console.log('dimensiones', dimX);
 	const handleReturn = () => {
 		setHiddenForm(false);
 		setHiddenVoucher(true);
@@ -129,8 +129,8 @@ export const Voucher = ({
 	);
 };
 
-export async function getServerSideProps(context) {
-	const window = window;
-	const navigator = navigator;
-	return { window, navigator };
-}
+// export async function getServerSideProps(context) {
+// 	const window = window;
+// 	const navigator = navigator;
+// 	return { window, navigator };
+// }
