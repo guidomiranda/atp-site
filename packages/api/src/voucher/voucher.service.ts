@@ -31,4 +31,10 @@ export class VoucherService {
   getOne(id: string) {
     return this.prisma.voucher.findFirst({ where: { id } });
   }
+
+  getOneCodigo(codigo: string) {
+    return this.prisma.voucher.findFirst({
+      where: { codigo: parseInt(codigo) },
+    });
+  }
 }

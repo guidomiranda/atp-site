@@ -70,4 +70,14 @@ export class VoucherController {
       data: voucher,
     });
   }
+
+  @Get('codigo/:codigo')
+  async getOneCodigo(@Res() res: Response, @Param('codigo') codigo: string) {
+    const voucher = await this.service.getOneCodigo(codigo);
+    return res.status(HttpStatus.OK).json({
+      message: 'Voucher',
+      success: true,
+      data: voucher,
+    });
+  }
 }

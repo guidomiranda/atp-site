@@ -300,7 +300,8 @@ model Voucher {
   codigo              Int
   fecha               DateTime  @default(now())
   cedula              String?
-  estado              Boolean @default(true)
+  canjeado            Boolean @default(false)
+  canjeadoFecha       DateTime?
   telefono            String?
   promocionVoucher    Promocion @relation(fields: [promocionId], references: [id])
   promocionId         String
