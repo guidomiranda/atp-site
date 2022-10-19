@@ -51,9 +51,9 @@ export const Voucher = ({
 		}
 	}, []);
 	console.log('dimensionesfsfsdfds', dimX);
-	
+
 	const handleReturn = () => {
-		console.log('first');
+		alert('first');
 		setHiddenForm(false);
 		setHiddenVoucher(true);
 		setFormData(initialState);
@@ -131,8 +131,8 @@ export const Voucher = ({
 	);
 };
 
-// export async function getServerSideProps(context) {
-// 	const window = window;
-// 	const navigator = navigator;
-// 	return { window, navigator };
-// }
+export async function getServerSideProps(context) {
+	const window = window;
+	const navigator = navigator;
+	return { window, navigator };
+}
