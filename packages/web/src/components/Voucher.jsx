@@ -39,18 +39,17 @@ export const Voucher = ({
 			navigator.userAgent.match(/BlackBerry/i) ||
 			navigator.userAgent.match(/Windows Phone/i)
 		) {
-			console.log('Estás usando un dispositivo móvil!!');
+			// console.log('Estás usando un dispositivo móvil!!');
 			setDimensions({
 				dimX: 1.66,
 				dimY: 1,
 				vScale: 0.5,
 			});
 		} else {
-			console.log('No estás usando un móvil');
+			// console.log('No estás usando un móvil');
 			setDimensions(initialDimension);
 		}
 	}, []);
-	console.log('dimensionesfsfsdfds', dimX);
 
 	const handleReturn = () => {
 		setHiddenForm(false);

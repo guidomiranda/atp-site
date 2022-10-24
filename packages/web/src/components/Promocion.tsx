@@ -7,6 +7,9 @@ import {
 	Radio,
 	RadioGroup,
 	Text,
+	HStack,
+	useToast,
+	useNumberInput
 } from '@chakra-ui/react';
 import Input from '../components/Input';
 import LayoutMin from '../components/LayoutMin';
@@ -14,6 +17,7 @@ import Select from '../components/Select';
 import axios from '../config/axios';
 import dateFormat from '../helpers/dateFormat';
 import { Voucher } from '../components/Voucher';
+import toast from 'react-hot-toast';
 
 export const Promocion = ({ hiddenForm }) => {
 	const initialState = {
@@ -37,6 +41,22 @@ export const Promocion = ({ hiddenForm }) => {
 	const [producto, setProducto] = useState([]);
 	const [productoId, setProductoId] = useState('');
 	const [productoNombre, setProductoNombre] = useState('');
+
+	const toast = useToast()
+
+	const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
+    useNumberInput({
+      step: 1,
+      defaultValue: 1,
+      min: 1,
+      max: 100,
+      precision: 0,
+    });
+
+	const inc = getIncrementButtonProps();
+	const dec = getDecrementButtonProps();
+	const input = getInputProps();
+
 
 	useEffect(() => {
 		const getProducto = async () => {
@@ -88,6 +108,7 @@ export const Promocion = ({ hiddenForm }) => {
 		});
 	}, [productoId]);
 
+	
 	const handleChange = e => {
 		setFormData({
 			...formData,
@@ -95,16 +116,27 @@ export const Promocion = ({ hiddenForm }) => {
 		});
 	};
 
+
+	
+
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (!formData.nombre) {
-			alert('Complete todos los campos con *');
-			return;
+			return toast({
+                title: 'Complete todos los campos con *',
+                status: 'error',
+				position: 'top',				
+                isClosable: true,
+              });
 		}
 
 		if (!formData.productoId) {
-			alert('Complete todos los campos con *');
-			return;
+			return toast({
+                title: 'Complete todos los campos con *',
+                status: 'error',
+				position: 'top',
+                isClosable: true,
+              });
 		}
 
 		const voucher = createVaucher(formData);
@@ -255,6 +287,7 @@ export const Promocion = ({ hiddenForm }) => {
 								/>
 							</Box>
 						</Box>
+						
 
 						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Text
@@ -293,14 +326,14 @@ export const Promocion = ({ hiddenForm }) => {
 								fontSize='25px'
 								fontWeight='Bold'
 							>
-								<select
+								<Select
 									className='select-promotion'
 									id='productos'
 									name='productos'
 									onChange={e => handleChangeProducto(e)}
 								>
 									<option value={0}>
-										--Selecciona tu producto en promoción *--
+										--Selecciona tu producto-- *
 									</option>
 									{producto.map(getProduto => (
 										<option key={getProduto.id} value={getProduto.id}>
@@ -308,8 +341,26 @@ export const Promocion = ({ hiddenForm }) => {
 											{getProduto.nombre}
 										</option>
 									))}
-								</select>
+								</Select>
 							</Box>
+						</Box>
+
+						<Box>
+						<HStack maxW='220px'>
+						<Text
+								as='label'
+								color='#015796'
+								mr='10px'
+								htmlFor='ci'
+								fontSize='14px'
+								fontWeight='bold'
+							>
+								Cantidad
+						</Text>							
+							<Button {...inc}>+</Button>
+							<Input fontWeight='bold'{...input} />
+							<Button {...dec}>-</Button>
+						</HStack>
 						</Box>
 
 						<Box mt='32px'>
@@ -343,6 +394,8 @@ export const Promocion = ({ hiddenForm }) => {
 				setProductoNombre={setProductoNombre}
 				setProductoId={setProductoId}
 			/>
+
+			
 		</LayoutMin>
 	);
 };
