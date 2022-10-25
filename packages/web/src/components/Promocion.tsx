@@ -25,6 +25,7 @@ export const Promocion = ({ hiddenForm }) => {
 		promocionNombre: 'PROMOCION PEDIDOS YA',
 		productoId: '',
 		productoNombre: 'ccc',
+		cantidad: 1,
 		promocionPorcentaje: '30',
 		empresaNombre: 'PEDIDOS YA',
 		nombre: '',
@@ -110,6 +111,8 @@ export const Promocion = ({ hiddenForm }) => {
 
 	
 	const handleChange = e => {
+		console.log('e.target.name: ',e.target.name);
+		console.log('e.target.value: ',e.target.value);
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
@@ -346,7 +349,8 @@ export const Promocion = ({ hiddenForm }) => {
 						</Box>
 
 						<Box>
-						<HStack maxW='220px'>
+						<HStack maxW='220px'
+						onChange={e => handleChange(e)}>
 						<Text
 								as='label'
 								color='#015796'
@@ -358,7 +362,10 @@ export const Promocion = ({ hiddenForm }) => {
 								Cantidad
 						</Text>							
 							<Button {...inc}>+</Button>
-							<Input fontWeight='bold'{...input} />
+							<Input 
+							name='cantidad'
+							value={formData.cantidad}														
+							fontWeight='bold'{...input} />
 							<Button {...dec}>-</Button>
 						</HStack>
 						</Box>
