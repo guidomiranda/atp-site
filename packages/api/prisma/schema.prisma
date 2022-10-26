@@ -319,14 +319,15 @@ model Sequence {
 }
 
 model Producto {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  nombre     String    @unique
-  codigo     Int
-  estado     Boolean   @default(true)
-  orden      Int       @default(1)
-  productos  Voucher[]
-  created_at DateTime  @default(now())
-  updated_at DateTime?
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre      String    @unique
+  codigo      Int
+  codigoBarra String?
+  estado      Boolean   @default(true)
+  orden       Int       @default(1)
+  productos   Voucher[]
+  created_at  DateTime  @default(now())
+  updated_at  DateTime?
 }
 
 
