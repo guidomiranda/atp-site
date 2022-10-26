@@ -1,4 +1,4 @@
-import {useState,useRef} from 'react';
+import {useState, useRef} from 'react';
 import { Flex } from '@chakra-ui/react';
 import {
 	Box,
@@ -15,70 +15,47 @@ import {
 	HStack,
 	useNumberInput
 } from '@chakra-ui/react';
+import { set } from 'immer/dist/internal';
+import { log } from 'console';
 
 export function Prueba() {
-	
-	const [cantidad, setCantidad] = useState(1);
-	const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
-    useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: 100,
-      precision: 0,
-    });
-	const inputNumberRef = useRef();
-	const inc = getIncrementButtonProps();
-	const dec = getDecrementButtonProps();
-	const input = getInputProps();	
+
+	const inputRef = useRef();
+
 	const initialState = {
-		cantidad: 0
+		cantidad: 1
 	  };
 
 	  const [formData, setFormData] = useState(initialState);
 
-	  const handleChangePrueba = ref => {
-		console.log('ref: ',inputNumberRef);
-	};
-
 	  const handleChange = e => {
-		alert('entroooo');
-		console.log('e.target.name: ',e.target.name);
-		console.log('e.target.value: ',e.target.value);
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
 		});
 	};	  
+	lg
+	const updateCounter = (step) => {
+		console.log(formData.cantidad)
+		setFormData({
+			...formData,
+			cantidad: formData.cantidad+step
+		})
+	}
+
+log
 	return (
 		<>
-			<Flex>
-				<Input
-					isRequired
-					name='cantidad'
-					//onChange={handleChange}
-					type='number'
-					placeholder='Número*'
-					value={cantidad}
+			<Flex>		
+				<Button onClick={()=>updateCounter(1)}>+</Button>						
+				<Input maxW={'60px'} fontStyle={'bold'} textAlign={'center'}
+				name='cantidad'													
+				fontWeight='bold'
+				value={formData.cantidad}
+				onChange={handleChange}
 				/>
+				<Button onClick={()=>updateCounter(-1)}>-</Button>
 			</Flex>
-			<Flex>
-				
-				<HStack maxW='220px'>						
-					<Button {...inc }>+</Button>
-					<Input 
-					ref={inputNumberRef}
-					name='cantidad'													
-					fontWeight='bold'
-					{...input }	
-					value={cantidad}	
-					onClick={handleChangePrueba}			
-					/>
-					<Button {...dec} >-</Button>
-				</HStack>
-
-			</Flex>
-			<Button  bgColor = '#000' onClick={()=> alert(cantidad)}></Button>
-								</>
+		</>
 	)
   }

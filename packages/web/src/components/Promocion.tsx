@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
 	Box,
 	Button,
@@ -17,14 +17,13 @@ import Select from '../components/Select';
 import axios from '../config/axios';
 import dateFormat from '../helpers/dateFormat';
 import { Voucher } from '../components/Voucher';
-import toast from 'react-hot-toast';
 
 export const Promocion = ({ hiddenForm }) => {
 	const initialState = {
-		promocionId: '63408a498b1a57b742cc11d1',
-		promocionNombre: 'PROMOCION PEDIDOS YA',
+		promocionId: '',
+		promocionNombre: '',
 		productoId: '',
-		productoNombre: 'ccc',
+		productoNombre: '',
 		cantidad: 1,
 		promocionPorcentaje: '30',
 		empresaNombre: 'PEDIDOS YA',
@@ -42,22 +41,9 @@ export const Promocion = ({ hiddenForm }) => {
 	const [producto, setProducto] = useState([]);
 	const [productoId, setProductoId] = useState('');
 	const [productoNombre, setProductoNombre] = useState('');
+	const [[promocionId,promocionNombre], setPromocion] = useState(['','']);
 
 	const toast = useToast()
-
-	const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
-    useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: 100,
-      precision: 0,
-    });
-
-	const inc = getIncrementButtonProps();
-	const dec = getDecrementButtonProps();
-	const input = getInputProps();
-
 
 	useEffect(() => {
 		const getProducto = async () => {
@@ -69,60 +55,66 @@ export const Promocion = ({ hiddenForm }) => {
 			setProducto(resProducto);
 		};
 		getProducto();
+
+		const getPromocion = async () => {
+			const data = await axios({
+				method: 'GET',
+				url: `/promociones`,
+			});
+			const resPromocion = data.data.data;
+			setPromocion([resPromocion[0].id,resPromocion[0].nombre]);
+			setFormData({
+				...formData,
+				promocionId: resPromocion[0].id,
+				promocionNombre: resPromocion[0].nombre
+			})
+		};
+		getPromocion();		
 	}, []);
 
-	const handleChangeProducto = e => {
-		const getProductoid = e.target.value;
-		if (getProductoid == 0) {
-			setProductoId('');
+	const handleChangeProducto = async e => {
+		const resProductoId = await e.target.value;
+		const resProductoNombre = await getProductoNombre(resProductoId)
+		if (resProductoId == 0) {
+			await setProductoId('');
+			await setProductoNombre('');
 		} else {
-			setProductoId(getProductoid);
+			await setProductoId(resProductoId);
+			await setProductoNombre(resProductoNombre);
 		}
-		setFormData({
+		await setFormData({
 			...formData,
-			productoId,
-			productoNombre,
+			productoId: resProductoId,
+			productoNombre: resProductoNombre,
 		});
 		e.preventDefault();
 	};
 
-	const getProductoNombre = async () => {
+	const getProductoNombre = async (productoId) => {
 		const data = await axios({
 			method: 'GET',
 			url: `/productos/${productoId}`,
 		});
 		const resProductoNombre = await data.data.data.nombre;
-
-		await setProductoNombre(resProductoNombre);
+		return resProductoNombre;
 	};
 
-	useEffect(() => {
-		if (productoId == '') {
-			setProductoNombre('');
-		} else {
-			getProductoNombre();
-		}
-		setFormData({
-			...formData,
-			productoId,
-			productoNombre,
-		});
-	}, [productoId]);
-
-	
 	const handleChange = e => {
-		console.log('e.target.name: ',e.target.name);
-		console.log('e.target.value: ',e.target.value);
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
 		});
 	};
 
+	const updateCounter = (step) => {
+		console.log(formData.cantidad)
+		setFormData({
+			...formData,
+			cantidad: formData.cantidad+step
+		})
+	}
 
-	
-
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
 		if (!formData.nombre) {
 			return toast({
@@ -142,19 +134,17 @@ export const Promocion = ({ hiddenForm }) => {
               });
 		}
 
-		const voucher = createVaucher(formData);
+		const voucher = await createVaucher(formData);
 
-		voucher.then(v => {
-			setFormData({
-				...formData,
-				fecha: dateFormat.format(v.fecha),
-				voucherCodigo: v.codigo,
-				productoId,
-				productoNombre,
-			});
+
+		await setFormData({
+			...formData,
+			fecha: dateFormat.format(voucher.fecha),
+			voucherCodigo: voucher.codigo,
 		});
-		setHiddenForm(true);
-		setHiddenVoucher(false);
+
+		await setHiddenForm(true);
+		await setHiddenVoucher(false);
 	};
 
 	const handleCancel = e => {
@@ -187,6 +177,7 @@ export const Promocion = ({ hiddenForm }) => {
 			promocionId: formData.promocionId,
 			usuarioId: formData.usuarioId,
 			productoId,
+			cantidad: formData.cantidad
 		};
 
 		const data = await axios({
@@ -349,25 +340,26 @@ export const Promocion = ({ hiddenForm }) => {
 						</Box>
 
 						<Box>
-						<HStack maxW='220px'
-						onChange={e => handleChange(e)}>
-						<Text
-								as='label'
-								color='#015796'
-								mr='10px'
-								htmlFor='ci'
-								fontSize='14px'
+							<Text
+									as='label'
+									color='#015796'
+									mr='10px'
+									htmlFor='ci'
+									fontSize='14px'
+									fontWeight='bold'
+								>
+									Cantidad
+							</Text>							
+							<Flex>		
+								<Button onClick={()=>updateCounter(1)}>+</Button>						
+								<Input maxW={'60px'} fontStyle={'bold'} textAlign={'center'}
+								name='cantidad'													
 								fontWeight='bold'
-							>
-								Cantidad
-						</Text>							
-							<Button {...inc}>+</Button>
-							<Input 
-							name='cantidad'
-							value={formData.cantidad}														
-							fontWeight='bold'{...input} />
-							<Button {...dec}>-</Button>
-						</HStack>
+								value={formData.cantidad}
+								onChange={handleChange}
+								/>
+								<Button onClick={()=>updateCounter(-1)}>-</Button>
+							</Flex>
 						</Box>
 
 						<Box mt='32px'>
