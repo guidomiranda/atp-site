@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
 	Box,
 	Button,
@@ -7,6 +7,9 @@ import {
 	Radio,
 	RadioGroup,
 	Text,
+	HStack,
+	useToast,
+	useNumberInput
 } from '@chakra-ui/react';
 import Input from '../components/Input';
 import LayoutMin from '../components/LayoutMin';
@@ -17,10 +20,11 @@ import { Voucher } from '../components/Voucher';
 
 export const Promocion = ({ hiddenForm }) => {
 	const initialState = {
-		promocionId: '63408a498b1a57b742cc11d1',
-		promocionNombre: 'PROMOCION PEDIDOS YA',
+		promocionId: '',
+		promocionNombre: '',
 		productoId: '',
-		productoNombre: 'ccc',
+		productoNombre: '',
+		cantidad: 1,
 		promocionPorcentaje: '30',
 		empresaNombre: 'PEDIDOS YA',
 		nombre: '',
@@ -37,6 +41,9 @@ export const Promocion = ({ hiddenForm }) => {
 	const [producto, setProducto] = useState([]);
 	const [productoId, setProductoId] = useState('');
 	const [productoNombre, setProductoNombre] = useState('');
+	const [[promocionId,promocionNombre], setPromocion] = useState(['','']);
+
+	const toast = useToast()
 
 	useEffect(() => {
 		const getProducto = async () => {
@@ -48,45 +55,49 @@ export const Promocion = ({ hiddenForm }) => {
 			setProducto(resProducto);
 		};
 		getProducto();
+
+		const getPromocion = async () => {
+			const data = await axios({
+				method: 'GET',
+				url: `/promociones`,
+			});
+			const resPromocion = data.data.data;
+			setPromocion([resPromocion[0].id,resPromocion[0].nombre]);
+			setFormData({
+				...formData,
+				promocionId: resPromocion[0].id,
+				promocionNombre: resPromocion[0].nombre
+			})
+		};
+		getPromocion();		
 	}, []);
 
-	const handleChangeProducto = e => {
-		const getProductoid = e.target.value;
-		if (getProductoid == 0) {
-			setProductoId('');
+	const handleChangeProducto = async e => {
+		const resProductoId = await e.target.value;
+		const resProductoNombre = await getProductoNombre(resProductoId)
+		if (resProductoId == 0) {
+			await setProductoId('');
+			await setProductoNombre('');
 		} else {
-			setProductoId(getProductoid);
+			await setProductoId(resProductoId);
+			await setProductoNombre(resProductoNombre);
 		}
-		setFormData({
+		await setFormData({
 			...formData,
-			productoId,
-			productoNombre,
+			productoId: resProductoId,
+			productoNombre: resProductoNombre,
 		});
 		e.preventDefault();
 	};
 
-	const getProductoNombre = async () => {
+	const getProductoNombre = async (productoId) => {
 		const data = await axios({
 			method: 'GET',
 			url: `/productos/${productoId}`,
 		});
 		const resProductoNombre = await data.data.data.nombre;
-
-		await setProductoNombre(resProductoNombre);
+		return resProductoNombre;
 	};
-
-	useEffect(() => {
-		if (productoId == '') {
-			setProductoNombre('');
-		} else {
-			getProductoNombre();
-		}
-		setFormData({
-			...formData,
-			productoId,
-			productoNombre,
-		});
-	}, [productoId]);
 
 	const handleChange = e => {
 		setFormData({
@@ -95,31 +106,45 @@ export const Promocion = ({ hiddenForm }) => {
 		});
 	};
 
-	const handleSubmit = e => {
+	const updateCounter = (step) => {
+		console.log(formData.cantidad)
+		setFormData({
+			...formData,
+			cantidad: formData.cantidad+step
+		})
+	}
+
+	const handleSubmit = async e => {
 		e.preventDefault();
 		if (!formData.nombre) {
-			alert('Complete todos los campos con *');
-			return;
+			return toast({
+                title: 'Complete todos los campos con *',
+                status: 'error',
+				position: 'top',				
+                isClosable: true,
+              });
 		}
 
 		if (!formData.productoId) {
-			alert('Complete todos los campos con *');
-			return;
+			return toast({
+                title: 'Complete todos los campos con *',
+                status: 'error',
+				position: 'top',
+                isClosable: true,
+              });
 		}
 
-		const voucher = createVaucher(formData);
+		const voucher = await createVaucher(formData);
 
-		voucher.then(v => {
-			setFormData({
-				...formData,
-				fecha: dateFormat.format(v.fecha),
-				voucherCodigo: v.codigo,
-				productoId,
-				productoNombre,
-			});
+
+		await setFormData({
+			...formData,
+			fecha: dateFormat.format(voucher.fecha),
+			voucherCodigo: voucher.codigo,
 		});
-		setHiddenForm(true);
-		setHiddenVoucher(false);
+
+		await setHiddenForm(true);
+		await setHiddenVoucher(false);
 	};
 
 	const handleCancel = e => {
@@ -152,6 +177,7 @@ export const Promocion = ({ hiddenForm }) => {
 			promocionId: formData.promocionId,
 			usuarioId: formData.usuarioId,
 			productoId,
+			cantidad: formData.cantidad
 		};
 
 		const data = await axios({
@@ -255,6 +281,7 @@ export const Promocion = ({ hiddenForm }) => {
 								/>
 							</Box>
 						</Box>
+						
 
 						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Text
@@ -293,14 +320,14 @@ export const Promocion = ({ hiddenForm }) => {
 								fontSize='25px'
 								fontWeight='Bold'
 							>
-								<select
+								<Select
 									className='select-promotion'
 									id='productos'
 									name='productos'
 									onChange={e => handleChangeProducto(e)}
 								>
 									<option value={0}>
-										--Selecciona tu producto en promoción *--
+										--Selecciona tu producto-- *
 									</option>
 									{producto.map(getProduto => (
 										<option key={getProduto.id} value={getProduto.id}>
@@ -308,8 +335,31 @@ export const Promocion = ({ hiddenForm }) => {
 											{getProduto.nombre}
 										</option>
 									))}
-								</select>
+								</Select>
 							</Box>
+						</Box>
+
+						<Box>
+							<Text
+									as='label'
+									color='#015796'
+									mr='10px'
+									htmlFor='ci'
+									fontSize='14px'
+									fontWeight='bold'
+								>
+									Cantidad
+							</Text>							
+							<Flex>		
+								<Button onClick={()=>updateCounter(1)}>+</Button>						
+								<Input maxW={'60px'} fontStyle={'bold'} textAlign={'center'}
+								name='cantidad'													
+								fontWeight='bold'
+								value={formData.cantidad}
+								onChange={handleChange}
+								/>
+								<Button onClick={()=>updateCounter(-1)}>-</Button>
+							</Flex>
 						</Box>
 
 						<Box mt='32px'>
@@ -343,6 +393,8 @@ export const Promocion = ({ hiddenForm }) => {
 				setProductoNombre={setProductoNombre}
 				setProductoId={setProductoId}
 			/>
+
+			
 		</LayoutMin>
 	);
 };

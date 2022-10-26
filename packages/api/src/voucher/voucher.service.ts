@@ -32,16 +32,70 @@ export class VoucherService {
   }
 
   getAll() {
-    return this.prisma.voucher.findMany();
+    return this.prisma.voucher.findMany({
+      select: {
+        id: true,
+        codigo: true,
+        fecha: true,
+        canjeado: true,
+        canjeadoFecha: true,
+        promocionId: true,
+        cantidad: true,
+        usuarioId: true,
+        promocionProducto: {
+          select: {
+            id: true,
+            nombre: true,
+            codigoBarra: true,
+          },
+        },
+      },
+    });
   }
 
   getOne(id: string) {
-    return this.prisma.voucher.findFirst({ where: { id } });
+    return this.prisma.voucher.findFirst({
+      where: { id },
+      select: {
+        id: true,
+        codigo: true,
+        fecha: true,
+        canjeado: true,
+        canjeadoFecha: true,
+        promocionId: true,
+        cantidad: true,
+        usuarioId: true,
+        promocionProducto: {
+          select: {
+            id: true,
+            nombre: true,
+            codigoBarra: true,
+          },
+        },
+      },
+    });
   }
 
   getOneCodigo(codigo: string) {
     return this.prisma.voucher.findFirst({
       where: { codigo: parseInt(codigo) },
+      select: {
+        id: true,
+        codigo: true,
+        fecha: true,
+        canjeado: true,
+        canjeadoFecha: true,
+        promocionId: true,
+        cantidad: true,
+        usuarioId: true,
+        promocionProducto: {
+          select: {
+            id: true,
+            nombre: true,
+            codigoBarra: true,
+          },
+        },
+      },
     });
   }
 }

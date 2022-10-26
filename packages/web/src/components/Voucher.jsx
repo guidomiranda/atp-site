@@ -28,7 +28,6 @@ export const Voucher = ({
 	const fileName = `voucher#${data.voucherCodigo}.pdf`;
 
 	useEffect(() => {
-		console.log('useEfect funcando');
 		let navegador = navigator.userAgent;
 		if (
 			navigator.userAgent.match(/Android/i) ||
@@ -39,25 +38,24 @@ export const Voucher = ({
 			navigator.userAgent.match(/BlackBerry/i) ||
 			navigator.userAgent.match(/Windows Phone/i)
 		) {
-			console.log('Estás usando un dispositivo móvil!!');
+			// console.log('Estás usando un dispositivo móvil!!');
 			setDimensions({
 				dimX: 1.66,
 				dimY: 1,
 				vScale: 0.5,
 			});
 		} else {
-			console.log('No estás usando un móvil');
+			// console.log('No estás usando un móvil');
 			setDimensions(initialDimension);
 		}
 	}, []);
-	console.log('dimensionesfsfsdfds', dimX);
 
 	const handleReturn = () => {
 		setHiddenForm(false);
 		setHiddenVoucher(true);
-		setFormData(initialState);
 		setProductoNombre('');
 		setProductoId('');
+		setFormData(initialState);
 		document.getElementById('productos').value = 0;
 	};
 
@@ -88,6 +86,9 @@ export const Voucher = ({
 						<p className='chakra-text voucher-label css-0'>tu Voucher</p>
 						<p className='chakra-text voucher-data css-0'>
 							{data.productoNombre}
+						</p>
+						<p className='chakra-text voucher-data css-0'>
+							x {data.cantidad} Unid.
 						</p>
 						<p className='chakra-text voucher-label css-0'>
 							se ha generado exitosamente
@@ -121,6 +122,7 @@ export const Voucher = ({
 								marginLeft: '5%',
 							}}
 							onClick={toPdf}
+							disabled={!true}
 						>
 							Descargar PDF
 						</button>
@@ -130,9 +132,3 @@ export const Voucher = ({
 		</>
 	);
 };
-
-export async function getServerSideProps(context) {
-	const window = window;
-	const navigator = navigator;
-	return { window, navigator };
-}
