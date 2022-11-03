@@ -10,6 +10,7 @@ import {
 	HiOutlinePhotograph,
 	HiOutlineShoppingCart,
 	HiOutlineUserGroup,
+	HiOutlineTicket
 } from 'react-icons/hi';
 import { TbBuildingFactory } from 'react-icons/tb';
 import { BiStore } from 'react-icons/bi';
@@ -91,7 +92,16 @@ const NavbarAdmin: React.FC = () => {
 					name='Vacancias'
 					path='/admin/vacancias'
 				/>
-				<Link icon={<BiStore />} name='Marcas' path='/admin/marcas' />
+				<Link 
+					icon={<BiStore />} 
+					name='Marcas' 
+					path='/admin/marcas' 
+				/>
+								<Link 
+					icon={<HiOutlineTicket />} 
+					name='Vouchers' 
+					path='/admin/promociones/vouchers' 
+				/>
 			</Box>
 
 			{/* Categories */}
