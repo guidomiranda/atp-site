@@ -3,7 +3,7 @@ import axios from '../config/axios';
 export const getVouchers = async () => {
 	const data = await axios({
 		method: 'GET',
-		url: '/vouchers',
+		url: '/promociones',
 	});
 
 	return data.data;
@@ -12,7 +12,7 @@ export const getVouchers = async () => {
 export const getVoucher = async (id: string) => {
 	const data = await axios({
 		method: 'GET',
-		url: `/vouchers/${id}`,
+		url: `/promociones/${id}`,
 	});
 
 	return data.data;
@@ -22,7 +22,7 @@ export const updateVoucher = async (id: string, clientInfo: any) => {
 	console.log('clientInfo: ', clientInfo);
 	const data = await axios({
 		method: 'PATCH',
-		url: `/vouchers/${id}`,
+		url: `/promociones/${id}`,
 		data: JSON.stringify(clientInfo),
 	});
 
@@ -32,7 +32,7 @@ export const updateVoucher = async (id: string, clientInfo: any) => {
 export const createVoucher = async (clientInfo: any) => {
 	const data = await axios({
 		method: 'POST',
-		url: `/vouchers/create`,
+		url: `/promociones/create`,
 		data: JSON.stringify(clientInfo),
 	});
 
@@ -42,7 +42,7 @@ export const createVoucher = async (clientInfo: any) => {
 export const deleteVoucher = async (id: string) => {
 	const data = await axios({
 		method: 'DELETE',
-		url: `/vouchers/${id}`,
+		url: `/promociones/${id}`,
 	});
 
 	return data.data;
