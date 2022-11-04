@@ -39,9 +39,21 @@ export class VoucherService {
         fecha: true,
         canjeado: true,
         canjeadoFecha: true,
-        promocionId: true,
-        cantidad: true,
-        usuarioId: true,
+        promocionId: false,
+        promocionVoucher: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
+        usuarioId: false,
+        usuario: {
+          select: {
+            id: true,
+            codigo: true,
+            nombre: true,
+          },
+        },
         promocionProducto: {
           select: {
             id: true,
@@ -49,6 +61,8 @@ export class VoucherService {
             codigoBarra: true,
           },
         },
+        cantidad: true,
+        created_at: true,
       },
     });
   }
@@ -62,9 +76,21 @@ export class VoucherService {
         fecha: true,
         canjeado: true,
         canjeadoFecha: true,
-        promocionId: true,
-        cantidad: true,
-        usuarioId: true,
+        promocionId: false,
+        promocionVoucher: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
+        usuarioId: false,
+        usuario: {
+          select: {
+            id: true,
+            codigo: true,
+            nombre: true,
+          },
+        },
         promocionProducto: {
           select: {
             id: true,
@@ -72,6 +98,8 @@ export class VoucherService {
             codigoBarra: true,
           },
         },
+        cantidad: true,
+        created_at: true,
       },
     });
   }
@@ -85,9 +113,21 @@ export class VoucherService {
         fecha: true,
         canjeado: true,
         canjeadoFecha: true,
-        promocionId: true,
-        cantidad: true,
-        usuarioId: true,
+        promocionId: false,
+        promocionVoucher: {
+          select: {
+            id: true,
+            nombre: true,
+          },
+        },
+        usuarioId: false,
+        usuario: {
+          select: {
+            id: true,
+            codigo: true,
+            nombre: true,
+          },
+        },
         promocionProducto: {
           select: {
             id: true,
@@ -95,6 +135,8 @@ export class VoucherService {
             codigoBarra: true,
           },
         },
+        cantidad: true,
+        created_at: true,
       },
     });
   }
