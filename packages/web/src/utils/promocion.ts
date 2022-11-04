@@ -1,6 +1,6 @@
 import axios from '../config/axios';
 
-export const getVouchers = async () => {
+export const getPromociones = async () => {
 	const data = await axios({
 		method: 'GET',
 		url: '/promociones',
@@ -9,7 +9,7 @@ export const getVouchers = async () => {
 	return data.data;
 };
 
-export const getVoucher = async (id: string) => {
+export const getPromocion = async (id: string) => {
 	const data = await axios({
 		method: 'GET',
 		url: `/promociones/${id}`,
@@ -18,7 +18,7 @@ export const getVoucher = async (id: string) => {
 	return data.data;
 };
 
-export const updateVoucher = async (id: string, clientInfo: any) => {
+export const updatePromocion = async (id: string, clientInfo: any) => {
 	console.log('clientInfo: ', clientInfo);
 	const data = await axios({
 		method: 'PATCH',
@@ -29,7 +29,7 @@ export const updateVoucher = async (id: string, clientInfo: any) => {
 	return data.data;
 };
 
-export const createVoucher = async (clientInfo: any) => {
+export const createPromocion = async (clientInfo: any) => {
 	const data = await axios({
 		method: 'POST',
 		url: `/promociones/create`,
@@ -39,7 +39,7 @@ export const createVoucher = async (clientInfo: any) => {
 	return data.data;
 };
 
-export const deleteVoucher = async (id: string) => {
+export const deletePromocion = async (id: string) => {
 	const data = await axios({
 		method: 'DELETE',
 		url: `/promociones/${id}`,
