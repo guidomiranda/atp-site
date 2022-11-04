@@ -40,8 +40,8 @@ const Header: React.FC = () => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-			 	base: '100px 100px 100px 100px 100px 100px 100px 100px',
-			 	xl: '60px 0.5fr 100px 0.2fr 100px 100px  100px 100px',
+			 	base: '100px 100px 100px 100px 100px 100px 100px 100px 100px',
+			 	xl: '60px 0.5fr 100px 0.2fr 100px 100px  100px 100px 100px',
 			 }}
 			p='10px 30px'
 			bgColor='#F9FAFB'
@@ -96,6 +96,14 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
+				fecha canje
+			</Box>			
+			<Box
+				color='#3B4A67'
+				fontWeight='bold'
+				textTransform='uppercase'
+				fontSize='14px'
+			>
 				Creado
 			</Box>
 			<Box></Box>
@@ -122,8 +130,8 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '100px 100px 100px 100px 100px 100px 100px 100px',
-				xl: '60px 0.5fr 100px 0.2fr 100px 100px 100px 100px',
+				base: '100px 100px 100px 100px 100px 100px 100px 100px 100px',
+				xl: '60px 0.5fr 100px 0.2fr 100px 100px 100px 100px 100px',
 			}}
 			p='10px 30px'
 			borderBottom='1px solid #DCDFE5'
@@ -193,6 +201,11 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 			{/* canjeado */}
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
 				{client.canjeado ? 'true' : 'false'}
+			</Box>
+
+			{/* canjeado fecha */}
+			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
+				{client.canjeadoFecha}
 			</Box>
 
 			{/* creado */}
