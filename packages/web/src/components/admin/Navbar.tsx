@@ -105,7 +105,7 @@ const NavbarAdmin: React.FC = () => {
 				<Link 
 					icon={<HiOutlineTicket />} 
 					name='Promocion' 
-					path='/admin/promociones/vouchers' 
+					path='/admin/promociones/promocion' 
 				/>
 				<Link 
 					icon={<HiOutlineTicket />} 

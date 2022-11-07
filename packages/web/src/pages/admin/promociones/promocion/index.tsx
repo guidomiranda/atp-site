@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query';
 import AdminLayout from '../../../../layout/admin';
 import Text from '../../../../components/admin/Text';
 import axios from '../../../../config/axios';
-import { deleteVoucher } from '../../../../utils/vouchers';
+import { deletePromocion } from '../../../../utils/promocion';
 
 interface ClientsProps {
 	client: any;
@@ -30,7 +30,7 @@ function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
 			method: 'GET',
-			url: '/vouchers',
+			url: '/promociones',
 		});
 		return data.data.data;
 	});
@@ -40,8 +40,8 @@ const Header: React.FC = () => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-			 	base: '100px 100px 100px 100px 100px 100px 100px 100px',
-			 	xl: '60px 0.5fr 100px 0.2fr 100px 100px  100px 100px',
+			 	base: '100px 100px 100px 100px 100px',
+			 	xl: '100px 0.5fr 100px 100px 100px',
 			 }}
 			p='10px 30px'
 			bgColor='#F9FAFB'
@@ -55,41 +55,18 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
-				codigo
+				id
 			</Box>
+
 			<Box
 				color='#3B4A67'
 				fontWeight='bold'
 				textTransform='uppercase'
 				fontSize='14px'
 			>
-				producto
-			</Box>	
-			<Box
-				color='#3B4A67'
-				fontWeight='bold'
-				textTransform='uppercase'
-				fontSize='14px'
-				textAlign={'center'}
-			>
-				cantidad
-			</Box>	
-			<Box
-				color='#3B4A67'
-				fontWeight='bold'
-				textTransform='uppercase'
-				fontSize='14px'
-			>
-				raider
-			</Box>							
-			<Box
-				color='#3B4A67'
-				fontWeight='bold'
-				textTransform='uppercase'
-				fontSize='14px'
-			>
-				canjeado
+				nombre
 			</Box>
+
 			<Box
 				color='#3B4A67'
 				fontWeight='bold'
@@ -108,7 +85,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const handleDeleteClient = async () => {
-		const response = await deleteVoucher(client.id);
+		const response = await deletePromocion(client.id);
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
@@ -122,8 +99,8 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	return (
 		<Grid
 			gridTemplateColumns={{
-				base: '100px 100px 100px 100px 100px 100px 100px 100px',
-				xl: '60px 0.5fr 100px 0.2fr 100px 100px 100px 100px',
+				base: '100px 100px 100px 100px 100px' ,
+				xl: '100px 0.5fr 100px 100px 100px',
 			}}
 			p='10px 30px'
 			borderBottom='1px solid #DCDFE5'
@@ -154,50 +131,19 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 			
 			{/* Campos */}
 
-			{/* codigo */}
+			{/* id */}
 			<Box color='#3B4A67' fontSize='14px' textAlign={'center'}>
-				{client.codigo}
+				{client.id}
 			</Box>
 
-			{/* producto */}
-			<Box
-				color='#3B4A67'
-				fontSize='14px'
-				whiteSpace='nowrap'
-				overflow='hidden'
-				textOverflow='ellipsis'
-				cursor='pointer'
-				onClick={() => router.push(`/admin/vouchers/${client.id}`)}
-			>
-				{client.promocionProducto.nombre}
-			</Box>
-
-			{/* cantidad */}
-			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase' textAlign={'center'}>
-				{client.cantidad}
-			</Box>
-
-			{/* usuario */}
-			<Box
-				color='#3B4A67'
-				fontSize='14px'
-				whiteSpace='nowrap'
-				overflow='hidden'
-				textOverflow='ellipsis'
-				cursor='pointer'
-				onClick={() => router.push(`/admin/vouchers/${client.id}`)}
-			>
-				{client.usuario.nombre}
-			</Box>
-
-			{/* canjeado */}
-			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase'>
-				{client.canjeado ? 'true' : 'false'}
+			{/* nombre */}
+			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase' textAlign={'left'}>
+				{client.nombre}
 			</Box>
 
 			{/* creado */}
 			<Box color='#3B4A67' fontSize='14px'>
-				{dayjs(client.created_at).format('DD/MM/YY')}
+				{dayjs(client.create_at).format('DD/MM/YY')}
 			</Box>
 
 			
@@ -221,7 +167,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push(`/admin/promociones/vouchers/${client.id}`)}
+					onClick={() => router.push(`/admin/promociones/promocion/${client.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -254,7 +200,7 @@ const ClientesAdmin = () => {
 
 	return (
 		<AdminLayout
-			title='Vouchers'
+			title='Promociones'
 			footer={
 				<Box>
 					<Button
@@ -266,9 +212,9 @@ const ClientesAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/promociones')}
+						onClick={() => router.push('/promociones/promocion')}
 					>
-						Crear voucher
+						Crear promocion
 					</Button>
 				</Box>
 			}
