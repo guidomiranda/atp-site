@@ -1,48 +1,48 @@
 import axios from '../config/axios';
 
-export const getVouchers = async () => {
+export const getEmpresas = async () => {
 	const data = await axios({
 		method: 'GET',
-		url: '/vouchers',
+		url: '/empresas',
 	});
 
 	return data.data;
 };
 
-export const getVoucher = async (id: string) => {
+export const getEmpresa = async (id: string) => {
 	const data = await axios({
 		method: 'GET',
-		url: `/vouchers/${id}`,
+		url: `/empresas/${id}`,
 	});
 
 	return data.data;
 };
 
-export const updateVoucher = async (id: string, clientInfo: any) => {
+export const updateEmpresa = async (id: string, clientInfo: any) => {
 	console.log('clientInfo: ', clientInfo);
 	const data = await axios({
 		method: 'PATCH',
-		url: `/vouchers/${id}`,
+		url: `/empresas/${id}`,
 		data: JSON.stringify(clientInfo),
 	});
 
 	return data.data;
 };
 
-export const createVoucher = async (clientInfo: any) => {
+export const createEmpresa = async (clientInfo: any) => {
 	const data = await axios({
 		method: 'POST',
-		url: `/vouchers/create`,
+		url: `/empresas/create`,
 		data: JSON.stringify(clientInfo),
 	});
 
 	return data.data;
 };
 
-export const deleteVoucher = async (id: string) => {
+export const deleteEmpresa = async (id: string) => {
 	const data = await axios({
 		method: 'DELETE',
-		url: `/vouchers/${id}`,
+		url: `/empresas/${id}`,
 	});
 
 	return data.data;
