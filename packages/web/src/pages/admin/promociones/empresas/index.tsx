@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query';
 import AdminLayout from '../../../../layout/admin';
 import Text from '../../../../components/admin/Text';
 import axios from '../../../../config/axios';
-import { deletePromocion } from '../../../../utils/promocion';
+import { deleteEmpresa } from '../../../../utils/empresa';
 
 interface ClientsProps {
 	client: any;
@@ -30,7 +30,7 @@ function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
 			method: 'GET',
-			url: '/promociones',
+			url: '/empresas',
 		});
 		return data.data.data;
 	});
@@ -85,7 +85,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const handleDeleteClient = async () => {
-		const response = await deletePromocion(client.id);
+		const response = await deleteEmpresa(client.id);
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
@@ -167,7 +167,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push(`/admin/promociones/promocion/${client.id}`)}
+					onClick={() => router.push(`/admin/promociones/empresas/${client.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -200,7 +200,7 @@ const ClientesAdmin = () => {
 
 	return (
 		<AdminLayout
-			title='Promociones'
+			title='Empresas'
 			footer={
 				<Box>
 					<Button
@@ -212,9 +212,9 @@ const ClientesAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/promociones/promocion')}
+						onClick={() => router.push('/promociones/empresas')}
 					>
-						Crear promocion
+						Crear empresa
 					</Button>
 				</Box>
 			}

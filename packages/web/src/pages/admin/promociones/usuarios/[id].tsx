@@ -13,11 +13,11 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import { GetServerSideProps } from 'next';
 import toast from 'react-hot-toast';
 
-import { getPromocion, updatePromocion } from '../../../../utils/promocion';
+import { getUsuario, updateUsuario } from '../../../../utils/usuario';
 import AdminLayout from '../../../../layout/admin/index';
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	const client = await getPromocion(context.query.id as string);
+	const client = await getUsuario(context.query.id as string);
 	return { props: { client: client.data } };
 };
 
@@ -40,14 +40,14 @@ const ClientAdminEdit = ({ client }) => {
 
 			delete clientInfoUpdated.id;
 			
-			const response = await updatePromocion(clientInfo.id, clientInfoUpdated);
+			const response = await updateUsuario(clientInfo.id, clientInfoUpdated);
 
 			if (response.success) {
 				toast.success('Actualizado correctamente!');
-				return router.push('/admin/promociones/promocion');
+				return router.push('/admin/promociones/usuarios');
 			} else {
 				toast.error('Hubo un problema al actualizar');
-				router.push('/admin/promociones/promocion');
+				router.push('/admin/promociones/usuarios');
 			}
 		}
 	};
@@ -62,7 +62,7 @@ const ClientAdminEdit = ({ client }) => {
 						h='45px'
 						rounded='3px'
 						bgColor='#e5e7eb'
-						onClick={() => router.push('/admin/promociones/promocion')}
+						onClick={() => router.push('/admin/promociones/usuarios')}
 						display='flex'
 						alignItems='center'
 					>
@@ -121,6 +121,26 @@ const ClientAdminEdit = ({ client }) => {
 							/>				
 						</Box>
 
+						{/* cedula */}
+						<Box mb='20px'>
+							<Text
+								fontSize='12px'
+								fontWeight='medium'
+								textTransform='uppercase'
+								mb='5px'
+								color='#555'
+							>
+								Cedula
+							</Text>
+							<Input
+								rounded='3px'
+								value={clientInfo.cedula}
+								onChange={e =>
+									setClientInfo({ ...clientInfo, cedula: e.target.value })
+								}
+							/>				
+						</Box>
+
 						{/* estado */}
 						<Box mb='20px'>
 							<Text
@@ -141,7 +161,8 @@ const ClientAdminEdit = ({ client }) => {
 							/>				
 						</Box>
 
-						{/* fecha Inicio */}
+
+						{/* Telefono */}
 						<Box mb='20px'>
 							<Text
 								fontSize='12px'
@@ -150,19 +171,18 @@ const ClientAdminEdit = ({ client }) => {
 								mb='5px'
 								color='#555'
 							>
-								Inicio
+								Telefono
 							</Text>
 							<Input
 								rounded='3px'
-								value={clientInfo.fechaInicio}
+								value={clientInfo.telefono}
 								onChange={e =>
-									setClientInfo({ ...clientInfo, fechaInicio: e.target.value })
+									setClientInfo({ ...clientInfo, telefono: e.target.value })
 								}
 							/>				
 						</Box>
 
-
-						{/* Fecha Fin */}
+						{/* email */}
 						<Box mb='20px'>
 							<Text
 								fontSize='12px'
@@ -171,18 +191,18 @@ const ClientAdminEdit = ({ client }) => {
 								mb='5px'
 								color='#555'
 							>
-								Fin
+								Email
 							</Text>
 							<Input
 								rounded='3px'
-								value={clientInfo.fechaFin}
+								value={clientInfo.email}
 								onChange={e =>
-									setClientInfo({ ...clientInfo, fechaFin: e.target.value })
+									setClientInfo({ ...clientInfo, email: e.target.value })
 								}
 							/>				
 						</Box>
 
-						{/* porcentaje */}
+						{/* empresa */}
 						<Box mb='20px'>
 							<Text
 								fontSize='12px'
@@ -191,76 +211,17 @@ const ClientAdminEdit = ({ client }) => {
 								mb='5px'
 								color='#555'
 							>
-								Porcentaje
+								Empresa
 							</Text>
 							<Input
 								rounded='3px'
-								value={clientInfo.porcentaje}
+								value={clientInfo.empresaId}
 								onChange={e =>
-									setClientInfo({ ...clientInfo, porcentaje: e.target.value })
-								}
-							/>				
-						</Box>
-
-						{/* link */}
-						<Box mb='20px'>
-							<Text
-								fontSize='12px'
-								fontWeight='medium'
-								textTransform='uppercase'
-								mb='5px'
-								color='#555'
-							>
-								Link
-							</Text>
-							<Input
-								rounded='3px'
-								value={clientInfo.link}
-								onChange={e =>
-									setClientInfo({ ...clientInfo, link: e.target.value })
+									setClientInfo({ ...clientInfo, empresaId: e.target.value })
 								}
 							/>				
 						</Box>	
 
-						{/* imagen */}
-						<Box mb='20px'>
-							<Text
-								fontSize='12px'
-								fontWeight='medium'
-								textTransform='uppercase'
-								mb='5px'
-								color='#555'
-							>
-								imagen
-							</Text>
-							<Input
-								rounded='3px'
-								value={clientInfo.imagen}
-								onChange={e =>
-									setClientInfo({ ...clientInfo, imagen: e.target.value })
-								}
-							/>				
-						</Box>	
-
-						{/* orden */}
-						<Box mb='20px'>
-							<Text
-								fontSize='12px'
-								fontWeight='medium'
-								textTransform='uppercase'
-								mb='5px'
-								color='#555'
-							>
-								Orden
-							</Text>
-							<Input
-								rounded='3px'
-								value={clientInfo.orden}
-								onChange={e =>
-									setClientInfo({ ...clientInfo, orden: e.target.value })
-								}
-							/>				
-						</Box>							
 
 						{/* BOTON ACTUALIZAR */}
 						<Box mt='30px'>
