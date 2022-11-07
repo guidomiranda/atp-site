@@ -8,7 +8,7 @@ import toast from 'react-hot-toast';
 
 import { FileType } from '../../../../interfaces/image';
 import { useImage } from '../../../../hooks/useImage';
-import { createVoucher } from '../../../../utils/vouchers';
+import { createProducto } from '../../../../utils/producto';
 
 const ClientAdminEdit = () => {
 	const router = useRouter();
@@ -39,21 +39,21 @@ const ClientAdminEdit = () => {
 			});
 		}
 
-		const responseImage = await useImage(fileImage as string, 'promociones/vouchers');
+		const responseImage = await useImage(fileImage as string, 'promociones/productos');
 
 		const clientInfoUpdated = {
 			...clientInfo,
 			imagen: responseImage,
 		};
 
-		const response = await createVoucher(clientInfoUpdated);
+		const response = await createProducto(clientInfoUpdated);
 
 		if (response.success) {
 			toast.success('Creado correctamente!');
-			return router.push('/admin/promociones/vouchers');
+			return router.push('/admin/promociones/productos');
 		} else {
 			toast.error('Hubo un problema al crear');
-			router.push('/admin/promociones/vouchers');
+			router.push('/admin/promociones/productos');
 		}
 	};
 
@@ -67,7 +67,7 @@ const ClientAdminEdit = () => {
 						h='45px'
 						rounded='3px'
 						bgColor='#e5e7eb'
-						onClick={() => router.push('/admin/promociones/vouchers')}
+						onClick={() => router.push('/admin/promociones/productos')}
 						display='flex'
 						alignItems='center'
 					>

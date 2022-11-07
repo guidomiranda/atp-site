@@ -13,11 +13,11 @@ import { BsArrowLeftShort } from 'react-icons/bs';
 import { GetServerSideProps } from 'next';
 import toast from 'react-hot-toast';
 
-import { getPromocion, updatePromocion } from '../../../../utils/promocion';
+import { getProducto, updateProducto } from '../../../../utils/producto';
 import AdminLayout from '../../../../layout/admin/index';
 
 export const getServerSideProps: GetServerSideProps = async context => {
-	const client = await getPromocion(context.query.id as string);
+	const client = await getProducto(context.query.id as string);
 	return { props: { client: client.data } };
 };
 
@@ -40,14 +40,14 @@ const ClientAdminEdit = ({ client }) => {
 
 			delete clientInfoUpdated.id;
 			
-			const response = await updatePromocion(clientInfo.id, clientInfoUpdated);
+			const response = await updateProducto(clientInfo.id, clientInfoUpdated);
 
 			if (response.success) {
 				toast.success('Actualizado correctamente!');
-				return router.push('/admin/promociones/promocion');
+				return router.push('/admin/promociones/productos');
 			} else {
 				toast.error('Hubo un problema al actualizar');
-				router.push('/admin/promociones/promocion');
+				router.push('/admin/promociones/productos');
 			}
 		}
 	};
@@ -62,7 +62,7 @@ const ClientAdminEdit = ({ client }) => {
 						h='45px'
 						rounded='3px'
 						bgColor='#e5e7eb'
-						onClick={() => router.push('/admin/promociones/promocion')}
+						onClick={() => router.push('/admin/promociones/productos')}
 						display='flex'
 						alignItems='center'
 					>
