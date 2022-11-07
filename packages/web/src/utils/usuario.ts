@@ -1,48 +1,48 @@
 import axios from '../config/axios';
 
-export const getVouchers = async () => {
+export const getUsuarios = async () => {
 	const data = await axios({
 		method: 'GET',
-		url: '/vouchers',
+		url: '/usuarios',
 	});
 
 	return data.data;
 };
 
-export const getVoucher = async (id: string) => {
+export const getUsuario = async (id: string) => {
 	const data = await axios({
 		method: 'GET',
-		url: `/vouchers/${id}`,
+		url: `/usuarios/${id}`,
 	});
 
 	return data.data;
 };
 
-export const updateVoucher = async (id: string, clientInfo: any) => {
+export const updateUsuario = async (id: string, clientInfo: any) => {
 	console.log('clientInfo: ', clientInfo);
 	const data = await axios({
 		method: 'PATCH',
-		url: `/vouchers/${id}`,
+		url: `/usuarios/${id}`,
 		data: JSON.stringify(clientInfo),
 	});
 
 	return data.data;
 };
 
-export const createVoucher = async (clientInfo: any) => {
+export const createUsuario = async (clientInfo: any) => {
 	const data = await axios({
 		method: 'POST',
-		url: `/vouchers/create`,
+		url: `/usuarios/create`,
 		data: JSON.stringify(clientInfo),
 	});
 
 	return data.data;
 };
 
-export const deleteVoucher = async (id: string) => {
+export const deleteUsuario = async (id: string) => {
 	const data = await axios({
 		method: 'DELETE',
-		url: `/vouchers/${id}`,
+		url: `/usuarios/${id}`,
 	});
 
 	return data.data;

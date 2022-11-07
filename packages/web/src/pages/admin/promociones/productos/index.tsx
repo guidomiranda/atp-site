@@ -20,7 +20,7 @@ import { useQuery } from '@tanstack/react-query';
 import AdminLayout from '../../../../layout/admin';
 import Text from '../../../../components/admin/Text';
 import axios from '../../../../config/axios';
-import { deleteUsuario } from '../../../../utils/usuario';
+import { deletePromocion } from '../../../../utils/promocion';
 
 interface ClientsProps {
 	client: any;
@@ -30,7 +30,7 @@ function usePosts() {
 	return useQuery(['posts'], async () => {
 		const data = await axios({
 			method: 'GET',
-			url: '/usuarios',
+			url: '/promociones',
 		});
 		return data.data.data;
 	});
@@ -64,15 +64,6 @@ const Header: React.FC = () => {
 				textTransform='uppercase'
 				fontSize='14px'
 			>
-				codigo
-			</Box>
-
-			<Box
-				color='#3B4A67'
-				fontWeight='bold'
-				textTransform='uppercase'
-				fontSize='14px'
-			>
 				nombre
 			</Box>
 
@@ -94,7 +85,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 	const { isOpen, onClose, onOpen } = useDisclosure();
 
 	const handleDeleteClient = async () => {
-		const response = await deleteUsuario(client.id);
+		const response = await deletePromocion(client.id);
 
 		if (response.success) {
 			toast.success('Eliminado correctamente!');
@@ -145,11 +136,6 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 				{client.id}
 			</Box>
 
-			{/* codigo */}
-			<Box color='#3B4A67' fontSize='14px' textAlign={'left'}>
-				{client.codigo}
-			</Box>
-
 			{/* nombre */}
 			<Box color='#3B4A67' fontSize='14px' textTransform='uppercase' textAlign={'left'}>
 				{client.nombre}
@@ -181,7 +167,7 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 					fontSize='24px'
 					_hover={{ bgColor: '#E5E7EB' }}
 					_focus={{ shadow: 'none' }}
-					onClick={() => router.push(`/admin/promociones/usuarios/${client.id}`)}
+					onClick={() => router.push(`/admin/promociones/promocion/${client.id}`)}
 				>
 					<FiEdit />
 				</Button>
@@ -214,7 +200,7 @@ const ClientesAdmin = () => {
 
 	return (
 		<AdminLayout
-			title='Usuarios'
+			title='Promociones'
 			footer={
 				<Box>
 					<Button
@@ -226,9 +212,9 @@ const ClientesAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/promociones/usuarios')}
+						onClick={() => router.push('/promociones/promocion')}
 					>
-						Crear usuario
+						Crear promocion
 					</Button>
 				</Box>
 			}
