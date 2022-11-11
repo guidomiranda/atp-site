@@ -226,7 +226,7 @@ const ClientesAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/promociones/usuarios')}
+						onClick={() => router.push('/admin/promociones/usuarios/create')}
 					>
 						Crear usuario
 					</Button>
@@ -240,7 +240,7 @@ const ClientesAdmin = () => {
 					color='#3B4A67'
 					border='1px solid #3B4A67'
 					fontWeight='medium'
-					onClick={() => router.push('/promociones/usuarios/import')}
+					onClick={() => router.push('/admin/promociones/usuarios/import')}
 					>
 						Importar lista
 					</Button>
