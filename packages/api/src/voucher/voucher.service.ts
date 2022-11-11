@@ -31,8 +31,10 @@ export class VoucherService {
     return this.prisma.voucher.delete({ where: { id } });
   }
 
-  getAll() {
+  getAll(page = 1) {
     return this.prisma.voucher.findMany({
+      take: 5,
+      skip: 5 * (page - 1),
       select: {
         id: true,
         codigo: true,

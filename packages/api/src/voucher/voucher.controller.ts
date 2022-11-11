@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
@@ -66,8 +67,8 @@ export class VoucherController {
   }
 
   @Get()
-  async getAll(@Res() res: Response) {
-    const vouchers = await this.service.getAll();
+  async getAll(@Query('page') page: number, @Res() res: Response) {
+    const vouchers = await this.service.getAll(page);
     return res.status(HttpStatus.OK).json({
       message: 'Vouchers',
       success: true,
