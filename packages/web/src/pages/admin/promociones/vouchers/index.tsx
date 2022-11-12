@@ -21,6 +21,7 @@ import AdminLayout from '../../../../layout/admin';
 import Text from '../../../../components/admin/Text';
 import axios from '../../../../config/axios';
 import { deleteVoucher } from '../../../../utils/vouchers';
+import { log } from 'console';
 
 interface ClientsProps {
 	client: any;
@@ -32,6 +33,7 @@ function usePosts() {
 			method: 'GET',
 			url: '/vouchers',
 		});
+
 		return data.data.data;
 	});
 }

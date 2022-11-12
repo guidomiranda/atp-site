@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
+import "bootstrap/dist/css/bootstrap.css";
 import { Toaster } from 'react-hot-toast';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
