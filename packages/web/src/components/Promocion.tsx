@@ -20,8 +20,8 @@ import { Voucher } from '../components/Voucher';
 
 export const Promocion = ({ hiddenForm }) => {
 	const initialState = {
-		// promocionId: '',
-		// promocionNombre: '',
+		promocionId: '',
+		promocionNombre: '',
 		productoId: '',
 		productoNombre: '',
 		cantidad: 1,
@@ -71,6 +71,25 @@ export const Promocion = ({ hiddenForm }) => {
 		};
 		getPromocion();		
 	}, []);
+
+
+	useEffect(() => {
+		const getPromocion = async () => {
+			const data = await axios({
+				method: 'GET',
+				url: `/promociones`,
+			});
+			const resPromocion = data.data.data;
+			setPromocion([resPromocion[0].id,resPromocion[0].nombre]);
+			setFormData({
+				...formData,
+				promocionId: resPromocion[0].id,
+				promocionNombre: resPromocion[0].nombre
+			})
+		};
+		getPromocion();		
+	}, [promocionId]);
+	
 
 	const handleChangeProducto = async e => {
 		const resProductoId = await e.target.value;
