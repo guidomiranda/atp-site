@@ -39,7 +39,7 @@ const ClientAdminEdit = () => {
 			});
 		}
 
-		const responseImage = await useImage(fileImage as string, 'promociones/empresas');
+		const responseImage = await useImage(fileImage as string, '/admin/promociones/empresas');
 
 		const clientInfoUpdated = {
 			...clientInfo,

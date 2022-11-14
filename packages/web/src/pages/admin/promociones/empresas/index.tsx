@@ -212,7 +212,7 @@ const ClientesAdmin = () => {
 						color='#3B4A67'
 						border='1px solid #3B4A67'
 						fontWeight='medium'
-						onClick={() => router.push('/promociones/empresas')}
+						onClick={() => router.push('/admin/promociones/empresas/create')}
 					>
 						Crear empresa
 					</Button>

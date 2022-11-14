@@ -15,6 +15,7 @@ import toast from 'react-hot-toast';
 
 import { getEmpresa, updateEmpresa } from '../../../../utils/empresa';
 import AdminLayout from '../../../../layout/admin/index';
+import Select from '../../../../components/Select';
 
 export const getServerSideProps: GetServerSideProps = async context => {
 	const client = await getEmpresa(context.query.id as string);
@@ -132,13 +133,22 @@ const ClientAdminEdit = ({ client }) => {
 							>
 								Estado
 							</Text>
-							<Input
+
+							<Select
 								rounded='3px'
 								value={clientInfo.estado}
 								onChange={e =>
 									setClientInfo({ ...clientInfo, estado: e.target.value })
 								}
-							/>				
+							>
+								<option value={'true'}>
+									Activo
+								</option>
+								<option value={'false'}>
+									Inactivo
+								</option>
+							</Select>
+
 						</Box>
 
 						{/* fecha Inicio */}
@@ -178,26 +188,6 @@ const ClientAdminEdit = ({ client }) => {
 								value={clientInfo.fechaFin}
 								onChange={e =>
 									setClientInfo({ ...clientInfo, fechaFin: e.target.value })
-								}
-							/>				
-						</Box>
-
-						{/* porcentaje */}
-						<Box mb='20px'>
-							<Text
-								fontSize='12px'
-								fontWeight='medium'
-								textTransform='uppercase'
-								mb='5px'
-								color='#555'
-							>
-								Porcentaje
-							</Text>
-							<Input
-								rounded='3px'
-								value={clientInfo.porcentaje}
-								onChange={e =>
-									setClientInfo({ ...clientInfo, porcentaje: e.target.value })
 								}
 							/>				
 						</Box>

@@ -20,8 +20,8 @@ import { Voucher } from '../components/Voucher';
 
 export const Promocion = ({ hiddenForm }) => {
 	const initialState = {
-		promocionId: '',
-		promocionNombre: '',
+		// promocionId: '',
+		// promocionNombre: '',
 		productoId: '',
 		productoNombre: '',
 		cantidad: 1,
