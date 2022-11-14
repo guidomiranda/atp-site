@@ -31,10 +31,10 @@ export class PromocionService {
     if (empresaId !== null) {
       const vEstado = estado === 'true';
       return this.prisma.promocion.findMany({
-        where: { estado: true, empresaId: },
+        where: { estado: true, empresaId },
       });
     }
-    
+
     return this.prisma.promocion.findMany();
   }
 

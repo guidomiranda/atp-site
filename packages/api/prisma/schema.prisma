@@ -253,9 +253,9 @@ model Promocion {
   fechaFin          DateTime?
   promocionVouchers Voucher[]
   empresa           Empresa   @relation(fields: [empresaId], references: [id])
-  empresaId   String    @unique
-  created_at  DateTime  @default(now())
-  updated_at  DateTime  @default(now()) @updatedAt
+  empresaId         String    @unique
+  created_at        DateTime  @default(now())
+  updated_at        DateTime  @default(now()) @updatedAt
 }
 model Empresa {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
