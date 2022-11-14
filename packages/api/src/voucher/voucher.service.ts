@@ -33,8 +33,8 @@ export class VoucherService {
 
   getAll(page = 1) {
     return this.prisma.voucher.findMany({
-      take: 5,
-      skip: 5 * (page - 1),
+      //take: 25,
+      //skip: 25 * (page - 1),
       select: {
         id: true,
         codigo: true,

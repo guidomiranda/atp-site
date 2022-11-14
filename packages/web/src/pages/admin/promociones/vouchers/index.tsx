@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import toast from 'react-hot-toast';
 import {
@@ -22,20 +22,11 @@ import Text from '../../../../components/admin/Text';
 import axios from '../../../../config/axios';
 import { deleteVoucher } from '../../../../utils/vouchers';
 import { log } from 'console';
+import { paginate } from '../../../../utils/paginate';
+import Pagination from '../../../../components/Pagination';
 
 interface ClientsProps {
 	client: any;
-}
-
-function usePosts() {
-	return useQuery(['posts'], async () => {
-		const data = await axios({
-			method: 'GET',
-			url: '/vouchers',
-		});
-
-		return data.data.data;
-	});
 }
 
 const Header: React.FC = () => {
@@ -265,7 +256,29 @@ const Clients: React.FC<ClientsProps> = ({ client }) => {
 
 const ClientesAdmin = () => {
 	const router = useRouter();
-	const { data, isFetching } = usePosts();
+	const [data, setData] = useState([]);
+	const pageSize = 10;
+	const [currentPage, setCurrentPage] = useState(1);
+	const [isFetching, setIsFetching] = useState(true);
+	
+	const getData = async () => {
+	  const resp = await axios({
+		method: 'GET',
+		url: '/vouchers',
+	  });
+	  setIsFetching(false);
+	  setData(resp.data.data);
+	};
+  
+	useEffect(() => {
+	  getData();
+	}, []);
+  
+	const handlePageChange = (page) => {
+	  setCurrentPage(page);
+	};
+  
+	const paginateData = paginate(data, currentPage, pageSize);
 
 	return (
 		<AdminLayout
@@ -295,9 +308,15 @@ const ClientesAdmin = () => {
 						<Text>Cargando..</Text>
 					</Grid>
 				) : (
-					data?.map(client => <Clients key={client.id} client={client} />)
+					paginateData?.map(client => <Clients key={client.id} client={client} />)
 				)}
 			</Box>
+			<Pagination
+				items={data.length}
+				pageSize={pageSize}
+				currentPage={currentPage}
+				onPageChange={handlePageChange}
+			/>
 		</AdminLayout>
 	);
 };
