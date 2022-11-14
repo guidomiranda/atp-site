@@ -28,7 +28,6 @@
     "@nestjs/jwt": "8.0.1",
     "@nestjs/mongoose": "9.0.3",
     "@nestjs/platform-express": "8.0.0",
-    "prisma": "^4.5.0",
     "@prisma/client": "^4.5.0",
     "argon2": "0.28.5",
     "class-transformer": "^0.5.1",
@@ -37,6 +36,7 @@
     "mongoose": "6.2.2",
     "nestjs-form-data": "^1.8.3",
     "nodemailer": "^6.7.8",
+    "prisma": "^4.6.1",
     "reflect-metadata": "0.1.13",
     "rimraf": "3.0.2",
     "rxjs": "7.2.0"

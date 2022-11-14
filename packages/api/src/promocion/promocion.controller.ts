@@ -55,7 +55,7 @@ export class PromocionController {
   @Get()
   async getAll(
     @Query('estado') estado: string,
-    @Query('estado') empresaId: string,
+    @Query('empresaId') empresaId: string,
     @Res() res: Response,
   ) {
     const clientes = await this.service.getAll(estado, empresaId);
