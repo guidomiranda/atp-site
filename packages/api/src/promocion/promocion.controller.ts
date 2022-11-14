@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Res,
+  Query,
 } from '@nestjs/common';
 import { Response } from 'express';
 
@@ -52,10 +53,10 @@ export class PromocionController {
   }
 
   @Get()
-  async getAll(@Res() res: Response) {
-    const clientes = await this.service.getAll();
+  async getAll(@Query('estado') estado: string, @Res() res: Response) {
+    const clientes = await this.service.getAll(estado);
     return res.status(HttpStatus.OK).json({
-      message: 'Promocions',
+      message: 'Promociones',
       success: true,
       data: clientes,
     });

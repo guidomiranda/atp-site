@@ -20,7 +20,14 @@ export class EmpresaService {
     return this.prisma.empresa.delete({ where: { id } });
   }
 
-  getAll() {
+  getAll(estado: string = null) {
+    if (estado !== null) {
+      const vEstado = estado === 'true';
+      return this.prisma.empresa.findMany({
+        where: { estado: vEstado },
+      });
+    }
+
     return this.prisma.empresa.findMany();
   }
 

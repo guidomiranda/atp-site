@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { Response } from 'express';
@@ -52,8 +53,8 @@ export class EmpresaController {
   }
 
   @Get()
-  async getAll(@Res() res: Response) {
-    const clientes = await this.service.getAll();
+  async getAll(@Query('estado') estado: string, @Res() res: Response) {
+    const clientes = await this.service.getAll(estado);
     return res.status(HttpStatus.OK).json({
       message: 'Empresas',
       success: true,

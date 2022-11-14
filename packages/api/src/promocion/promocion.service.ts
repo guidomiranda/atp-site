@@ -20,7 +20,13 @@ export class PromocionService {
     return this.prisma.promocion.delete({ where: { id } });
   }
 
-  getAll() {
+  getAll(estado: string = null) {
+    if (estado !== null) {
+      const vEstado = estado === 'true';
+      return this.prisma.promocion.findMany({
+        where: { estado: vEstado },
+      });
+    }
     return this.prisma.promocion.findMany();
   }
 
