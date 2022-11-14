@@ -57,9 +57,6 @@ import { UsuarioService } from './usuario/usuario.service';
 import { PromocionController } from './promocion/promocion.controller';
 import { PromocionService } from './promocion/promocion.service';
 
-import { PromocionDetalleController } from './promocionDetalle/promocionDetalle.controller';
-import { PromocionDetalleService } from './promocionDetalle/promocionDetalle.service';
-
 import { VoucherController } from './voucher/voucher.controller';
 import { VoucherService } from './voucher/voucher.service';
 
@@ -94,7 +91,6 @@ import { ProductoService } from './producto/producto.service';
     EmpresaController,
     UsuarioController,
     PromocionController,
-    PromocionDetalleController,
     VoucherController,
     SequenceController,
     ProductoController,
@@ -125,7 +121,6 @@ import { ProductoService } from './producto/producto.service';
     EmpresaService,
     UsuarioService,
     PromocionService,
-    PromocionDetalleService,
     VoucherService,
     SequenceService,
     ProductoService,
