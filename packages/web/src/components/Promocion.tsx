@@ -17,8 +17,10 @@ import Select from '../components/Select';
 import axios from '../config/axios';
 import dateFormat from '../helpers/dateFormat';
 import { Voucher } from '../components/Voucher';
+import { log } from 'console';
 
 export const Promocion = ({ hiddenForm }) => {
+
 	const initialState = {
 		promocionId: '',
 		promocionNombre: '',
@@ -26,7 +28,8 @@ export const Promocion = ({ hiddenForm }) => {
 		productoNombre: '',
 		cantidad: 1,
 		promocionPorcentaje: '30',
-		empresaNombre: 'PEDIDOS YA',
+		empresaId: '',
+		empresaNombre:'',
 		nombre: '',
 		usuarioCodigo: '',
 		usuarioId: '',
@@ -41,12 +44,22 @@ export const Promocion = ({ hiddenForm }) => {
 	const [producto, setProducto] = useState([]);
 	const [productoId, setProductoId] = useState('');
 	const [productoNombre, setProductoNombre] = useState('');
-	const [[promocionId,promocionNombre], setPromocion] = useState(['','']);
+	const [empresas, setEmpresa] = useState([{id:'',nombre:''}]);
+	const [promocion, setPromocion] = useState([{id:'',nombre:''}]);
 
 	const toast = useToast()
 
+	const getPromociones = async (empresaId) => {
+		const data = await axios({
+			method: 'GET',
+			url: `/promociones?estado=true&empresaId=${empresaId}`,
+		});
+		const resPromocion = await data.data.data;
+		await setPromocion(resPromocion);
+	};
+
 	useEffect(() => {
-		const getProducto = async () => {
+		const getProductos = async () => {
 			const data = await axios({
 				method: 'GET',
 				url: `/productos`,
@@ -54,41 +67,19 @@ export const Promocion = ({ hiddenForm }) => {
 			const resProducto = data.data.data;
 			setProducto(resProducto);
 		};
-		getProducto();
+		getProductos();
 
-		const getPromocion = async () => {
+		const getEmpresas = async () => {
 			const data = await axios({
 				method: 'GET',
-				url: `/promociones`,
+				url: `/empresas?estado=true`,
 			});
-			const resPromocion = data.data.data;
-			setPromocion([resPromocion[0].id,resPromocion[0].nombre]);
-			setFormData({
-				...formData,
-				promocionId: resPromocion[0].id,
-				promocionNombre: resPromocion[0].nombre
-			})
+			const respEmpresa = data.data.data;
+			setEmpresa(respEmpresa);
 		};
-		getPromocion();		
+		getEmpresas();
+	
 	}, []);
-
-
-	useEffect(() => {
-		const getPromocion = async () => {
-			const data = await axios({
-				method: 'GET',
-				url: `/promociones`,
-			});
-			const resPromocion = data.data.data;
-			setPromocion([resPromocion[0].id,resPromocion[0].nombre]);
-			setFormData({
-				...formData,
-				promocionId: resPromocion[0].id,
-				promocionNombre: resPromocion[0].nombre
-			})
-		};
-		getPromocion();		
-	}, [promocionId]);
 	
 
 	const handleChangeProducto = async e => {
@@ -124,6 +115,17 @@ export const Promocion = ({ hiddenForm }) => {
 			[e.target.name]: e.target.value,
 		});
 	};
+
+	const handleChangeEmpresa = async e => {
+		const resEmpresaId = await e.target.value;
+		await setFormData({
+		   ...formData,
+		   empresaId: resEmpresaId
+		});
+		await console.log(resEmpresaId)
+		await getPromociones(resEmpresaId);
+		e.preventDefault();
+	}
 
 	const updateCounter = (step) => {
 		console.log(formData.cantidad)
@@ -299,8 +301,7 @@ export const Promocion = ({ hiddenForm }) => {
 									onChange={handleChange}
 								/>
 							</Box>
-						</Box>
-						
+						</Box>			
 
 						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Text
@@ -314,8 +315,43 @@ export const Promocion = ({ hiddenForm }) => {
 								Empresa
 							</Text>
 							<Box>
+								<Select 
+								w='full' 
+								name='empresa' 
+								onChange={e => handleChangeEmpresa(e)}
+								isRequired
+								>
+									{empresas.map(empresa => (
+										<option key={empresa.id} value={empresa.id}>
+											{''}
+											{empresa.nombre}
+										</option>
+									))}									
+								</Select>
+							</Box>
+						</Box>
+
+						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
+							<Text
+								as='label'
+								color='#015796'
+								mr='10px'
+								htmlFor='ci'
+								fontSize='14px'
+								fontWeight='bold'
+							>
+								Promocion
+							</Text>
+							<Box>
 								<Select w='full' name='empresa' isRequired>
-									<option value='0'>PEDIDOS YA</option>
+									{	
+										promocion.map( promocion =>(
+										<option key={promocion.id} value={promocion.id}>
+											{''}
+											{promocion.nombre}
+										</option>
+										))
+									}
 								</Select>
 							</Box>
 						</Box>
