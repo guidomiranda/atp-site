@@ -53,8 +53,12 @@ export class PromocionController {
   }
 
   @Get()
-  async getAll(@Query('estado') estado: string, @Res() res: Response) {
-    const clientes = await this.service.getAll(estado);
+  async getAll(
+    @Query('estado') estado: string,
+    @Query('estado') empresaId: string,
+    @Res() res: Response,
+  ) {
+    const clientes = await this.service.getAll(estado, empresaId);
     return res.status(HttpStatus.OK).json({
       message: 'Promociones',
       success: true,

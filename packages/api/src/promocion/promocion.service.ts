@@ -20,13 +20,21 @@ export class PromocionService {
     return this.prisma.promocion.delete({ where: { id } });
   }
 
-  getAll(estado: string = null) {
+  getAll(estado: string = null, empresaId = null) {
     if (estado !== null) {
       const vEstado = estado === 'true';
       return this.prisma.promocion.findMany({
         where: { estado: vEstado },
       });
     }
+
+    if (empresaId !== null) {
+      const vEstado = estado === 'true';
+      return this.prisma.promocion.findMany({
+        where: { estado: true, empresaId: },
+      });
+    }
+    
     return this.prisma.promocion.findMany();
   }
 
