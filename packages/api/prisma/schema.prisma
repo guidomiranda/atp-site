@@ -247,15 +247,26 @@ model Promocion {
   imagen            String
   estado            Boolean   @default(true)
   orden             Int       @default(1)
-  porcentaje        Int?
-  monto             Int?
   fechaInicio       DateTime? @default(now()) 
   fechaFin          DateTime?
   promocionVouchers Voucher[]
   empresa           Empresa   @relation(fields: [empresaId], references: [id])
   empresaId         String    @unique
+  promociones       PromocionDetalle[]
   created_at        DateTime  @default(now())
   updated_at        DateTime  @default(now()) @updatedAt
+}
+
+model PromocionDetalle {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  promocion   Promocion @relation(fields: [promocionId], references: [id])
+  promocionId String   
+  producto    Producto  @relation(fields: [productoId], references: [id])
+  productoId  String    @unique
+  porcentaje  Int?      @default(0)
+  monto       Int?      @default(0)
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @default(now()) @updatedAt  
 }
 model Empresa {
   id              String    @id @default(auto()) @map("_id") @db.ObjectId
@@ -309,15 +320,17 @@ model Sequence {
 }
 
 model Producto {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  nombre      String    @unique
-  codigo      Int
-  codigoBarra String?   @unique
-  estado      Boolean   @default(true)
-  orden       Int       @default(1)
-  productos   Voucher[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime?
+  id                  String    @id @default(auto()) @map("_id") @db.ObjectId
+  nombre              String    @unique
+  codigo              Int
+  precio              Int?
+  codigoBarra         String?   @unique
+  estado              Boolean   @default(true)
+  orden               Int       @default(1)
+  productos           Voucher[]
+  productosPromoDet   PromocionDetalle[]
+  created_at          DateTime  @default(now())
+  updated_at          DateTime?
 }
 
 

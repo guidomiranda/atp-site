@@ -17,9 +17,12 @@ import Select from '../components/Select';
 import axios from '../config/axios';
 import dateFormat from '../helpers/dateFormat';
 import { Voucher } from '../components/Voucher';
-import { log } from 'console';
 
 export const Promocion = ({ hiddenForm }) => {
+	const ref = useRef(null);
+	// console.log(ref.current);
+
+	const toast = useToast();
 
 	const initialState = {
 		promocionId: '',
@@ -27,7 +30,7 @@ export const Promocion = ({ hiddenForm }) => {
 		productoId: '',
 		productoNombre: '',
 		cantidad: 1,
-		promocionPorcentaje: '30',
+		promocionPorcentaje: '',
 		empresaId: '',
 		empresaNombre:'',
 		nombre: '',
@@ -36,6 +39,20 @@ export const Promocion = ({ hiddenForm }) => {
 		fecha: '',
 		voucherCodigo: '',
 	};
+	const initPromoDetalle = [{
+		id: '',
+		promocion: {
+			id: '',
+			nombre: '',
+		},
+		producto: {
+			id: '',
+			nombre: '',
+		},
+		porcentaje: 0,
+		monto: 0
+	}];
+
 	const [formData, setFormData] = useState(initialState);
 	const [isDisabled, setDisabled] = useState(false);
 	const [isHiddenForm, setHiddenForm] = useState(hiddenForm);
@@ -43,11 +60,23 @@ export const Promocion = ({ hiddenForm }) => {
 
 	const [producto, setProducto] = useState([]);
 	const [productoId, setProductoId] = useState('');
+	const [empresaId, setEmpresaId] = useState('');
+	const [promocionId, setPromocionId] = useState('');
 	const [productoNombre, setProductoNombre] = useState('');
-	const [empresas, setEmpresa] = useState([{id:'',nombre:''}]);
-	const [promocion, setPromocion] = useState([{id:'',nombre:''}]);
+	const [empresas, setEmpresa] = useState([]);
 
-	const toast = useToast()
+	const [promocion, setPromocion] = useState([]);
+	const [promocionDetalle, setPromocionDetalle] = useState(initPromoDetalle);
+
+	const getEmpresas = async () => {
+		const data = await axios({
+			method: 'GET',
+			url: `/empresas?estado=true`,
+		});
+		const resEmpresa = await data.data.data;
+		setEmpresa(await resEmpresa);
+		setEmpresaId(await resEmpresa[0].id);
+	};
 
 	const getPromociones = async (empresaId) => {
 		const data = await axios({
@@ -55,33 +84,116 @@ export const Promocion = ({ hiddenForm }) => {
 			url: `/promociones?estado=true&empresaId=${empresaId}`,
 		});
 		const resPromocion = await data.data.data;
-		await setPromocion(resPromocion);
+		
+		setPromocion(await resPromocion);
+
+		if(resPromocion.length){
+		//	await console.log('getPromociones - resPromocion: ',resPromocion);
+			getPromocionDetalle(await resPromocion[0].id);
+			setPromocionId(await resPromocion[0].id);		
+		} else{
+			setPromocionId(await '')
+			setPromocionDetalle(await initPromoDetalle);
+		}
+	};
+
+	const getPromocionDetalle = async (promoId) => {
+	//	await console.log('getPromocionDetalle - promoId: ',promoId);
+		if(promoId){
+			const data = await axios({
+				method: 'GET',
+				url: `/promocion-detalle/promocion/${promoId}`,
+			});
+			const resPromoDetalle = await data.data.data;
+			//await console.log('getPromocionDetalle - data: ',resPromoDetalle[0]?.producto.nombre);
+	
+			if (resPromoDetalle.length) {
+				setPromocionDetalle(await resPromoDetalle);				
+			}
+			//await console.log('promocionDetalle:' ,promocionDetalle);
+		} else {
+			setPromocionDetalle(await initPromoDetalle);
+		}
 	};
 
 	useEffect(() => {
-		const getProductos = async () => {
-			const data = await axios({
-				method: 'GET',
-				url: `/productos`,
-			});
-			const resProducto = data.data.data;
-			setProducto(resProducto);
-		};
-		getProductos();
-
-		const getEmpresas = async () => {
-			const data = await axios({
-				method: 'GET',
-				url: `/empresas?estado=true`,
-			});
-			const respEmpresa = data.data.data;
-			setEmpresa(respEmpresa);
-		};
+	//	console.log('useEffect - getEmpresas');
 		getEmpresas();
-	
 	}, []);
+
+	useEffect(() => {
+	//	console.log('useEffect - getPromociones');
+		if(empresas.length){
+			getPromociones(empresas[0].id);
+		}
+
+		if(promocion.length){
+			getPromocionDetalle(promocion[0].id);
+		} else {
+			setPromocionDetalle(initPromoDetalle);
+		}	
+	}, [empresas]);
+
+	useEffect(() => {
+		//console.log('useEffect promocion: ', promocion.length);
+		if(promocion.length){
+			getPromocionDetalle(promocion[0].id);
+		} else {
+			setPromocionDetalle(initPromoDetalle);
+		}
+	}, [promocion]);
+
+	useEffect(() => {
+		console.log('---------------------------------------------------------');
+		console.log('useEffect VAR - productoId: ',productoId);
+		console.log('useEffect VAR - promocionId: ',promocionId);
+		console.log('useEffect VAR - empresaId: ',empresaId);
+		console.log('---------------------------------------------------------');
+		setFormData({
+			...formData,
+			productoId,
+			promocionId,
+			empresaId,
+		});		
+	}, [empresaId,promocionId,productoId])
 	
 
+
+
+	// ([{
+	// 	promocionId,
+	// 	promocionNombre: resPromoDetalle.promocion.nombre,
+	// 	productoId: resPromoDetalle.productoId,
+	// 	productoNombre: resPromoDetalle.producto.nombre,
+	// 	monto: resPromoDetalle.monto,
+	// 	porcentaje: resPromoDetalle.porcentaje
+	// }])
+
+	// const getProducto = async (productoId) => {
+	// 	const data = await axios({
+	// 		method: 'GET',
+	// 		url: `/producto/codigo/${codigo}`,
+	// 	});
+	// 	const resProducto = data.data.data;
+	// 	setProducto(resProducto);
+	// };
+
+
+
+	
+	const handleChangePromocion = async e => {
+		const resPromocionId = await e.target.value;
+		console.log('handleChangePromocion - resPromocionId: ',resPromocionId);
+		getPromocionDetalle(await resPromocionId);
+		setPromocionId(await resPromocionId);
+
+		if(!resPromocionId.length){
+			setProductoId('');
+			setPromocionId('');
+			setPromocionDetalle(initPromoDetalle);
+		}	
+	}
+	
 	const handleChangeProducto = async e => {
 		const resProductoId = await e.target.value;
 		const resProductoNombre = await getProductoNombre(resProductoId)
@@ -118,20 +230,20 @@ export const Promocion = ({ hiddenForm }) => {
 
 	const handleChangeEmpresa = async e => {
 		const resEmpresaId = await e.target.value;
-		await setFormData({
-		   ...formData,
-		   empresaId: resEmpresaId
-		});
-		await console.log(resEmpresaId)
+		//await console.log(resEmpresaId)
 		await getPromociones(resEmpresaId);
+		setEmpresaId(resEmpresaId);
 		e.preventDefault();
 	}
 
 	const updateCounter = (step) => {
-		console.log(formData.cantidad)
+
+		const vCantidad = formData.cantidad+step;
+		if (vCantidad < 1) return;
+
 		setFormData({
 			...formData,
-			cantidad: formData.cantidad+step
+			cantidad: vCantidad
 		})
 	}
 
@@ -146,7 +258,7 @@ export const Promocion = ({ hiddenForm }) => {
               });
 		}
 
-		if (!formData.productoId) {
+		if (!formData.productoId || !formData.promocionId) {
 			return toast({
                 title: 'Complete todos los campos con *',
                 status: 'error',
@@ -191,6 +303,13 @@ export const Promocion = ({ hiddenForm }) => {
 	const handleChangeUsuarioCodigo = e => {
 		const usuarioCodigo = e.target.value || '0';
 		fetchUsuario(usuarioCodigo);
+
+		setFormData({
+			...formData,
+			productoId,
+			promocionId,
+			empresaId,
+		});	
 	};
 
 	const createVaucher = async formData => {
@@ -317,7 +436,7 @@ export const Promocion = ({ hiddenForm }) => {
 							<Box>
 								<Select 
 								w='full' 
-								name='empresa' 
+								name='empresa'
 								onChange={e => handleChangeEmpresa(e)}
 								isRequired
 								>
@@ -343,7 +462,11 @@ export const Promocion = ({ hiddenForm }) => {
 								Promocion
 							</Text>
 							<Box>
-								<Select w='full' name='empresa' isRequired>
+								<Select 
+									w='full' 
+									name='promocion'
+									onChange={handleChangePromocion} 
+									isRequired>
 									{	
 										promocion.map( promocion =>(
 										<option key={promocion.id} value={promocion.id}>
@@ -384,10 +507,10 @@ export const Promocion = ({ hiddenForm }) => {
 									<option value={0}>
 										--Selecciona tu producto-- *
 									</option>
-									{producto.map(getProduto => (
-										<option key={getProduto.id} value={getProduto.id}>
+									{promocionDetalle.map((detalle) => (
+										<option ref={ref} key={detalle.producto.id} value={detalle.producto.id}>
 											{' '}
-											{getProduto.nombre}
+											{detalle.producto.nombre}
 										</option>
 									))}
 								</Select>
