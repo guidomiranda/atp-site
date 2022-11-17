@@ -76,11 +76,18 @@ export class PromocionDetalleController {
     @Res() res: Response,
     @Param('promocionId') promocionId: string,
   ) {
-    const cliente = await this.service.getAllPromocion(promocionId);
-    return res.status(HttpStatus.OK).json({
-      message: 'PromocionDetalle',
-      success: true,
-      data: cliente,
-    });
+    try {
+      const cliente = await this.service.getAllPromocion(promocionId);
+      return res.status(HttpStatus.OK).json({
+        message: 'PromocionDetalle',
+        success: true,
+        data: cliente,
+      });
+    } catch (error) {
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        message: error.message,
+        success: false,
+      });
+    }
   }
 }

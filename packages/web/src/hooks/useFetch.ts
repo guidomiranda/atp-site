@@ -1,41 +1,52 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import {API_URL} from '../utils/constants';
 
-export const useFetch = (url:string) => {
+export const useFetch = (url) => {
+	const [data, setData] = useState(null);
+	const [error, setError] = useState(null);
+	const [isLoading, setIsLoading] = useState(null);
 
-    const [state, setState] = useState({
-        data1: null,
-        isLoading: true,
-        hasError: null,
-    })
+	useEffect(() => {
+		const abortControler = new AbortController();
+		const signal = abortControler.signal;
 
-    const getData= async() => {
+		const fetchData = async() => {
+			setIsLoading(true);
 
-        setState({
-            ...state,
-            isLoading: true,
-        });
+			try {
+				const res = await fetch(API_URL +'/'+url);
+				
+				if(!res.ok){
+					let err = new Error("Error en la peticion Fetch");
+					error.status = res.status || '00';
+					error.statusText = res.statusText || 'Ocurrio un error';
+					throw err;
+				}
 
-        const resp = await fetch(url);
-        const data1 = await resp.json();
+				const data = await res.json();
+				
 
-        setState({
-            data1,
-            isLoading: false,
-            hasError: null
-        });
-    }
+				if(!signal.aborted){
+					setData(data);
+					setError(null);
+				}
+			} catch (error) {
+				if(!signal.aborted){
+					setData(null);
+					setError(error);
+				}
+			} finally {
+				if(!signal.aborted){
+					setIsLoading(false);
+				}				
+			}
+		};
+		fetchData();
 
+		return ()=> abortControler.abort();
+	}, [url]);
 
-    useEffect(() => {
-      getData();
-    }, [url])
-    
+	return {data,error,isLoading}
 
-
-
-    return {
-        data: state.data1,
-        isLoading: state.isLoading,
-        hasError: state.hasError
-    }
-}
+	
+};

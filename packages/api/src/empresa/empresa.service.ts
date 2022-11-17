@@ -34,4 +34,8 @@ export class EmpresaService {
   getOne(id: string) {
     return this.prisma.empresa.findFirst({ where: { id } });
   }
+
+  getOneInit(orden: string) {
+    return this.prisma.empresa.findFirst({ where: { orden: parseInt(orden) } });
+  }
 }

@@ -71,4 +71,14 @@ export class EmpresaController {
       data: cliente,
     });
   }
+
+  @Get('/init/:orden')
+  async getOneInit(@Res() res: Response, @Param('orden') orden: string) {
+    const cliente = await this.service.getOneInit(orden);
+    return res.status(HttpStatus.OK).json({
+      message: 'Empresa',
+      success: true,
+      data: cliente,
+    });
+  }
 }

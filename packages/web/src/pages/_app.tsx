@@ -9,6 +9,7 @@ import { UserProvider } from '../context/UserContext';
 
 import '../styles/swiper.css';
 import '../styles/styles.css';
+import '../styles/loader.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const queryClient = new QueryClient();

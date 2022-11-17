@@ -11,14 +11,17 @@ import {
 	useToast,
 	useNumberInput
 } from '@chakra-ui/react';
-import Input from '../components/Input';
-import LayoutMin from '../components/LayoutMin';
-import Select from '../components/Select';
+import Input from './Input';
+import LayoutMin from './LayoutMin';
+import Select from './Select';
 import axios from '../config/axios';
 import dateFormat from '../helpers/dateFormat';
-import { Voucher } from '../components/Voucher';
+import { Voucher } from './Voucher';
+import { SelectList } from './SelectList';
+import { useFetch } from '../hooks/useFetch';
+import { SelectListNested } from './SelectListNested';
 
-export const Promocion = ({ hiddenForm }) => {
+export const PromocionPrueba = ({ hiddenForm }) => {
 
 	const initialState = {
 		promocionId: '',
@@ -49,216 +52,40 @@ export const Promocion = ({ hiddenForm }) => {
 		monto: 0
 	}];
 
+	const toast = useToast();
+
 	const [formData, setFormData] = useState(initialState);
 	const [isDisabled, setDisabled] = useState(false);
 	const [isHiddenForm, setHiddenForm] = useState(hiddenForm);
 	const [hiddenVoucher, setHiddenVoucher] = useState(true);
-	const [empresaInit, setEmpresaInit] = useState({id:'',nombre:''});
+	//const [empresaInit, setEmpresaInit] = useState({id:'',nombre:''});
 	// const [promocionesInit, setPromocionesInit] = useState([]);
 	// const [promocionesDetalleInit, setPromocionesDetalleInit] = useState([]);
 
 	const [productos, setProductos] = useState([]);
 	const [productoId, setProductoId] = useState('');
 	const [empresaId, setEmpresaId] = useState('');
-	const [promocionId, setPromocionId] = useState('');
+	const [promocionId, setPromocionId] = useState(0);
 	const [productoNombre, setProductoNombre] = useState('');
 	const [empresas, setEmpresas] = useState([]);
 
 	const [promociones, setPromociones] = useState([]);
 	const [promocionDetalle, setPromocionDetalle] = useState(initPromoDetalle);
+	// const {data,error,isLoading} = useFetch('empresas/init/0');
 
-	const toast = useToast();
 
-	useEffect(() => {
-		// Buscamos todas las empresas activas
-
-		const getEmpresas = async () => {
-			const data = await axios({
-				method: 'GET',
-				url: `/empresas?estado=true`,
-			});
-			const resEmpresa = await data.data.data;
-			await setEmpresas(resEmpresa);
-		}
-		getEmpresas();
-		// console.log('useEffect 1 - empresas: ', empresas);
-	}, []);
-
-	useEffect(() => {
-		// Buscamos los datos para la empresa inicial
-		const datosEmpresaInit = async() => {
-			// await console.log('datosEmpresaOrdenCero -empresas: ', empresas);
-			const resEmpresaInit = await empresas.filter(empresa => empresa.orden === 0);
-			// await console.log('datosEmpresaOrdenCero - empresaInit[0].id: ', empresaInit[0].id);
-			if (resEmpresaInit.length){
-				setEmpresaInit(await resEmpresaInit[0]);
-				await console.log('datosEmpresaInit - empresaInit: ', empresaInit);
-			}
-		}
-		datosEmpresaInit();		
-		// console.log('useEffect 2 - empresas: ', empresas);
-	}, [empresas])
-
-	useEffect(() => {
-		// Buscamos los datos para la promocion inicial
-		const datosPromocionesInit = async () => {
-			await console.log('datosPromocionesInit - empresaInit: ', empresaInit);
-			if(empresaInit){
-				const data = await axios({
-					method: 'GET',
-					url: `/promociones?estado=true&empresaId=${empresaInit.id}`,
-				});
-				const resPromociones = await data.data.data;
-				// await console.log('datosPromocionesInit - empresaInit: ', empresaInit.id);
-				if (resPromociones.length){
-					setPromociones(await resPromociones)
-					await console.log('datosPromocionesInit - promocionesInit: ', promociones);
-				}
-			}
-		}
-		datosPromocionesInit();		
-	}, [empresaInit])
-
-	useEffect(() => {
-		const datosPromocionesDetalleInit = async () => {
-				//	await console.log('getPromocionDetalle - promoId: ',promoId);
-					if(promociones.length){
-						const data = await axios({
-							method: 'GET',
-							url: `/promocion-detalle/promocion/${promociones[0].id}`,
-						});
-						const resPromoDetalle = await data.data.data;
-						if (resPromoDetalle.length){
-							setPromocionDetalle(await resPromoDetalle)
-							//await console.log('datosPromocionesInit - promocionesInit: ', promocionesDetalleInit);
-						}						
-					}
-			}
-			datosPromocionesDetalleInit();
-	}, [promociones])
 	
-	const dataEmpresaInit = async(pEmpresaId) => {
-			const data = await axios({
-				method: 'GET',
-				url: `/empresas/${pEmpresaId}`,
-			});
-			const resEmpresa = await data.data.data;
-			if (resEmpresa.length){
-				setEmpresaInit(await resEmpresa[0]);
-				await console.log('datosEmpresaInit - empresaInit: ', empresaInit);
-			}
-		}
-
-
-
-
-
-
-
-
-
-
-
-
 	// useEffect(() => {
-	// //	console.log('useEffect - getPromociones');
-	// 	if(empresas.length){
-	// 		getPromociones(empresas[0].id);
+	// 	const dataInit=async (data) =>{
+	// 		if(!data) return;
+	// 		setEmpresaId(await data.data.id);
+	// 		console.log('empresaInit: ',data.data.id);
 	// 	}
-
-	// 	if(promocion.length){
-	// 		getPromocionDetalle(promocion[0].id);
-	// 	} else {
-	// 		setPromocionDetalle(initPromoDetalle);
-	// 	}	
-	// }, [empresas]);
-
-	// useEffect(() => {
-	// 	//console.log('useEffect promocion: ', promocion.length);
-	// 	if(promocion.length){
-	// 		getPromocionDetalle(promocion[0].id);
-	// 	} else {
-	// 		setPromocionDetalle(initPromoDetalle);
-	// 	}
-	// }, [promocion]);
-
-	// useEffect(() => {
-	// 	console.log('---------------------------------------------------------');
-	// 	console.log('useEffect VAR - productoId: ',productoId);
-	// 	console.log('useEffect VAR - promocionId: ',promocionId);
-	// 	console.log('useEffect VAR - empresaId: ',empresaId);
-	// 	console.log('---------------------------------------------------------');
-	// 	setFormData({
-	// 		...formData,
-	// 		productoId,
-	// 		promocionId,
-	// 		empresaId,
-	// 	});		
-	// }, [empresaId,promocionId,productoId])
-	
+	// 	dataInit(data);
+	// }, [data]);
 
 
 
-	// ([{
-	// 	promocionId,
-	// 	promocionNombre: resPromoDetalle.promocion.nombre,
-	// 	productoId: resPromoDetalle.productoId,
-	// 	productoNombre: resPromoDetalle.producto.nombre,
-	// 	monto: resPromoDetalle.monto,
-	// 	porcentaje: resPromoDetalle.porcentaje
-	// }])
-
-	// const getProducto = async (productoId) => {
-	// 	const data = await axios({
-	// 		method: 'GET',
-	// 		url: `/producto/codigo/${codigo}`,
-	// 	});
-	// 	const resProducto = data.data.data;
-	// 	setProducto(resProducto);
-	// };
-
-
-
-	
-	const handleChangePromocion = async e => {
-		const resPromocionId = await e.target.value;
-		console.log('handleChangePromocion - resPromocionId: ',resPromocionId);
-		//getPromocionDetalle(await resPromocionId);
-		setPromocionId(await resPromocionId);
-
-		if(!resPromocionId.length){
-			setProductoId('');
-			setPromocionId('');
-			setPromocionDetalle(initPromoDetalle);
-		}	
-	}
-	
-	const handleChangeProducto = async e => {
-		const resProductoId = await e.target.value;
-		const resProductoNombre = await getProductoNombre(resProductoId)
-		if (resProductoId == 0) {
-			await setProductoId('');
-			await setProductoNombre('');
-		} else {
-			await setProductoId(resProductoId);
-			await setProductoNombre(resProductoNombre);
-		}
-		await setFormData({
-			...formData,
-			productoId: resProductoId,
-			productoNombre: resProductoNombre,
-		});
-		e.preventDefault();
-	};
-
-	const getProductoNombre = async (productoId) => {
-		const data = await axios({
-			method: 'GET',
-			url: `/productos/${productoId}`,
-		});
-		const resProductoNombre = await data.data.data.nombre;
-		return resProductoNombre;
-	};
 
 	const handleChange = e => {
 		setFormData({
@@ -267,14 +94,7 @@ export const Promocion = ({ hiddenForm }) => {
 		});
 	};
 
-	const handleChangeEmpresa = async e => {
-		const resEmpresaId = await e.target.value;
-		//await console.log(resEmpresaId)
-		//await getPromociones(resEmpresaId);
-		setEmpresaId(resEmpresaId);
-		dataEmpresaInit(resEmpresaId);
-		e.preventDefault();
-	}
+
 
 	const updateCounter = (step) => {
 
@@ -381,7 +201,7 @@ export const Promocion = ({ hiddenForm }) => {
 								color='#015796'
 								fontFamily='Montserrat,sans-serif'
 							>
-								PROMOCIONES
+								PROMOCIONES - PRUEBA
 							</Heading>
 							<Box
 								position='absolute'
@@ -474,21 +294,16 @@ export const Promocion = ({ hiddenForm }) => {
 								Empresa
 							</Text>
 							<Box>
-								<Select 
-								w='full' 
-								name='empresa'
-								onChange={e => handleChangeEmpresa(e)}
-								isRequired
-								>
-									{empresas.map(empresa => (
-										<option key={empresa.id} value={empresa.id}>
-											{''}
-											{empresa.nombre}
-										</option>
-									))}									
-								</Select>
+							 <SelectList
+								title="empresa"
+								url={`empresas?estado=true`}
+								handleChange={(e) => {
+									setEmpresaId(e.target.value);
+								}}
+      						/> 
 							</Box>
 						</Box>
+
 
 						<Box mt='20px' w={{ base: '100%', lg: '60%' }}>
 							<Text
@@ -502,20 +317,14 @@ export const Promocion = ({ hiddenForm }) => {
 								Promocion
 							</Text>
 							<Box>
-								<Select 
-									w='full' 
-									name='promocion'
-									onChange={handleChangePromocion} 
-									isRequired>
-									{	
-										promociones.map( promocion =>(
-										<option key={promocion.id} value={promocion.id}>
-											{''}
-											{promocion.nombre}
-										</option>
-										))
-									}
-								</Select>
+							 <SelectList
+								title="promocion"
+								url={`promociones?estado=true&empresaId=${empresaId}`}
+								handleChange={(e) => {
+									setPromocionId(e.target.value);
+									console.log(promocionId)
+								}}
+      						/> 
 							</Box>
 						</Box>
 
@@ -538,22 +347,14 @@ export const Promocion = ({ hiddenForm }) => {
 								fontSize='25px'
 								fontWeight='Bold'
 							>
-								<Select
-									className='select-promotion'
-									id='productos'
-									name='productos'
-									onChange={e => handleChangeProducto(e)}
-								>
-									<option value={0}>
-										--Selecciona tu producto-- *
-									</option>
-									{promocionDetalle.map((detalle) => (
-										<option key={detalle.producto.id} value={detalle.producto.id}>
-											{' '}
-											{detalle.producto.nombre}
-										</option>
-									))}
-								</Select>
+							 <SelectListNested
+								title="producto"
+								url={`promocion-detalle/promocion/${promocionId}`}
+								value={productoId}
+								handleChange={(e) => {
+									setProductoId(e.target.value);
+								}}
+      						/> 
 							</Box>
 						</Box>
 
@@ -599,6 +400,14 @@ export const Promocion = ({ hiddenForm }) => {
 						</Box>
 					</Box>
 				</Box>
+				{/* <pre>
+					<code>
+						{data}
+						{error}
+						{isLoading}
+					</code>
+				</pre> */}
+
 			</Box>
 
 			<Voucher
